@@ -1,0 +1,85 @@
+html{
+    height: auto;
+}
+body{
+    background-color: #ffffff !important;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12px;
+    margin:0;
+    padding:0;
+    line-height: 1.4em;
+    word-spacing:1px;
+    letter-spacing:0.2px;
+    page-break-inside: always;
+    height: auto;
+}
+#header, .leftmenu, #breadcrumb, #notify, #printerror{
+    display: none !important;
+}
+#displaynameprint{
+    display: block; !important;
+}
+#displayname{
+    display: none; !important;
+}
+.height100{
+    height: auto;
+}
+.list_table {
+    background-color: #ffffff;
+}
+.list_table_th {
+    background-color: #ffffff;
+}
+.main_content{
+    height: auto;
+    background-color: #ffffff;
+}
+.padding20{
+    padding: 0px;
+}
+.border_bottom{
+    border-bottom: 2px solid #000000;
+}
+.border_right{
+    border-right: 2px solid #000000;
+}
+.border_top{
+    border-top: 2px solid #000000;
+}
+.border_left{
+    border-left: 2px solid #000000;
+}
+.listing_cell_padding_sm{
+    padding: 8px 2px 10px 5px;
+}
+.srnowidth{
+    width: 65px;
+}
+/***********************set suppliers data********************************/
+.nsnwidth{
+    width: 80px;
+}
+.contractnumberwidth{
+    width: 100px;
+}
+.orderqtywidth{
+    width: 60px;
+}
+.supplierorderreceiptwidth{
+    width: 80px;
+}
+/******************************set demander data*******************************/
+.duesoutwidth{
+    width: 30px;
+}
+.sohwidth{
+    width: 50px;
+}
+.qoowidth{
+    width: 50px;
+}
+.issueqtywidth{
+    width: 75px;
+}

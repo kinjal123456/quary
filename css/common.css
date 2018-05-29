@@ -1,0 +1,114 @@
+﻿@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('fonts/Roboto-Regular.ttf');
+    src: url('fonts/Roboto-Regular.ttf?#iefix') format('embedded-opentype'),
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('fonts/Roboto-Bold.ttf');
+    src: url('fonts/Roboto-Bold.ttf?#iefix') format('embedded-opentype'),
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Myriad Pro';
+    src: url('fonts/MyriadPro-Regular.ttf');
+    src: url('fonts/MyriadPro-Regular.ttf?#iefix') format('embedded-opentype'),
+    font-weight: normal;
+    font-style: normal;
+}
+html, body { height: 100%; }
+body{
+	background-color: #808080;
+    font-family: 'Roboto-Regular';
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    color: #000;
+    overflow-x: hidden;
+}
+a{
+	text-decoration: none;
+	color: #FFF
+}
+input[type="submit"]{
+	cursor: pointer
+}
+.container{
+	width: 100%;
+	height: 100%
+}
+.backgroundcontainer{
+	background-image:url("../images/quarry-background.jpg");
+	height:100%
+}
+#loader {
+	position:absolute;
+	left:0px;
+	top:0px;
+	display:none;
+	z-index:10000005;
+}
+
+#loader label {
+	color:#555555;
+	font-weight:bold;
+	text-align:center;
+}
+#loader img {
+	display:block;
+}
+.showing-title{
+	color: #949494;
+	font-size: 11px;
+	font-family: Myriad Pro;
+	text-transform: uppercase;
+	padding-top: 25px;
+	padding-bottom: 8px
+}
+.paging li{
+	list-style: none;
+	float: left;
+	font-size: 12px;
+	font-family: Myriad Pro;
+	background-color: #ffffff;
+	border: solid 1px #d8d8d8;
+	padding: 3px 5px 2px 5px;
+	margin-left: 5px
+}
+.paging li a{
+	color: #949494;
+}
+.paging > .active{
+	color: #525252;
+	background-color: #d8d8d8
+}
+.pull-left{
+	float: left;
+}
+.pull-right{
+	float: right;
+}
+.padding-top5{
+	padding-top: 5px
+}
+.padding-top10{
+	padding-top: 10px
+}
+.padding-left10{
+	padding-left:10px
+}
+.padding-left30{
+	padding-left:30px
+}
+.export-label{
+	height: 16px
+}
+.paddingall{
+	padding:10px
+}
+.clearall{
+	clear:both
+}

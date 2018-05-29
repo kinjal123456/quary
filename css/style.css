@@ -1,0 +1,570 @@
+﻿/*login css*/
+.login-child-container1{
+	height: 26%
+}
+.login-child-container2{
+	height: 74%
+}
+.login-form{
+	padding-bottom: 20px;
+    position: relative;
+}
+.login-cipla-logo{
+	position: absolute;
+    bottom: 14px;
+    right: 25px;
+}
+.input-box{
+	background-color: #FFF;
+	border: solid 1px #797979;
+	width: 55.6%;
+	height: 44px;
+	color: #949494;
+	font-size: 14px;
+	padding-left: 10px
+}
+.input-button{
+	background-color: #000;
+	border: none;
+	width: 57.8%;
+	height: 44px;
+	color: #ffffff;
+	font-size: 16px;
+	font-family: Roboto-Bold
+}
+.add-button{
+	background-color: #000;
+	border: none;
+	line-height: 30px;
+	color: #ffffff;
+	font-size: 12px;
+	font-family: Roboto-Bold;
+	margin:10px;
+	padding:0 10px
+}
+.forgot-password, .forgot-password a{
+	color: #000;
+	font-size: 13px;
+	font-family: Roboto-Bold;
+	cursor: pointer
+}
+#forgetpasscontainer{
+	display: none
+}
+.botton-text1{
+	color: #6c6c6c; font-size: 11px;
+}
+.bottom-text2{
+	color: #949494; font-size: 10px;
+}
+/*login css close*/
+/*post login css*/
+.header-background{
+	background-color: #000;
+	height:50px
+}
+.header-logo{
+	padding: 11px 0 11px 50px;
+}
+.header-welcome-section{
+	padding: 0 22px 0 0;
+}
+.header-welcome-text{
+	color: #949494;
+	font-size: 14px;
+}
+.header-administrator-text{
+	color: #525252;
+	font-size: 14px;
+	font-family: Myriad Pro;
+	font-weight: bold;
+	text-transform: capitalize
+}
+.header-profile{
+	padding: 0 10px 0 27px;
+}
+.drop-arrow{
+	padding-right: 40px;
+}
+.left-panel{
+	background-color: #000;
+	/*width: 16%;*/
+	width: 200px
+}
+.left-menu-icon{
+	margin: 0 20px 0 15px
+}
+.customer-icon{
+	background-image: url('../images/customer-icon.png');
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px
+}
+.customer-icon-selected{
+	background-image: url('../images/customer-hover-icon.png');
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 24px
+}
+.molecules-icon{
+	background-image: url('../images/molecules-icon.png');
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 25px
+}
+.molecules-icon-selected{
+	background-image: url('../images/molecules-hover-icon.png');
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 25px
+}
+.discovery-icon{
+	background-image: url('../images/discovery-icon.png');
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 24px
+}
+.discovery-icon-selected{
+	background-image: url('../images/discovery-hover-icon.png');
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 25px
+}
+.report-icon{
+	background-image: url('../images/report.png');
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px
+}
+.report-icon-selected{
+	background-image: url('../images/report-selected.png');
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px
+}
+.logout-icon{
+	background-image: url('../images/logout-icon.png');
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px
+}
+.logout-icon-selected{
+	background-image: url('../images/logout-hover-icon.png');
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 24px
+}
+.left-menu-item{
+	color: #ffffff;
+	font-size: 13px;
+	text-transform: uppercase;
+	padding: 18px 0;
+	border-bottom: solid 1px #4d619d;
+	border-left: solid 5px transparent;
+}
+.left-menu-item-selected, .left-menu-item:hover{
+	background-color: #808080;
+	color: #ffffff;
+	font-size: 13px;
+	text-transform: uppercase;
+	padding: 18px 0;
+	border-bottom: solid 1px #4d619d;
+	border-left: solid 5px #8ffc01
+}
+.left-menu-cipla{
+	background-color: #e1e1e1;
+	width: 160px
+}
+.left-menu-cipla-logo{
+	background-color: #4d619d;
+    padding: 20px 0 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.left-menu-cipla-item{
+	padding: 20px 0 0 19px;
+	font-size: 12px;
+	font-family: Myriad Pro;
+	text-transform: capitalize
+}
+.left-menu-cipla-item a{
+	color: #949494;
+}
+.left-menu-cipla-item-selected{
+	padding: 20px 0 0 19px;
+	font-size: 12px;
+	font-family: Myriad Pro;
+	font-weight: bold;
+	text-transform: capitalize
+}
+.left-menu-cipla-item-selected a, .left-menu-cipla-item a:hover{
+	color: #525252;
+}
+/*table listing css*/
+.table-container{
+	background-color: #FFF;
+	border: solid 1px #e6e6e6
+}
+.table-heading{
+	color: #525252;
+    font-size: 20px;
+    padding: 30px 30px 20px 28px;
+    border-bottom: solid 3px #32cd32;
+}
+.addField{
+	font-weight: bold;color: #686868;font-size: 12px;
+}
+.table-detail-heading{
+	color: #525252;
+    font-size: 20px;
+    padding: 20px 0 18px 28px;
+    border-bottom: solid 3px #32cd32;
+    padding-right: 30px;
+}
+.table-container > div{
+	overflow-x: auto
+}
+.listing-table{
+	table-layout: fixed
+}
+.listing-table tr:nth-child(odd){ 
+	background-color: #f8f8f8;
+}
+.listing-table tr:nth-child(even){
+	background-color: #ffffff;
+}
+.input-element{
+	height: 35px;
+	padding-left: 10px;
+	border: none;
+	font-family: Roboto-Bold;
+	width: 150px
+}
+.select-element{
+	width: 180px
+}
+.button-padding{
+	padding: 20px 16px 0 0
+}
+.customer-button-container{
+	border: solid 2px #e5e5e5;
+	cursor: pointer;
+	font-family: Roboto-Bold
+}
+.button-container{
+	border: solid 2px #e5e5e5;
+	cursor: pointer;
+	font-family: Roboto-Bold
+}
+.button-container:hover{
+	background-color: #32cd32;
+	color: #FFF
+}
+.upload-csv-icon{
+	background-image: url('../images/upload-csv-icon.png');
+	background-repeat: no-repeat;
+	height: 17px;
+	width: 24px;
+	margin: 10px
+}
+.upload-csv-hover-icon{
+	background-image: url('../images/upload-csv-hover-icon.png');
+	background-repeat: no-repeat;
+	height: 17px;
+	width: 24px;
+	margin: 10px
+}
+.search-icon{
+	background-image: url('../images/search-icon.png');
+	background-repeat: no-repeat;
+	height: 15px;
+	width: 15px;
+	float: right;
+	margin-top: 14px;
+    margin-right: 10px;
+	cursor: pointer
+}
+.drop-down-arrow{
+	background-image: url('../images/drop-down-arrow.png');
+	background-repeat: no-repeat;
+	height: 8px;
+	width: 12px;
+	position: relative;
+    right: -162px;
+    top: 16px;
+}
+.table-title{
+	color: #949494;
+	font-size: 13px;
+	font-family: Roboto-Bold;
+	padding-left: 28px;
+	background-color: #f2f2f2;
+	border-top: solid 1px #e6e6e6;
+	line-height: 40px
+}
+.table-data{
+	color: #525252;
+	font-size: 13px;
+	border-top: solid 1px #e6e6e6;
+	font-family: Myriad Pro;
+	padding: 15px 0 15px 28px;
+    vertical-align: middle;
+}
+.table-data-detail{
+	color: #525252;
+	font-size: 13px;
+	padding-left: 28px;
+	border-top: solid 1px #e6e6e6;
+	font-family: Myriad Pro;
+	line-height: 40px
+}
+.even{
+	background-color: #ffffff;
+}
+.odd{
+	background-color: #f8f8f8
+}
+.action-icon{
+	padding-right: 10px
+}
+.action-icon a img{
+	padding-top: 4px
+}
+.action-icon img, .action-icon a img{
+	vertical-align: top;
+	cursor: pointer;
+}
+/*table listing css close*/
+.detail-title{
+	padding: 25px 0 25px 28px;
+	color: #949494;
+	font-size: 13px;
+	font-family: Roboto-Bold;
+	width: 15%;
+	background-color: #f8f8f8;
+	border-top: solid 1px #e6e6e6
+}
+.detail-value{
+	color: #525252;
+	font-size: 13px;
+	font-family: Myriad Pro;
+	padding: 25px 0 25px 23px;
+	border-top: solid 1px #e6e6e6;
+	width: 85%
+}
+.detail-value-orange{
+	padding: 0 0 0 23px;
+	border-top: solid 1px #e6e6e6;
+	width: 85%
+}
+.orange-box{
+	color: #525252;
+    font-size: 13px;
+    margin: 18px 10px 0px 0;
+    border-top: solid 1px #32cd32;
+    border-right: solid 1px #32cd32;
+    border-bottom: solid 1px #32cd32;
+    border-left: solid 5px #32cd32;
+    line-height: 30px;
+    padding: 0 10px;
+    min-width: 70px;
+}
+.download-csv{
+	color: #253570;
+    font-size: 11px;
+    font-family: Roboto-Regular;
+    line-height: 50px;
+}
+.download-csv:hover{
+	color: #32cd32;
+    font-size: 11px;
+    font-family: Roboto-Regular;
+    line-height: 50px;
+}
+/*Reports*/
+.pie-chart-container{
+	background-color: #FFF;
+	border: solid 1px #e6e6e6;
+	width: 55%;
+}
+.pie-chart-table-heading{
+	color: #525252;
+    font-size: 18px;
+    padding: 30px 0 20px 15px;
+    border-bottom: solid 3px #32cd32;
+    padding-right: 10px;
+	border-bottom: solid 3px #32CD32;
+}
+.pie-chart-table-heading-border-color{
+    border-bottom: solid 3px #32CD32;
+}
+.calendar-icon{
+	background-image: url('../images/calendar.png');
+	background-repeat: no-repeat;
+	height: 14px;
+	width: 16px;
+	float: right;
+	margin-top: 14px;
+    margin-right: 10px;
+	cursor: pointer
+}
+/* white color data labels */ 
+.jqplot-data-label{color:transparent;}
+.jqplot-series-canvas{
+	left: 30px !important;
+	top: -11px !important
+}
+.jqplot-table-legend{
+	border: none !important;
+}
+div.jqplot-table-legend-swatch-outline{
+	border: none !important;
+	padding: 0 !important
+}
+div.jqplot-table-legend-swatch{
+	border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+}
+td.jqplot-table-legend{
+	display: none
+}
+.jqplot-event-canvas{
+	display: none
+}
+.ui-datepicker-trigger{
+	border: 0;
+	background: 0;
+	padding: 12px 10px 0 0;
+	cursor: pointer
+}
+/*Reports end*/
+/*post login close*/
+.back-button{
+	background-color: #f8f8f8;
+    width: 78px;
+    height: 67px;
+    text-align: center;
+    vertical-align: middle;
+}
+.back-button img{
+	padding-top: 30px
+}
+#printerror{
+	display:none;
+}
+.import_error{
+    color: red;
+}
+.zone-customers{
+	font-size: 13px;font-weight: bold;color: #525252;
+}
+.tab_container{
+    padding-left: 19px;
+    white-space: nowrap;
+    padding-right: 14px;
+}
+.tab_height{
+    height: 59px;
+}
+.tab{
+    display: inline-block;
+    margin-right: 2px;
+    color: #FFFFFF;
+    background-color: #cccccc;
+    border: 1px solid #cccccc;
+    border-bottom: none;
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 7px;
+    padding-bottom: 9px;
+    vertical-align: bottom;
+}
+.active_tab{
+    color: #000;
+    background-color: #ffffff;
+    position: relative;
+    bottom:-1px;
+    padding-bottom: 10px;
+}
+.tab_content_container > div{
+	display:none
+}
+.customer-table-data{
+	color: #525252;
+    font-size: 13px;
+    vertical-align: middle;
+}
+.icon_delete {
+    background-image: url("../images/delete.png");
+    height: 21px;
+    width: 21px;
+	cursor:pointer
+}
+.icon_add {
+    background-image: url("../images/add.png");
+    height: 21px;
+    width: 21px;
+	cursor:pointer
+}
+.icon_edit{
+    background-image: url("../images/edit.png");
+    height: 21px;
+    width: 21px;
+}
+.additional-buttons{
+	background-color: #000;
+    border: none;
+    line-height: 30px;
+    color: #ffffff;
+    font-size: 12px;
+    font-family: Roboto-Bold;
+    margin: 5px;
+    padding: 0 10px;
+	width:100px
+}
+/*-- listing --*/
+.border_left{
+    border-left:1px solid #dddddd;
+}
+.border_right{
+    border-right:1px solid #dddddd;
+}
+.border_top{
+    border-top:1px solid #dddddd;
+}
+.border_bottom{
+    border-bottom:1px solid #dddddd;
+}
+.list_table{
+    width: 100%;
+    background-color: #fcfcfc;
+}
+.list_table_th{
+    color: #343434;
+    font-weight: bold;
+    background-color: #f7f7f7;
+}
+.listing_th_padding{
+    padding: 8px 20px 9px 20px;
+	color: #000;
+    font-size: 13px;
+}
+.list_table input{
+	cursor: pointer; width: 100%; border: 0; padding:0
+}
+.table_additional_data_heading {
+    color: #525252;
+    font-size: 12px;
+    padding: 10px;
+    border-bottom: solid 3px #32cd32;
+	width:200px;
+	font-weight:bold
+}
+.cursorpointer{
+	cursor:pointer
+}
+.select_drop_down{
+	height:30px; color:#686868; font-size:12px
+}

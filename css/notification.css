@@ -1,0 +1,154 @@
+﻿/*body {
+	font-family:Arial, Helvetica, sans-serif;
+	margin:0px;
+	padding:0px;
+}*/
+
+img, div, form {
+	margin:0px;
+	padding:0px;
+}
+
+.notify_warning {
+	vertical-align: top;
+    background-image: url(../images/notifications/notification-error.png);
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    text-align: left;
+    background-color: #f3c0c1;
+    font-family: Roboto-Regular;
+    font-size: 13px;
+    color: #c25b5b;
+    display: none;
+}
+
+.notify_warning label {
+	color: #c25b5b;
+    line-height: 40px;
+    padding-left: 40px;
+    margin-bottom: 0;
+}
+
+.notify_warning ul {
+	margin: 0px;
+    padding-left: 55px;
+    text-align: left;
+    list-style-type: disc;
+    padding-bottom: 10px;
+    color: #000;
+    font-size: 11px;
+    font-family: Roboto-Regular;
+}
+
+.notify_warning ul li {
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+}
+
+.notify_warning ul li label {
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+	line-height:15px;
+}
+
+.notify_information {
+	vertical-align: top;
+    background-image: url(../images/notifications/notification-right.png);
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    text-align: left;
+    background-color: #a3e7b0;
+    font-family: Roboto-Regular;
+    font-size: 13px;
+    color: #369c49;
+    display: none;
+}
+
+.notify_information label {
+	color: #369c49;
+    line-height: 40px;
+    padding-left: 40px;
+    margin-bottom: 0px;
+}
+
+.notify_information ul {
+	margin:0px;
+	padding-left:30px;
+	text-align:left;
+	list-style-type:disc;
+	padding-bottom:10px;
+}
+	
+.notify_information ul li {
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+}
+
+.notify_information ul li label {
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+	line-height:15px;
+}
+
+.notify_help {
+	vertical-align:top;
+	background-image:url(../images/notifications/icon_help.gif);
+	background-position:10px 10px;
+	background-repeat:no-repeat;
+	text-align:left;
+	background-color:#cceecc;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#004400;
+	border:1px dashed #004400;
+	display:none;
+}
+
+.notify_help label {
+	color:#004400;
+	font-weight:bold;
+	line-height:42px;
+	padding-left:40px;
+}
+
+.notify_help ul {
+	margin:0px;
+	padding-left:30px;
+	text-align:left;
+	list-style-type:disc;
+	padding-bottom:5px;
+}
+
+.notify_help ul li {
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+}
+
+.notify_help ul li label {
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+	line-height:15px;
+}
+
+.notify_help div {
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+	padding-left:10px;
+}
+
+.notify_help > div > #showhelp {
+	vertical-align:middle;
+}
+
+.notify_help > div > #helplabel {
+	font-weight:normal;
+	vertical-align:middle;
+	padding-left:5px;
+}

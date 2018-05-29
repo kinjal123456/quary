@@ -1,0 +1,343 @@
+/*---------------------Input Type(STARTS)----------------*/
+div.inputleft {
+	background-image:url("../images/csform/input-left.png");
+	background-repeat:no-repeat;
+	background-position:top left;
+	padding-left:5px;
+	overflow:hidden;
+}
+.typeSquare div.inputleft {
+    background: none;
+    background-color: #ffffff;
+    padding-left: 9px;
+    padding-right: 9px;
+    border: 1px solid #cccccc;
+}
+div.typeSquare.calenderinput div.inputleft{
+    padding-right: 24px;
+}
+.ui-datepicker-trigger{
+    vertical-align: middle;
+    cursor: pointer;
+}
+div.inputright {
+    background-image:url("../images/csform/input-right.png");
+	background-repeat:no-repeat;
+	background-position:right top;
+	padding-right:5px;
+}
+.calenderinput div.inputright{
+    background-image:url("../images/csform/input-calender-right.png");
+    padding-right:32px;
+}
+.typeSquare div.inputright {
+    background: no-repeat;
+    padding-right: 0px;
+}
+div.inputmid{
+    background-image:url("../images/csform/input-mid.png");
+    background-repeat:repeat-x;
+    height: 32px;
+    padding: 0px 5px;
+}
+.typeSquare div.inputmid {
+    background: no-repeat;
+    height: 30px;
+    padding: 0px;
+    white-space: nowrap;
+}
+.disabled{
+    cursor: default;
+}
+div.inputleft input{
+    height: 27px;
+    line-height: 27px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:normal;
+	color:#686868;
+	outline:0;
+	border:none;
+    background:none;
+    padding: 0px;
+    margin:0px;
+    margin-top: 3px;
+	vertical-align:middle;
+	width:100%;
+}
+.typeSquare div.inputleft input{
+    color: #888888;
+    margin: 2px 0px;
+}
+div.focus input{
+	color:#555555;
+}
+/*------------------Input Type(ENDS)-----------------*/
+
+/*---------------Select tag(STARTS)-------------------*/
+div.selector {
+    background-image:url("../images/csform/input-left.png");
+    background-repeat:no-repeat;
+    background-position:top left;
+    padding-left:5px;
+	position:relative;
+	overflow:hidden;
+    height: 32px;
+}
+.typeSquare div.selector {
+    background: none;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    height: 30px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+div.selector_right{
+    background-image:url("../images/csform/selector-right.png");
+    background-repeat:no-repeat;
+    background-position:top right;
+    padding-right:32px;
+    height: 32px;
+}
+.typeSquare div.selector_right {
+    background: none;
+    height: 30px;
+    padding-right: 12px;
+    background-image: url("../images/icons/arrow-down.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+div.selector span {
+    padding-left: 5px;
+    background-image:url("../images/csform/input-mid.png");
+  	background-repeat:repeat-x;
+	background-position:top;
+	height:32px;
+	line-height:32px;
+	display:block;
+	overflow:hidden;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	text-overflow:ellipsis;
+	text-align:left;
+	color:#686868;
+}
+.typeSquare div.selector span {
+    background: none;
+    height: 30px;
+    padding-left: 0px;
+    line-height: 30px;
+    color: #888888;
+}
+div.selector select {
+	top:0px;
+	left:0px;
+	position:absolute;
+	opacity:0;
+	filter:alpha(opacity:0);
+	height:32px;
+	line-height:28px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#686868;
+	border:0px;
+	cursor:pointer;
+	width:100%;
+}
+.typeSquare div.selector select {
+    height: 30px;
+    color: #888888;
+    line-height:30px;
+}
+.disabled div.selector select {
+	cursor:default;
+}
+.focus .selector span{
+	color:#555555;
+}
+/*----------------------Select tag(ENDS)--------------------------*/
+
+/*--------------------- File(STARTS) ---------------------*/
+div.uploaderleft{
+    background-image:url(../images/csform/uploader-left.png);
+    background-repeat:no-repeat;
+    background-position:left top;
+    padding-left:5px;
+    height:34px;
+    cursor:pointer;
+    position:relative;
+}
+div.uploader {
+	background-image:url(../images/csform/uploader-right.png);
+	background-repeat:no-repeat;
+	background-position:right top;
+	height:34px;
+	overflow:hidden;
+	cursor:pointer;
+    padding-right: 82px;
+}
+div.uploader span.filename {
+	height:34px;
+	line-height:34px;
+	color:#686868;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	display:block;
+	text-overflow:ellipsis-word;
+	overflow:hidden;
+	text-align:left;
+	cursor:pointer;
+    background-image:url(../images/csform/uploader-mid.png);
+    background-repeat: repeat-x;
+    padding-left: 5px;
+}
+div.uploader input {
+	opacity:0;
+	filter:alpha(opacity:0);
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	height:34px;
+	cursor:pointer;
+	z-index:1;
+}
+.disabled .uploader, .disabled .uploaderleft, .disabled .uploader span.filename, .disabled .uploader input{
+    cursor: default;
+}
+div.focus span.filename {
+	color:#555555;
+}
+/*--------------------- File(ENDS) ---------------------*/
+
+/*-------------------- Radio Button(STARTS) --------------------*/
+div.radio {
+	width:20px;
+	height:20px;
+}
+
+div.radio input {
+	width:20px;
+	height:20px;
+	opacity:0;
+	text-align:center;
+	display:inline-block;
+	background:none;
+	
+}
+
+div.radio span {
+	display:-moz-inline-box;
+	display:inline-block;
+	text-align:center;
+	height:20px;
+	width:20px;
+	background-image:url(../../images/radio_button.png);
+	background-repeat:no-repeat;
+	background-position:-61px 0px;
+
+}
+
+div.radio span.checked {
+	
+	background-position:-104px 0px;
+}
+
+div.radio.disabled span{
+	background-position:2px 0px;
+}
+
+div.radio.disabled span.checked{
+	
+	background-position:-40px 0px;
+}
+
+div.radio span.focus, div.radio span.hover {
+	/*background-position:-40px 0px;*/
+}
+
+div.radio span.checked.focus, div.radio span.checked.hover {
+	
+	/*background-position:-40px 0px;*/
+}
+/*--------------------- Radio Button(ENDS) ---------------------*/
+
+/*-----------------Textarea(STARTS)-------------------*/
+
+div.textleft{
+	background-image:url(../images/textarea.png);	
+	background-repeat:no-repeat;
+	background-position:-490px -100px;
+	color:#8a8a8a;	
+}
+div.textarea {
+	background-image:url(../images/textarea.png);	
+	background-repeat:no-repeat;
+	margin-left:8px;
+	background-position:right top;
+	height:100px;
+}
+div.textarea_padding {
+	padding:10px 22px 0px 5px;
+}
+textarea{
+	height:82px;
+	resize:none;
+}
+
+/*------------------------Textarea(ENDS)---------------------------*/
+/*--------------------- Checkbox(STARTS) ---------------------*/
+div.checker {
+	width: 20px;
+    height: 20px;
+}
+
+div.checker input {
+	width:21px;
+	height:20px;
+	opacity:0;
+	filter:alpha(opacity:0);
+	display:inline-block;
+	background:none;
+	margin:0;
+	cursor:pointer;
+	vertical-align: top
+}
+
+div.checker span {
+	background-image: url(../images/inactive-icon.png);
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 21px;
+    display: -moz-inline-box;
+    display: inline-block;
+    text-align: center;
+}
+
+div.checker span.checked {
+	background-image: url(../images/active-icon.png);
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 21px;
+    display: -moz-inline-box;
+    display: inline-block;
+    text-align: center;
+}
+
+div.checker.disabled span {
+	background-image:url(../images/Check.png);
+}
+
+div.checker.disabled span.checked {
+	background-image:url(../images/active-icon.png);
+}
+
+div.checker span.focus, div.checker span.hover {
+	background-image:url(../images/inactive-icon.png);
+}
+
+div.checker span.checked.focus, div.checker span.checked.hover {
+	background-image:url(../images/active-icon.png);
+}
+
+/*--------------------- Checkbox(ENDS) ---------------------*/

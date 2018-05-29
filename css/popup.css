@@ -1,0 +1,129 @@
+﻿#popupmodel {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0;
+}
+.popup_dragger{
+	cursor: move
+}
+#popup {
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1001;
+    max-width: 98%;
+}
+.popup{
+    padding: 20px;
+    background-color: #ffffff;
+    border: 4px solid rgba(252,124,123,1);
+}
+.popup-top-left{
+	background-image: url('../images/popup/popup-top-left.png');
+	background-repeat: no-repeat;
+	height: 26px;
+	width: 26px
+}
+.popup-top-middle{
+	background-image: url('../images/popup/popup-top-middle.png');
+	background-repeat: repeat-x;
+	height: 26px;
+}
+.popup-top-right{
+	background-image: url('../images/popup/popup-top-right.png');
+	background-repeat: no-repeat;
+	height: 26px;
+	width: 26px;
+}
+.popup-middle-left{
+	background-image: url('../images/popup/popup-middle-left.png');
+	background-repeat: repeat-y;
+	width: 26px;
+}
+.popup-middle-middle{
+	background-color: #FFF;
+	background-repeat: repeat;
+	max-width: 550px
+}
+.popup-middle-right{
+	background-image: url('../images/popup/popup-middle-right.png');
+	background-repeat: repeat-y;
+	width: 26px;
+}
+.popup-bottom-left{
+	background-image: url('../images/popup/popup-bottom-left.png');
+	background-repeat: no-repeat;
+	height: 26px;
+	width: 26px
+}
+.popup-bottom-middle{
+	background-image: url('../images/popup/popup-bottom-middle.png');
+	background-repeat: repeat-x;
+	height: 26px;
+}
+.popup-bottom-right{
+	background-image: url('../images/popup/popup-bottom-right.png');
+	background-repeat: no-repeat;
+	height: 26px;
+	width: 26px
+}
+.popup-border-top{
+	border-top: solid 1px #32cd32;
+	width: 450px
+}
+.popup-title{
+	color: #525252;
+	font-size: 20px
+}
+.popup-close-icon{
+	position: absolute;
+    right: 22px;
+    top: 25px;
+}
+.popup-download-csv-title, .popup-download-csv-title a{
+	color: #253570;
+	font-size: 13px;
+	font-family: Myriad Pro;
+	padding-top: 10px
+}
+.popup-download-button-container{
+	border: solid 2px #e5e5e5;
+	width: 100px;
+	cursor: pointer;
+	position: relative
+}
+.popup-download-button{
+	padding: 9px 10px 5px 14px;
+}
+.popup-download-button-text{
+	padding-top: 9px;
+	font-size: 13px;
+	color: #525252;
+	font-family: Roboto-Bold
+}
+.popup-border-green{
+	border: solid 2px #6EC57D;
+    float: left;
+    margin-left: 60px;
+    width: 150px;
+}
+.popup-progress-grey{
+	border-top: solid 5px #e5e5e5;
+	margin: 0 60px
+}
+.popup-file-element{
+	position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 100px;
+    opacity: 0;
+    cursor: pointer;
+}
+.popup-report-table-conainer{
+	border: solid 1px #e6e6e6;
+}
