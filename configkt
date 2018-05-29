@@ -5,19 +5,9 @@
 	logallrefupdates = true
 	symlinks = false
 	ignorecase = true
-[remote "origin"]
-	url = ssh://git-codecommit.eu-west-1.amazonaws.com/v1/repos/rsa-pharma-database
-	fetch = +refs/heads/*:refs/remotes/origin/*
-	pushurl = ssh://git-codecommit.eu-west-1.amazonaws.com/v1/repos/rsa-pharma-database
-[branch "master"]
-	remote = origin
-	merge = refs/heads/master	
 [user]
-	name = Kinjal Thaker
-	email = kinjal@maximaainfoways.com
-[branch "development"]
-	remote = origin
-	merge = refs/heads/development
-[branch "reset_change"]
-	remote = origin
-	merge = refs/heads/reset_change
+	name = kinjal
+	email = kinjal.thaker@1rivet.com
+[remote "origin"]
+	url = https://github.com/kinjal123456/quary.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
