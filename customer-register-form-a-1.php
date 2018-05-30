@@ -1,5 +1,22 @@
 <?php
 	include_once "libs/data/db.connect.php";
+	
+	//Delete register form a
+	if(isset($_POST['action']) && trim($_POST['action'])=="registerFormDelete"){
+		$type['type']="error";
+		$formid=intval($_POST['formid']);
+		$customerid=intval($_POST['customerid']);
+		
+		if($formid>0){
+			$query="DELETE FROM customer_register_form_a_type_a WHERE id=%i AND customerid=%i";
+			$query=$sql->query($query, array($formid, $customerid));
+			if($db->query($query)){
+				$type['type']="success";
+			}
+		}
+		echo json_encode($type);
+		exit(0);
+	}
 
 	if(isset($_POST['submitbtn'])){
 		$type["registerstaus"]="error";
@@ -328,23 +345,39 @@
 							<td valign="top" class="table-title" style="width:300px">Name</td>
 							<td valign="top" class="table-title" style="width:300px">Surname</td>
 							<td valign="top" class="table-title" style="width:200px">Father's/Spouse name</td>
+							<td valign="top" class="table-title" style="width:100px">Actions</td>
 						</tr>
 						<?php
-							$qry="SELECT srno, emp_code, firstname, lastname, secondname FROM customer_register_form_a_type_a WHERE customerid=%i";
+							$qry="SELECT id, customerid, srno, emp_code, firstname, lastname, secondname FROM customer_register_form_a_type_a WHERE customerid=%i";
 							$qry=$sql->query($qry, array($customerid));
 							$res=$db->query($qry);
 							$cnt=$db->numRows($res);
 							if($cnt>0){
 								while($rw=$db->fetchNextObject($res)){
+									$id=intval($rw->id); 
 						?>
 						<tr>
 							<td valign="top" class="table-data" title="<?php echo intval($rw->srno); ?>"><?php echo intval($rw->srno); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($rw->emp_code); ?>"><?php echo trim($rw->emp_code); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 50); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
+							<td valign="top" class="table-data" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
+							<td valign="middle" class="table-data">
+								<div>
+									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm(this, <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+								</div>
+							</td>
 						</tr>
-						<?php } } ?>
+						<?php } }else { ?>
+						<tr>
+							<td colspan="6">
+								<div id="norecord"></div>
+							</td>
+						</tr>
+						<script type="text/javascript" language="javascript">
+							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
+						</script>
+						<?php } ?>
 					</table>
 				</div>
 			</div>
