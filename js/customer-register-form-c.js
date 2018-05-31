@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	$( "#dob, #doj, #dateofexit" ).datepicker();
 	
-	$("#register_a_1").validate({
+	$("#registerform").validate({
         debug: false,onsubmit: true,onfocusout: false,onkeyup: false,
         rules: {
-        	srno: {
+        	name: {
                 required: true
             }/*,
             empcode: {
@@ -99,8 +99,8 @@ $(document).ready(function() {
             }*/
         },
         messages: {
-        	srno: {
-            	required: "Please enter serial number."
+        	name: {
+            	required: "Please enter name."
             }/*,
             empcode: {
             	required: "Please enter employee code."
@@ -210,7 +210,7 @@ function validationError(errorMap, errorList){
 function validationSuccess(){
 	 showLoader();
 	 $("#submitbtn").attr("disabled","disabled");
-	 $('#register_a_1').ajaxSubmit({
+	 $('#registerform').ajaxSubmit({
 	  	success:loginformResponse,
 	  	dataType: "json"
 	 });
@@ -225,7 +225,7 @@ function loginformResponse(responseText, statusText) {
 		if(responseText.registerstaus == 'success') {
 			$("#submitbtn").attr("disabled","disabled");
 			$("#notify").notification({caption: "Information updated successfully.", type:"information", onhide:function(){
-				window.location="customer-register-form-a-1.php?custid="+responseText.customerid;
+				window.location="customer-register-form-c.php?custid="+responseText.customerid;
 			}});
 		}else {
 			$("#notify").notification({caption: "Unable to save information.", type:"warning", sticky:true});

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$( "#dob, #doj, #dateofexit" ).datepicker();
 	
-	$("#register_a_1").validate({
+	$("#registerform").validate({
         debug: false,onsubmit: true,onfocusout: false,onkeyup: false,
         rules: {
         	srno: {
@@ -210,7 +210,7 @@ function validationError(errorMap, errorList){
 function validationSuccess(){
 	 showLoader();
 	 $("#submitbtn").attr("disabled","disabled");
-	 $('#register_a_1').ajaxSubmit({
+	 $('#registerform').ajaxSubmit({
 	  	success:loginformResponse,
 	  	dataType: "json"
 	 });

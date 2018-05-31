@@ -112,7 +112,7 @@
 				</div>
 			</div>
 			<div style="padding:20px">
-				<form name="register_a_1" id="register_a_1" action="" method="post">
+				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
 							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">Sr No.</div></td>
@@ -364,7 +364,7 @@
 							<td valign="top" class="table-data" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
 							<td valign="middle" class="table-data">
 								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm(this, <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-1', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
 								</div>
 							</td>
 						</tr>
