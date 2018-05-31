@@ -56,7 +56,7 @@
 													  `date_of_exit`='%s',
 													  `reason_for_exit`='%s',
 													  `id_mark`='%s',
-													  `photo`='%s',
+									 				  `photo`='%s',
 													  `signature_thumb_image`='%s',
 													  `remark`='%s',
 													  `created_by`=NOW(),

@@ -21,53 +21,43 @@
 	if(isset($_POST['submitbtn'])){
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
-		$dateofjoining=strlen(trim($_POST['dob'])>0)?date("Y-m-d", strtotime(trim($_POST['dob']))):"";
-		$dateofjoin=strlen(trim($_POST['doj'])>0)?date("Y-m-d", strtotime(trim($_POST['doj']))):"";
-		$dateofexit=strlen(trim($_POST['dateofexit'])>0)?date("Y-m-d", strtotime(trim($_POST['dateofexit']))):"";
+		$dateofpayment=strlen(trim($_POST['date_of_payment'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_payment']))):"";
 		
 		if($custid>0){
 			$query="INSERT INTO customer_register_form_b SET
-													  `customerid`=%i,
-													  `srno`=%i,
-													  `emp_code`='%s',
-													  `firstname`='%s',
-													  `lastname`='%s',
-													  `gender`=%i,
-													  `secondname`='%s',
-													  `dob`='%s',
-													  `nationality`='%s',
-													  `education`='%s',
-													  `doj`='%s',
-													  `designation`='%s',
-													  `category_address`=%i,
-													  `emp_type`='%s',
-													  `mobile`=%i,
-													  `uan`='%s',
-													  `pan`='%s',
-													  `esic_ip`='%s',
-													  `lwf`='%s',
-													  `aadhaar_no`='%s',
-													  `bank_ac_no`=%i,
-													  `bank`='%s',
-													  `branch_ifsc_code`=%i,
-													  `present_address`='%s',
-													  `permenent_address`='%s',
-													  `service_book_no`=%i,
-													  `date_of_exit`='%s',
-													  `reason_for_exit`='%s',
-													  `id_mark`='%s',
-													  `photo`='%s',
-													  `signature_thumb_image`='%s',
-													  `remark`='%s',
-													  `created_by`=NOW(),
-													  `updated_by`=NOW()";
-			$query=$sql->query($query, array($custid, intval($_POST['srno']), trim($_POST['empcode']), trim($_POST['name']), 
-					trim($_POST['surname']), intval($_POST['gender']), trim($_POST['secondname']), $dateofbirth, 
-					trim($_POST['nationality']), trim($_POST['education']), $dateofjoin, trim($_POST['designation']), 
-					intval($_POST['cat_add']), trim($_POST['emptype']), intval($_POST['mobile']), trim($_POST['uan']), trim($_POST['pan']),
-					trim($_POST['esicip']), trim($_POST['lwf']), trim($_POST['aadharno']), intval($_POST['bankacno']), trim($_POST['bankname']),
-					intval($_POST['ifsccode']), trim($_POST['presentadd']), trim($_POST['permanantadd']), intval($_POST['servicebookno']), $dateofexit,
-					trim($_POST['reasonforexit']), trim($_POST['idmark']), trim($_POST['photo']), trim($_POST['specimensign']), trim($_POST['remark'])
+													    `customerid`=%i
+														`name`='%s',
+														`rate_of_wage`=%i,
+														`no_of_work_days`=%i,
+														`overtime_hours`=%i,
+														`basic`=%i,
+														`special_basic`=%i,
+														`da`=%i,
+														`overtime_payments`=%i,
+														`hra`=%i,
+														`others`=%i,
+														`total`=%i,
+														`pf`=%i,
+														`esic`='%s',
+														`society`='%s',
+														`income_tax`=%i,
+														`insurance`=%i,
+														`others_deduction`=%i,
+														`recoveries`=%i,
+														`total_deduction`=%i,
+														`net_payment`=%i,
+														`emp_share_pf_welfare`=%i,
+														`receipt_by_emp_bank_trans_id`=%i,
+														`date_of_payment`='%s',
+														`remark`='%s',
+														`created_by`=NOW(),
+														`updated_by`=NOW()";
+			$query=$sql->query($query, array($custid, intval($_POST['name']), trim($_POST['rate_of_wage']), trim($_POST['no_of_work_days']), 
+					trim($_POST['overtime_hours']), intval($_POST['basic']), trim($_POST['special_basic']), trim($_POST['da']), 
+					trim($_POST['overtime_payments']), trim($_POST['hra']), trim($_POST['others']), 
+					intval($_POST['total']), trim($_POST['pf']), intval($_POST['esic']), trim($_POST['society']), trim($_POST['income_tax']),
+					trim($_POST['insurance']), trim($_POST['others_deduction']), trim($_POST['recoveries']), intval($_POST['total_deduction']), trim($_POST['net_payment']),
+					intval($_POST['emp_share_pf_welfare']), trim($_POST['receipt_by_emp_bank_trans_id']), $dateofpayment, intval($_POST['remark'])
 			));
 			if($db->query($query)){
 				$type['customerid']=$custid;
@@ -273,13 +263,6 @@
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
 							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right"><div class="listing_th_padding">Present<br /> Address</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Permanent</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding" style="width:110px">Service Book No.</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Date of Exit</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Reason for Exit</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Mark of Identification</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Photo</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Specimen Signature/Thumb<br /> Impression</div></td>
 							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
 						</tr>
 						<tr>
