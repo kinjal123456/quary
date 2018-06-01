@@ -21,57 +21,28 @@
 	if(isset($_POST['submitbtn'])){
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
-		$dateofcompleterecovery=strlen(trim($_POST['date_of_complete_recovery'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_complete_recovery']))):"";
 		
-		if($custid>0){
-			$query="INSERT INTO customer_register_form_d SET
-													    `customerid`=%i,
-														`name`='%s',
-														`relay_or_set_work`='%s',,
-														`day_1`=%i,
-														`day_2`=%i,
-														`day_3`=%i,
-														`day_4`=%i,
-														`day_5`=%i,
-														`day_6`=%i,
-														`day_7`=%i,
-														`day_8`=%i,
-														`day_9`=%i,
-														`day_10`=%i,
-														`day_11`=%i,
-														`day_12`=%i,
-														`day_13`=%i,
-														`day_14`=%i,
-														`day_15`=%i,
-														`day_16`=%i,
-														`day_17`=%i,
-														`day_18`=%i,
-														`day_19`=%i,
-														`day_20`=%i,
-														`day_21`=%i,
-														`day_22`=%i,
-														`day_23`=%i,
-														`day_24`=%i,
-														`day_25`=%i,
-														`day_26`=%i,
-														`day_27`=%i,
-														`day_28`=%i,
-														`day_29`=%i,
-														`day_30`=%i,
-														`day_31`=%i,
-														`summary_no_of_days`=%i,
-														`signature_of_reg_keeper`='%s',
-														`remark_no_of_hours`='%s',
-														`created_by`=NOW(),
-														`updated_by`=NOW()";
-			$query=$sql->query($query, array($custid, intval($_POST['si_no']), trim($_POST['name']), intval($_POST['recovery_type']), 
-					trim($_POST['particulars']), trim($_POST['date_of_loss']), intval($_POST['amount']), trim($_POST['whether_show_cause_issued']), 
-					trim($_POST['explanation_heard_in_presence_of']), intval($_POST['no_of_emis']), trim($_POST['first_month_year']), 
-					trim($_POST['last_month_year']), $dateofcompleterecovery, trim($_POST['remark'])
-			));
+		if($custid>0){//INSERT MAIN DATA
+			$query="INSERT INTO customer_register_form_d SET `customerid`=%i,`name`='%s',`relay_or_set_work`='%s',`summary_no_of_days`=%i,`signature_of_reg_keeper`='%s',
+														`remark_no_of_hours`='%s',`created_by`=NOW(),`updated_by`=NOW()";
+			$query=$sql->query($query, array($custid, trim($_POST['name']), trim($_POST['relay_or_set_work']), intval($_POST['summary_no_of_days']), 
+					trim($_POST['signature_of_reg_keeper']), trim($_POST['remark_no_of_hours'])));
 			if($db->query($query)){
-				$type['customerid']=$custid;
-				$type["registerstaus"]="success";
+				$lastinsId=$db->lastInsertedId();
+				if($lastinsId>0){//UPDATE ATTENDENCE DATA
+					if(isset($_POST['days']) && count($_POST['days'])>0){
+						$dayno=1;
+						for($j=0; $j<=count($_POST['days']); $j++){
+							if(strlen($_POST['days'][$j])>0){
+								$upquery="UPDATE customer_register_form_d SET day_".$dayno."='%s',`updated_by`=NOW() WHERE id=%i";
+								$upquery=$sql->query($upquery, array($_POST['days'][$j], $lastinsId));
+								$db->query($upquery);
+							}
+						$dayno++; }
+					}
+					$type['customerid']=$custid;
+					$type["registerstaus"]="success";
+				}
 			}
 		}
 		
@@ -103,84 +74,74 @@
 		<div id="notify"><!-- --></div>
 		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Update Customer - '.trim($custrow->customername).' details':'New Customer'; ?></div>
 		<div style="padding: 20px 0;">
-			<div style="border-bottom: 1px solid #cccccc;">
+			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
 					<a class="tab active_tab" id="general">General Details</a>
 					<a class="tab" id="additional">Additional Details</a>
 					<a class="tab" id="bills">Bills</a>
 					<a class="tab" id="registers">Registers</a>
 				</div>
-			</div>
+			</div>-->
 			<div style="padding:20px">
+				<div align="center">
+					<div class="register_form_upper_hadding_lg">FORM D</div>
+					<div class="register_form_upper_hadding_lg">FORMAT OF ATTENDANCE REGISTER</div>
+				</div>
+				<div>
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<td style="font-weight:bold">Name of the Establishment</td>
+							<td>fg</td>
+							<td style="font-weight:bold">Name of Owner</td>
+							<td>Jayeshbhai Desai</td>
+							<td style="font-weight:bold">LIN</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pull-left" style="font-weight:bold;padding-right:10px">For the Period From</div>
+								<div class="pull-left">fg</div>
+								<div class="pull-left" style="font-weight:bold;padding:0 10px">To</div>
+								<div class="pull-left">gfd</div>
+								<br clear="all">
+							</td>
+						</tr>
+						<tr><td colspan="6" style="height:10px"><!-- --></td></tr>
+					</table>
+				</div>
 				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">SI Number</div></td>
 							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Recovery Type</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Particulars</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Date of Loss</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Amount</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Whether show <br />Cause Issued</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Explanation Heard <br /> in Presence of</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Number of EMIS</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">First Month Year</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Last Month Year</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Relay or set work</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Summary number of days</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Signature of reg keeper</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Remark number of hours</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="si_no" id="si_no" value="">
+									<input type="text" name="name" id="name" value="">
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="name" id="name" value="" />
+									<input type="text" name="relay_or_set_work" id="relay_or_set_work" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="recovery_type" id="recovery_type" value="" />
+									<input type="text" name="summary_no_of_days" id="summary_no_of_days" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="particulars" id="particulars" value="" />
+									<input type="text" name="signature_of_reg_keeper" id="signature_of_reg_keeper" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="date_of_loss" id="date_of_loss" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="amount" id="amount" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="whether_show_cause_issued" id="whether_show_cause_issued" value="" style="width:100%" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="explanation_heard_in_presence_of" id="explanation_heard_in_presence_of" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="no_of_emis" id="no_of_emis" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="first_month_year" id="first_month_year" value="" style="width:100%" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="last_month_year" id="last_month_year" value="" />
+									<input type="text" name="remark_no_of_hours" id="remark_no_of_hours" value="" />
 								</div>
 							</td>
 						</tr>
@@ -188,19 +149,15 @@
 					</table>
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:200px"><div class="listing_th_padding">Date of Complete Recovery</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right"><div class="listing_th_padding">Attendence</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="date_of_complete_recovery" id="date_of_complete_recovery" value="">
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="remark" id="remark" value="" />
-								</div>
+								<?php for($i=0; $i<31; $i++){ ?>
+									<div class="listing_td_padding pull-left">
+										<input type="text" name="days[]" id="day_<?php echo $i; ?>" value="" style="width:12px" />
+									</div>
+								<?php } ?>
 							</td>
 						</tr>
 						<tr>

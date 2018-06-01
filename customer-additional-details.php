@@ -118,7 +118,7 @@
 		            
 		            if($expcount>0){
 	            ?>
-				<tr class="capacity templatecapacity">
+				<tr class="capacity templatecapacity" style="display:none">
 					<td align="center" valign="middle" class="border_bottom border_left border_right">
 	                    <div>
 	                        <div title="Delete" class="icon_delete"></div>
@@ -200,7 +200,7 @@
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Issue date</div></td>
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Expirty date</div></td>
 			</tr>
-			<tr class="short templateshort">
+			<tr class="short templateshort" style="display:none">
 				<td align="center" valign="middle" class="border_bottom border_left border_right">
                     <div>
                         <div title="Delete" class="icon_delete"></div>
@@ -323,7 +323,7 @@
                 </td>
             </tr>
             <?php } ?>
-            <tr class="add templateadd">
+            <tr class="add templateadd" style="display:none">
                 <td align="center" valign="middle" class="border_bottom border_left border_right">
                     <div>
                         <div title="Delete" class="icon_delete"></div>

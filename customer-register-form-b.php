@@ -93,14 +93,14 @@
 		<div id="notify"><!-- --></div>
 		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Update Customer - '.trim($custrow->customername).' details':'New Customer'; ?></div>
 		<div style="padding: 20px 0;">
-			<div style="border-bottom: 1px solid #cccccc;">
+			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
 					<a class="tab active_tab" id="general">General Details</a>
 					<a class="tab" id="additional">Additional Details</a>
 					<a class="tab" id="bills">Bills</a>
 					<a class="tab" id="registers">Registers</a>
 				</div>
-			</div>
+			</div>-->
 			<div style="padding:20px">
 				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">

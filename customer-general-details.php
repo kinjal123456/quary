@@ -153,7 +153,7 @@
 						                </td>
 						            </tr>
 						            <?php } } ?>
-						            <tr class="genemp templategenemp">
+						            <tr class="genemp templategenemp" style="display:none">
 						                <td align="center" valign="middle" class="border_bottom border_left border_right">
 						                    <div>
 						                        <div title="Delete" class="icon_delete"></div>

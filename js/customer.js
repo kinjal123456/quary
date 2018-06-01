@@ -513,7 +513,9 @@ jQuery.validator.addMethod('checkvalidbillamount', function(value, element){
 });
 
 function makegenempClone(){
+	$('.templategenemp').show();
     var newentry = $('.templategenemp').clone(false).removeClass('templategenemp')[0].outerHTML;
+	$('.templategenemp').hide();
     lastoldelem = $('table#appendgenempcontent tr.genemp:last');
     $(lastoldelem).after(newentry);
 
@@ -521,7 +523,9 @@ function makegenempClone(){
 }
 
 function makeaddClone(){
+	$('.templateadd').show();
     var newentry = $('.templateadd').clone(false).removeClass('templateadd')[0].outerHTML;
+	$('.templateadd').hide();
     lastoldelem = $('table#appendaddcontent tr.add:last');
     $(lastoldelem).after(newentry);
 
@@ -529,7 +533,9 @@ function makeaddClone(){
 }
 
 function makecapacityClone(){
+	$('.templatecapacity').show();
     var newentry = $('.templatecapacity').clone(false).removeClass('templatecapacity')[0].outerHTML;
+	$('.templatecapacity').hide();
     lastoldelem = $('table#appendcapacitycontent tr.capacity:last');
     $(lastoldelem).after(newentry);
 
@@ -537,7 +543,9 @@ function makecapacityClone(){
 }
 
 function makeshortClone(){
+	$('.templateshort').show();
     var newentry = $('.templateshort').clone(false).removeClass('templateshort')[0].outerHTML;
+	$('.templateshort').hide();
     lastoldelem = $('table#appendshortcontent tr.short:last');
     $(lastoldelem).after(newentry);
 
@@ -545,7 +553,9 @@ function makeshortClone(){
 }
 
 function makebillClone(){
+	$('.template').show();
     var newentry = $('.template').clone(false).removeClass('template')[0].outerHTML;
+	$('.template').hide();
     lastoldelem = $('table#appendbillcontent tr.bills:last');
     $(lastoldelem).after(newentry);
 

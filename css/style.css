@@ -568,3 +568,12 @@ td.jqplot-table-legend{
 .select_drop_down{
 	height:30px; color:#686868; font-size:12px
 }
+.register_form_upper_hadding_lg{
+	font-weight:bold;
+	padding-bottom:12px;
+	font-size:14px
+}
+.register_form_upper_hadding_sm{
+	font-weight:bold;
+	padding-bottom:12px;
+}
