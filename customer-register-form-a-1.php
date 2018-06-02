@@ -84,6 +84,11 @@
 		$customerid=intval($_GET['custid']);
 	}
 ?>
+<link rel="stylesheet" href="css/style-fixed-row-column.css">
+<script src="//cdn.datatables.net/1.9.4/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.rawgit.com/DataTables/FixedColumns/RELEASE_2_0_3/media/js/FixedColumns.js"></script>
+<script src="jquery/main.js"></script>
+<script type="text/javascript" src="js/customer-register-form-a-1.js"></script>
 <style>
 	.register_table_td{
 		width:100px
@@ -96,8 +101,16 @@
 	.listing_td_padding{
 		padding:5px
 	}
+	.dataTables_wrapper .DTFC_LeftWrapper td, .dataTables_wrapper .DTFC_LeftWrapper th {
+        text-align: left;
+    }
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 5px;
+    }
+    .dataTables_wrapper .DTFC_LeftBodyWrapper td, .dataTables_wrapper .dataTables_scrollHeadInner th {
+        cursor: default;
+    }
 </style>
-<script type="text/javascript" src="js/customer-register-form-a-1.js"></script>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
@@ -358,46 +371,87 @@
 					</table>
 				</form>
 				<div style="padding:20px 0">
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td valign="top" class="table-title" style="width:50px">Sr No.</td>
-							<td valign="top" class="table-title" style="width:100px">Employee Code</td>
-							<td valign="top" class="table-title" style="width:300px">Name</td>
-							<td valign="top" class="table-title" style="width:300px">Surname</td>
-							<td valign="top" class="table-title" style="width:200px">Father's/Spouse name</td>
-							<td valign="top" class="table-title" style="width:100px">Actions</td>
-						</tr>
-						<?php
-							$qry="SELECT id, customerid, srno, emp_code, firstname, lastname, secondname FROM customer_register_form_a_type_a WHERE customerid=%i";
-							$qry=$sql->query($qry, array($customerid));
-							$res=$db->query($qry);
-							$cnt=$db->numRows($res);
-							if($cnt>0){
-								while($rw=$db->fetchNextObject($res)){
-									$id=intval($rw->id); 
-						?>
-						<tr>
-							<td valign="top" class="table-data" title="<?php echo intval($rw->srno); ?>"><?php echo intval($rw->srno); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->emp_code); ?>"><?php echo trim($rw->emp_code); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 50); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
-							<td valign="middle" class="table-data">
-								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-1', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-								</div>
-							</td>
-						</tr>
-						<?php } }else { ?>
-						<tr>
-							<td colspan="6">
-								<div id="norecord"></div>
-							</td>
-						</tr>
-						<script type="text/javascript" language="javascript">
-							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
-						</script>
-						<?php } ?>
+					<table id="example" class="table table-bordered table-condensed" style="width:100%">
+						<thead>
+							<tr>
+								<th valign="top" class="table-title">Actions</th>
+								<th valign="top" class="table-title">Sr No.</th>
+								<th valign="top" class="table-title">Employee Code</th>
+								<th valign="top" class="table-title">Name</th>
+								<th valign="top" class="table-title">Surname</th>
+								<th valign="top" class="table-title">Gender</th>
+								<th valign="top" class="table-title">Father's/Spouse name</th>
+								<th valign="top" class="table-title">Dob</th>
+								<th valign="top" class="table-title">Nationality</th>
+								<th valign="top" class="table-title">Education</th>
+								<th valign="top" class="table-title">Doj</th>
+								<th valign="top" class="table-title">Designation</th>
+								<th valign="top" class="table-title">Category Address</th>
+								<th valign="top" class="table-title">Employee Type</th>
+								<th valign="top" class="table-title">Mobile</th>
+								<th valign="top" class="table-title">UAN</th>
+								<th valign="top" class="table-title">PAN</th>
+								<th valign="top" class="table-title">ESIC IP</th>
+								<th valign="top" class="table-title">LWF</th>
+								<th valign="top" class="table-title">Aadhaar Number</th>
+								<th valign="top" class="table-title">Bank A/C Number</th>
+								<th valign="top" class="table-title">Bank</th>
+								<th valign="top" class="table-title">Branch IFSC Code</th>
+								<th valign="top" class="table-title">Present Address</th>
+								<th valign="top" class="table-title">Permenent Address</th>
+								<th valign="top" class="table-title">Service Book Number</th>
+								<th valign="top" class="table-title">Date of Exit</th>
+								<th valign="top" class="table-title">Reason for Exit</th>
+								<th valign="top" class="table-title">Mark of Identif ication</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								$qry="SELECT * FROM customer_register_form_a_type_a WHERE customerid=%i";
+								$qry=$sql->query($qry, array($customerid));
+								$res=$db->query($qry);
+								$cnt=$db->numRows($res);
+								if($cnt>0){
+									while($rw=$db->fetchNextObject($res)){
+										$id=intval($rw->id); 
+							?>
+							<tr>
+								<td valign="top" class="table-data" title="<?php echo intval($rw->srno); ?>"><?php echo intval($rw->srno); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->emp_code); ?>"><?php echo trim($rw->emp_code); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->gender); ?>"><?php echo ellipses(trim($rw->gender), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->dob); ?>"><?php echo ellipses(trim($rw->dob), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->nationality); ?>"><?php echo ellipses(trim($rw->nationality), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->education); ?>"><?php echo ellipses(trim($rw->education), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->doj); ?>"><?php echo ellipses(trim($rw->doj), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->designation); ?>"><?php echo ellipses(trim($rw->designation), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->category_address); ?>"><?php echo ellipses(trim($rw->category_address), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->emp_type); ?>"><?php echo ellipses(trim($rw->emp_type), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->mobile); ?>"><?php echo ellipses(trim($rw->mobile), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->uan); ?>"><?php echo ellipses(trim($rw->uan), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->pan); ?>"><?php echo ellipses(trim($rw->pan), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->esic_ip); ?>"><?php echo ellipses(trim($rw->esic_ip), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->lwf); ?>"><?php echo ellipses(trim($rw->lwf), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->aadhaar_no); ?>"><?php echo ellipses(trim($rw->aadhaar_no), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->bank_ac_no); ?>"><?php echo ellipses(trim($rw->bank_ac_no), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->bank); ?>"><?php echo ellipses(trim($rw->bank), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->branch_ifsc_code); ?>"><?php echo ellipses(trim($rw->branch_ifsc_code), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->present_address); ?>"><?php echo ellipses(trim($rw->present_address), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->permenent_address); ?>"><?php echo ellipses(trim($rw->permenent_address), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->service_book_no); ?>"><?php echo ellipses(trim($rw->service_book_no), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->date_of_exit); ?>"><?php echo ellipses(trim($rw->date_of_exit), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->reason_for_exit); ?>"><?php echo ellipses(trim($rw->reason_for_exit), 50); ?></td>
+								<td valign="top" class="table-data" title="<?php echo trim($rw->id_mark); ?>"><?php echo ellipses(trim($rw->id_mark), 50); ?></td>
+								<td valign="middle" class="table-data">
+									<div>
+										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-1', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									</div>
+								</td>
+							</tr>
+							<?php } } ?>
+						</tbody>
 					</table>
 				</div>
 			</div>
