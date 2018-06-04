@@ -301,7 +301,7 @@
 	padding-left: 28px;
 	background-color: #f2f2f2;
 	border-top: solid 1px #e6e6e6;
-	line-height: 40px
+	line-height:40px
 }
 .table-data{
 	color: #525252;
@@ -525,6 +525,9 @@ td.jqplot-table-legend{
 	width:100px
 }
 /*-- listing --*/
+.borderall{
+	border:solid 1px #dddddd
+}
 .border_left{
     border-left:1px solid #dddddd;
 }

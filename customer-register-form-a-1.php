@@ -19,7 +19,7 @@
 	}
 
 	if(isset($_POST['submitbtn'])){
-		$type["registerstaus"]="error";
+		$status="error";
 		$custid=intval($_POST['custid']);
 		$dateofjoining=strlen(trim($_POST['dob'])>0)?date("Y-m-d", strtotime(trim($_POST['dob']))):"";
 		$dateofjoin=strlen(trim($_POST['doj'])>0)?date("Y-m-d", strtotime(trim($_POST['doj']))):"";
@@ -70,6 +70,28 @@
 					trim($_POST['reasonforexit']), trim($_POST['idmark']), trim($_POST['photo']), trim($_POST['specimensign']), trim($_POST['remark'])
 			));
 			if($db->query($query)){
+				$status="success";
+				
+				$lastinsId=$db->lastInsertedId();
+				
+				$target_dir = "uploads/photos/".$lastinsId."/"
+				$target_file = $target_dir . basename($_FILES["photo"]["name"]);
+				$uploadOk = 1;
+				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+				// Check if image file is a actual image or fake image
+				if(isset($_POST["photo"])) {
+					$check = getimagesize($_FILES["photo"]["tmp_name"]);
+					if($check !== false) {
+						$upquery="UPDATE customer_register_form_a_type_a SET photo='%s' WHERE id=%i";
+						$upquery=$sql->query($upquery, array(trim($_POST['photo']), $lastinsId));
+						if($db->query($upquery)){
+							$status="success";
+						}
+					} else {
+						$status="imageerror";
+					}
+				}
+				
 				$type['customerid']=$custid;
 				$type["registerstaus"]="success";
 			}
@@ -84,10 +106,6 @@
 		$customerid=intval($_GET['custid']);
 	}
 ?>
-<link rel="stylesheet" href="css/style-fixed-row-column.css">
-<script src="//cdn.datatables.net/1.9.4/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.rawgit.com/DataTables/FixedColumns/RELEASE_2_0_3/media/js/FixedColumns.js"></script>
-<script src="jquery/main.js"></script>
 <script type="text/javascript" src="js/customer-register-form-a-1.js"></script>
 <style>
 	.register_table_td{
@@ -99,17 +117,18 @@
 		font-size: 13px;
 	}
 	.listing_td_padding{
-		padding:5px
+		padding:5px;
 	}
-	.dataTables_wrapper .DTFC_LeftWrapper td, .dataTables_wrapper .DTFC_LeftWrapper th {
-        text-align: left;
-    }
-    table.dataTable tbody th, table.dataTable tbody td {
-        padding: 5px;
-    }
-    .dataTables_wrapper .DTFC_LeftBodyWrapper td, .dataTables_wrapper .dataTables_scrollHeadInner th {
-        cursor: default;
-    }
+	.table-title {
+	    padding: 0 10px;
+	    vertical-align: middle;
+	    min-width: 100px;
+	    line-height:inherit;
+	}
+	.table-data {
+	    padding: 0 28px;
+	    line-height: 25px;
+	}
 </style>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
@@ -197,12 +216,12 @@
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="dob" id="dob" value="" style="width:100%" />
+									<input type="text" name="dob" id="dob" value="" style="width:100%" readonly="readonly" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="nationality" id="nationality" value="" />
+									<input type="text" name="nationality" id="nationality" value="Indian" readonly="readonly" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
@@ -212,7 +231,7 @@
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="doj" id="doj" value="" style="width:100%" />
+									<input type="text" name="doj" id="doj" value="" style="width:100%" readonly="readonly" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
@@ -370,7 +389,7 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:20px 0">
+				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table id="example" class="table table-bordered table-condensed" style="width:100%">
 						<thead>
 							<tr>
@@ -416,39 +435,39 @@
 										$id=intval($rw->id); 
 							?>
 							<tr>
-								<td valign="top" class="table-data" title="<?php echo intval($rw->srno); ?>"><?php echo intval($rw->srno); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->emp_code); ?>"><?php echo trim($rw->emp_code); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->gender); ?>"><?php echo ellipses(trim($rw->gender), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->dob); ?>"><?php echo ellipses(trim($rw->dob), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->nationality); ?>"><?php echo ellipses(trim($rw->nationality), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->education); ?>"><?php echo ellipses(trim($rw->education), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->doj); ?>"><?php echo ellipses(trim($rw->doj), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->designation); ?>"><?php echo ellipses(trim($rw->designation), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->category_address); ?>"><?php echo ellipses(trim($rw->category_address), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->emp_type); ?>"><?php echo ellipses(trim($rw->emp_type), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->mobile); ?>"><?php echo ellipses(trim($rw->mobile), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->uan); ?>"><?php echo ellipses(trim($rw->uan), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->pan); ?>"><?php echo ellipses(trim($rw->pan), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->esic_ip); ?>"><?php echo ellipses(trim($rw->esic_ip), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->lwf); ?>"><?php echo ellipses(trim($rw->lwf), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->aadhaar_no); ?>"><?php echo ellipses(trim($rw->aadhaar_no), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->bank_ac_no); ?>"><?php echo ellipses(trim($rw->bank_ac_no), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->bank); ?>"><?php echo ellipses(trim($rw->bank), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->branch_ifsc_code); ?>"><?php echo ellipses(trim($rw->branch_ifsc_code), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->present_address); ?>"><?php echo ellipses(trim($rw->present_address), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->permenent_address); ?>"><?php echo ellipses(trim($rw->permenent_address), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->service_book_no); ?>"><?php echo ellipses(trim($rw->service_book_no), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->date_of_exit); ?>"><?php echo ellipses(trim($rw->date_of_exit), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->reason_for_exit); ?>"><?php echo ellipses(trim($rw->reason_for_exit), 50); ?></td>
-								<td valign="top" class="table-data" title="<?php echo trim($rw->id_mark); ?>"><?php echo ellipses(trim($rw->id_mark), 50); ?></td>
-								<td valign="middle" class="table-data">
+								<td valign="middle" class="table-data borderall" style="padding-top:5px">
 									<div>
 										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-1', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
 									</div>
 								</td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->srno); ?>"><?php echo intval($rw->srno); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emp_code); ?>"><?php echo trim($rw->emp_code); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo (intval($rw->gender)==1)?"Men":"Woman"; ?>"><?php echo (intval($rw->gender)==1)?"Men":"Woman"; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->dob); ?>"><?php echo date("m/d/Y", strtotime(trim($rw->dob))); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nationality); ?>"><?php echo ellipses(trim($rw->nationality), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->education); ?>"><?php echo ellipses(trim($rw->education), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->doj); ?>"><?php echo date("m/d/Y", strtotime(trim($rw->doj))); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->designation); ?>"><?php echo ellipses(trim($rw->designation), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->category_address); ?>"><?php echo ellipses(trim($rw->category_address), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emp_type); ?>"><?php echo ellipses(trim($rw->emp_type), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->mobile); ?>"><?php echo ellipses(trim($rw->mobile), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->uan); ?>"><?php echo ellipses(trim($rw->uan), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->pan); ?>"><?php echo ellipses(trim($rw->pan), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->esic_ip); ?>"><?php echo ellipses(trim($rw->esic_ip), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->lwf); ?>"><?php echo ellipses(trim($rw->lwf), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->aadhaar_no); ?>"><?php echo ellipses(trim($rw->aadhaar_no), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->bank_ac_no); ?>"><?php echo ellipses(trim($rw->bank_ac_no), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->bank); ?>"><?php echo ellipses(trim($rw->bank), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->branch_ifsc_code); ?>"><?php echo ellipses(trim($rw->branch_ifsc_code), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->present_address); ?>"><?php echo ellipses(trim($rw->present_address), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->permenent_address); ?>"><?php echo ellipses(trim($rw->permenent_address), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->service_book_no); ?>"><?php echo ellipses(trim($rw->service_book_no), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->date_of_exit); ?>"><?php echo ellipses(trim($rw->date_of_exit), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->reason_for_exit); ?>"><?php echo ellipses(trim($rw->reason_for_exit), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->id_mark); ?>"><?php echo ellipses(trim($rw->id_mark), 50); ?></td>
 							</tr>
 							<?php } } ?>
 						</tbody>

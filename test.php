@@ -1,8 +1,28 @@
-<link rel="stylesheet" href="css/style-fixed-row-column.css">
-<script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-<script src="//cdn.datatables.net/1.9.4/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.rawgit.com/DataTables/FixedColumns/RELEASE_2_0_3/media/js/FixedColumns.js"></script>
-<script src="jquery/main.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY": "555px",
+		"scrollX": false,
+		"paging": false,
+		"ordering": false,
+		"autoWidth": false,
+		"fixedHeader": {
+			"header": false,
+			"footer": false
+		},
+		"columnDefs": [
+		  { "width": "10px", "targets": 0 },
+		  { "width": "40px", "targets": 1 },
+		  { "width": "100px", "targets": 2 },
+		  { "width": "70px", "targets": 3 },
+		  { "width": "70px", "targets": 4 },
+		  { "width": "70px", "targets": 5 }
+		]
+    } );
+} );
+</script>
 <style>
     .dataTables_wrapper .DTFC_LeftWrapper td, .dataTables_wrapper .DTFC_LeftWrapper th {
         text-align: left;
@@ -12,6 +32,10 @@
     }
     .dataTables_wrapper .DTFC_LeftBodyWrapper td, .dataTables_wrapper .dataTables_scrollHeadInner th {
         cursor: default;
+    }
+	div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
     }
 </style>
 <table id="example" class="table table-bordered table-condensed" style="width:100%">
