@@ -84,24 +84,12 @@
 		$customerid=intval($_GET['custid']);
 	}
 ?>
-<style>
-	.register_table_td{
-		width:100px
-	}
-	.listing_th_padding {
-		padding: 5px 5px 5px 8px;
-		color: #000;
-		font-size: 13px;
-	}
-	.listing_td_padding{
-		padding:5px
-	}
-</style>
+<link href="css/register-styles.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/customer-register-form-a-1.js"></script>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
-		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Update Customer - '.trim($custrow->customername).' details':'New Customer'; ?></div>
+		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Register Form A - Type B':''; ?></div>
 		<div style="padding: 20px 0;">
 			<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">

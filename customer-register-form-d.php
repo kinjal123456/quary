@@ -55,24 +55,12 @@
 		$customerid=intval($_GET['custid']);
 	}
 ?>
-<style>
-	.register_table_td{
-		width:100px
-	}
-	.listing_th_padding {
-		padding: 5px 5px 5px 8px;
-		color: #000;
-		font-size: 13px;
-	}
-	.listing_td_padding{
-		padding:5px
-	}
-</style>
+<link href="css/register-styles.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/customer-register-form-d.js"></script>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
-		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Update Customer - '.trim($custrow->customername).' details':'New Customer'; ?></div>
+		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Register Form D':''; ?></div>
 		<div style="padding: 20px 0;">
 			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
@@ -168,13 +156,19 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:20px 0">
+				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td valign="top" class="table-title" style="width:50px">Sr No.</td>
-							<td valign="top" class="table-title"Name</td>
-							<td valign="top" class="table-title" style="width:100px">Actions</td>
-						</tr>
+						<thead>
+							<tr>
+								<th valign="top" class="table-title border_left border_right">Actions</th>
+								<th valign="top" class="table-title border_right">Name</th>
+								<th valign="top" class="table-title border_right">Relay or set work</th>
+								<th valign="top" class="table-title border_right">Summary number of days</th>
+								<th valign="top" class="table-title border_right">Signature of registration keeper</th>
+								<th valign="top" class="table-title border_right">Remark number of hours</th>
+							</tr>
+						</thead>
+						<tbody>
 						<?php
 							$qry="SELECT id, customerid, name FROM customer_register_form_d WHERE customerid=%i";
 							$qry=$sql->query($qry, array($customerid));
@@ -185,15 +179,18 @@
 								while($rw=$db->fetchNextObject($res)){
 									$id=intval($rw->id); 
 						?>
-						<tr>
-							<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
-							<td valign="middle" class="table-data">
-								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('d', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-								</div>
-							</td>
-						</tr>
+							<tr>
+								<td valign="middle" class="table-data borderall" style="padding-top:5px">
+									<div>
+										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('d', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									</div>
+								</td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->relay_or_set_work); ?>"><?php echo ellipses(trim($rw->relay_or_set_work), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->summary_no_of_days); ?>"><?php echo intval($rw->summary_no_of_days); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->signature_of_reg_keeper); ?>"><?php echo ellipses(trim($rw->signature_of_reg_keeper), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark_no_of_hours); ?>"><?php echo ellipses(trim($rw->remark_no_of_hours), 50); ?></td>
+							</tr>
 						<?php $counter++; } }else { ?>
 						<tr>
 							<td colspan="6">
@@ -204,6 +201,7 @@
 							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
 						</script>
 						<?php } ?>
+						</tbody>
 					</table>
 				</div>
 			</div>

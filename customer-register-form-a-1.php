@@ -74,26 +74,8 @@
 				
 				$lastinsId=$db->lastInsertedId();
 				
-				$target_dir = "uploads/photos/".$lastinsId."/"
-				$target_file = $target_dir . basename($_FILES["photo"]["name"]);
-				$uploadOk = 1;
-				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-				// Check if image file is a actual image or fake image
-				if(isset($_POST["photo"])) {
-					$check = getimagesize($_FILES["photo"]["tmp_name"]);
-					if($check !== false) {
-						$upquery="UPDATE customer_register_form_a_type_a SET photo='%s' WHERE id=%i";
-						$upquery=$sql->query($upquery, array(trim($_POST['photo']), $lastinsId));
-						if($db->query($upquery)){
-							$status="success";
-						}
-					} else {
-						$status="imageerror";
-					}
-				}
-				
 				$type['customerid']=$custid;
-				$type["registerstaus"]="success";
+				$type["registerstaus"]=$status;
 			}
 		}
 		
@@ -106,34 +88,12 @@
 		$customerid=intval($_GET['custid']);
 	}
 ?>
+<link href="css/register-styles.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/customer-register-form-a-1.js"></script>
-<style>
-	.register_table_td{
-		width:100px
-	}
-	.listing_th_padding {
-		padding: 5px 5px 5px 8px;
-		color: #000;
-		font-size: 13px;
-	}
-	.listing_td_padding{
-		padding:5px;
-	}
-	.table-title {
-	    padding: 0 10px;
-	    vertical-align: middle;
-	    min-width: 100px;
-	    line-height:inherit;
-	}
-	.table-data {
-	    padding: 0 28px;
-	    line-height: 25px;
-	}
-</style>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
-		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Update Customer - '.trim($custrow->customername).' details':'New Customer'; ?></div>
+		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Register Form A - Type A':''; ?></div>
 		<div style="padding: 20px 0;">
 			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
@@ -390,38 +350,38 @@
 					</table>
 				</form>
 				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
-					<table id="example" class="table table-bordered table-condensed" style="width:100%">
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 						<thead>
 							<tr>
-								<th valign="top" class="table-title">Actions</th>
-								<th valign="top" class="table-title">Sr No.</th>
-								<th valign="top" class="table-title">Employee Code</th>
-								<th valign="top" class="table-title">Name</th>
-								<th valign="top" class="table-title">Surname</th>
-								<th valign="top" class="table-title">Gender</th>
-								<th valign="top" class="table-title">Father's/Spouse name</th>
-								<th valign="top" class="table-title">Dob</th>
-								<th valign="top" class="table-title">Nationality</th>
-								<th valign="top" class="table-title">Education</th>
-								<th valign="top" class="table-title">Doj</th>
-								<th valign="top" class="table-title">Designation</th>
-								<th valign="top" class="table-title">Category Address</th>
-								<th valign="top" class="table-title">Employee Type</th>
-								<th valign="top" class="table-title">Mobile</th>
-								<th valign="top" class="table-title">UAN</th>
-								<th valign="top" class="table-title">PAN</th>
-								<th valign="top" class="table-title">ESIC IP</th>
-								<th valign="top" class="table-title">LWF</th>
-								<th valign="top" class="table-title">Aadhaar Number</th>
-								<th valign="top" class="table-title">Bank A/C Number</th>
-								<th valign="top" class="table-title">Bank</th>
-								<th valign="top" class="table-title">Branch IFSC Code</th>
-								<th valign="top" class="table-title">Present Address</th>
-								<th valign="top" class="table-title">Permenent Address</th>
-								<th valign="top" class="table-title">Service Book Number</th>
-								<th valign="top" class="table-title">Date of Exit</th>
-								<th valign="top" class="table-title">Reason for Exit</th>
-								<th valign="top" class="table-title">Mark of Identif ication</th>
+								<th valign="top" class="table-title border_left border_right">Actions</th>
+								<th valign="top" class="table-title border_right">Sr No.</th>
+								<th valign="top" class="table-title border_right">Employee Code</th>
+								<th valign="top" class="table-title border_right">Name</th>
+								<th valign="top" class="table-title border_right">Surname</th>
+								<th valign="top" class="table-title border_right">Gender</th>
+								<th valign="top" class="table-title border_right">Father's/Spouse name</th>
+								<th valign="top" class="table-title border_right">Dob</th>
+								<th valign="top" class="table-title border_right">Nationality</th>
+								<th valign="top" class="table-title border_right">Education</th>
+								<th valign="top" class="table-title border_right">Doj</th>
+								<th valign="top" class="table-title border_right">Designation</th>
+								<th valign="top" class="table-title border_right">Category Address</th>
+								<th valign="top" class="table-title border_right">Employee Type</th>
+								<th valign="top" class="table-title border_right">Mobile</th>
+								<th valign="top" class="table-title border_right">UAN</th>
+								<th valign="top" class="table-title border_right">PAN</th>
+								<th valign="top" class="table-title border_right">ESIC IP</th>
+								<th valign="top" class="table-title border_right">LWF</th>
+								<th valign="top" class="table-title border_right">Aadhaar Number</th>
+								<th valign="top" class="table-title border_right">Bank A/C Number</th>
+								<th valign="top" class="table-title border_right">Bank</th>
+								<th valign="top" class="table-title border_right">Branch IFSC Code</th>
+								<th valign="top" class="table-title border_right">Present Address</th>
+								<th valign="top" class="table-title border_right">Permenent Address</th>
+								<th valign="top" class="table-title border_right">Service Book Number</th>
+								<th valign="top" class="table-title border_right">Date of Exit</th>
+								<th valign="top" class="table-title border_right">Reason for Exit</th>
+								<th valign="top" class="table-title border_right">Mark of Identif ication</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -469,7 +429,16 @@
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->reason_for_exit); ?>"><?php echo ellipses(trim($rw->reason_for_exit), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->id_mark); ?>"><?php echo ellipses(trim($rw->id_mark), 50); ?></td>
 							</tr>
-							<?php } } ?>
+							<?php } }else { ?>
+						<tr>
+							<td colspan="31">
+								<div id="norecord"></div>
+							</td>
+						</tr>
+						<script type="text/javascript" language="javascript">
+							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
+						</script>
+						<?php } ?>
 						</tbody>
 					</table>
 				</div>

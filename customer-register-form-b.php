@@ -74,24 +74,12 @@
 		$customerid=intval($_GET['custid']);
 	}
 ?>
-<style>
-	.register_table_td{
-		width:100px
-	}
-	.listing_th_padding {
-		padding: 5px 5px 5px 8px;
-		color: #000;
-		font-size: 13px;
-	}
-	.listing_td_padding{
-		padding:5px
-	}
-</style>
+<link href="css/register-styles.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/customer-register-form-b.js"></script>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
-		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Update Customer - '.trim($custrow->customername).' details':'New Customer'; ?></div>
+		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Register Form B':''; ?></div>
 		<div style="padding: 20px 0;">
 			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
@@ -274,15 +262,40 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:20px 0">
+				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td valign="top" class="table-title" style="width:50px">Sr No.</td>
-							<td valign="top" class="table-title">Name</td>
-							<td valign="top" class="table-title" style="width:100px">Actions</td>
-						</tr>
+						<thead>
+							<tr>
+								<th valign="top" class="table-title border_left border_right">Actions</th>
+								<th valign="top" class="table-title border_right">Name</th>
+								<th valign="top" class="table-title border_right">Rate of Wage</th>
+								<th valign="top" class="table-title border_right">Number of Work days</th>
+								<th valign="top" class="table-title border_right">Overtime hours</th>
+								<th valign="top" class="table-title border_right">Basic</th>
+								<th valign="top" class="table-title border_right">Special Basic</th>
+								<th valign="top" class="table-title border_right">DA</th>
+								<th valign="top" class="table-title border_right">Overtime Payments</th>
+								<th valign="top" class="table-title border_right">HRA</th>
+								<th valign="top" class="table-title border_right">Others</th>
+								<th valign="top" class="table-title border_right">Total</th>
+								<th valign="top" class="table-title border_right">PF</th>
+								<th valign="top" class="table-title border_right">ESIC</th>
+								<th valign="top" class="table-title border_right">Society</th>
+								<th valign="top" class="table-title border_right">Income Tax</th>
+								<th valign="top" class="table-title border_right">Insurance</th>
+								<th valign="top" class="table-title border_right">Other Deduction</th>
+								<th valign="top" class="table-title border_right">Recoveries</th>
+								<th valign="top" class="table-title border_right">Total Deduction</th>
+								<th valign="top" class="table-title border_right">Net Payment</th>
+								<th valign="top" class="table-title border_right">Employee Share PF Welfare</th>
+								<th valign="top" class="table-title border_right">Receipt by employee Bank Transaction ID</th>
+								<th valign="top" class="table-title border_right">Date of Payment</th>
+								<th valign="top" class="table-title border_right">Remark</th>
+							</tr>
+						</thead>
+						<tbody>
 						<?php
-							$qry="SELECT id, customerid, name FROM customer_register_form_b WHERE customerid=%i";
+							$qry="SELECT * FROM customer_register_form_b WHERE customerid=%i";
 							$qry=$sql->query($qry, array($customerid));
 							$res=$db->query($qry);
 							$cnt=$db->numRows($res);
@@ -291,18 +304,40 @@
 								while($rw=$db->fetchNextObject($res)){
 									$id=intval($rw->id); 
 						?>
-						<tr>
-							<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
-							<td valign="middle" class="table-data">
-								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('b', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-								</div>
-							</td>
-						</tr>
+							<tr>
+								<td valign="middle" class="table-data borderall" style="padding-top:5px">
+									<div>
+										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('b', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									</div>
+								</td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->rate_of_wage); ?>"><?php echo trim($rw->rate_of_wage); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->no_of_work_days); ?>"><?php echo ellipses(intval($rw->no_of_work_days), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->overtime_hours); ?>"><?php echo intval($rw->overtime_hours); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->basic); ?>"><?php echo intval($rw->basic); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->special_basic); ?>"><?php echo intval($rw->special_basic); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->da); ?>"><?php echo intval($rw->da); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->overtime_payments); ?>"><?php echo intval($rw->overtime_payments); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->hra); ?>"><?php echo intval($rw->hra); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->others); ?>"><?php echo intval($rw->others); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->total); ?>"><?php echo intval($rw->total); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->pf); ?>"><?php echo intval($rw->pf); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->esic); ?>"><?php echo trim($rw->esic); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->society); ?>"><?php echo trim($rw->society); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->income_tax); ?>"><?php echo intval($rw->income_tax); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->insurance); ?>"><?php echo trim($rw->insurance); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->others_deduction); ?>"><?php echo intval($rw->others_deduction); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->recoveries); ?>"><?php echo intval($rw->recoveries); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->total_deduction); ?>"><?php echo intval($rw->total_deduction); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->net_payment); ?>"><?php echo intval($rw->net_payment); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emp_share_pf_welfare); ?>"><?php echo trim($rw->emp_share_pf_welfare); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->receipt_by_emp_bank_trans_id); ?>"><?php echo intval($rw->receipt_by_emp_bank_trans_id); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo date("m/d/Y", strtotime(trim($rw->date_of_payment))); ?>"><?php echo date("m/d/Y", strtotime(trim($rw->date_of_payment))); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark); ?>"><?php echo ellipses(trim($rw->remark), 50); ?></td>
+							</tr>
 						<?php $counter++; } }else { ?>
 						<tr>
-							<td colspan="6">
+							<td colspan="25">
 								<div id="norecord"></div>
 							</td>
 						</tr>
@@ -310,6 +345,7 @@
 							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
 						</script>
 						<?php } ?>
+						</tbody>
 					</table>
 				</div>
 			</div>

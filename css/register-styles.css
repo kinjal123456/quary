@@ -1,0 +1,24 @@
+.table-heading{
+	text-align:center
+}
+.register_table_td{
+	width:100px
+}
+.listing_th_padding {
+	padding: 5px 5px 5px 8px;
+	color: #000;
+	font-size: 13px;
+}
+.listing_td_padding{
+	padding:5px;
+}
+.table-title {
+	padding: 0 10px;
+	vertical-align: middle;
+	min-width: 100px;
+	line-height:inherit;
+}
+.table-data {
+	padding: 0 28px;
+	line-height: 25px;
+}

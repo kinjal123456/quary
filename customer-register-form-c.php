@@ -61,24 +61,12 @@
 		$customerid=intval($_GET['custid']);
 	}
 ?>
-<style>
-	.register_table_td{
-		width:100px
-	}
-	.listing_th_padding {
-		padding: 5px 5px 5px 8px;
-		color: #000;
-		font-size: 13px;
-	}
-	.listing_td_padding{
-		padding:5px
-	}
-</style>
+<link href="css/register-styles.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/customer-register-form-c.js"></script>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
-		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Update Customer - '.trim($custrow->customername).' details':'New Customer'; ?></div>
+		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Register Form C':''; ?></div>
 		<div style="padding: 20px 0;">
 			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
@@ -188,15 +176,29 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:20px 0">
+				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td valign="top" class="table-title" style="width:50px">Sr No.</td>
-							<td valign="top" class="table-title"Name</td>
-							<td valign="top" class="table-title" style="width:100px">Actions</td>
-						</tr>
+						<thead>
+							<tr>
+								<th valign="top" class="table-title border_left border_right">Actions</th>
+								<th valign="top" class="table-title border_right">SI Number</th>
+								<th valign="top" class="table-title border_right">Name</th>
+								<th valign="top" class="table-title border_right">Recovery Type</th>
+								<th valign="top" class="table-title border_right">Particulars</th>
+								<th valign="top" class="table-title border_right">Date of loss</th>
+								<th valign="top" class="table-title border_right">Amount</th>
+								<th valign="top" class="table-title border_right">Whether show cause issued</th>
+								<th valign="top" class="table-title border_right">Explanation heard in presence of</th>
+								<th valign="top" class="table-title border_right">Number of EMIS</th>
+								<th valign="top" class="table-title border_right">First month year</th>
+								<th valign="top" class="table-title border_right">Last month year</th>
+								<th valign="top" class="table-title border_right">Date of complete recovery</th>
+								<th valign="top" class="table-title border_right">Remark</th>
+							</tr>
+						</thead>
+						<tbody>
 						<?php
-							$qry="SELECT id, customerid, name FROM customer_register_form_c WHERE customerid=%i";
+							$qry="SELECT * FROM customer_register_form_c WHERE customerid=%i";
 							$qry=$sql->query($qry, array($customerid));
 							$res=$db->query($qry);
 							$cnt=$db->numRows($res);
@@ -205,25 +207,37 @@
 								while($rw=$db->fetchNextObject($res)){
 									$id=intval($rw->id); 
 						?>
-						<tr>
-							<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
-							<td valign="middle" class="table-data">
-								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('c', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-								</div>
-							</td>
-						</tr>
+							<tr>
+								<td valign="middle" class="table-data borderall" style="padding-top:5px">
+									<div>
+										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('c', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									</div>
+								</td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->si_no); ?>"><?php echo intval($rw->si_no); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->recovery_type); ?>"><?php echo ellipses(intval($rw->recovery_type), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->particulars); ?>"><?php echo trim($rw->particulars); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->date_of_loss)>0)?date("m/d/Y", strtotime(trim($rw->date_of_loss))):""; ?>"><?php echo (strlen($rw->date_of_loss)>0)?date("m/d/Y", strtotime(trim($rw->date_of_loss))):""; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->amount); ?>"><?php echo intval($rw->amount); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->whether_show_cause_issued); ?>"><?php echo trim($rw->whether_show_cause_issued); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->explanation_heard_in_presence_of); ?>"><?php echo trim($rw->explanation_heard_in_presence_of); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->no_of_emis); ?>"><?php echo intval($rw->no_of_emis); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->first_month_year); ?>"><?php echo trim($rw->first_month_year); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->last_month_year); ?>"><?php echo trim($rw->last_month_year); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->date_of_complete_recovery)>0)?date("m/d/Y", strtotime(trim($rw->date_of_complete_recovery))):""; ?>"><?php echo (strlen($rw->date_of_complete_recovery)>0)?date("m/d/Y", strtotime(trim($rw->date_of_complete_recovery))):""; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark); ?>"><?php echo trim($rw->remark); ?></td>
+							</tr>
 						<?php $counter++; } }else { ?>
-						<tr>
-							<td colspan="6">
-								<div id="norecord"></div>
-							</td>
-						</tr>
+							<tr>
+								<td colspan="14">
+									<div id="norecord"></div>
+								</td>
+							</tr>
 						<script type="text/javascript" language="javascript">
 							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
 						</script>
 						<?php } ?>
+						</tbody>
 					</table>
 				</div>
 			</div>
