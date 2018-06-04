@@ -117,6 +117,7 @@ DROP TABLE IF EXISTS `customer_register_form_a_type_a`;
 CREATE TABLE `customer_register_form_a_type_a` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customerid` int(11) DEFAULT NULL,
+  `srno` int(11) DEFAULT NULL,
   `emp_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `firstname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lastname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -150,9 +151,11 @@ CREATE TABLE `customer_register_form_a_type_a` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_a_type_a` */
+
+insert  into `customer_register_form_a_type_a`(`id`,`customerid`,`srno`,`emp_code`,`firstname`,`lastname`,`gender`,`secondname`,`dob`,`nationality`,`education`,`doj`,`designation`,`category_address`,`emp_type`,`mobile`,`uan`,`pan`,`esic_ip`,`lwf`,`aadhaar_no`,`bank_ac_no`,`bank`,`branch_ifsc_code`,`present_address`,`permenent_address`,`service_book_no`,`date_of_exit`,`reason_for_exit`,`id_mark`,`photo`,`signature_thumb_image`,`remark`,`created_by`,`updated_by`) values (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,1,1,'','','',0,'','0000-00-00 00:00:00','','','0000-00-00 00:00:00','','0','',0,'','','','','',0,'',0,'','',0,'0000-00-00 00:00:00','','','','','','2018-06-02 20:02:35','2018-06-02 20:02:35');
 
 /*Table structure for table `customer_register_form_a_type_b` */
 
@@ -191,9 +194,9 @@ CREATE TABLE `customer_register_form_b` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customerid` int(11) DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rate_of_wage` decimal(10,2) DEFAULT NULL,
+  `rate_of_wage` int(11) DEFAULT NULL,
   `no_of_work_days` int(11) DEFAULT NULL,
-  `overtime_hours` decimal(10,2) DEFAULT NULL,
+  `overtime_hours` int(11) DEFAULT NULL,
   `basic` int(11) DEFAULT NULL,
   `special_basic` int(11) DEFAULT NULL,
   `da` int(11) DEFAULT NULL,
@@ -212,14 +215,16 @@ CREATE TABLE `customer_register_form_b` (
   `net_payment` int(11) DEFAULT NULL,
   `emp_share_pf_welfare` int(11) DEFAULT NULL,
   `receipt_by_emp_bank_trans_id` int(11) DEFAULT NULL,
-  `date_of_payment` datetime DEFAULT NULL,
+  `date_of_payment` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `remark` text COLLATE utf8_unicode_ci,
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_b` */
+
+insert  into `customer_register_form_b`(`id`,`customerid`,`name`,`rate_of_wage`,`no_of_work_days`,`overtime_hours`,`basic`,`special_basic`,`da`,`overtime_payments`,`hra`,`others`,`total`,`pf`,`esic`,`society`,`income_tax`,`insurance`,`others_deduction`,`recoveries`,`total_deduction`,`net_payment`,`emp_share_pf_welfare`,`receipt_by_emp_bank_trans_id`,`date_of_payment`,`remark`,`created_by`,`updated_by`) values (3,1,'kinjal',0,0,0,0,0,0,0,0,0,0,0,'','',0,0,0,0,0,0,0,0,'','','2018-06-04 23:19:23','2018-06-04 23:19:23');
 
 /*Table structure for table `customer_register_form_c` */
 
@@ -232,21 +237,23 @@ CREATE TABLE `customer_register_form_c` (
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `recovery_type` tinyint(1) DEFAULT NULL COMMENT '1=demage,2=loss,3=fine,4=advance,5=loans',
   `particulars` text COLLATE utf8_unicode_ci,
-  `date_of_loss` datetime DEFAULT NULL,
+  `date_of_loss` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   `whether_show_cause_issued` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `explanation_heard_in_presence_of` text COLLATE utf8_unicode_ci,
   `no_of_emis` int(11) DEFAULT NULL,
   `first_month_year` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `last_month_year` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `date_of_complete_recovery` datetime DEFAULT NULL,
+  `date_of_complete_recovery` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `remark` text COLLATE utf8_unicode_ci,
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_c` */
+
+insert  into `customer_register_form_c`(`id`,`customerid`,`si_no`,`name`,`recovery_type`,`particulars`,`date_of_loss`,`amount`,`whether_show_cause_issued`,`explanation_heard_in_presence_of`,`no_of_emis`,`first_month_year`,`last_month_year`,`date_of_complete_recovery`,`remark`,`created_by`,`updated_by`) values (1,1,1,'kinjwl',0,'','',0,'','',0,'','','0000-00-00 00:00:00','','2018-06-04 23:38:21','2018-06-04 23:38:21');
 
 /*Table structure for table `customer_register_form_d` */
 
@@ -294,7 +301,7 @@ CREATE TABLE `customer_register_form_d` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_d` */
 
