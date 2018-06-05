@@ -38,3 +38,9 @@ function deleteRegisterForm(formname, formid, customerid){
         });
     }
 }
+function printRegisterfrom(){
+	$('input#fromprint[type=hidden]').val(1);
+	$('#registerformprint').attr({
+		'target': '_blank',
+	}).submit();
+}

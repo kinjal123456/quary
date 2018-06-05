@@ -2,8 +2,7 @@
 SQLyog Community Edition- MySQL GUI v7.11 
 MySQL - 5.5.24-log : Database - quary
 *********************************************************************
-*/
-
+*/ 
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;

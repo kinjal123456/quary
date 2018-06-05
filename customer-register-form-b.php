@@ -90,6 +90,30 @@
 				</div>
 			</div>-->
 			<div style="padding:20px">
+				<div align="center">
+					<div class="register_form_upper_hadding_lg">FORMAT FOR WAGE REGISTER</div>
+				</div>
+				<div>
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<td style="font-weight:bold">Name of the Establishment</td>
+							<td>fg</td>
+							<td style="font-weight:bold">Name of Owner</td>
+							<td>Jayeshbhai Desai</td>
+							<td style="font-weight:bold">LIN</td>
+						</tr>
+						<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
+						<tr>
+							<td style="font-weight:bold">Wage period From</td>
+							<td>fg</td>
+							<td style="font-weight:bold">To</td>
+							<td>df</td>
+							<td style="font-weight:bold">(Monthly/Fortnightly/Weekly/Daily/Piece Rated)</td>
+							<td></td>
+						</tr>
+						<tr><td colspan="5" style="height:20px"><!-- --></td></tr>
+					</table>
+				</div>
 				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
@@ -305,9 +329,15 @@
 									$id=intval($rw->id); 
 						?>
 							<tr>
-								<td valign="middle" class="table-data borderall" style="padding-top:5px">
+								<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
+									<form name="registerformprint" id="registerformprint" action="register-form-b-print.php" method="post">
+										<input type="hidden" name="fromprint" id="fromprint" value="0">
+										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
+									</form>
 									<div>
 										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('b', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom()">Print</lable></div>
+										<div class="clearall">
 									</div>
 								</td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>

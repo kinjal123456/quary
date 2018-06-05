@@ -351,8 +351,14 @@
 							<td valign="top" class="table-data" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
 							<td valign="middle" class="table-data">
+								<form name="registerformprint" id="registerformprint" action="register-form-a2-print.php" method="post">
+									<input type="hidden" name="fromprint" id="fromprint" value="0">
+									<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
+								</form>
 								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm(this, <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-2', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom()">Print</lable></div>
+									<div class="clearall">
 								</div>
 							</td>
 						</tr>
