@@ -1,3 +1,10 @@
+<?php 
+	$explosiveqry="SELECT * FROM customer_licence_info WHERE customerid=%i AND detail_type=%i";
+	$explosiveqry=$sql->query($explosiveqry, array($customerid, _EXPLOSIVE_LICENCE_TYPE_));
+	$explosiveres=$db->query($explosiveqry);
+	$explosivecnt=$db->numRows($explosiveres);
+	$explosiverw=$db->fetchNextObject($explosiveres);
+?>
 <div class="border_top border_bottom border_left border_right">
 	<div class="table_additional_data_heading">Explosive licence occupier details</div>
 	<div class="border_top border_bottom border_left border_right" style="margin:20px">
@@ -13,27 +20,28 @@
 				<tr>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-                        	<input type="text" name="explosive_dockey" id="explosive_dockey" class="explosive_dockey" value="">
+                        	<input type="text" name="explosive_dockey" id="explosive_dockey" class="explosive_dockey" value="<?php echo ($explosivecnt>0)?trim($explosiverw->document_key):""; ?>">
 			            </div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-	                    	<input type="text" name="explosive_licenceno" id="explosive_licenceno" class="explosive_licenceno" value="" />
+	                    	<input type="text" name="explosive_licenceno" id="explosive_licenceno" class="explosive_licenceno" value="<?php echo ($explosivecnt>0)?trim($explosiverw->licence_no):""; ?>" />
 	                	</div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-		                    <input type="text" name="explosive_occupiernm" id="explosive_occupiernm" class="explosive_occupiernm" value="" />
+		                    <input type="text" name="explosive_occupiernm" id="explosive_occupiernm" class="explosive_occupiernm" value="<?php echo ($explosivecnt>0)?trim($explosiverw->name):""; ?>" />
 		                </div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-		                    <input type="text" name="explosive_issuedate" id="explosive_issuedate" class="explosive_issuedate" value="" />
+		                    <input type="text" name="explosive_issuedate" id="explosive_issuedate" class="explosive_issuedate" value="<?php echo ($explosivecnt>0 && strlen(trim($explosiverw->issue_date))>0)?date("m/d/Y", strtotime(trim($explosiverw->issue_date))):""; ?>" readonly="readonly" />
 		                </div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom">
 	                    <div style="padding: 10px">
-		                    <input type="text" name="explosive_expirydate" id="explosive_expirydate" class="explosive_expirydate" value="" />
+							<input type="hidden" name="explosiveid" id="explosiveid" value="<?php echo ($explosivecnt>0)?intval($explosiverw->id):0; ?>" />
+		                    <input type="text" name="explosive_expirydate" id="explosive_expirydate" class="explosive_expirydate" value="<?php echo ($explosivecnt>0 && trim($explosiverw->expiry_date)>0)?date("m/d/Y", strtotime(trim($explosiverw->expiry_date))):""; ?>" readonly="readonly" />
 		                </div>
 	                </td>
 	            </tr>
@@ -55,7 +63,7 @@
 					<td align="left" valign="top" class="list_table_th border_bottom"><div class="listing_th_padding">No. of times</div></td>
 				</tr>
 				<?php
-	            	$addcapqry="SELECT cli.name, cec.class, cec.division, cec.qty_at_time, cec.unit, cec.no_of_time FROM customer_explosive_capacity cec
+	            	$addcapqry="SELECT cec.id, cli.customerid, cli.name, cec.class, cec.division, cec.qty_at_time, cec.unit, cec.no_of_time FROM customer_explosive_capacity cec
 								LEFT JOIN customer_licence_info cli on cec.customer_licence_id=cli.id
 								WHERE cli.customerid=%i";
 	            	$addcapqry=$sql->query($addcapqry, array($customerid));
@@ -67,9 +75,9 @@
 	            ?>
 	            <tr>
 	                <td align="center" valign="middle" class="border_bottom border_left border_right">
-	                	<div style="padding-left: 10px">
-	                		<div title="Edit" class="pull-left icon_edit"></div>
-	                		<div title="Delete" class="icon_delete"></div>
+	                	<div>
+	                		<!--<div title="Edit" class="pull-left icon_edit"></div>-->
+	                		<div title="Delete" class="icon_delete" onclick="deleteCapacity(this, <?php echo intval($addcaprw->id); ?>, <?php echo intval($addcaprw->customerid); ?>)"></div>
 	                		<div style="clear:all"><!--  --></div>
 	                	</div>
 	                </td>
@@ -112,7 +120,7 @@
 	            <?php } } ?>
 	            <?php
 		            $expqry="SELECT id, name FROM customer_licence_info WHERE customerid=%i AND detail_type=%i";
-		            $expqry=$sql->query($expqry, array($customerid, 1));
+		            $expqry=$sql->query($expqry, array($customerid, _EXPLOSIVE_LICENCE_TYPE_));
 		            $experes=$db->query($expqry);
 		            $expcount=$db->numRows($experes);
 		            
@@ -200,6 +208,49 @@
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Issue date</div></td>
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Expirty date</div></td>
 			</tr>
+			<?php
+				$shortfireqry="SELECT * FROM customer_licence_info WHERE customerid=%i AND detail_type=%i";
+				$shortfireqry=$sql->query($shortfireqry, array($customerid, _SHORTFIRE_LICENCE_TYPE_));
+				$shortfireres=$db->query($shortfireqry);
+				$shortfirecnt=$db->numRows($shortfireres);
+				if($shortfirecnt>0){
+					while($shortfirerw=$db->fetchNextObject($shortfireres)){
+			?>
+			<tr>
+				<td align="center" valign="middle" class="border_bottom border_left border_right">
+					<div>
+						<!--<div title="Edit" class="pull-left icon_edit"></div>-->
+						<div title="Delete" class="icon_delete" onclick="deleteShortfire(this, <?php echo intval($shortfirerw->id); ?>, <?php echo intval($shortfirerw->customerid); ?>)"></div>
+						<div style="clear:all"><!--  --></div>
+					</div>
+				</td>
+				<td align="left" valign="top" class="border_bottom border_right">
+					<div style="padding: 10px">
+						<?php echo trim($shortfirerw->document_key); ?>
+					</div>
+				</td>
+				<td align="left" valign="top" class="border_bottom border_right">
+					<div style="padding: 10px">
+						<?php echo trim($shortfirerw->licence_no); ?>
+					</div>
+				</td>
+				<td align="left" valign="top" class="border_bottom border_right">
+					<div style="padding: 10px">
+						<?php echo trim($shortfirerw->name); ?>
+					</div>
+				</td>
+				<td align="left" valign="top" class="border_bottom border_right">
+					<div style="padding: 10px">
+						<?php echo (strlen(trim($shortfirerw->issue_date))>0)?trim($shortfirerw->issue_date):""; ?>
+					</div>
+				</td>
+				<td align="left" valign="top" class="border_bottom border_right">
+					<div style="padding: 10px">
+						<?php echo (strlen(trim($shortfirerw->expiry_date))>0)?trim($shortfirerw->expiry_date):""; ?>
+					</div>
+				</td>
+			</tr>
+			<?php } } ?>
 			<tr class="short templateshort" style="display:none">
 				<td align="center" valign="middle" class="border_bottom border_left border_right">
                     <div>
@@ -252,7 +303,7 @@
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Password</div></td>
             </tr>
             <?php
-            	$addqry="SELECT customerid, detailname, emailid, password FROM customer_additional_info WHERE customerid=%i";
+            	$addqry="SELECT id, customerid, detailname, emailid, password FROM customer_additional_info WHERE customerid=%i";
             	$addqry=$sql->query($addqry, array($customerid));
             	$addres=$db->query($addqry);
             	$addcnt=$db->numRows($addres);
@@ -261,9 +312,9 @@
             ?>
             <tr>
                 <td align="center" valign="middle" class="border_bottom border_left border_right">
-                	<div style="padding-left: 10px">
-                		<div title="Edit" class="pull-left icon_edit"></div>
-                		<div title="Delete" class="icon_delete"></div>
+                	<div>
+                		<!--<div title="Edit" class="pull-left icon_edit"></div>-->
+                		<div title="Delete" class="icon_delete" onclick="deleteDetails(this, <?php echo intval($addrw->id); ?>, <?php echo intval($addrw->id); ?>)"></div>
                 		<div style="clear:all"><!--  --></div>
                 	</div>
                 </td>
@@ -341,7 +392,7 @@
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-                    	<input type="text" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
+                    	<input type="password" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
 	                </div>
                 </td>
             </tr>

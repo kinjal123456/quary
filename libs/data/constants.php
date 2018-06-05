@@ -5,6 +5,10 @@
 	//IMPORT EXCEL
     define("_CHUNKSIZE_", 800);
 	
+	//CUSTOMER LICENCE INFORMATION
+	define("_EXPLOSIVE_LICENCE_TYPE_", 1);
+	define("_SHORTFIRE_LICENCE_TYPE_", 2);
+	
 	/****************************************CUSTOMERS CONSTANTS**********************************************************************************/
     define("_CUSTOMER_REQUIRED_FIRSTNAME_", "0");
     define("_CUSTOMER_REQUIRED_LASTNAME_", "1");

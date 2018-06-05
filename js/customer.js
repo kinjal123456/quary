@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	$("#explosive_issuedate, #explosive_expirydate, #short_issuedate, #short_expirydate").datepicker();
+	
 	$("#customerform").validate({
         debug: false,
         onsubmit: true,
@@ -268,12 +270,14 @@ $(document).ready(function() {
 
 //Capacity sr no
 jQuery.validator.addMethod('checkcapacitysrno', function(value, element){
-    validateflag=1;
-    if($('.capacity_srno').length>0){
+    valdateflag=1;
+    if($('.capacity_srno').length>1){
         validateflag=0;
         $('input.capacity_srno').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -282,11 +286,14 @@ jQuery.validator.addMethod('checkcapacitysrno', function(value, element){
 //Capacity explosive name
 jQuery.validator.addMethod('checkcapacityexpnm', function(value, element){
     validateflag=1;
-    if($('.capacity_explosivenm').length>0){
+	
+	if($('select.capacity_explosivenm option:selected').length>0){
         validateflag=0;
-        $('input.capacity_explosivenm').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+        $('select.capacity_explosivenm option:selected').each(function(index) {
+        	if(index>0){
+		        var value = $(this).val();
+		        if(value==""){validateflag=1;}
+        	}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -298,8 +305,10 @@ jQuery.validator.addMethod('checkcapacityclass', function(value, element){
     if($('.capacity_class').length>0){
         validateflag=0;
         $('input.capacity_class').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -311,8 +320,10 @@ jQuery.validator.addMethod('checkcapacitydivision', function(value, element){
     if($('.capacity_division').length>0){
         validateflag=0;
         $('input.capacity_division').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -325,8 +336,10 @@ jQuery.validator.addMethod('checkcapacityqty', function(value, element){
     if($('.capacity_qty').length>0){
         validateflag=0;
         $('input.capacity_qty').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -338,8 +351,10 @@ jQuery.validator.addMethod('checkcapacityunit', function(value, element){
     if($('.capacity_unit').length>0){
         validateflag=0;
         $('input.capacity_unit').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -351,8 +366,10 @@ jQuery.validator.addMethod('checkcapacitynotimes', function(value, element){
     if($('.capacity_notimes').length>0){
         validateflag=0;
         $('input.capacity_notimes').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -364,8 +381,10 @@ jQuery.validator.addMethod('checkshortdockey', function(value, element){
     if($('.short_doc_key').length>0){
         validateflag=0;
         $('input.short_doc_key').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -377,8 +396,10 @@ jQuery.validator.addMethod('checkshortlicenceno', function(value, element){
     if($('.short_licenceno').length>0){
         validateflag=0;
         $('input.short_licenceno').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -390,8 +411,10 @@ jQuery.validator.addMethod('checkshortname', function(value, element){
     if($('.short_name').length>0){
         validateflag=0;
         $('input.short_name').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -403,8 +426,10 @@ jQuery.validator.addMethod('checkshortissuedate', function(value, element){
     if($('.short_issuedate').length>0){
         validateflag=0;
         $('input.short_issuedate').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -416,8 +441,10 @@ jQuery.validator.addMethod('checkshortexpirydate', function(value, element){
     if($('.short_expirydate').length>0){
         validateflag=0;
         $('input.short_expirydate').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -428,8 +455,10 @@ jQuery.validator.addMethod('checkdetailname', function(value, element){
     if($('.detailname').length>0){
         validateflag=0;
         $('input.detailname').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -440,8 +469,10 @@ jQuery.validator.addMethod('checkdetailids', function(value, element){
     if($('.emailid').length>0){
         validateflag=0;
         $('input.emailid').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -452,8 +483,10 @@ jQuery.validator.addMethod('checkdetailpwd', function(value, element){
     if($('.addpassword').length>0){
         validateflag=0;
         $('input.addpassword').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -478,8 +511,10 @@ jQuery.validator.addMethod('checkbillname', function(value, element){
     if($('.billname').length>0){
         validateflag=0;
         $('input.billname').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -490,8 +525,10 @@ jQuery.validator.addMethod('checkbillamount', function(value, element){
     if($('.billamt').length>0){
         validateflag=0;
         $('input.billamt').each(function(index) {
-            var value = $(this).val();
-            if(value==""){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -504,9 +541,10 @@ jQuery.validator.addMethod('checkvalidbillamount', function(value, element){
     if($('.billamt').length>0){
         validateflag=0;
         $('input.billamt').each(function(index) {
-            var value = $(this).val();
-			 
-            if(numberRegex.test(value)){validateflag=1;}
+			if(index>0){
+				var value = $(this).val();
+				if(numberRegex.test(value)){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -588,7 +626,7 @@ function formResponse(responseText, statusText) {
 	if(statusText == 'success') {
 		if(responseText.type == 'success') {
 			//customer general information
-			if(responseText.genstatus == 'success') {
+			if(responseText.genstatus == 'success' || responseText.custempstatus == 'success') {
 				$("#submitbtn").attr("disabled","disabled");
 				$("#notify").notification({caption: "Customer general information updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
