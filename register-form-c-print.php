@@ -44,27 +44,19 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 <title>Quarry<?php if(isset($page_title)) echo " : ".$page_title; ?></title>
 <div style="padding:10px 0;">
 		<div align="center">
-			<div style="<?php echo $register_form_upper_hadding_lg; ?>">FORMAT FOR WAGE REGISTER</div>
+			<div style="<?php echo $register_form_upper_hadding_lg; ?>">FORMAT OF REGISTER OF LOAN/RECOVERIES</div>
 		</div>
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td style="font-weight:bold">Name of the Establishment</td>
 					<td>fg</td>
-					<td style="font-weight:bold">Name of Owner</td>
-					<td>Jayeshbhai Desai</td>
 					<td style="font-weight:bold">LIN</td>
-				</tr>
-				<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
-				<tr>
-					<td style="font-weight:bold">Wage period From</td>
 					<td>fg</td>
-					<td style="font-weight:bold">To</td>
-					<td>df</td>
-					<td style="font-weight:bold">(Monthly/Fortnightly/Weekly/Daily/Piece Rated)</td>
+					<td style="font-weight:bold">Year</td>
 					<td></td>
 				</tr>
-				<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
+				<tr><td colspan="5" style="height:20px"><!-- --></td></tr>
 			</table>
 		</div>
 		<div>

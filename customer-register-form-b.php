@@ -101,6 +101,7 @@
 							<td style="font-weight:bold">Name of Owner</td>
 							<td>Jayeshbhai Desai</td>
 							<td style="font-weight:bold">LIN</td>
+							<td>fg</td>
 						</tr>
 						<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
 						<tr>
@@ -330,13 +331,13 @@
 						?>
 							<tr>
 								<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
-									<form name="registerformprint" id="registerformprint" action="register-form-b-print.php" method="post">
+									<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-b-print.php" method="post">
 										<input type="hidden" name="fromprint" id="fromprint" value="0">
 										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 									</form>
 									<div>
 										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('b', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom()">Print</lable></div>
+										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
 										<div class="clearall">
 									</div>
 								</td>

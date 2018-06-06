@@ -74,27 +74,27 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="srno" id="srno" value="<?php echo intval($row->srno); ?>" readonly="readonly" style="border:0" />
+							<?php echo intval($row->srno); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="empcode" id="empcode" value="<?php echo trim($row->empcode); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->empcode); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="name" id="name" value="<?php echo trim($row->name); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->name); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="surname" id="surname" value="<?php echo trim($row->surname); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->surname); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="gender" id="gender" value="<?php echo (intval($row->gender)>0)?"Male":"Female"; ?>" readonly="readonly" style="border:0" />
+							<?php echo (intval($row->gender)>0)?"Male":"Female"; ?>
 						</div>
 					</td>
 				</tr>
@@ -109,27 +109,27 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="secondname" id="secondname" value="<?php echo trim($row->secondname); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->secondname); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="dob" id="dob" value="<?php echo (strlen($row->dob)>0)?date("m/d/Y", strtotime($row->dob)):""; ?>" readonly="readonly" style="border:0" />
+							<?php echo (strlen($row->dob)>0)?date("m/d/Y", strtotime($row->dob)):""; ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="nationality" id="nationality" value="Indian" readonly="readonly" style="border:0" />
+							<?php echo trim($row->nationality); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="education" id="education" value="<?php echo trim($row->education); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->education); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="doj" id="doj" value="<?php echo date("m/d/Y", strtotime($row->doj)); ?>" readonly="readonly" readonly="readonly" style="border:0" />
+							<?php echo date("m/d/Y", strtotime($row->doj)); ?>
 						</div>
 					</td>
 				</tr>
@@ -144,27 +144,27 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="designation" id="designation" value="<?php echo trim($row->designation); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->designation); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="cat_add" id="cat_add" value="<?php echo intval($row->cat_add); ?>" readonly="readonly" style="border:0" />
+							<?php echo intval($row->cat_add); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="emptype" id="emptype" value="<?php echo trim($row->emptype); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->emptype); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="mobile" id="mobile" value="<?php echo intval($row->mobile); ?>" readonly="readonly" style="border:0" />
+							<?php echo intval($row->mobile); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="uan" id="uan" value="<?php echo trim($row->uan); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->uan); ?>
 						</div>
 					</td>
 				</tr>
@@ -179,27 +179,27 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="pan" id="pan" value="<?php echo trim($row->pan); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->pan); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="esicip" id="esicip" value="<?php echo trim($row->esicip); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->esicip); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="lwf" id="lwf" value="<?php echo trim($row->lwf); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->lwf); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="aadharno" id="aadharno" value="<?php echo trim($row->aadharno); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->aadharno); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="bankacno" id="bankacno" value="<?php echo intval($row->bankacno); ?>" readonly="readonly" style="border:0" />
+							<?php echo intval($row->bankacno); ?>
 						</div>
 					</td>
 				</tr>
@@ -214,27 +214,27 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="bankname" id="bankname" value="<?php echo trim($row->bankname); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->bankname); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="ifsccode" id="ifsccode" value="<?php echo intval($row->ifsccode); ?>" readonly="readonly" style="border:0" />
+							<?php echo intval($row->ifsccode); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="presentadd" id="presentadd" value="<?php echo trim($row->presentadd); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->presentadd); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="permanantadd" id="permanantadd" value="<?php echo trim($row->permanantadd); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->permanantadd); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="servicebookno" id="servicebookno" value="<?php echo trim($row->servicebookno); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->servicebookno); ?>
 						</div>
 					</td>
 				</tr>
@@ -249,27 +249,27 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="dateofexit" id="dateofexit" value="<?php echo strlen(trim($row->dateofexit)>0)?date("m/d/Y", strtotime(trim($row->dateofexit))):""; ?>" readonly="readonly" style="border:0" />
+							<?php echo strlen(trim($row->dateofexit)>0)?date("m/d/Y", strtotime(trim($row->dateofexit))):""; ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="reasonforexit" id="reasonforexit" value="<?php echo trim($row->reasonforexit); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->reasonforexit); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="idmark" id="idmark" value="<?php echo trim($row->idmark); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->idmark); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="photo" id="photo" value="<?php echo trim($row->photo); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->photo); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="specimensign" id="specimensign" value="<?php echo trim($row->specimensign); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->specimensign); ?>
 						</div>
 					</td>
 				</tr>
@@ -280,7 +280,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td colspan="5" align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<input type="text" name="remark" id="remark" value="<?php echo trim($row->remark); ?>" readonly="readonly" style="border:0" />
+							<?php echo trim($row->remark); ?>
 						</div>
 					</td>
 				</tr>

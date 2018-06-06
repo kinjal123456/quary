@@ -20,8 +20,9 @@
 
 	if(isset($_POST['submitbtn'])){
 		$status="error";
+		$imagestatus=="";
 		$custid=intval($_POST['custid']);
-		$dateofjoining=strlen(trim($_POST['dob'])>0)?date("Y-m-d", strtotime(trim($_POST['dob']))):"";
+		$dateofbirth=strlen(trim($_POST['dob'])>0)?date("Y-m-d", strtotime(trim($_POST['dob']))):"";
 		$dateofjoin=strlen(trim($_POST['doj'])>0)?date("Y-m-d", strtotime(trim($_POST['doj']))):"";
 		$dateofexit=strlen(trim($_POST['dateofexit'])>0)?date("Y-m-d", strtotime(trim($_POST['dateofexit']))):"";
 		
@@ -56,8 +57,6 @@
 													  `date_of_exit`='%s',
 													  `reason_for_exit`='%s',
 													  `id_mark`='%s',
-									 				  `photo`='%s',
-													  `signature_thumb_image`='%s',
 													  `remark`='%s',
 													  `created_by`=NOW(),
 													  `updated_by`=NOW()";
@@ -67,12 +66,71 @@
 					intval($_POST['cat_add']), trim($_POST['emptype']), intval($_POST['mobile']), trim($_POST['uan']), trim($_POST['pan']),
 					trim($_POST['esicip']), trim($_POST['lwf']), trim($_POST['aadharno']), intval($_POST['bankacno']), trim($_POST['bankname']),
 					intval($_POST['ifsccode']), trim($_POST['presentadd']), trim($_POST['permanantadd']), intval($_POST['servicebookno']), $dateofexit,
-					trim($_POST['reasonforexit']), trim($_POST['idmark']), trim($_POST['photo']), trim($_POST['specimensign']), trim($_POST['remark'])
+					trim($_POST['reasonforexit']), trim($_POST['idmark']), trim($_POST['remark'])
 			));
 			if($db->query($query)){
 				$status="success";
 				
 				$lastinsId=$db->lastInsertedId();
+				$path="upload/".$custid;
+				
+				//Photo upload
+				if(isset($_FILES['photo'])){
+					$file_name = $_FILES['photo']['name'];
+					$file_size =$_FILES['photo']['size'];
+					$file_tmp =$_FILES['photo']['tmp_name'];
+					$file_type=$_FILES['photo']['type'];
+					$file_ext=strtolower(end(explode('.',$_FILES['photo']['name'])));
+
+					if($file_size > 2097152){
+						$imagestatus="sizeerror";//'File size must be excately 2 MB';
+					}
+
+					if(empty($imagestatus)==true){
+						if(!file_exists($path."/image/")){
+							createdir($path."/image/");
+						}
+						$filename=getTempName($path."/image/", $file_ext);
+						if(move_uploaded_file($file_tmp, $path."/image/".$filename)){
+							$imgqry="UPDATE customer_register_form_a_type_a SET photo='%s' WHERE id=%i";
+							$imgqry=$sql->query($imgqry, array($filename, $lastinsId));
+							if($db->query($imgqry)){
+								$type["imagestaus"]=$imagestatus;
+							}
+						}
+					}else{
+						$type["imagestaus"]=$imagestatus;
+					}
+				}
+				
+				//Signature upload
+				if(isset($_FILES['specimensign'])){
+					$sign_name = $_FILES['specimensign']['name'];
+					$sign_size =$_FILES['specimensign']['size'];
+					$sign_tmp =$_FILES['specimensign']['tmp_name'];
+					$sign_type=$_FILES['specimensign']['type'];
+					$sign_ext=strtolower(end(explode('.',$_FILES['specimensign']['name'])));
+
+					if($sign_size > 2097152){
+						$signstatus="sizeerror";//'File size must be excately 2 MB';
+					}
+
+					if(empty($signstatus)==true){
+						if(!file_exists($path."/sign/")){
+							createdir($path."/sign/");
+						}
+						$signname=getTempName($path."/sign/", $sign_ext);
+						if(move_uploaded_file($sign_tmp, $path."/sign/".$signname)){
+							$signqry="UPDATE customer_register_form_a_type_a SET signature_thumb_image='%s' WHERE id=%i";
+							$signqry=$sql->query($signqry, array($signname, $lastinsId));
+							if($db->query($signqry)){
+								$type["signstaus"]=$signstatus;
+							}
+						}
+					}else{
+						$type["signstaus"]=$signstatus;
+					}
+				}
 				
 				$type['customerid']=$custid;
 				$type["registerstaus"]=$status;
@@ -396,30 +454,30 @@
 							?>
 							<tr>
 								<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
-									<form name="registerformprint" id="registerformprint" action="register-form-a1-print.php" method="post">
+									<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-a1-print.php" method="post">
 										<input type="hidden" name="fromprint" id="fromprint" value="0">
 										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 									</form>
 									<div>
 										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-1', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom()">Print</lable></div>
+										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
 										<div class="clearall">
 									</div>
 								</td>
 								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->srno); ?>"><?php echo intval($rw->srno); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emp_code); ?>"><?php echo trim($rw->emp_code); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 20); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo (intval($rw->gender)==1)?"Men":"Woman"; ?>"><?php echo (intval($rw->gender)==1)?"Men":"Woman"; ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->dob); ?>"><?php echo date("m/d/Y", strtotime(trim($rw->dob))); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->dob); ?>"><?php echo (strlen(trim($rw->dob))>0)?date("m/d/Y", strtotime(trim($rw->dob))):""; ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nationality); ?>"><?php echo ellipses(trim($rw->nationality), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->education); ?>"><?php echo ellipses(trim($rw->education), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->doj); ?>"><?php echo date("m/d/Y", strtotime(trim($rw->doj))); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->doj); ?>"><?php echo (strlen(trim($rw->doj))>0)?date("m/d/Y", strtotime(trim($rw->doj))):""; ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->designation); ?>"><?php echo ellipses(trim($rw->designation), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->category_address); ?>"><?php echo ellipses(trim($rw->category_address), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emp_type); ?>"><?php echo ellipses(trim($rw->emp_type), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->mobile); ?>"><?php echo ellipses(trim($rw->mobile), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->mobile); ?>"><?php echo intval($rw->mobile); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->uan); ?>"><?php echo ellipses(trim($rw->uan), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->pan); ?>"><?php echo ellipses(trim($rw->pan), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->esic_ip); ?>"><?php echo ellipses(trim($rw->esic_ip), 50); ?></td>
@@ -431,7 +489,7 @@
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->present_address); ?>"><?php echo ellipses(trim($rw->present_address), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->permenent_address); ?>"><?php echo ellipses(trim($rw->permenent_address), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->service_book_no); ?>"><?php echo ellipses(trim($rw->service_book_no), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->date_of_exit); ?>"><?php echo ellipses(trim($rw->date_of_exit), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->date_of_exit); ?>"><?php echo (strlen(trim($rw->date_of_exit))>0)?date("m/d/Y", strtotime(trim($rw->date_of_exit))):""; ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->reason_for_exit); ?>"><?php echo ellipses(trim($rw->reason_for_exit), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->id_mark); ?>"><?php echo ellipses(trim($rw->id_mark), 50); ?></td>
 							</tr>

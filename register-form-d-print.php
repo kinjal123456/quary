@@ -34,7 +34,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 	if(isset($_POST['formid']) && intval($_POST['formid'])>0){
 		$formid=intval($_POST['formid']);
 		
-		$query="SELECT * FROM customer_register_form_c WHERE id=%i";
+		$query="SELECT * FROM customer_register_form_d WHERE id=%i";
 		$query=$sql->query($query, array($formid));
 		$result=$db->query($query);
 		$count=$db->numRows($result);
@@ -109,11 +109,99 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				</tr>
 				<tr>
 					<td colspan="5" align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
-						<?php $cnt=1; for($i=0; $i<31; $i++){ ?>
-							<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
-								<?php echo trim($row->day_.$cnt); ?>
-							</div>
-						<?php $cnt++; } ?>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_1); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_2); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_3); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_4); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_5); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_6); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_7); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_8); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_9); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_10); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_11); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_12); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_13); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_14); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_15); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_16); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_17); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_18); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_19); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_20); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_21); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_22); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_23); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_24); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_25); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_26); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_27); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_28); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_29); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_30); ?>
+						</div>
+						<div style="<?php echo $listing_td_padding.$border_bottom.$border_left.$border_right; ?>;float:left;width:20px;height:20px">
+							<?php echo trim($row->day_31); ?>
+						</div>
 					</td>
 				</tr>
 				<tr><td style="height:10px"><!-- --></td></tr>

@@ -77,6 +77,22 @@
 				</div>
 			</div>-->
 			<div style="padding:20px">
+				<div align="center">
+					<div class="register_form_upper_hadding_lg">FORMAT OF REGISTER OF LOAN/RECOVERIES</div>
+				</div>
+				<div>
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<td style="font-weight:bold">Name of the Establishment</td>
+							<td>fg</td>
+							<td style="font-weight:bold">LIN</td>
+							<td>fg</td>
+							<td style="font-weight:bold">Year</td>
+							<td></td>
+						</tr>
+						<tr><td colspan="5" style="height:20px"><!-- --></td></tr>
+					</table>
+				</div>
 				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
@@ -209,13 +225,13 @@
 						?>
 							<tr>
 								<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
-									<form name="registerformprint" id="registerformprint" action="register-form-c-print.php" method="post">
+									<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-c-print.php" method="post">
 										<input type="hidden" name="fromprint" id="fromprint" value="0">
 										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 									</form>
 									<div>
 										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('c', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom()">Print</lable></div>
+										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
 										<div class="clearall">
 									</div>
 								</td>

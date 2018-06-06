@@ -130,8 +130,8 @@
 						            ?>
 						            <tr>
 						                <td align="center" valign="middle" class="border_bottom border_left border_right">
-						                	<div style="padding-left: 10px">
-						                		<div title="Edit" class="pull-left icon_edit"></div>
+						                	<div>
+						                		<!--<div title="Edit" class="pull-left icon_edit"></div>-->
 						                		<div title="Delete" class="icon_delete"></div>
 						                		<div style="clear:all"><!--  --></div>
 						                	</div>

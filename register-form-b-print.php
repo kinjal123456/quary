@@ -54,6 +54,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					<td style="font-weight:bold">Name of Owner</td>
 					<td>Jayeshbhai Desai</td>
 					<td style="font-weight:bold">LIN</td>
+					<td>fg</td>
 				</tr>
 				<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
 				<tr>
@@ -64,7 +65,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					<td style="font-weight:bold">(Monthly/Fortnightly/Weekly/Daily/Piece Rated)</td>
 					<td></td>
 				</tr>
-				<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
+				<tr><td colspan="6" style="height:10px"><!-- --></td></tr>
 			</table>
 		</div>
 		<div>

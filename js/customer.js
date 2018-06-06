@@ -24,7 +24,16 @@ $(document).ready(function() {
 			},
 			'custpwd': {
 				required: true
-			},//START OF ADDITIONAL LAST FIELDS
+			},
+			'empname[]':{
+            	checkempname: true
+            },
+			'empdesignation[]':{
+            	checkempdesignation: true
+            },
+			'empmob[]':{
+            	checkempmob: true
+            },//START OF ADDITIONAL LAST FIELDS
 			'explosive_dockey': {
 				required: true
 			},
@@ -114,7 +123,16 @@ $(document).ready(function() {
 			},
 			'custpwd': {
 				required: "Please enter password."
-			},//START OF ADDITIONAL LAST FIELDS
+			},
+			'empname[]':{
+            	checkempname: "Please enter Employee name."
+            },
+			'empdesignation[]':{
+            	checkempdesignation: "Please enter Employee designation."
+            },
+			'empmob[]':{
+            	checkempmob: "Please enter Employee mobile."
+            },//START OF ADDITIONAL LAST FIELDS
 			'explosive_dockey': {
 				required: "Please enter explosive document key."
 			},
@@ -266,6 +284,51 @@ $(document).ready(function() {
     });
 	
 	$('#generalid').val(1);
+});
+
+//Employee name
+jQuery.validator.addMethod('checkempname', function(value, element){
+    valdateflag=1;
+    if($('.empname').length>1){
+        validateflag=0;
+        $('input.empname').each(function(index) {
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
+        });
+    }
+    if(validateflag==0){return true;} else{ return false;}
+});
+
+//Employee designation
+jQuery.validator.addMethod('checkempdesignation', function(value, element){
+    valdateflag=1;
+    if($('.empdesignation').length>1){
+        validateflag=0;
+        $('input.empdesignation').each(function(index) {
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
+        });
+    }
+    if(validateflag==0){return true;} else{ return false;}
+});
+
+//Employee mobile
+jQuery.validator.addMethod('checkempmob', function(value, element){
+    valdateflag=1;
+    if($('.empmob').length>1){
+        validateflag=0;
+        $('input.empmob').each(function(index) {
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
+        });
+    }
+    if(validateflag==0){return true;} else{ return false;}
 });
 
 //Capacity sr no

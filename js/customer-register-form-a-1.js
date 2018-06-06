@@ -6,6 +6,12 @@ $(document).ready(function() {
         rules: {
         	srno: {
                 required: true
+            },
+			photo: {
+                accept: true
+            },
+			specimensign: {
+                accept: true
             }/*,
             empcode: {
                 required: true
@@ -101,6 +107,12 @@ $(document).ready(function() {
         messages: {
         	srno: {
             	required: "Please enter serial number."
+            },
+			photo: {
+            	accept: "Please choose a JPEG or PNG file for photo."
+            },
+			specimensign: {
+            	accept: "Please choose a JPEG or PNG file for Specimen signature."
             }/*,
             empcode: {
             	required: "Please enter employee code."
@@ -222,11 +234,15 @@ function loginformResponse(responseText, statusText) {
     hideLoader();
     $("#submitbtn").removeAttr("disabled");
 	if(statusText == 'success') {
-		if(responseText.registerstaus == 'success') {
+		if(responseText.registerstaus == 'success' || responseText.imagestaus == 'success' || responseText.signstaus == 'success') {
 			$("#submitbtn").attr("disabled","disabled");
 			$("#notify").notification({caption: "Information updated successfully.", type:"information", onhide:function(){
 				window.location="customer-register-form-a-1.php?custid="+responseText.customerid;
 			}});
+		}else if(responseText.imagestaus == 'sizeerror'){
+			$("#notify").notification({caption: "Photo size must be excately 2 MB.", type:"warning", sticky:true});
+		}else if(responseText.signstaus == 'sizeerror'){
+			$("#notify").notification({caption: "Specimen signature size must be excately 2 MB.", type:"warning", sticky:true});
 		}else {
 			$("#notify").notification({caption: "Unable to save information.", type:"warning", sticky:true});
 		}

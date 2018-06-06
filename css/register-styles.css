@@ -15,10 +15,10 @@
 .table-title {
 	padding: 0 10px;
 	vertical-align: middle;
-	min-width: 100px;
+	min-width: 130px;
 	line-height:inherit;
 }
 .table-data {
-	padding: 0 28px;
+	padding: 0 10px;
 	line-height: 25px;
 }

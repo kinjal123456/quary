@@ -53,6 +53,7 @@
 					</td>
 				</tr>
 				<tr>
+					<td valign="top" class="table-title" style="width:30px;padding-top:10px"><input type="checkbox" name="selectallzones" id="selectallzones"></td>
 					<td valign="top" class="table-title" style="width:50px">Sr No.</td>
 					<td valign="top" class="table-title">Zone name</td>
 					<td valign="top" class="table-title" style="width:100px">Actions</td>
@@ -63,6 +64,7 @@
 						while($row=$db->fetchNextObject($result)){
 						$id=intval($row->id); ?>
 						<tr>
+							<td valign="top" class="table-data"><input type="checkbox" name="selectzone" id="selectzone" class="selectzone" value="<?php echo $id; ?>"></td>
 							<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($row->zonename); ?>"><?php echo ellipses(trim($row->zonename), 50); ?></td>
 							<td valign="middle" class="table-data">

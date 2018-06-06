@@ -1,5 +1,13 @@
 $(document).ready(function(){
 	$('input, textarea').csform();
+	
+	$("#selectallzones").on("click", function(){
+		if($("#selectallzones").is(":checked")==true){
+			$('.selectzone').attr("checked", "checked");
+		}else {
+			$('.selectzone').removeAttr("checked");
+		}
+	});
 });
 
 function manage(offset){
@@ -92,9 +100,9 @@ function deleteRegisterForm(formname, formid, customerid){
     }
 }
 //Print Register form
-function printRegisterfrom(){
+function printRegisterfrom(formid){
 	$('input#fromprint[type=hidden]').val(1);
-	$('#registerformprint').attr({
+	$('#registerformprint'+formid).attr({
 		'target': '_blank',
 	}).submit();
 }
