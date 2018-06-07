@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	$('input, textarea').csform();
 	
-	$("#selectallzones").on("click", function(){
-		if($("#selectallzones").is(":checked")==true){
-			$('.selectzone').attr("checked", "checked");
+	$("#selectall").on("click", function(){
+		if($("#selectall").is(":checked")==true){
+			$('.selectcheckbox').attr("checked", "checked").csform.update();
 		}else {
-			$('.selectzone').removeAttr("checked");
+			$('.selectcheckbox').removeAttr("checked").csform.update();
 		}
 	});
 });
@@ -30,6 +30,32 @@ function deleteZone(obj, zoneid){
             }
         });
     }
+}
+//Delete multiple zones
+function deleteMultipleZones(obj){
+	zoneid = new Array;
+	$(".selectcheckbox:checked").each(function(index){
+		zoneid.push($(this).val());
+	});
+	if(zoneid.length>0){
+		var answer = confirm('Are you sure you want to delete this record(s)?');
+		hideLoader();
+		if(answer){
+			ajaxUpdate("zones.php", {action:"zoneDelete", 'zoneid[]':zoneid}, function(data){
+				scrollwindowTop();
+				hideLoader();
+				if(data.type=="success") {
+					$("#notify").notification({caption:"Zones deleted successfully.", type:"information", sticky:false, onhide:function(){
+						window.location.href="zones.php";
+					}});
+				}else{
+					$("#notify").notification({caption:"Not able to delete the file.", type:"warning", sticky:true});
+				}
+			});
+		}
+	}else {
+		$("#notify").notification({caption:"Please select atleast one record(s) to delete.", type:"warning", sticky:true});
+	}
 }
 //Delete Capacity
 function deleteCapacity(obj, capacityid, customerid){

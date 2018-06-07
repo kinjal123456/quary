@@ -2,25 +2,30 @@
 	include 'libs/data/db.connect.php';
 	include 'libs/data/db.paging.php';
 	
-	//DELETE CUSTOMER
+	//Delete customer
 	if(isset($_POST['action']) && trim($_POST['action'])=="customerDelete"){
-		$type['type']="error";
-		$custid=intval($_POST['customerid']);
-		if($custid>0){
-			//DELETE PARENTE ENTRIES
-			$query="DELETE FROM customers WHERE id=%i";
-			$query=$sql->query($query, array($custid));
-			if($db->query($query)){
-				//DELETE CHILD TABLE ENTRIES
-				$queryChild="DELETE FROM customers_bills WHERE customerid=%i";
-				$queryChild=$sql->query($queryChild, array($custid));
-				if($db->query($queryChild)){
-					$type['type']="success";
-				}
+		$type["type"]='error';
+		$type["usernotiy"]=false;
+		
+		if(isset($_POST['customerid'])){
+			$customerid=$_POST['customerid'];
+			$uploadid=array();
+			$qry="SELECT DISTINCT uploadid FROM customers WHERE id=%i";
+			$qry=$sql->query($qry, array($customerid));
+			$res=$db->query($qry);
+			while($rw=$db->fetchNextObject($res)){
+				$uploadid[]=intval($rw->uploadid);
 			}
+			
+			//Delete 
+			$delqry="DELETE FROM customerupload WHERE id IN (%l)";
+			$delqry=$sql->query($delqry, array($uploadid));
+			$db->query($delqry);
+			
+			$type=deletecustomerBycustomerid($customerid);
 		}
 		echo json_encode($type);
-		exit(0);
+        exit(0);
 	}
 	
 	//-------------------------------UPLOAD FILE TO DATA FOLDER-----------------------//
@@ -87,21 +92,28 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td align="right" colspan="6">
-						<script type="text/javascript" src="js/customers.js"></script>
-						<form action="" method="post" name="uploadcustomerform" id="uploadcustomerform">
-							<div class="pull-right">
-								<input type="submit" name="submitbtn" id="submitbtn" value="Upload" class="add-button">
-							</div>
-							<div align="right" style="width: 35%; padding-top:8px" class="pull-right">
-								<input type="hidden" name="action" id="action" value="uploadcustomerfile"/>
-								<input type="hidden" name="userid" id="userid" value="<?php echo $userid; ?>">
-								<input type="file" name="file" id="file"/>
-							</div>
-							<div class="clearall"><!-- --></div>
-						</form>
+						<div class="pull-left">
+							<a href="#"><input type="button" name="deletebtn" id="deletebtn" value="Delete" class="add-button" onclick="deleteMultipleCustomers(this)"></a>
+						</div>
+						<div>
+							<script type="text/javascript" src="js/customers.js"></script>
+							<form action="" method="post" name="uploadcustomerform" id="uploadcustomerform">
+								<div class="pull-right">
+									<input type="submit" name="submitbtn" id="submitbtn" value="Upload" class="add-button">
+								</div>
+								<div align="right" style="width: 35%; padding-top:8px" class="pull-right">
+									<input type="hidden" name="action" id="action" value="uploadcustomerfile"/>
+									<input type="hidden" name="userid" id="userid" value="<?php echo $userid; ?>">
+									<input type="file" name="file" id="file"/>
+								</div>
+								<div class="clearall"><!-- --></div>
+							</form>
+						</div>
+						<div class="clearall"><!-- --></div>
 					</td>
 				</tr>
 				<tr>
+					<td valign="top" class="table-title" style="width:30px;padding-top:10px"><input type="checkbox" name="selectall" id="selectall"></td>
 					<td valign="top" class="table-title" style="width:50px">Sr no.</td>
 					<td valign="top" class="table-title">First Name</td>
 					<td valign="top" class="table-title">Last Name</td>
@@ -115,6 +127,7 @@
 						while($row=$db->fetchNextObject($result)){
 						$id=intval($row->id); ?>
 						<tr>
+							<td valign="top" class="table-data"><input type="checkbox" name="selectcustomer" id="selectcustomer" class="selectcheckbox" value="<?php echo $id; ?>"></td>
 							<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($row->firstname); ?>"><?php echo ellipses(trim($row->firstname), 50); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($row->lastname); ?>"><?php echo ellipses(trim($row->lastname), 20); ?></td>

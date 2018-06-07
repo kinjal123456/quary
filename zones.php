@@ -4,17 +4,13 @@
 	
 	//Delete Zone
 	if(isset($_POST['action']) && trim($_POST['action'])=="zoneDelete"){
-		$type['type']="error";
-		$zoneid=intval($_POST['zoneid']);
-		if($zoneid>0){
-			$query="DELETE FROM zones WHERE id=%i";
-			$query=$sql->query($query, array($zoneid));
-			if($db->query($query)){
-				$type['type']="success";
-			}
+		$type='error';
+		if(isset($_POST["zoneid"]) && count($_POST["zoneid"])>0){
+			$zoneid=$_POST['zoneid'];
+			$type=deleteZoneByZoneid($zoneid);
 		}
-		echo json_encode($type);
-		exit(0);
+		echo '{"type":"' . $type . '"}';
+        exit(0);
 	}
 	
 	$search='Search';
@@ -48,12 +44,13 @@
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
-					<td align="right" colspan="3">
+					<td align="right" colspan="4">
 						<a href="zone.php"><input type="button" name="addbtn" id="addbtn" value="Add Zone" class="add-button"></a>
+						<a href="#"><input type="button" name="deletebtn" id="deletebtn" value="Delete" class="add-button" onclick="deleteMultipleZones(this)"></a>
 					</td>
 				</tr>
 				<tr>
-					<td valign="top" class="table-title" style="width:30px;padding-top:10px"><input type="checkbox" name="selectallzones" id="selectallzones"></td>
+					<td valign="top" class="table-title" style="width:30px;padding-top:10px"><input type="checkbox" name="selectall" id="selectall"></td>
 					<td valign="top" class="table-title" style="width:50px">Sr No.</td>
 					<td valign="top" class="table-title">Zone name</td>
 					<td valign="top" class="table-title" style="width:100px">Actions</td>
@@ -64,7 +61,7 @@
 						while($row=$db->fetchNextObject($result)){
 						$id=intval($row->id); ?>
 						<tr>
-							<td valign="top" class="table-data"><input type="checkbox" name="selectzone" id="selectzone" class="selectzone" value="<?php echo $id; ?>"></td>
+							<td valign="top" class="table-data"><input type="checkbox" name="selectzone" id="selectzone" class="selectcheckbox" value="<?php echo $id; ?>"></td>
 							<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($row->zonename); ?>"><?php echo ellipses(trim($row->zonename), 50); ?></td>
 							<td valign="middle" class="table-data">
@@ -76,7 +73,7 @@
 						</tr>
 				<?php $counter++; } }else { ?>
 						<tr>
-							<td colspan="3">
+							<td colspan="4">
 								<div id="norecord"></div>
 							</td>
 						</tr>
