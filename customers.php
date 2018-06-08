@@ -6,23 +6,13 @@
 	if(isset($_POST['action']) && trim($_POST['action'])=="customerDelete"){
 		$type["type"]='error';
 		$type["usernotiy"]=false;
+		$confirmFlag=intval($_POST['confirmFlag']);
 		
 		if(isset($_POST['customerid'])){
 			$customerid=$_POST['customerid'];
 			$uploadid=array();
-			$qry="SELECT DISTINCT uploadid FROM customers WHERE id=%i";
-			$qry=$sql->query($qry, array($customerid));
-			$res=$db->query($qry);
-			while($rw=$db->fetchNextObject($res)){
-				$uploadid[]=intval($rw->uploadid);
-			}
 			
-			//Delete 
-			$delqry="DELETE FROM customerupload WHERE id IN (%l)";
-			$delqry=$sql->query($delqry, array($uploadid));
-			$db->query($delqry);
-			
-			$type=deletecustomerBycustomerid($customerid);
+			$type=deletecustomerBycustomerid($customerid, $confirmFlag);
 		}
 		echo json_encode($type);
         exit(0);
@@ -56,7 +46,7 @@
             }
         }
         echo '{"type":"' . $type . '","uploadid":"' . $uploadid. '"}';
-        exit(0);
+        exit(0); 
     }
 	
 	$values=array();
