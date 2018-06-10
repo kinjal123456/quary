@@ -4,18 +4,34 @@
 	if(isset($_POST['zoneid'])){
 		$type['type']="error";
 		$zoneid=intval($_POST['zoneid']);
+		$values=array();
+		$subquery="";
+		
+		$values[]=strtolower($_POST['zonename']);
 		if($zoneid>0){
-			$query="UPDATE zones SET zonename='%s', updated_at=now() WHERE id=%i";
-			$query=$sql->query($query, array(trim($_POST['zonename']), $zoneid));
-			if($db->query($query)){
-				$type['type']="success";
+			$subquery=" AND id<>%i";
+			$values[]=$zoneid;
+		}
+		$zonequery = "SELECT count(*) as totalrecords FROM zones WHERE lower(zonename)='%s'".$subquery;
+		$zonequery=$sql->query($zonequery, $values);
+    	$zonecount = intval($db->queryUniqueValue($zonequery));
+	
+		if($zonecount==0){
+			if($zoneid>0){
+				$query="UPDATE zones SET zonename='%s', updated_at=now() WHERE id=%i";
+				$query=$sql->query($query, array(trim($_POST['zonename']), $zoneid));
+				if($db->query($query)){
+					$type['type']="success";
+				}
+			}else {
+				$query="INSERT INTO zones SET zonename='%s', created_at=now(), updated_at=now()";
+				$query=$sql->query($query, array(trim($_POST['zonename'])));
+				if($db->query($query)){
+					$type['type']="success";
+				}
 			}
 		}else {
-			$query="INSERT INTO zones SET zonename='%s', created_at=now(), updated_at=now()";
-			$query=$sql->query($query, array(trim($_POST['zonename'])));
-			if($db->query($query)){
-				$type['type']="success";
-			}
+			$type['type']="recordexists";
 		}
 		
 		echo json_encode($type);
@@ -62,7 +78,7 @@
 					<tr><td style="padding-top:10px"><!-- --></td></tr>
 					<?php if($zoneid>0){ ?>
 					<tr>
-						<td class="zone-customers">Customers list of <?php echo trim($zonerow->zonename); ?> zone.</td>
+						<td class="zone-customers">Customers list for <?php echo trim($zonerow->zonename); ?> zone.</td>
 					</tr>
 					<tr><td style="padding-top:10px"><!-- --></td></tr>
 					<tr>

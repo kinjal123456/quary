@@ -26,7 +26,7 @@
     if($row = $db->fetchNextObject($result)){
         $creationdate=$row->created_at;
         $filename=$row->filename;
-        $path="data/customers/".$uploadid."/";
+        $path="upload/customers/".$uploadid."/";
         $filepath=$path."/".$filename;
     }else{
         header("Location: customers.php");
@@ -239,7 +239,7 @@
 								
 								$querycustomer="SELECT id as recordexist FROM `customers` WHERE email='%s'";
 								$querycustomer=$sql->query($querycustomer,array($email));
-								$rowcustomer=$db->queryUniqueObject($querycustomer);
+								$rowcustomer=$db->query($querycustomer);
 								$recordexist=intval($rowcustomer->recordexist);
 										
 								//-------------------insert new customers----------------------//

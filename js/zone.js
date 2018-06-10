@@ -11,7 +11,7 @@ $(document).ready(function() {
         },
         messages: {
             zonename: {
-                required: "Please enter zonename."
+                required: "Please enter zone name."
             }
         },
         showErrors: validationError,
@@ -42,12 +42,16 @@ function formRequest(formData, jqForm, options) {}
 function loginformResponse(responseText, statusText) {
     hideLoader();
     $("#submitbtn").removeAttr("disabled");
+	scrollwindowTop();
+	
 	if(statusText == 'success') {
 		if(responseText.type == 'success') {
 			$("#submitbtn").attr("disabled","disabled");
 			$("#notify").notification({caption: "Zone added successfully.", type:"information", onhide:function(){
 				window.location="zones.php";
 			}});
+		}else if(responseText.type == 'recordexists'){
+			$("#notify").notification({caption: "Zone is already exists in the system.", type:"warning", sticky:true});
 		}else {
 			$("#notify").notification({caption: "Unable to save information.", type:"warning", sticky:true});
 		}

@@ -29,7 +29,7 @@
             if($db->query($query)){
                 $uploadid=$db->lastInsertedId();
             }
-            $uploads_dir="data/customers/".$uploadid."/";
+            $uploads_dir="upload/customers/".$uploadid."/";
             createdir($uploads_dir);
             $originalfilename=$_FILES["file"]["name"];
             $path_parts = pathinfo($originalfilename);
@@ -82,9 +82,16 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td align="right" colspan="6">
+						<?php if($count>0){ ?>
 						<div class="pull-left">
 							<a href="#"><input type="button" name="deletebtn" id="deletebtn" value="Delete" class="add-button" onclick="deleteMultipleCustomers(this)"></a>
 						</div>
+						<?php } ?>
+						<?php 
+							$zonequery = "SELECT count(*) as totalrecords FROM zones";
+    						$zonecount = intval($db->queryUniqueValue($zonequery));
+							if($zonecount>0){
+						?>
 						<div>
 							<script type="text/javascript" src="js/customers.js"></script>
 							<form action="" method="post" name="uploadcustomerform" id="uploadcustomerform">
@@ -99,6 +106,7 @@
 								<div class="clearall"><!-- --></div>
 							</form>
 						</div>
+						<?php } ?>
 						<div class="clearall"><!-- --></div>
 					</td>
 				</tr>
@@ -132,7 +140,7 @@
 						</tr>
 				<?php $counter++; } }else { ?>
 						<tr>
-							<td colspan="6">
+							<td colspan="7">
 								<div id="norecord"></div>
 							</td>
 						</tr>

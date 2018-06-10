@@ -46,13 +46,15 @@
 				<tr>
 					<td align="right" colspan="4">
 						<a href="zone.php"><input type="button" name="addbtn" id="addbtn" value="Add Zone" class="add-button"></a>
-						<a href="#"><input type="button" name="deletebtn" id="deletebtn" value="Delete" class="add-button" onclick="deleteMultipleZones(this)"></a>
+						<?php if($count>0){ ?>
+							<a href="#"><input type="button" name="deletebtn" id="deletebtn" value="Delete" class="add-button" onclick="deleteMultipleZones(this)"></a>
+						<?php } ?>
 					</td>
 				</tr>
 				<tr>
 					<td valign="top" class="table-title" style="width:30px;padding-top:10px"><input type="checkbox" name="selectall" id="selectall"></td>
 					<td valign="top" class="table-title" style="width:50px">Sr No.</td>
-					<td valign="top" class="table-title">Zone name</td>
+					<td valign="top" class="table-title">Zone Name</td>
 					<td valign="top" class="table-title" style="width:100px">Actions</td>
 				</tr>
 				<?php

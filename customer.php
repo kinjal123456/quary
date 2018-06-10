@@ -1,6 +1,21 @@
 <?php 
 	include 'libs/data/db.connect.php';
 	
+	//Delete Employee
+	if(isset($_POST['action']) && trim($_POST['action'])=="custEmpDelete"){
+		$type['type']="error";
+		$employeeid=intval($_POST['employeeid']);
+		if($employeeid>0){
+			$query="DELETE FROM customer_employees WHERE id=%i";
+			$query=$sql->query($query, array($employeeid));
+			if($db->query($query)){
+				$type['type']="success";
+			}
+		}
+		echo json_encode($type);
+		exit(0);
+	}
+	
 	//Delete Capacity
 	if(isset($_POST['action']) && trim($_POST['action'])=="capacityDelete"){
 		$type['type']="error";
@@ -46,16 +61,40 @@
 		exit(0);
 	}
 	
+	//Delete Bills
+	if(isset($_POST['action']) && trim($_POST['action'])=="billDelete"){
+		$type['type']="error";
+		$billid=intval($_POST['billid']);
+		if($billid>0){
+			$query="DELETE FROM customers_bills WHERE id=%i";
+			$query=$sql->query($query, array($billid));
+			if($db->query($query)){
+				$type['type']="success";
+			}
+		}
+		echo json_encode($type);
+		exit(0);
+	}
+	
 	if(isset($_POST['customerid'])){
 		$type['type']="error";
 		$custid=intval($_POST['customerid']);
 		if($custid>0){
 			if(isset($_POST['generalid']) && intval($_POST['generalid'])>0){//general updation
-				$query="UPDATE customers SET zoneid=%i, companyname='%s', firstname='%s', lastname='%s', phone=%i, email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
-				$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['firstnm']), trim($_POST['lastnm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), intval($_POST['pincode']), trim($_POST['custstate']), $custid));
-				if($db->query($query)){
+				$custquery = "SELECT count(*) as totalrecords FROM customers WHERE email='%s' AND id<>%i";
+				$custquery=$sql->query($custquery, array(trim($_POST['custemail']), $custid));
+				$custcount = intval($db->queryUniqueValue($custquery));
+		
+				if($custcount==0){
+					$query="UPDATE customers SET zoneid=%i, companyname='%s', firstname='%s', lastname='%s', phone=%i, email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
+					$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['firstnm']), trim($_POST['lastnm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), intval($_POST['custpincode']), trim($_POST['custstate']), $custid));
+					if($db->query($query)){
+						$type['type']="success";
+						$type['genstatus']="success";
+					}
+				}else {
 					$type['type']="success";
-					$type['genstatus']="success";
+					$type['genstatus']="custexists";
 				}
 				
 				//UPDATE CUSTOMERS EMPLOYEES

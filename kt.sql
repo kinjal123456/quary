@@ -2,7 +2,8 @@
 SQLyog Community Edition- MySQL GUI v7.11 
 MySQL - 5.5.24-log : Database - quary
 *********************************************************************
-*/ 
+*/
+
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -47,11 +48,9 @@ CREATE TABLE `customer_additional_info` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customer_additional_info` */
-
-insert  into `customer_additional_info`(`id`,`customerid`,`detailname`,`emailid`,`password`,`startdate`,`enddate`,`created_at`,`updated_at`) values (1,1,'Employee RNA detail','kinjalthaker51@gmail.com','kinjalcss6',NULL,NULL,'2018-05-14 12:40:18','2018-05-14 12:40:18'),(2,1,'Shram Shuvidha LIN detail','kinjal@maximaainfoways.com','kinjal',NULL,NULL,'2018-05-14 12:40:18','2018-05-14 12:40:18'),(3,1,'kinjal','kinjalthaker51@gmail.com','fdsf',NULL,NULL,'2018-05-14 12:40:18','2018-05-14 12:40:18');
 
 /*Table structure for table `customer_employees` */
 
@@ -66,9 +65,11 @@ CREATE TABLE `customer_employees` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_employees` */
+
+insert  into `customer_employees`(`id`,`customerid`,`name`,`designation`,`mobile_no`,`created_at`,`updated_at`) values (1,1,'Anjali','Software Developer',2147483647,'2018-06-10 18:13:32','2018-06-10 18:13:32');
 
 /*Table structure for table `customer_explosive_capacity` */
 
@@ -100,8 +101,8 @@ CREATE TABLE `customer_licence_info` (
   `document_key` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `licence_no` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `issue_date` datetime DEFAULT NULL,
-  `expiry_date` datetime DEFAULT NULL,
+  `issue_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `expiry_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -150,11 +151,9 @@ CREATE TABLE `customer_register_form_a_type_a` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_a_type_a` */
-
-insert  into `customer_register_form_a_type_a`(`id`,`customerid`,`srno`,`emp_code`,`firstname`,`lastname`,`gender`,`secondname`,`dob`,`nationality`,`education`,`doj`,`designation`,`category_address`,`emp_type`,`mobile`,`uan`,`pan`,`esic_ip`,`lwf`,`aadhaar_no`,`bank_ac_no`,`bank`,`branch_ifsc_code`,`present_address`,`permenent_address`,`service_book_no`,`date_of_exit`,`reason_for_exit`,`id_mark`,`photo`,`signature_thumb_image`,`remark`,`created_by`,`updated_by`) values (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,1,1,'','','',0,'','0000-00-00 00:00:00','','','0000-00-00 00:00:00','','0','',0,'','','','','',0,'',0,'','',0,'0000-00-00 00:00:00','','','','','','2018-06-02 20:02:35','2018-06-02 20:02:35');
 
 /*Table structure for table `customer_register_form_a_type_b` */
 
@@ -219,11 +218,9 @@ CREATE TABLE `customer_register_form_b` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_b` */
-
-insert  into `customer_register_form_b`(`id`,`customerid`,`name`,`rate_of_wage`,`no_of_work_days`,`overtime_hours`,`basic`,`special_basic`,`da`,`overtime_payments`,`hra`,`others`,`total`,`pf`,`esic`,`society`,`income_tax`,`insurance`,`others_deduction`,`recoveries`,`total_deduction`,`net_payment`,`emp_share_pf_welfare`,`receipt_by_emp_bank_trans_id`,`date_of_payment`,`remark`,`created_by`,`updated_by`) values (3,1,'kinjal',0,0,0,0,0,0,0,0,0,0,0,'','',0,0,0,0,0,0,0,0,'','','2018-06-04 23:19:23','2018-06-04 23:19:23');
 
 /*Table structure for table `customer_register_form_c` */
 
@@ -248,11 +245,9 @@ CREATE TABLE `customer_register_form_c` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_c` */
-
-insert  into `customer_register_form_c`(`id`,`customerid`,`si_no`,`name`,`recovery_type`,`particulars`,`date_of_loss`,`amount`,`whether_show_cause_issued`,`explanation_heard_in_presence_of`,`no_of_emis`,`first_month_year`,`last_month_year`,`date_of_complete_recovery`,`remark`,`created_by`,`updated_by`) values (1,1,1,'kinjwl',0,'','',0,'','',0,'','','0000-00-00 00:00:00','','2018-06-04 23:38:21','2018-06-04 23:38:21');
 
 /*Table structure for table `customer_register_form_d` */
 
@@ -300,7 +295,7 @@ CREATE TABLE `customer_register_form_d` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_d` */
 
@@ -316,6 +311,7 @@ CREATE TABLE `customers` (
   `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` int(11) NOT NULL,
+  `licenceno` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `survey_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -325,11 +321,11 @@ CREATE TABLE `customers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customers` */
 
-insert  into `customers`(`id`,`uploadid`,`zoneid`,`companyname`,`firstname`,`lastname`,`phone`,`email`,`password`,`survey_no`,`address`,`pincode`,`state`,`created_at`,`updated_at`) values (1,35,2,NULL,'k','t',435435,NULL,NULL,'LIC1',NULL,NULL,NULL,'2018-05-04 13:24:25','2018-05-04 13:24:59'),(2,35,4,NULL,'m','t',54353,NULL,NULL,'LIC2',NULL,NULL,NULL,'2018-05-04 13:24:25','2018-05-04 13:24:59'),(3,35,3,NULL,'a','d',543535,NULL,NULL,'LIC3',NULL,NULL,NULL,'2018-05-04 13:24:25','2018-05-04 13:24:59'),(4,35,2,NULL,'y','p',6456,NULL,NULL,'LIC4',NULL,NULL,NULL,'2018-05-04 13:24:25','2018-05-04 13:24:59'),(5,35,4,NULL,'p','p',435345,NULL,NULL,'LIC5',NULL,NULL,NULL,'2018-05-04 13:24:25','2018-05-04 13:24:59'),(6,35,4,NULL,'x','x',43543,NULL,NULL,'LIC6',NULL,NULL,NULL,'2018-05-04 13:24:25','2018-05-04 13:24:59');
+insert  into `customers`(`id`,`uploadid`,`zoneid`,`companyname`,`firstname`,`lastname`,`phone`,`licenceno`,`email`,`password`,`survey_no`,`address`,`pincode`,`state`,`created_at`,`updated_at`) values (2,1,2,NULL,'Mansi','thaker',65,'rtgre','m@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-06-10 18:00:14','2018-06-10 18:00:14');
 
 /*Table structure for table `customers_bills` */
 
@@ -345,11 +341,11 @@ CREATE TABLE `customers_bills` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customers_bills` */
 
-insert  into `customers_bills`(`id`,`customerid`,`userid`,`billname`,`billno`,`bill_amount`,`created_at`,`updated_at`) values (4,6,2,'bill2','cyz39','200.00','2018-05-06 19:17:36','2018-05-06 19:17:36'),(3,6,1,'bill1','4sjt2','100.00','2018-05-06 19:17:36','2018-05-06 19:17:36'),(5,1,1,'gfh','j9q9p','100.00','2018-05-10 11:37:01','2018-05-10 11:37:01');
+insert  into `customers_bills`(`id`,`customerid`,`userid`,`billname`,`billno`,`bill_amount`,`created_at`,`updated_at`) values (2,1,1,'bill1','3unk0','100.00','2018-06-10 23:01:33','2018-06-10 23:01:33'),(3,1,2,'bill2','ttp35','200.00','2018-06-10 23:01:33','2018-06-10 23:01:33');
 
 /*Table structure for table `customerupload` */
 
@@ -361,31 +357,11 @@ CREATE TABLE `customerupload` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customerupload` */
 
-insert  into `customerupload`(`id`,`filename`,`created_at`,`updated_at`) values (1,'0_63279000_1525341476.xlsx','2018-05-03 15:27:56','2018-05-03 15:27:56'),(2,'0_46440200_1525341581.xlsx','2018-05-03 15:29:41','2018-05-03 15:29:41'),(3,'0_45516000_1525341813.xlsx','2018-05-03 15:33:33','2018-05-03 15:33:33'),(4,'0_99945200_1525341925.xlsx','2018-05-03 15:35:25','2018-05-03 15:35:26'),(5,'0_44126800_1525342272.xlsx','2018-05-03 15:41:12','2018-05-03 15:41:12'),(6,'0_06930100_1525342431.xlsx','2018-05-03 15:43:51','2018-05-03 15:43:51'),(7,'0_94880300_1525343715.xlsx','2018-05-03 16:05:15','2018-05-03 16:05:15'),(8,'0_00164200_1525343746.xlsx','2018-05-03 16:05:45','2018-05-03 16:05:46'),(15,'0_81668000_1525345026.xlsx','2018-05-03 16:27:06','2018-05-03 16:27:06'),(16,'0_94369700_1525350803.xlsx','2018-05-03 18:03:23','2018-05-03 18:03:23'),(17,'0_64800800_1525416990.xlsx','2018-05-04 12:26:30','2018-05-04 12:26:30'),(19,'0_54776300_1525417122.xlsx','2018-05-04 12:28:42','2018-05-04 12:28:42'),(20,'0_06447300_1525417206.xlsx','2018-05-04 12:30:06','2018-05-04 12:30:06'),(21,'0_59101200_1525419358.xlsx','2018-05-04 13:05:58','2018-05-04 13:05:58'),(22,'0_97775200_1525419473.xlsx','2018-05-04 13:07:53','2018-05-04 13:07:53'),(23,'0_44628900_1525419569.xlsx','2018-05-04 13:09:29','2018-05-04 13:09:29'),(24,'0_73173000_1525419609.xlsx','2018-05-04 13:10:09','2018-05-04 13:10:09'),(25,'0_11222600_1525419677.xlsx','2018-05-04 13:11:17','2018-05-04 13:11:17'),(26,'0_90680700_1525419785.xlsx','2018-05-04 13:13:05','2018-05-04 13:13:05'),(27,'0_60123900_1525419861.xlsx','2018-05-04 13:14:21','2018-05-04 13:14:21'),(28,'0_51176600_1525419940.xlsx','2018-05-04 13:15:40','2018-05-04 13:15:40'),(29,'0_17229900_1525420022.xlsx','2018-05-04 13:17:02','2018-05-04 13:17:02'),(30,'0_89676400_1525420053.xlsx','2018-05-04 13:17:33','2018-05-04 13:17:33'),(31,'0_51484100_1525420117.xlsx','2018-05-04 13:18:37','2018-05-04 13:18:37'),(32,'0_73343000_1525420187.xlsx','2018-05-04 13:19:47','2018-05-04 13:19:47'),(33,'0_15710000_1525420288.xlsx','2018-05-04 13:21:28','2018-05-04 13:21:28'),(34,'0_72189400_1525420460.xlsx','2018-05-04 13:24:20','2018-05-04 13:24:20'),(35,'0_05851100_1525420495.xlsx','2018-05-04 13:24:55','2018-05-04 13:24:55');
-
-/*Table structure for table `users` */
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/*Data for the table `users` */
-
-insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`) values (1,'admin','kinjalthaker51@gmail.com','$2y$10$Qq.wkmMzmKV4UxG4XUz.6uxKFDwocAZyuJYpyPw4rynC9Mqi1PX/y','zSINRcqDSVxUcX3MZ8pVM3TmA4wIiCVmBQh25lFcL7sTvVaMmMi2vQJosfoH','2018-04-30 10:06:08','2018-04-30 10:06:08');
+insert  into `customerupload`(`id`,`filename`,`created_at`,`updated_at`) values (1,'0_15880500_1528633809.xlsx','2018-06-10 18:00:09','2018-06-10 18:00:09');
 
 /*Table structure for table `zones` */
 
@@ -397,11 +373,11 @@ CREATE TABLE `zones` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `zones` */
 
-insert  into `zones`(`id`,`zonename`,`created_at`,`updated_at`) values (2,'Valsad','2018-05-02 12:56:28','2018-05-02 12:58:04'),(3,'Vapi','2018-05-02 12:58:14','2018-05-02 12:58:14'),(4,'Navsari','2018-05-02 12:58:39','2018-05-02 12:58:39');
+insert  into `zones`(`id`,`zonename`,`created_at`,`updated_at`) values (1,'Valsad','2018-06-10 17:59:11','2018-06-10 20:29:43'),(2,'Navsari','2018-06-10 17:59:54','2018-06-10 20:29:35');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

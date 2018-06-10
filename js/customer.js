@@ -606,7 +606,7 @@ jQuery.validator.addMethod('checkvalidbillamount', function(value, element){
         $('input.billamt').each(function(index) {
 			if(index>0){
 				var value = $(this).val();
-				if(numberRegex.test(value)){validateflag=1;}
+				if(numberRegex.test(value)==false){validateflag=1;}
 			}
         });
     }
@@ -686,31 +686,29 @@ function formRequest(formData, jqForm, options) {}
 function formResponse(responseText, statusText) {
     hideLoader();
     $("#submitbtn").removeAttr("disabled");
+	scrollwindowTop();
+	
 	if(statusText == 'success') {
 		if(responseText.type == 'success') {
+			$("#submitbtn").attr("disabled","disabled");
 			//customer general information
 			if(responseText.genstatus == 'success' || responseText.custempstatus == 'success') {
-				$("#submitbtn").attr("disabled","disabled");
 				$("#notify").notification({caption: "Customer general information updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
 			//customer additional information
 			}else if(responseText.explosivestatus == 'success' || responseText.capacitystatus == 'success' || responseText.shortstatus == 'success' || responseText.addstatus == 'success'){
-				$("#submitbtn").attr("disabled","disabled");
 				$("#notify").notification({caption: "Customer additional information updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
 			//customer bills information
 			}else if(responseText.billstatus == 'success'){
-				$("#submitbtn").attr("disabled","disabled");
 				$("#notify").notification({caption: "Customer's bills updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
 			//when all criteria get fials
 			}else {
-				$("#notify").notification({caption: "Unable to save information.", type:"information", onhide:function(){
-					location.reload(true);
-				}});
+				$("#notify").notification({caption: "Unable to save information Customer details.", type:"warning", sticky:true});
 			}
 		}else {
 			$("#notify").notification({caption: "Unable to save information.", type:"warning", sticky:true});

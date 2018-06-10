@@ -25,10 +25,19 @@
 	//Delete multiple zones
 	function deleteZoneByZoneid($zoneid){
 		global $db,$sql;
-		$query="DELETE FROM zones WHERE id in (%l)";
-		$query=$sql->query($query, array($zoneid));
-		if ($db->query($query)) {
-			$type='success';
+		
+		$custquery = "SELECT count(*) as totalrecords FROM customers WHERE zoneid in (%l)";
+		$custquery = $sql->query($custquery, array($zoneid));
+    	$custcount = intval($db->queryUniqueValue($custquery));
+	
+		if($custcount==0){
+			$query="DELETE FROM zones WHERE id in (%l)";
+			$query=$sql->query($query, array($zoneid));
+			if ($db->query($query)) {
+				$type='success';
+			}
+		}else {
+			$type='recordexist';
 		}
 		return $type;
 	}

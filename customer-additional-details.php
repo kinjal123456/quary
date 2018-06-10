@@ -314,7 +314,7 @@
                 <td align="center" valign="middle" class="border_bottom border_left border_right">
                 	<div>
                 		<!--<div title="Edit" class="pull-left icon_edit"></div>-->
-                		<div title="Delete" class="icon_delete" onclick="deleteDetails(this, <?php echo intval($addrw->id); ?>, <?php echo intval($addrw->id); ?>)"></div>
+                		<div title="Delete" class="icon_delete" onclick="deleteDetails(this, <?php echo intval($addrw->id); ?>, <?php echo intval($addrw->customerid); ?>)"></div>
                 		<div style="clear:all"><!--  --></div>
                 	</div>
                 </td>
@@ -323,7 +323,7 @@
                     	<?php echo trim($addrw->detailname); ?>
 	                </div>
                 </td>
-                <td align="left" valign="top" class="border_bottom border_right whitebg">
+                <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
                     	<?php echo trim($addrw->emailid); ?>
 	                </div>
