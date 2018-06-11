@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#explosive_issuedate, #explosive_expirydate, #short_issuedate, #short_expirydate").datepicker();
+	$("#short_issuedate").datepicker();
 	
 	$("#customerform").validate({
         debug: false,
@@ -50,7 +50,8 @@ $(document).ready(function() {
 				required: true
 			},
 			'capacity_srno[]':{
-            	checkcapacitysrno: true
+            	checkcapacitysrno: true,
+				checkvalidcapacitysrno: true
             },
 			'capacity_explosivenm[]':{
             	checkcapacityexpnm: true
@@ -149,7 +150,8 @@ $(document).ready(function() {
 				required: "Please enter explosive expiry date."
 			},
 			'capacity_srno[]':{
-            	checkcapacitysrno: "Please enter capacity sr no."
+            	checkcapacitysrno: "Please enter capacity sr no.",
+				checkvalidcapacitysrno: "Please enter capacity sr no in number."
             },
 			'capacity_explosivenm[]':{
             	checkcapacityexpnm: "Please select capacity explosive name."
@@ -161,13 +163,13 @@ $(document).ready(function() {
             	checkcapacitydivision: "Please enter capacity division."
             },
 			'capacity_qty[]':{
-            	checkcapacityqty: "Please enter capacity quantity."
+            	checkcapacityqty: "Please enter capacity quantity in number."
             },
 			'capacity_unit[]':{
-            	checkcapacityunit: "Please enter capacity unit."
+            	checkcapacityunit: "Please enter capacity unit in number."
             },
 			'capacity_notimes[]':{
-            	checkcapacitynotimes: "Please enter capacity number of times."
+            	checkcapacitynotimes: "Please enter capacity number of times in number."
             },
 			'short_doc_key[]':{
             	checkshortdockey: "Please enter short fire document key."
@@ -346,6 +348,22 @@ jQuery.validator.addMethod('checkcapacitysrno', function(value, element){
     if(validateflag==0){return true;} else{ return false;}
 });
 
+//Check valid serial number
+jQuery.validator.addMethod('checkvalidcapacitysrno', function(value, element){
+	validateflag=1;
+	   
+    if($('.capacity_srno').length>0){
+        validateflag=0;
+        $('input.capacity_srno').each(function(index) {
+			if(index>0){
+				var value = $(this).val();
+				if(!isNaN(parseInt(value))==false){validateflag=1;}
+			}
+        });
+    }
+    if(validateflag==0){return true;} else{ return false;}
+});
+
 //Capacity explosive name
 jQuery.validator.addMethod('checkcapacityexpnm', function(value, element){
     validateflag=1;
@@ -401,7 +419,7 @@ jQuery.validator.addMethod('checkcapacityqty', function(value, element){
         $('input.capacity_qty').each(function(index) {
 			if(index>0){
 				var value = $(this).val();
-				if(value==""){validateflag=1;}
+				if(value=="" || !isNaN(parseInt(value))==false){ validateflag=1; }
 			}
         });
     }
@@ -416,7 +434,7 @@ jQuery.validator.addMethod('checkcapacityunit', function(value, element){
         $('input.capacity_unit').each(function(index) {
 			if(index>0){
 				var value = $(this).val();
-				if(value==""){validateflag=1;}
+				if(value=="" || !isNaN(parseInt(value))==false){ validateflag=1; }
 			}
         });
     }
@@ -431,7 +449,7 @@ jQuery.validator.addMethod('checkcapacitynotimes', function(value, element){
         $('input.capacity_notimes').each(function(index) {
 			if(index>0){
 				var value = $(this).val();
-				if(value==""){validateflag=1;}
+				if(value=="" || !isNaN(parseInt(value))==false){ validateflag=1; }
 			}
         });
     }
@@ -532,7 +550,7 @@ jQuery.validator.addMethod('checkdetailids', function(value, element){
     if($('.emailid').length>0){
         validateflag=0;
         $('input.emailid').each(function(index) {
-			if(index>0){
+			if(index!=2){
 				var value = $(this).val();
 				if(value==""){validateflag=1;}
 			}
@@ -546,7 +564,7 @@ jQuery.validator.addMethod('checkdetailpwd', function(value, element){
     if($('.addpassword').length>0){
         validateflag=0;
         $('input.addpassword').each(function(index) {
-			if(index>0){
+			if(index!=2){
 				var value = $(this).val();
 				if(value==""){validateflag=1;}
 			}
@@ -664,6 +682,7 @@ function makebillClone(){
 }
 
 function validationError(errorMap, errorList){
+	scrollwindowTop();
 	if(errorList.length==0) return;
 	var msgs=[];
 	for(var err=0;err<errorList.length;err++) {
@@ -688,27 +707,32 @@ function formResponse(responseText, statusText) {
     $("#submitbtn").removeAttr("disabled");
 	scrollwindowTop();
 	
-	if(statusText == 'success') {
-		if(responseText.type == 'success') {
-			$("#submitbtn").attr("disabled","disabled");
-			//customer general information
+	if(statusText == 'success') { 
+		if(responseText.generalid == 'success') {
 			if(responseText.genstatus == 'success' || responseText.custempstatus == 'success') {
 				$("#notify").notification({caption: "Customer general information updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
-			//customer additional information
-			}else if(responseText.explosivestatus == 'success' || responseText.capacitystatus == 'success' || responseText.shortstatus == 'success' || responseText.addstatus == 'success'){
+			}else if(responseText.genstatus == 'custexists'){//if customer email address is exists
+				$("#notify").notification({caption: "Customer email already exists in the system.", type:"warning", sticky:true});
+			}else {
+				$("#notify").notification({caption: "Unable to save customer general information.", type:"warning", sticky:true});
+			}
+		}else if(responseText.additionalid == 'success'){
+			if(responseText.explosivestatus == 'success' || responseText.capacitystatus == 'success' || responseText.shortstatus == 'success' || responseText.addstatus == 'success'){
 				$("#notify").notification({caption: "Customer additional information updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
-			//customer bills information
-			}else if(responseText.billstatus == 'success'){
+			}else {
+				$("#notify").notification({caption: "Unable to save customer additional information.", type:"warning", sticky:true});
+			}
+		}else if(responseText.billid == 'success'){
+			if(responseText.billstatus == 'success'){
 				$("#notify").notification({caption: "Customer's bills updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
-			//when all criteria get fials
 			}else {
-				$("#notify").notification({caption: "Unable to save information Customer details.", type:"warning", sticky:true});
+				$("#notify").notification({caption: "Unable to save customer bills information.", type:"warning", sticky:true});
 			}
 		}else {
 			$("#notify").notification({caption: "Unable to save information.", type:"warning", sticky:true});

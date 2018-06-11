@@ -81,20 +81,22 @@
 		$custid=intval($_POST['customerid']);
 		if($custid>0){
 			if(isset($_POST['generalid']) && intval($_POST['generalid'])>0){//general updation
+				$type["generalid"]="success";
+				
 				$custquery = "SELECT count(*) as totalrecords FROM customers WHERE email='%s' AND id<>%i";
 				$custquery=$sql->query($custquery, array(trim($_POST['custemail']), $custid));
 				$custcount = intval($db->queryUniqueValue($custquery));
 		
-				if($custcount==0){
+				if($custcount>0){//if email address repeats
+					$type['type']="success";
+					$type['genstatus']="custexists";
+				}else {
 					$query="UPDATE customers SET zoneid=%i, companyname='%s', firstname='%s', lastname='%s', phone=%i, email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
 					$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['firstnm']), trim($_POST['lastnm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), intval($_POST['custpincode']), trim($_POST['custstate']), $custid));
 					if($db->query($query)){
 						$type['type']="success";
 						$type['genstatus']="success";
 					}
-				}else {
-					$type['type']="success";
-					$type['genstatus']="custexists";
 				}
 				
 				//UPDATE CUSTOMERS EMPLOYEES
@@ -107,8 +109,9 @@
 						}
 					}
 				}
-				
 			}else if(isset($_POST['additionalid']) && intval($_POST['additionalid'])>0){//additional information
+				$type['additionalid']="success";
+				
 				if(isset($_POST['explosiveid'])){
 					$explosiveid=intval($_POST['explosiveid']);
 					if($explosiveid>0){
@@ -131,8 +134,8 @@
 				//UPDATE EXPLOSIVE CAPACITY DETAILS
 				for($c=0; $c<count($_POST['capacity_explosivenm']); $c++){
 					if(strlen(trim($_POST['capacity_explosivenm'][$c]))>0 && strlen(trim($_POST['capacity_class'][$c]))>0 && strlen(trim($_POST['capacity_division'][$c]))>0){
-						$capinsert="INSERT INTO customer_explosive_capacity SET customer_licence_id=%i, class='%s', division='%s', qty_at_time='%s', unit='%s', no_of_time='%s', created_at=NOW(), updated_at=NOW()";
-						$capinsert=$sql->query($capinsert, array($custid, trim($_POST['capacity_class'][$c]), trim($_POST['capacity_division'][$c]), trim($_POST['capacity_qty'][$c]), trim($_POST['capacity_unit'][$c]), trim($_POST['capacity_notimes'][$c])));
+						$capinsert="INSERT INTO customer_explosive_capacity SET srno=%i, customer_licence_id=%i, class='%s', division='%s', qty_at_time='%s', unit='%s', no_of_time='%s', created_at=NOW(), updated_at=NOW()";
+						$capinsert=$sql->query($capinsert, array(intval($_POST['capacity_srno'][$c]), intval($_POST['capacity_explosivenm'][$c]), trim($_POST['capacity_class'][$c]), trim($_POST['capacity_division'][$c]), trim($_POST['capacity_qty'][$c]), trim($_POST['capacity_unit'][$c]), trim($_POST['capacity_notimes'][$c])));
 						if($db->query($capinsert)){
 							$type['capacitystatus']="success";
 						}
@@ -162,8 +165,10 @@
 				}
 				
 				$type['type']="success";
-				
+
 			}else if(isset($_POST['billid']) && intval($_POST['billid'])>0){//bills insertion
+				$type['billid']="success";
+				
 				for($b=0; $b<count($_POST['user']); $b++){
 					if(intval($_POST['user'][$b])>0 && strlen(trim($_POST['billname'][$b]))>0 && strlen(trim($_POST['billamt'][$b]))>0){
 						$query="INSERT INTO customers_bills SET customerid=%i, userid=%i, billno='%s', billname='%s', bill_amount='%s', created_at=NOW(), updated_at=NOW()";
