@@ -134,8 +134,8 @@
 				//UPDATE EXPLOSIVE CAPACITY DETAILS
 				for($c=0; $c<count($_POST['capacity_explosivenm']); $c++){
 					if(strlen(trim($_POST['capacity_explosivenm'][$c]))>0 && strlen(trim($_POST['capacity_class'][$c]))>0 && strlen(trim($_POST['capacity_division'][$c]))>0){
-						$capinsert="INSERT INTO customer_explosive_capacity SET srno=%i, customer_licence_id=%i, class='%s', division='%s', qty_at_time='%s', unit='%s', no_of_time='%s', created_at=NOW(), updated_at=NOW()";
-						$capinsert=$sql->query($capinsert, array(intval($_POST['capacity_srno'][$c]), intval($_POST['capacity_explosivenm'][$c]), trim($_POST['capacity_class'][$c]), trim($_POST['capacity_division'][$c]), trim($_POST['capacity_qty'][$c]), trim($_POST['capacity_unit'][$c]), trim($_POST['capacity_notimes'][$c])));
+						$capinsert="INSERT INTO customer_explosive_capacity SET customerid=%i, srno=%i, explosive_name='%s', class='%s', division='%s', qty_at_time='%s', unit='%s', no_of_time='%s', created_at=NOW(), updated_at=NOW()";
+						$capinsert=$sql->query($capinsert, array($custid, intval($_POST['capacity_srno'][$c]), trim($_POST['capacity_explosivenm'][$c]), trim($_POST['capacity_class'][$c]), trim($_POST['capacity_division'][$c]), trim($_POST['capacity_qty'][$c]), trim($_POST['capacity_unit'][$c]), trim($_POST['capacity_notimes'][$c])));
 						if($db->query($capinsert)){
 							$type['capacitystatus']="success";
 						}

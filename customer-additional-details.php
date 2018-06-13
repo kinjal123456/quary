@@ -63,9 +63,8 @@
 					<td align="left" valign="top" class="list_table_th border_bottom"><div class="listing_th_padding">No. of times</div></td>
 				</tr>
 				<?php
-	            	$addcapqry="SELECT cec.id, cli.customerid, cli.name, cec.class, cec.division, cec.qty_at_time, cec.unit, cec.no_of_time FROM customer_explosive_capacity cec
-								LEFT JOIN customer_licence_info cli on cec.customer_licence_id=cli.id
-								WHERE cli.customerid=%i";
+	            	$addcapqry="SELECT id, customerid, srno, explosive_name, class, division, qty_at_time, unit, no_of_time FROM customer_explosive_capacity
+								WHERE customerid=%i";
 	            	$addcapqry=$sql->query($addcapqry, array($customerid));
 	            	$addcapres=$db->query($addcapqry);
 	            	$addcapcnt=$db->numRows($addcapres);
@@ -88,7 +87,7 @@
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right whitebg">
 	                    <div style="padding: 10px">
-	                    	<?php echo trim($addcaprw->name); ?>
+	                    	<?php echo trim($addcaprw->explosive_name); ?>
 		                </div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
@@ -118,14 +117,6 @@
 	                </td>
 	            </tr>
 	            <?php } } ?>
-	            <?php
-		            $expqry="SELECT id, name FROM customer_licence_info WHERE customerid=%i AND detail_type=%i";
-		            $expqry=$sql->query($expqry, array($customerid, _EXPLOSIVE_LICENCE_TYPE_));
-		            $experes=$db->query($expqry);
-		            $expcount=$db->numRows($experes);
-		            
-		            if($expcount>0){
-	            ?>
 				<tr class="capacity templatecapacity" style="display:none">
 					<td align="center" valign="middle" class="border_bottom border_left border_right">
 	                    <div>
@@ -139,16 +130,7 @@
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-	                    	<select name="capacity_explosivenm[]" id="capacity_explosivenm" class="capacity_explosivenm select_drop_down">
-	                    		<option value="">Select explosive name</option>
-								<?php
-									if($expcount>0){
-										while($exprw=$db->fetchNextObject($expres)){
-											echo '<option value="'.intval($exprw->id).'">'.trim($exprw->name).'</option>';
-										}
-									}
-								?>
-	                    	</select>
+							<input type="text" name="capacity_explosivenm[]" id="capacity_explosivenm" class="capacity_explosivenm" value="">
 	                	</div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
@@ -184,16 +166,6 @@
 						</div>
 					</td>
 				</tr>
-				<?php }else { ?>
-				<tr>
-					<td colspan="8">
-						<div id="norecord"></div>
-					</td>
-				</tr>
-				<script type="text/javascript" language="javascript">
-					$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
-				</script>
-				<?php } ?>
 			</table>
 		</div>
 	</div>

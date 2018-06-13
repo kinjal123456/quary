@@ -6,6 +6,7 @@
 		include_once 'libs/data/db.connect.php';
 		$userid=intval($_SESSION['userId']);
 		$adminInfo=getAdminDetails($userid);
+		$adminName=$adminInfo['adminname'];
 		$userName=$adminInfo['username'];
 	}
 	
@@ -47,9 +48,8 @@
 				<!--<a href=""><img src="images/header-logo.png"></a>-->
 			</div>
 			<div class="header-welcome-section">
-				<div class="pull-right padding-top10">
-					<span class="header-welcome-text">Welcome</span> 
-					<span class="header-administrator-text"><?php echo $userName; ?></span>
+				<div align="center" class="padding-top10">
+					<span class="header-administrator-text"><?php echo $adminName; ?></span>
 				</div>
 			</div>
 			<br clear="all">

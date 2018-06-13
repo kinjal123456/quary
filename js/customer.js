@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#short_issuedate").datepicker();
+	$("#explosive_issuedate, #explosive_expirydate, #short_issuedate, #short_expirydate").datepicker();
 	
 	$("#customerform").validate({
         debug: false,
@@ -368,13 +368,13 @@ jQuery.validator.addMethod('checkvalidcapacitysrno', function(value, element){
 jQuery.validator.addMethod('checkcapacityexpnm', function(value, element){
     validateflag=1;
 	
-	if($('select.capacity_explosivenm option:selected').length>0){
+	if($('.capacity_explosivenm').length>0){
         validateflag=0;
-        $('select.capacity_explosivenm option:selected').each(function(index) {
-        	if(index>0){
-		        var value = $(this).val();
-		        if(value==""){validateflag=1;}
-        	}
+        $('input.capacity_explosivenm').each(function(index) {
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
         });
     }
     if(validateflag==0){return true;} else{ return false;}

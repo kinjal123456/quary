@@ -2,11 +2,12 @@
 	function getAdminDetails($adminid){
 		global $db, $sql;
 		
-		$query="select id, username, email from admin where id=%i";
+		$query="select id, adminname, username, email from admin where id=%i";
 		$query=$sql->query($query, array($adminid));
 		$result=$db->query($query);
 		$row=$db->fetchNextObject($result);
 		$admin['id'] = intval($row->id);
+		$admin['adminname'] = trim($row->adminname);
 		$admin['username'] = trim($row->username);
 		
 		return $admin;

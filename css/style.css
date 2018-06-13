@@ -75,10 +75,10 @@
 }
 .header-administrator-text{
 	color: #525252;
-	font-size: 14px;
+	font-size: 25px;
 	font-family: Myriad Pro;
 	font-weight: bold;
-	text-transform: capitalize
+	text-transform: uppercase
 }
 .header-profile{
 	padding: 0 10px 0 27px;
