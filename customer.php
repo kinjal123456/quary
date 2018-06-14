@@ -171,11 +171,21 @@
 				
 				for($b=0; $b<count($_POST['user']); $b++){
 					if(intval($_POST['user'][$b])>0 && strlen(trim($_POST['billname'][$b]))>0 && strlen(trim($_POST['billamt'][$b]))>0){
-						$query="INSERT INTO customers_bills SET customerid=%i, userid=%i, billno='%s', billname='%s', bill_amount='%s', created_at=NOW(), updated_at=NOW()";
-						$query=$sql->query($query, array($custid, intval($_POST['user'][$b]), genRandomString(5), trim($_POST['billname'][$b]), trim($_POST['billamt'][$b])));
-						if($db->query($query)){
+						
+						$billquery = "SELECT count(*) as totalrecords FROM customers_bills WHERE customerid=%i AND userid=%i";
+						$billquery=$sql->query($billquery, array($custid, intval($_POST['user'][$b])));
+						$billcount = intval($db->queryUniqueValue($billquery));
+				
+						if($billcount==0){
+							$query="INSERT INTO customers_bills SET customerid=%i, userid=%i, billno='%s', billname='%s', bill_amount='%s', created_at=NOW(), updated_at=NOW()";
+							$query=$sql->query($query, array($custid, intval($_POST['user'][$b]), genRandomString(5), trim($_POST['billname'][$b]), trim($_POST['billamt'][$b])));
+							if($db->query($query)){
+								$type['type']="success";
+								$type['billstatus']="success";
+							}
+						}else {
 							$type['type']="success";
-							$type['billstatus']="success";
+							$type['billstatus']="billexists";
 						}
 					}
 				}
@@ -238,6 +248,7 @@
 						<input type="hidden" class="hiddencomponent" name="additionalid" id="additionalid" value="">
 						<input type="hidden" class="billid" name="billid" id="billid" value="">
 						<input type="hidden" name="customerid" id="customerid" value="<?php echo $customerid; ?>">
+						<input type="hidden" name="print" id="print" value="0">
 						<input type="submit" name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0">
 					</div>
 				</form>

@@ -170,3 +170,7 @@ function printRegisterfrom(formid){
 		'target': '_blank',
 	}).submit();
 }
+//Print Bills
+function printBills(customerid){
+	window.location.href="customer-bill-print.php?custid="+customerid;
+}

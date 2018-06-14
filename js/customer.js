@@ -672,13 +672,19 @@ function makeshortClone(){
 }
 
 function makebillClone(){
-	$('.template').show();
-    var newentry = $('.template').clone(false).removeClass('template')[0].outerHTML;
-	$('.template').hide();
-    lastoldelem = $('table#appendbillcontent tr.bills:last');
-    $(lastoldelem).after(newentry);
+	var numofbills=$('table#appendbillcontent tr.noofbills').length-1;
+	
+	if(numofbills<2){
+		$('.template').show();
+		var newentry = $('.template').clone(false).removeClass('template')[0].outerHTML;
+		$('.template').hide();
+		lastoldelem = $('table#appendbillcontent tr.bills:last');
+		$(lastoldelem).after(newentry);
 
-    elem = $('table#appendbillcontent tr.bills:last');//getting element
+		elem = $('table#appendbillcontent tr.bills:last');//getting element
+	}else {
+		$(".icon_add_bill").hide();
+	}
 }
 
 function validationError(errorMap, errorList){
@@ -731,6 +737,8 @@ function formResponse(responseText, statusText) {
 				$("#notify").notification({caption: "Customer's bills updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
+			}else if(responseText.billstatus == 'billexists'){
+				$("#notify").notification({caption: "Customer bill already exists for this user.", type:"warning", sticky:true});
 			}else {
 				$("#notify").notification({caption: "Unable to save customer bills information.", type:"warning", sticky:true});
 			}
