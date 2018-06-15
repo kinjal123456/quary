@@ -1,20 +1,34 @@
 //Delete customer
 function deleteCustomer(obj, customerid){
+	var confirmFlag = 0;
     var answer = confirm('Do you really want to delete this record?.');
     if(answer){
-        ajaxUpdate("customers.php", {action: 'customerDelete', customerid:customerid}, function(data){
-            hideLoader();
-            scrollwindowTop();
-            if(data.type=="success") {
-                $("#notify").notification({caption:"Customer deleted successfully.", type:"information", sticky:false, onhide:function(){
-                    window.location.href="customers.php";
-                }});
-            }else if(data.usernotiy=="success"){
-				$("#notify").notification({caption:"Not able to delete the record.", type:"information", sticky:false});
+        ajaxUpdate("customers.php", {action:"customerDelete", customerid:customerid, confirmFlag:confirmFlag}, function(data){
+			scrollwindowTop();
+			hideLoader();
+			if(data.type=="success" && data.usernotiy==true) {
+				var confirmdelete = confirm('There are multiple records linked with the customer(s). Are you sure you want to delete this records(s) ?');
+				
+				if(confirmdelete){
+					confirmFlag=1;
+					ajaxUpdate("customers.php", {action:"customerDelete", 'customerid[]':customerid, confirmFlag:confirmFlag}, function(data){
+						scrollwindowTop();
+						hideLoader();
+						if(data.type=="success" && data.usernotiy==false) {
+							$("#notify").notification({caption:"Customer(s) deleted successfully.", type:"information", sticky:false, onhide:function(){
+								window.location.href="customers.php";
+							}});
+						}
+					});
+				}
+			}else if(data.type=="success" && data.usernotiy==false) {
+				$("#notify").notification({caption:"Customer(s) deleted successfully.", type:"information", sticky:false, onhide:function(){
+					window.location.href="customers.php";
+				}});
 			}else{
-                $("#notify").notification({caption:"Not able to delete the record.", type:"information", sticky:false});
-            }
-        });
+				$("#notify").notification({caption:"Not able to delete the file.", type:"warning", sticky:true});
+			}
+		});
     }
 }
 
@@ -43,12 +57,16 @@ function deleteMultipleCustomers(obj){
 							scrollwindowTop();
 							hideLoader();
 							if(data.type=="success" && data.usernotiy==false) {
-								$("#notify").notification({caption:"Customers deleted successfully.", type:"information", sticky:false, onhide:function(){
+								$("#notify").notification({caption:"Customer(s) deleted successfully.", type:"information", sticky:false, onhide:function(){
 									window.location.href="customers.php";
 								}});
 							}
 						});
 					}
+				}else if(data.type=="success" && data.usernotiy==false) {
+					$("#notify").notification({caption:"Customer(s) deleted successfully.", type:"information", sticky:false, onhide:function(){
+						window.location.href="customers.php";
+					}});
 				}else{
 					$("#notify").notification({caption:"Not able to delete the file.", type:"warning", sticky:true});
 				}
