@@ -34,7 +34,7 @@
 						$dayno=1;
 						for($j=0; $j<=count($_POST['days']); $j++){
 							if(strlen($_POST['days'][$j])>0){
-								$upquery="UPDATE customer_register_form_d SET day_".$dayno."='%s',`updated_by`=NOW() WHERE id=%i";
+								$upquery="UPDATE customer_register_form_d SET day_".$dayno."=%i,`updated_by`=NOW() WHERE id=%i";
 								$upquery=$sql->query($upquery, array($_POST['days'][$j], $lastinsId));
 								$db->query($upquery);
 							}
@@ -143,7 +143,12 @@
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<?php for($i=0; $i<31; $i++){ ?>
 									<div class="listing_td_padding pull-left">
-										<input type="text" name="days[]" id="day_<?php echo $i; ?>" value="" style="width:12px" />
+										<select name="days[]" id="day_<?php echo $i; ?>">
+											<option value="">Select</option>
+											<?php foreach($REGISTER_FORM_D_ATTENDANCE_ as $attendancekey => $attendancevalue){ ?>
+												<option value="<?php echo $attendancekey; ?>"><?php echo $attendancevalue; ?></option>
+											<?php } ?>
+										</select>
 									</div>
 								<?php } ?>
 							</td>

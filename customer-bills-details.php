@@ -1,15 +1,10 @@
 <?php 
-	$billsqry="SELECT id, customerid, userid, billno, billname, bill_amount FROM customers_bills WHERE customerid=%i";
-	$billsqry=$sql->query($billsqry, array($customerid));
+	$billsqry="SELECT id, customerid, userid, billno, billname, bill_amount FROM customers_bills WHERE customerid=%i AND YEAR(created_at)=%i";
+	$billsqry=$sql->query($billsqry, array($customerid, date('Y')));
 	$billsres=$db->query($billsqry);
 	$billscnt=$db->numRows($billsres);
 ?>
 <table border="0" cellpadding="0" cellspacing="0" id="appendbillcontent" class="billslisting">
-	<?php if($billscnt>0){ ?>
-		<tr>
-			<td colspan="6" style="padding-bottom:10px"><label title="Print" style="cursor:pointer" onclick="printBills(<?php echo $customerid; ?>)">Print</lable></td>
-		</tr>
-	<?php } ?>
 	<tr>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 80px;">&nbsp;</td>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Sr no.</div></td>
@@ -29,7 +24,9 @@
 	<tr class="noofbills">
 		<td align="center" valign="middle" class="border_bottom border_left border_right">
 			<div>
-				<div title="Delete" class="icon_delete" onclick="deleteBills(this, <?php echo intval($billsrw->id); ?>, <?php echo intval($billsrw->customerid); ?>)" style="margin-left:10px"></div>
+				<div title="Delete" class="icon_delete pull-left" onclick="deleteBills(this, <?php echo intval($billsrw->id); ?>, <?php echo intval($billsrw->customerid); ?>)" style="margin-left:10px"></div>
+				<div class="action-icon"><label title="Print" style="cursor:pointer" onclick="printBills(<?php echo intval($billsrw->id); ?>)">Print</lable></div>
+				<div class="clearall">
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">

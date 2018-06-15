@@ -171,6 +171,26 @@ function printRegisterfrom(formid){
 	}).submit();
 }
 //Print Bills
-function printBills(customerid){
-	window.location.href="customer-bill-print.php?custid="+customerid;
+function printBills(billid){
+	$('input#billprint[type=hidden]').val(1);
+	$('#bill_id').val(billid);
+	$('#billformprint').attr({
+		'target': '_blank',
+	}).submit();
+}
+//Update Bill Payment
+function updateBillPayment(obj, billid){
+	var billpaymentid = $("#paymentstatus"+billid).val();
+	
+	ajaxUpdate("bills.php", {action: 'billPaymentUpdate', billid:billid, billpaymentid:billpaymentid}, function(data){
+		hideLoader();
+		scrollwindowTop();
+		if(data.type=="success") {
+			$("#notify").notification({caption:"Payment status updated successfully.", type:"information", sticky:false, onhide:function(){
+				window.location.href="bills.php";
+			}});
+		}else{
+			$("#notify").notification({caption:"Not able to update the record.", type:"warning", sticky:false});
+		}
+	});
 }

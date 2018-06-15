@@ -26,10 +26,23 @@
 	define("_CUSTOMER_MESSAGE_INVALID_ZONE_", "&bull; The zone does not exists in the system.");
 	
 	/****************************************REGISTER FORM CONSTANTS*****************************************************************************/
-	$REGISTER_FORM_A_1_CATEGORY_ADDRESS = array(
+	$REGISTER_FORM_A_1_CATEGORY_ADDRESS_ = array(
 			1 => "HS",
 			2 => "S",
 			3 => "SS",
 			4 => "US"
+	);
+	
+	/****************************************REGISTER FORM D ATTENDANCE ABBRIVIATION*****************************************************************************/
+	$REGISTER_FORM_D_ATTENDANCE_ = array(
+			1 => "A",
+			2 => "P",
+			3 => "X"
+	);
+	
+	/****************************************BILLS REPORTS PAYMENT STATUS*****************************************************************************/
+	$BILLS_PAYMENT_STATUS_ = array(
+			1 => "Payment due",
+			2 => "Paid"
 	);
 ?>

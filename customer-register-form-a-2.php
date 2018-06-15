@@ -198,7 +198,7 @@
 									<select name="cat_add" id="cat_add" class="select_drop_down" style="width:100%">
 										<option value="">Select</option>
 										<?php
-											foreach($REGISTER_FORM_A_1_CATEGORY_ADDRESS as $catkey => $catvalue){
+											foreach($REGISTER_FORM_A_1_CATEGORY_ADDRESS_ as $catkey => $catvalue){
 												echo '<option value="'.$catkey.'">'.$catvalue.'</option>';
 											}
 										?>

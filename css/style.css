@@ -480,6 +480,7 @@ td.jqplot-table-legend{
     padding-top: 7px;
     padding-bottom: 9px;
     vertical-align: bottom;
+	cursor:pointer
 }
 .active_tab{
     color: #000;
@@ -487,6 +488,7 @@ td.jqplot-table-legend{
     position: relative;
     bottom:-1px;
     padding-bottom: 10px;
+	cursor:pointer
 }
 .tab_content_container > div{
 	display:none
