@@ -15,6 +15,12 @@
 		exit(0);
 	}
 	
+	if(isset($_GET['custid']) && intval($_GET['custid'])){
+		$custnameq="SELECT CONCAT(firstname, ' ', lastname) AS name FROM customers WHERE id=%i";
+		$custnameq=$sql->query($custnameq, array(intval($_GET['custid'])));
+		$cust_name=$db->queryUniqueValue($custnameq);
+	}
+	
 	$filename=(isset($_SERVER['SCRIPT_FILENAME']))?trim(basename($_SERVER['SCRIPT_FILENAME'])):'';
 ?>
 <!DOCTYPE html>

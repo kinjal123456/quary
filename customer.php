@@ -252,7 +252,7 @@
 						<input type="submit" name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0">
 					</div>
 				</form>
-				<form name="billformprint" id="billformprint" action="customer-bill-print.php" method="post">
+				<form name="billformprint" id="billformprint" action="" method="post">
 					<input type="hidden" name="billprint" id="billprint" value="0">
 					<input type="hidden" name="bill_id" id="bill_id" value="">
 				</form>

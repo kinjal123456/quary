@@ -39,6 +39,14 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 		$result=$db->query($query);
 		$count=$db->numRows($result);
 		$row=$db->fetchNextObject($result);
+		
+		$custnameq="SELECT CONCAT(firstname, ' ', lastname) AS name FROM customers WHERE id=%i";
+		$custnameq=$sql->query($custnameq, array(intval($row->customerid)));
+		$cust_name=$db->queryUniqueValue($custnameq);
+		
+		$formlinq="SELECT emailid FROM customer_additional_info WHERE id=%i AND detailname='Shram Shuvidha LIN detail'";
+		$formlinq=$sql->query($formlinq, array(intval($row->customerid)));
+		$formlin=$db->queryUniqueValue($formlinq);
 	}
 ?>
 <title>Quarry<?php if(isset($page_title)) echo " : ".$page_title; ?></title>
@@ -54,12 +62,13 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td style="font-weight:bold">Name of the Establishment</td>
-					<td>fg</td>
+					<td><?php echo $cust_name; ?></td>
 					<td style="font-weight:bold">Name of Owner</td>
 					<td>Jayeshbhai Desai</td>
 					<td style="font-weight:bold">LIN</td>
+					<td><?php echo (strlen($formlin)>0)?$formlin:"-"; ?></td>
 				</tr>
-				<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
+				<tr><td colspan="6" style="height:10px"><!-- --></td></tr>
 			</table>
 		</div>
 		<div>

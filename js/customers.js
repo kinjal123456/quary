@@ -26,7 +26,7 @@ function deleteCustomer(obj, customerid){
 					window.location.href="customers.php";
 				}});
 			}else{
-				$("#notify").notification({caption:"Not able to delete the file.", type:"warning", sticky:true});
+				$("#notify").notification({caption:"Not able to delete the record(s).", type:"warning", sticky:true});
 			}
 		});
     }
@@ -68,7 +68,7 @@ function deleteMultipleCustomers(obj){
 						window.location.href="customers.php";
 					}});
 				}else{
-					$("#notify").notification({caption:"Not able to delete the file.", type:"warning", sticky:true});
+					$("#notify").notification({caption:"Not able to delete the record(s).", type:"warning", sticky:true});
 				}
 			});
 		}

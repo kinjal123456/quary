@@ -178,7 +178,7 @@
 						            </tr>
 									<tr>
 										<td colspan="5" align="left" valign="top" class="border_right">
-											<div style="padding:10px 22px;">
+											<div style="padding:10px 34px;">
 												<div title="Add" class="icon_add icon_gen_emp"></div>
 											</div>
 										</td>

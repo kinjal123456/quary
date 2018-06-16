@@ -53,6 +53,10 @@
 
 	if(isset($_GET['custid']) && intval($_GET['custid'])){
 		$customerid=intval($_GET['custid']);
+		
+		$formlinq="SELECT emailid FROM customer_additional_info WHERE id=%i AND detailname='Shram Shuvidha LIN detail'";
+		$formlinq=$sql->query($formlinq, array($customerid));
+		$formlin=$db->queryUniqueValue($formlinq);
 	}
 ?>
 <link href="css/register-styles.css" type="text/css" rel="stylesheet" />
@@ -60,7 +64,11 @@
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
-		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Register Form D':''; ?></div>
+		<div valign="top" class="table-heading">
+			<div class="pull-left"><a href="customer.php?custid=<?php echo $customerid; ?>"><img src="images/back.png"></a></div>
+			<div><?php echo ($customerid>0)?'Register Form D':''; ?></div>
+			<div class="clearall"><!-- --></div>
+		</div>
 		<div style="padding: 20px 0;">
 			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
@@ -79,18 +87,18 @@
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tr>
 							<td style="font-weight:bold">Name of the Establishment</td>
-							<td>fg</td>
+							<td><?php echo $cust_name; ?></td>
 							<td style="font-weight:bold">Name of Owner</td>
 							<td>Jayeshbhai Desai</td>
 							<td style="font-weight:bold">LIN</td>
-							<td></td>
+							<td><?php echo (strlen($formlin)>0)?$formlin:"-"; ?></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="pull-left" style="font-weight:bold;padding-right:10px">For the Period From</div>
-								<div class="pull-left">fg</div>
+								<div class="pull-left">2018</div>
 								<div class="pull-left" style="font-weight:bold;padding:0 10px">To</div>
-								<div class="pull-left">gfd</div>
+								<div class="pull-left">2019</div>
 								<br clear="all">
 							</td>
 						</tr>

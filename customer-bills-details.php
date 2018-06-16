@@ -4,7 +4,7 @@
 	$billsres=$db->query($billsqry);
 	$billscnt=$db->numRows($billsres);
 ?>
-<table border="0" cellpadding="0" cellspacing="0" id="appendbillcontent" class="billslisting">
+<table border="0" cellpadding="0" cellspacing="0" id="appendbillcontent" class="billslisting" style="width:100%">
 	<tr>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 80px;">&nbsp;</td>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Sr no.</div></td>
@@ -59,7 +59,9 @@
 	<tr class="bills template noofbills" style="height:40px;display:none">
 		<td align="center" valign="middle" class="border_bottom border_left">
 			<div>
-				<div title="Delete" class="icon_delete"></div>
+				<div title="Delete" class="icon_delete pull-left" style="margin-left:10px"></div>
+				<div class="action-icon">&nbsp;</div>
+				<div class="clearall">
 			</div>
 		</td>
 		<td align="center" valign="middle" class="border_bottom border_left border_right">&nbsp;</td>

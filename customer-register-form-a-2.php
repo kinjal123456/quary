@@ -89,7 +89,11 @@
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
-		<div valign="top" class="table-heading"><?php echo ($customerid>0)?'Register Form A - Type B':''; ?></div>
+		<div valign="top" class="table-heading">
+			<div class="pull-left"><a href="customer.php?custid=<?php echo $customerid; ?>"><img src="images/back.png"></a></div>
+			<div><?php echo ($customerid>0)?'Register Form A - Type B':''; ?></div>
+			<div class="clearall"><!-- --></div>
+		</div>
 		<div style="padding: 20px 0;">
 			<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">

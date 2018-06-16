@@ -43,7 +43,7 @@ if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){?>
 	}
 ?>
 <title>Quarry<?php if(isset($page_title)) echo " : ".$page_title; ?></title>
-<div style="padding:10px 0;">
+<div style="padding:10px 0">
 	<div>
 		<div align="center" style="padding-bottom:10px;font-size:16px;color:#000">
 			<div style="font-size:28px;padding-bottom:5px">JAYESH PRAMODRAI DESAI.</div>
@@ -52,13 +52,13 @@ if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){?>
 			<div style="border-top:3px solid #000"></div>
 		</div>
 		<div>
-			<div style="color:#000;font-weight:bold;text-transform:capitalize;text-decoration:underline;padding-bottom:5px">Bill No: <?php echo trim($row->billno); ?></div>
-			<div style="color:#000;font-weight:bold;text-transform:capitalize;text-decoration:underline;padding-bottom:15px">Dated: <?php echo date("dS F, Y", strtotime(trim($row->created_at))); ?>.</div>
-			<div style="color:#000;font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->name); ?></div>
+			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline;padding-bottom:5px">Bill No: <?php echo trim($row->billno); ?></div>
+			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline;padding-bottom:15px">Dated: <?php echo date("dS F, Y", strtotime(trim($row->created_at))); ?>.</div>
+			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->name); ?></div>
 			<?php if(strlen($row->address)>0){ ?>
-				<div style="color:#000;font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->address); ?></div>
+				<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->address); ?></div>
 			<?php } ?>
-			<div style="color:#000;font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo $row->pincode.", ".trim($row->state); ?></div>
+			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo $row->pincode.", ".trim($row->state); ?></div>
 		</div>
 		<div style="height:20px"><!-- --></div>
 	</div>
@@ -96,5 +96,9 @@ if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){?>
 				</td>
 			</tr>
 		</table>
+	</div>
+	<div style="padding-top:10px">
+		<div>Thanking you,</div>
+		<div style="font-size:14px; padding-top:10px">Jayesh Pramodrai Desai.</div>
 	</div>
 </div>

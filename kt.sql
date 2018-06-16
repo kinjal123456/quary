@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2018 at 02:00 PM
+-- Generation Time: Jun 16, 2018 at 11:12 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `customers`
@@ -78,7 +78,9 @@ CREATE TABLE IF NOT EXISTS `customers` (
 
 INSERT INTO `customers` (`id`, `uploadid`, `zoneid`, `companyname`, `firstname`, `lastname`, `phone`, `licenceno`, `email`, `password`, `survey_no`, `address`, `pincode`, `state`, `created_at`, `updated_at`) VALUES
 (2, 1, 2, '', 'Mansi', 'thaker', 65, 'rtgre', 'm@gmail.com', 'kinjal', '', 'Tithal road', 396001, 'Gujarat', '2018-06-10 12:30:14', '2018-06-11 12:03:14'),
-(3, 1, 2, 'test', 'kinjal', 'thaker', 45435, 'ffs', 'kinjal@gmail.com', 'kinjal', '123456', '7 shroff building, azad chowck', 396001, 'GUJARAT', '2018-06-10 18:30:00', '2018-06-14 13:22:59');
+(24, 9, 1, NULL, 'vrunda', 'd', 543535, 'LIC3', 'k3@gmail.com', NULL, NULL, NULL, NULL, NULL, '2018-06-16 05:40:41', '2018-06-16 05:40:41'),
+(22, 9, 1, 'dsfds', 'kinjal', 'thaker', 435435, 'LIC1', 'k1@gmail.com', 'kinjal', '43534', '7 shroff building, azad chowck', 396001, 'GUJARAT', '2018-06-16 05:40:41', '2018-06-16 05:42:36'),
+(23, 9, 2, NULL, 'mansi', 't', 54353, 'LIC2', 'k2@gmail.com', NULL, NULL, NULL, NULL, NULL, '2018-06-16 05:40:41', '2018-06-16 05:40:41');
 
 -- --------------------------------------------------------
 
@@ -94,19 +96,20 @@ CREATE TABLE IF NOT EXISTS `customers_bills` (
   `billname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `billno` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `bill_amount` decimal(10,2) DEFAULT NULL,
-  `payment_status` tinyint(1) NOT NULL COMMENT '1=paument due, 2=paid',
+  `payment_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1=paument due, 2=paid',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `customers_bills`
 --
 
 INSERT INTO `customers_bills` (`id`, `customerid`, `userid`, `billname`, `billno`, `bill_amount`, `payment_status`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, 'fdg', 'f3zh4', '45.00', 1, '2018-06-14 13:07:10', '2018-06-15 19:08:21'),
-(2, 3, 2, 'dgf', 'xfku0', '45.00', 2, '2018-06-14 13:07:10', '2018-06-15 19:08:11');
+(5, 22, 1, 'kinjal chetankumar thaker', 'm6xvr', '45.00', 1, '2017-06-16 11:13:18', '2018-06-16 12:52:35'),
+(3, 2, 1, 'Bill1', 'n8fa0', '100.00', 1, '2018-06-16 11:09:00', '2018-06-16 11:13:33'),
+(6, 22, 2, 'dgfdg', 'm56o6', '45.00', 1, '2017-06-16 11:13:18', '2018-06-16 11:13:48');
 
 -- --------------------------------------------------------
 
@@ -121,14 +124,15 @@ CREATE TABLE IF NOT EXISTS `customerupload` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `customerupload`
 --
 
 INSERT INTO `customerupload` (`id`, `filename`, `created_at`, `updated_at`) VALUES
-(1, '0_15880500_1528633809.xlsx', '2018-06-10 18:00:09', '2018-06-10 18:00:09');
+(1, '0_15880500_1528633809.xlsx', '2018-06-10 18:00:09', '2018-06-10 18:00:09'),
+(9, '0_47214900_1529127636.xlsx', '2018-06-16 11:10:36', '2018-06-16 11:10:36');
 
 -- --------------------------------------------------------
 
@@ -176,16 +180,19 @@ CREATE TABLE IF NOT EXISTS `customer_employees` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `customer_employees`
 --
 
 INSERT INTO `customer_employees` (`id`, `customerid`, `name`, `designation`, `mobile_no`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Anjali', 'Software Developer', 2147483647, '2018-06-10 18:13:32', '2018-06-10 18:13:32'),
+(8, 22, 'kinjal', 'developer', 2147483647, '2018-06-16 11:12:36', '2018-06-16 11:12:36'),
 (4, 2, 'kinjal', 'developer', 2147483647, '2018-06-11 12:39:08', '2018-06-11 12:39:08'),
-(5, 2, 'Mansi', 'developer', 2147483647, '2018-06-11 12:39:08', '2018-06-11 12:39:08');
+(5, 2, 'Mansi', 'developer', 2147483647, '2018-06-11 12:39:08', '2018-06-11 12:39:08'),
+(6, 16, 'kinjal', 'developer', 2147483647, '2018-06-16 11:03:20', '2018-06-16 11:03:20'),
+(7, 16, 'Mansi', 'developer', 2147483647, '2018-06-16 11:03:20', '2018-06-16 11:03:20'),
+(9, 22, 'Mansi', 'developer', 2147483647, '2018-06-16 11:12:36', '2018-06-16 11:12:36');
 
 -- --------------------------------------------------------
 
@@ -290,14 +297,15 @@ CREATE TABLE IF NOT EXISTS `customer_register_form_a_type_a` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `customer_register_form_a_type_a`
 --
 
 INSERT INTO `customer_register_form_a_type_a` (`id`, `customerid`, `srno`, `emp_code`, `firstname`, `lastname`, `gender`, `secondname`, `dob`, `nationality`, `education`, `doj`, `designation`, `category_address`, `emp_type`, `mobile`, `uan`, `pan`, `esic_ip`, `lwf`, `aadhaar_no`, `bank_ac_no`, `bank`, `branch_ifsc_code`, `present_address`, `permenent_address`, `service_book_no`, `date_of_exit`, `reason_for_exit`, `id_mark`, `photo`, `signature_thumb_image`, `remark`, `created_by`, `updated_by`) VALUES
-(1, 3, 1, '', '', '', 0, '', '', 'Indian', '', '', '', '0', '', 0, '', '', '', '', '', 0, '', 0, '', '', 0, '', '', '', NULL, NULL, '', '2018-06-15 11:47:19', '2018-06-15 11:47:19');
+(1, 3, 1, '', '', '', 0, '', '', 'Indian', '', '', '', '0', '', 0, '', '', '', '', '', 0, '', 0, '', '', 0, '', '', '', NULL, NULL, '', '2018-06-15 11:47:19', '2018-06-15 11:47:19'),
+(2, 2, 1, '', '', '', 0, '', '', 'Indian', '', '', '', '0', '', 0, '', '', '', '', '', 0, '', 0, '', '', 0, '', '', '', NULL, NULL, '', '2018-06-16 12:40:23', '2018-06-16 12:40:23');
 
 -- --------------------------------------------------------
 
@@ -366,7 +374,14 @@ CREATE TABLE IF NOT EXISTS `customer_register_form_b` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `customer_register_form_b`
+--
+
+INSERT INTO `customer_register_form_b` (`id`, `customerid`, `name`, `rate_of_wage`, `no_of_work_days`, `overtime_hours`, `basic`, `special_basic`, `da`, `overtime_payments`, `hra`, `others`, `total`, `pf`, `esic`, `society`, `income_tax`, `insurance`, `others_deduction`, `recoveries`, `total_deduction`, `net_payment`, `emp_share_pf_welfare`, `receipt_by_emp_bank_trans_id`, `date_of_payment`, `remark`, `created_by`, `updated_by`) VALUES
+(1, 2, 'gdf', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', '2018-06-16 12:46:45', '2018-06-16 12:46:45');
 
 -- --------------------------------------------------------
 
@@ -394,7 +409,14 @@ CREATE TABLE IF NOT EXISTS `customer_register_form_c` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `customer_register_form_c`
+--
+
+INSERT INTO `customer_register_form_c` (`id`, `customerid`, `si_no`, `name`, `recovery_type`, `particulars`, `date_of_loss`, `amount`, `whether_show_cause_issued`, `explanation_heard_in_presence_of`, `no_of_emis`, `first_month_year`, `last_month_year`, `date_of_complete_recovery`, `remark`, `created_by`, `updated_by`) VALUES
+(1, 2, 1, 'gdfg', 0, '', '', 0, '', '', 0, '', '', '', '', '2018-06-16 12:47:19', '2018-06-16 12:47:19');
 
 -- --------------------------------------------------------
 
@@ -445,7 +467,7 @@ CREATE TABLE IF NOT EXISTS `customer_register_form_d` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `customer_register_form_d`
@@ -454,7 +476,8 @@ CREATE TABLE IF NOT EXISTS `customer_register_form_d` (
 INSERT INTO `customer_register_form_d` (`id`, `customerid`, `name`, `relay_or_set_work`, `day_1`, `day_2`, `day_3`, `day_4`, `day_5`, `day_6`, `day_7`, `day_8`, `day_9`, `day_10`, `day_11`, `day_12`, `day_13`, `day_14`, `day_15`, `day_16`, `day_17`, `day_18`, `day_19`, `day_20`, `day_21`, `day_22`, `day_23`, `day_24`, `day_25`, `day_26`, `day_27`, `day_28`, `day_29`, `day_30`, `day_31`, `summary_no_of_days`, `signature_of_reg_keeper`, `remark_no_of_hours`, `created_by`, `updated_by`) VALUES
 (1, 3, 'kinjal.thaker@1rivet.com', '', 1, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '', '2018-06-15 15:44:56', '2018-06-15 15:44:56'),
 (2, 3, 'kinjal', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '', '2018-06-15 15:49:54', '2018-06-15 15:49:54'),
-(3, 3, 'dsf', '', 1, 2, 3, 2, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '', '2018-06-15 15:50:18', '2018-06-15 15:50:18');
+(3, 3, 'dsf', '', 1, 2, 3, 2, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '', '2018-06-15 15:50:18', '2018-06-15 15:50:18'),
+(4, 2, 'dgdf', 'dfg', 1, 2, 2, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'dfg', 'dfg', '2018-06-16 12:48:08', '2018-06-16 12:48:09');
 
 -- --------------------------------------------------------
 

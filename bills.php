@@ -2,6 +2,8 @@
 	include 'libs/data/db.connect.php';
 	include 'libs/data/db.paging.php';
 	
+	$values=array();
+	
 	if(isset($_POST['action']) && trim($_POST['action'])=="billPaymentUpdate"){
 		$type['type']="error";
 		$billid=intval($_POST['billid']);
@@ -17,8 +19,10 @@
 		exit(0);
 	}
 	
-	$qry = "SELECT count(*) as totalrecords FROM customers_bills WHERE YEAR(created_at)=%i ORDER BY created_at DESC";
-	$qry=$sql->query($qry, array(date('Y')));
+	$values[]=(isset($_POST['billyear']) && $_POST['billyear']>0)?$_POST['billyear']:date('Y');
+	
+	$qry = "SELECT count(*) as totalrecords FROM customers_bills WHERE YEAR(created_at)='%s' ORDER BY created_at DESC";
+	$qry=$sql->query($qry, $values);
     $count = intval($db->queryUniqueValue($qry));
 	
 	$offset = (isset($_POST['offset']))?trim($_POST['offset']):0;
@@ -26,13 +30,12 @@
 	
 	$paging = new PG($offset, $perpage, $count, "manage");
 	
-	$values[] = date('Y');
 	$values[] = $offset;
     $values[] = $perpage;
 	
 	$query = "SELECT cb.id, cb.userid, cb.billname, cb.billno, cb.bill_amount, cb.payment_status, CONCAT(c.firstname, ' ', c.lastname) AS name FROM customers_bills cb 
 			  LEFT JOIN customers c ON cb.customerid=c.id
-			  WHERE YEAR(cb.created_at)=%i
+			  WHERE YEAR(cb.created_at)='%s'
 			  ORDER BY cb.created_at DESC LIMIT %i, %i";
 	$query = $sql->query($query, $values);
 	$result=$db->query($query);
@@ -42,6 +45,23 @@
 ?>
 <td valign="top" style="padding: 20px">
 	<div class="table-container">
+		<div align="right" style="padding:10px">
+			<form name="filterform" id="filterform" action="" method="post">
+				<span>Select Year: </span>
+				<select name="billyear" id="billyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterYears()">
+					<option value="">Select</option>
+					<?php 
+						$yearq="SELECT YEAR(created_at) as year FROM customers_bills GROUP BY YEAR(created_at) ORDER BY created_at DESC";
+						$yearr=$db->query($yearq);
+						$yearc=$db->numRows($yearr);
+						while($yearrw=$db->fetchNextObject($yearr)){ ?>
+							<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['billyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+						<?php }
+					?>
+				</select>
+				<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
+			</form>
+		</div>
 		<div id="notify"><!-- --></div>
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">

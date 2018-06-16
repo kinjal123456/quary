@@ -88,7 +88,7 @@
 		$qryregD=$sql->query($qryregD, array($customerid));
 		$regDCount=$db->queryUniqueValue($qryregD);
 		
-		if(($billsCount==0 || $addCount==0 || $empCount==0 || $licenceCount==0 || $capacityCount==0 || $regA1Count==0 || $regA2Count==0 || $regBCount==0 || $regCCount==0 || $regDCount==0) && $confirmFlag==0){
+		if($billsCount==0 && $addCount==0 && $empCount==0 && $licenceCount==0 && $capacityCount==0 && $regA1Count==0 && $regA2Count==0 && $regBCount==0 && $regCCount==0 && $regDCount==0 && $confirmFlag==0){
 			$qry="SELECT DISTINCT uploadid FROM customers WHERE id IN (%l)";
 			$qry=$sql->query($qry, array($customerid));
 			$res=$db->query($qry);
@@ -112,16 +112,16 @@
 			$customersreturn["usernotiy"]=true;
 		}else {
 			if($confirmFlag>0){
+				$qry="SELECT DISTINCT uploadid FROM customers WHERE id IN (%l)";
+				$qry=$sql->query($qry, array($customerid));
+				$res=$db->query($qry);
+				while($rw=$db->fetchNextObject($res)){
+					$uploadid[]=intval($rw->uploadid);
+				}
+					
 				$query="DELETE FROM customers WHERE id in (%l)";
 				$query=$sql->query($query, array($customerid));
 				if ($db->query($query)) {
-					$qry="SELECT DISTINCT uploadid FROM customers WHERE id IN (%l)";
-					$qry=$sql->query($qry, array($customerid));
-					$res=$db->query($qry);
-					while($rw=$db->fetchNextObject($res)){
-						$uploadid[]=intval($rw->uploadid);
-					}
-					
 					//Delete customer upload
 					$delqry="DELETE FROM customerupload WHERE id IN (%l)";
 					$delqry=$sql->query($delqry, array($uploadid));

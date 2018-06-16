@@ -28,15 +28,15 @@
 					</a>
 				</td>
 			</tr>
-			<tr>
+			<!--<tr>
 				<td valign="top">
 					<a href="registers.php">
-						<div class="<?php echo ($filename=='registers.php')?'left-menu-item-selected':'left-menu-item'; ?>">
+						<div class="<?php //echo ($filename=='registers.php')?'left-menu-item-selected':'left-menu-item'; ?>">
 							<div class="padding-left30">Register</div>
 						</div>
 					</a>
 				</td>
-			</tr>
+			</tr>-->
 			<tr>
 				<td valign="top">
 					<a href="logout.php">

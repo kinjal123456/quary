@@ -175,6 +175,7 @@ function printBills(billid){
 	$('input#billprint[type=hidden]').val(1);
 	$('#bill_id').val(billid);
 	$('#billformprint').attr({
+		'action': 'customer-bill-print.php',
 		'target': '_blank',
 	}).submit();
 }
@@ -193,4 +194,8 @@ function updateBillPayment(obj, billid){
 			$("#notify").notification({caption:"Not able to update the record.", type:"warning", sticky:false});
 		}
 	});
+}
+//Filter bill by year
+function filterYears(){
+	$("#filterform").submit();
 }
