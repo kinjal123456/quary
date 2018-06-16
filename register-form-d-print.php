@@ -97,7 +97,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->summary_no_of_days); ?>
+							<?php echo trim($row->summary_no_of_days); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">

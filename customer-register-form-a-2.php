@@ -329,7 +329,35 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:20px 0">
+				<?php 
+					$regYear=(isset($_POST['regyear']) && $_POST['regyear']>0)?$_POST['regyear']:date('Y');
+							
+					$qry="SELECT * FROM customer_register_form_a_type_b WHERE customerid=%i AND YEAR(created_by)='%s'";
+					$qry=$sql->query($qry, array($customerid, $regYear));
+					$res=$db->query($qry);
+					$cnt=$db->numRows($res);
+					
+					if($cnt>0){
+				?>
+					<div align="right" style="padding:10px">
+						<form name="filterregform" id="filterregform" action="" method="post">
+							<span>Select Year: </span>
+							<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
+								<option value="">Select</option>
+								<?php 
+									$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_a_type_b GROUP BY YEAR(created_by) ORDER BY created_by DESC";
+									$yearr=$db->query($yearq);
+									$yearc=$db->numRows($yearr);
+									while($yearrw=$db->fetchNextObject($yearr)){ ?>
+										<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+									<?php }
+								?>
+							</select>
+							<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
+						</form>
+					</div>
+				<?php } ?>
+				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tr>
 							<td valign="top" class="table-title" style="width:50px">Sr No.</td>
@@ -340,10 +368,6 @@
 							<td valign="top" class="table-title" style="width:100px">Actions</td>
 						</tr>
 						<?php
-							$qry="SELECT id, customerid, srno, emp_code, firstname, lastname, secondname FROM customer_register_form_a_type_a WHERE customerid=%i";
-							$qry=$sql->query($qry, array($customerid));
-							$res=$db->query($qry);
-							$cnt=$db->numRows($res);
 							if($cnt>0){
 								while($rw=$db->fetchNextObject($res)){
 									$id=intval($rw->id); 

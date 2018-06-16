@@ -50,6 +50,18 @@
 														`receipt_by_emp_bank_trans_id`=%i,
 														`date_of_payment`='%s',
 														`remark`='%s',
+														`min_highly_skilled`=%i,
+														`min_skilled`=%i,
+														`min_semi_skilled`=%i,
+														`min_un_skilled`=%i,
+														`da_highly_skilled`=%i,
+														`da_skilled`=%i,
+														`da_semi_skilled`=%i,
+														`da_un_skilled`=%i,
+														`over_highly_skilled`=%i,
+														`over_skilled`=%i,
+														`over_semi_skilled`=%i,
+														`over_un_skilled`=%i,
 														`created_by`=NOW(),
 														`updated_by`=NOW()";
 			$query=$sql->query($query, array($custid, trim($_POST['name']), trim($_POST['rate_of_wage']), trim($_POST['no_of_work_days']), 
@@ -57,7 +69,10 @@
 					trim($_POST['overtime_payments']), trim($_POST['hra']), trim($_POST['others']), 
 					intval($_POST['total']), trim($_POST['pf']), trim($_POST['esic']), trim($_POST['society']), trim($_POST['income_tax']),
 					trim($_POST['insurance']), trim($_POST['others_deduction']), trim($_POST['recoveries']), intval($_POST['total_deduction']), trim($_POST['net_payment']),
-					intval($_POST['emp_share_pf_welfare']), trim($_POST['receipt_by_emp_bank_trans_id']), $dateofpayment, trim($_POST['remark'])
+					intval($_POST['emp_share_pf_welfare']), trim($_POST['receipt_by_emp_bank_trans_id']), $dateofpayment, trim($_POST['remark']),
+					intval($_POST['min_highly_skilled']), intval($_POST['min_skilled']), intval($_POST['min_semi_skilled']), intval($_POST['min_un_skilled']), 
+					intval($_POST['da_highly_skilled']), intval($_POST['da_skilled']), intval($_POST['da_semi_skilled']), intval($_POST['da_un_skilled']), 
+					intval($_POST['over_highly_skilled']), intval($_POST['over_skilled']), intval($_POST['over_semi_skilled']), intval($_POST['over_un_skilled'])
 			));
 			if($db->query($query)){
 				$type['customerid']=$custid;
@@ -98,203 +113,386 @@
 				</div>
 			</div>-->
 			<div style="padding:20px">
-				<div align="center">
-					<div class="register_form_upper_hadding_lg">FORMAT FOR WAGE REGISTER</div>
-				</div>
 				<div>
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td style="font-weight:bold">Name of the Establishment</td>
-							<td><?php echo $cust_name; ?></td>
-							<td style="font-weight:bold">Name of Owner</td>
-							<td>Jayeshbhai Desai</td>
-							<td style="font-weight:bold">LIN</td>
-							<td><?php echo (strlen($formlin)>0)?$formlin:"-"; ?></td>
-						</tr>
-						<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
-						<tr>
-							<td style="font-weight:bold">Wage period From</td>
-							<td>2018</td>
-							<td style="font-weight:bold">To</td>
-							<td>2019</td>
-							<td style="font-weight:bold">(Monthly/Fortnightly/Weekly/Daily/Piece Rated)</td>
-							<td></td>
-						</tr>
-						<tr><td colspan="5" style="height:20px"><!-- --></td></tr>
-					</table>
+					<form name="registerform" id="registerform" action="" method="post">
+					<div align="center">
+						<div class="register_form_upper_hadding_lg">FORMAT FOR WAGE REGISTER</div>
+					</div>
+					<div>
+						<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+							<tr>
+								<td class="list_table_th border_top border_left register_table_td"></td>
+								<td align="center" colspan="4" class="list_table_th border_top border_right register_table_td">
+									<div class="listing_th_padding">Rate of Minimum Wages and since the date</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="list_table_th border_top border_left register_table_td">
+									<div class="listing_th_padding"></div>
+								</td>
+								<td align="center" class="list_table_th border_top border_right register_table_td">
+									<div class="listing_th_padding">Highly Skilled</div>
+								</td>
+								<td align="center" class="list_table_th border_top border_right register_table_td">
+									<div class="listing_th_padding">Skilled</div>
+								</td>
+								<td align="center" class="list_table_th border_top border_right register_table_td">
+									<div class="listing_th_padding">Semi Skilled</div>
+								</td>
+								<td align="center" class="list_table_th border_top border_right register_table_td">
+									<div class="listing_th_padding">Un Skilled</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="list_table_th border_top border_left register_table_td">
+									<div class="listing_th_padding">Minimum Basic</div>
+								</td>
+								<td align="center" class="border_top border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="min_highly_skilled" id="min_highly_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="min_skilled" id="min_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="min_semi_skilled" id="min_semi_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_left border_right register_table_td">
+									<div class="listing_th_padding">
+										<select name="min_un_skilled" id="min_un_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="list_table_th border_top border_left register_table_td">
+									<div class="listing_th_padding">DA</div>
+								</td>
+								<td align="center" class="border_top border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="da_highly_skilled" id="da_highly_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="da_skilled" id="da_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="da_semi_skilled" id="da_semi_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_left border_right register_table_td">
+									<div class="listing_th_padding">
+										<select name="da_un_skilled" id="da_un_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="list_table_th border_top border_bottom border_left register_table_td">
+									<div class="listing_th_padding">Overtime</div>
+								</td>
+								<td align="center" class="border_top border_bottom border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="over_highly_skilled" id="over_highly_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_bottom border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="over_skilled" id="over_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_bottom border_left register_table_td">
+									<div class="listing_th_padding">
+										<select name="over_semi_skilled" id="over_semi_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+								<td align="center" class="border_top border_bottom border_left border_right register_table_td">
+									<div class="listing_th_padding">
+										<select name="over_un_skilled" id="over_un_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
+											<option value="0">Select</option>
+											<option value="1">Yes</option>
+											<option value="2">No</option>
+										</select>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="5" style="height:30px"><!-- --></td>
+							</tr>
+						</table>
+					</div>
+					<div>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							<tr>
+								<td style="font-weight:bold">Name of the Establishment</td>
+								<td><?php echo $cust_name; ?></td>
+								<td style="font-weight:bold">Name of Owner</td>
+								<td>Jayeshbhai Desai</td>
+								<td style="font-weight:bold">LIN</td>
+								<td><?php echo (strlen($formlin)>0)?$formlin:"-"; ?></td>
+							</tr>
+							<tr><td colspan="5" style="height:10px"><!-- --></td></tr>
+							<tr>
+								<td style="font-weight:bold">Wage period From</td>
+								<td>2018</td>
+								<td style="font-weight:bold">To</td>
+								<td>2019</td>
+								<td style="font-weight:bold">(Monthly/Fortnightly/Weekly/Daily/Piece Rated)</td>
+								<td></td>
+							</tr>
+							<tr><td colspan="5" style="height:20px"><!-- --></td></tr>
+						</table>
+					</div>
+						<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
+							<tr>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">Name</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Rate of <br /> Wage</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Number of work days</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Overtime hours</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Basic</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Special Basic</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">DA</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Overtime payments</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">HRA</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Others</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Total</div></td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" class="border_bottom border_left border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="name" id="name" value="">
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="rate_of_wage" id="rate_of_wage" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="no_of_work_days" id="no_of_work_days" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="overtime_hours" id="overtime_hours" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="basic" id="basic" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="special_basic" id="special_basic" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="da" id="da" value="" style="width:100%" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="overtime_payments" id="overtime_payments" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="hra" id="hra" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="others" id="others" value="" style="width:100%" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="total" id="total" value="" />
+									</div>
+								</td>
+							</tr>
+							<tr><td style="height:10px"><!-- --></td></tr>
+						</table>
+						<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
+							<tr>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">PF</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">ESIC</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Society</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Income Tax</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Insurance</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Others Deduction</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Recoveries</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Total Deduction</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Net Payment</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Employee Share <br />PF Welfare</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Receipt by Employee <br /> Bank Transaction Id</div></td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" class="border_bottom border_left border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="pf" id="pf" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="esic" id="esic" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="society" id="society" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="income_tax" id="income_tax" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="insurance" id="insurance" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="others_deduction" id="others_deduction" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="recoveries" id="recoveries" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="total_deduction" id="total_deduction" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="net_payment" id="net_payment" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="emp_share_pf_welfare" id="emp_share_pf_welfare" value="" />
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="receipt_by_emp_bank_trans_id" id="receipt_by_emp_bank_trans_id" value="" />
+									</div>
+								</td>
+							</tr>
+							<tr><td style="height:10px"><!-- --></td></tr>
+						</table>
+						<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
+							<tr>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:200px"><div class="listing_th_padding">Date of Payment</div></td>
+								<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" class="border_bottom border_left border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="date_of_payment" id="date_of_payment" value="">
+									</div>
+								</td>
+								<td align="left" valign="top" class="border_bottom border_right">
+									<div class="listing_td_padding">
+										<input type="text" name="remark" id="remark" value="" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="9">
+									<input type="hidden" name="custid" id="custid" value="<?php echo $customerid; ?>">
+									<input name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0" type="submit">
+								</td>
+							</tr>
+						</table>
+					</form>
 				</div>
-				<form name="registerform" id="registerform" action="" method="post">
-					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
-						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Rate of <br /> Wage</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Number of work days</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Overtime hours</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Basic</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Special Basic</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">DA</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Overtime payments</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">HRA</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Others</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Total</div></td>
-						</tr>
-						<tr>
-							<td align="left" valign="top" class="border_bottom border_left border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="name" id="name" value="">
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="rate_of_wage" id="rate_of_wage" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="no_of_work_days" id="no_of_work_days" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="overtime_hours" id="overtime_hours" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="basic" id="basic" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="special_basic" id="special_basic" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="da" id="da" value="" style="width:100%" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="overtime_payments" id="overtime_payments" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="hra" id="hra" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="others" id="others" value="" style="width:100%" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="total" id="total" value="" />
-								</div>
-							</td>
-						</tr>
-						<tr><td style="height:10px"><!-- --></td></tr>
-					</table>
-					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
-						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">PF</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">ESIC</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Society</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Income Tax</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Insurance</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Others Deduction</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Recoveries</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Total Deduction</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Net Payment</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Employee Share <br />PF Welfare</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Receipt by Employee <br /> Bank Transaction Id</div></td>
-						</tr>
-						<tr>
-							<td align="left" valign="top" class="border_bottom border_left border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="pf" id="pf" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="esic" id="esic" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="society" id="society" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="income_tax" id="income_tax" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="insurance" id="insurance" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="others_deduction" id="others_deduction" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="recoveries" id="recoveries" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="total_deduction" id="total_deduction" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="net_payment" id="net_payment" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="emp_share_pf_welfare" id="emp_share_pf_welfare" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="receipt_by_emp_bank_trans_id" id="receipt_by_emp_bank_trans_id" value="" />
-								</div>
-							</td>
-						</tr>
-						<tr><td style="height:10px"><!-- --></td></tr>
-					</table>
-					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
-						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:200px"><div class="listing_th_padding">Date of Payment</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
-						</tr>
-						<tr>
-							<td align="left" valign="top" class="border_bottom border_left border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="date_of_payment" id="date_of_payment" value="">
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="remark" id="remark" value="" />
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="9">
-								<input type="hidden" name="custid" id="custid" value="<?php echo $customerid; ?>">
-								<input name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0" type="submit">
-							</td>
-						</tr>
-					</table>
-				</form>
+				<?php 
+					$regYear=(isset($_POST['regyear']) && $_POST['regyear']>0)?$_POST['regyear']:date('Y');
+							
+					$qry="SELECT * FROM customer_register_form_b WHERE customerid=%i AND YEAR(created_by)='%s'";
+					$qry=$sql->query($qry, array($customerid, $regYear));
+					$res=$db->query($qry);
+					$cnt=$db->numRows($res);
+					
+					if($cnt>0){
+				?>
+					<div align="right" style="padding:10px">
+						<form name="filterregform" id="filterregform" action="" method="post">
+							<span>Select Year: </span>
+							<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
+								<option value="">Select</option>
+								<?php 
+									$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_b GROUP BY YEAR(created_by) ORDER BY created_by DESC";
+									$yearr=$db->query($yearq);
+									$yearc=$db->numRows($yearr);
+									while($yearrw=$db->fetchNextObject($yearr)){ ?>
+										<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+									<?php }
+								?>
+							</select>
+							<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
+						</form>
+					</div>
+				<?php } ?>
 				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 						<thead>
@@ -328,10 +526,6 @@
 						</thead>
 						<tbody>
 						<?php
-							$qry="SELECT * FROM customer_register_form_b WHERE customerid=%i";
-							$qry=$sql->query($qry, array($customerid));
-							$res=$db->query($qry);
-							$cnt=$db->numRows($res);
 							if($cnt>0){
 								$counter=1;
 								while($rw=$db->fetchNextObject($res)){

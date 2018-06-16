@@ -23,9 +23,9 @@
 		$custid=intval($_POST['custid']);
 		
 		if($custid>0){//INSERT MAIN DATA
-			$query="INSERT INTO customer_register_form_d SET `customerid`=%i,`name`='%s',`relay_or_set_work`='%s',`summary_no_of_days`=%i,`signature_of_reg_keeper`='%s',
+			$query="INSERT INTO customer_register_form_d SET `customerid`=%i,`name`='%s',`relay_or_set_work`='%s',`summary_no_of_days`='%s',`signature_of_reg_keeper`='%s',
 														`remark_no_of_hours`='%s',`created_by`=NOW(),`updated_by`=NOW()";
-			$query=$sql->query($query, array($custid, trim($_POST['name']), trim($_POST['relay_or_set_work']), intval($_POST['summary_no_of_days']), 
+			$query=$sql->query($query, array($custid, trim($_POST['name']), trim($_POST['relay_or_set_work']), trim($_POST['summary_no_of_days']), 
 					trim($_POST['signature_of_reg_keeper']), trim($_POST['remark_no_of_hours'])));
 			if($db->query($query)){
 				$lastinsId=$db->lastInsertedId();
@@ -169,6 +169,34 @@
 						</tr>
 					</table>
 				</form>
+				<?php 
+					$regYear=(isset($_POST['regyear']) && $_POST['regyear']>0)?$_POST['regyear']:date('Y');
+							
+					$qry="SELECT id, customerid, name, relay_or_set_work, summary_no_of_days, signature_of_reg_keeper, remark_no_of_hours FROM customer_register_form_d WHERE customerid=%i AND YEAR(created_by)='%s'";
+					$qry=$sql->query($qry, array($customerid, $regYear));
+					$res=$db->query($qry);
+					$cnt=$db->numRows($res);
+					
+					if($cnt>0){
+				?>
+					<div align="right" style="padding:10px">
+						<form name="filterregform" id="filterregform" action="" method="post">
+							<span>Select Year: </span>
+							<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
+								<option value="">Select</option>
+								<?php 
+									$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_d GROUP BY YEAR(created_by) ORDER BY created_by DESC";
+									$yearr=$db->query($yearq);
+									$yearc=$db->numRows($yearr);
+									while($yearrw=$db->fetchNextObject($yearr)){ ?>
+										<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+									<?php }
+								?>
+							</select>
+							<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
+						</form>
+					</div>
+				<?php } ?>
 				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 						<thead>
@@ -183,10 +211,6 @@
 						</thead>
 						<tbody>
 						<?php
-							$qry="SELECT id, customerid, name FROM customer_register_form_d WHERE customerid=%i";
-							$qry=$sql->query($qry, array($customerid));
-							$res=$db->query($qry);
-							$cnt=$db->numRows($res);
 							if($cnt>0){
 								$counter=1;
 								while($rw=$db->fetchNextObject($res)){
@@ -206,7 +230,7 @@
 								</td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->relay_or_set_work); ?>"><?php echo ellipses(trim($rw->relay_or_set_work), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->summary_no_of_days); ?>"><?php echo intval($rw->summary_no_of_days); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->summary_no_of_days); ?>"><?php echo trim($rw->summary_no_of_days); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->signature_of_reg_keeper); ?>"><?php echo ellipses(trim($rw->signature_of_reg_keeper), 50); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark_no_of_hours); ?>"><?php echo ellipses(trim($rw->remark_no_of_hours), 50); ?></td>
 							</tr>

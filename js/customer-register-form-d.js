@@ -4,10 +4,7 @@ $(document).ready(function() {
         rules: {
         	name: {
                 required: true
-            },
-			'days[]':{
-				
-			}/*,
+            }/*,
             empcode: {
                 required: true
             },
@@ -200,6 +197,7 @@ $(document).ready(function() {
 });
 
 function validationError(errorMap, errorList){
+	scrollwindowTop();
 	if(errorList.length==0) return;
 	var msgs=[];
 	for(var err=0;err<errorList.length;err++) {
@@ -222,6 +220,8 @@ function formRequest(formData, jqForm, options) {}
 function loginformResponse(responseText, statusText) {
     hideLoader();
     $("#submitbtn").removeAttr("disabled");
+	scrollwindowTop();
+	
 	if(statusText == 'success') {
 		if(responseText.registerstaus == 'success') {
 			$("#submitbtn").attr("disabled","disabled");

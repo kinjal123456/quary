@@ -199,3 +199,7 @@ function updateBillPayment(obj, billid){
 function filterYears(){
 	$("#filterform").submit();
 }
+//Filter reg by year
+function filterRegYears(){
+	$("#filterregform").submit();
+}
