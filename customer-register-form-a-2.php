@@ -8,7 +8,7 @@
 		$customerid=intval($_POST['customerid']);
 		
 		if($formid>0){
-			$query="DELETE FROM customer_register_form_a_type_a WHERE id=%i AND customerid=%i";
+			$query="DELETE FROM customer_register_form_c WHERE id=%i AND customerid=%i";
 			$query=$sql->query($query, array($formid, $customerid));
 			if($db->query($query)){
 				$type['type']="success";
@@ -21,53 +21,30 @@
 	if(isset($_POST['submitbtn'])){
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
-		$dateofjoining=strlen(trim($_POST['dob'])>0)?date("Y-m-d", strtotime(trim($_POST['dob']))):"";
-		$dateofjoin=strlen(trim($_POST['doj'])>0)?date("Y-m-d", strtotime(trim($_POST['doj']))):"";
-		$dateofexit=strlen(trim($_POST['dateofexit'])>0)?date("Y-m-d", strtotime(trim($_POST['dateofexit']))):"";
+		$dateofcompleterecovery=strlen(trim($_POST['date_of_complete_recovery'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_complete_recovery']))):"";
 		
 		if($custid>0){
-			$query="INSERT INTO customer_register_form_a_type_a SET
-													  `customerid`=%i,
-													  `srno`=%i,
-													  `emp_code`='%s',
-													  `firstname`='%s',
-													  `lastname`='%s',
-													  `gender`=%i,
-													  `secondname`='%s',
-													  `dob`='%s',
-													  `nationality`='%s',
-													  `education`='%s',
-													  `doj`='%s',
-													  `designation`='%s',
-													  `category_address`=%i,
-													  `emp_type`='%s',
-													  `mobile`=%i,
-													  `uan`='%s',
-													  `pan`='%s',
-													  `esic_ip`='%s',
-													  `lwf`='%s',
-													  `aadhaar_no`='%s',
-													  `bank_ac_no`=%i,
-													  `bank`='%s',
-													  `branch_ifsc_code`=%i,
-													  `present_address`='%s',
-													  `permenent_address`='%s',
-													  `service_book_no`=%i,
-													  `date_of_exit`='%s',
-													  `reason_for_exit`='%s',
-													  `id_mark`='%s',
-													  `photo`='%s',
-													  `signature_thumb_image`='%s',
-													  `remark`='%s',
-													  `created_by`=NOW(),
-													  `updated_by`=NOW()";
-			$query=$sql->query($query, array($custid, intval($_POST['srno']), trim($_POST['empcode']), trim($_POST['name']), 
-					trim($_POST['surname']), intval($_POST['gender']), trim($_POST['secondname']), $dateofbirth, 
-					trim($_POST['nationality']), trim($_POST['education']), $dateofjoin, trim($_POST['designation']), 
-					intval($_POST['cat_add']), trim($_POST['emptype']), intval($_POST['mobile']), trim($_POST['uan']), trim($_POST['pan']),
-					trim($_POST['esicip']), trim($_POST['lwf']), trim($_POST['aadharno']), intval($_POST['bankacno']), trim($_POST['bankname']),
-					intval($_POST['ifsccode']), trim($_POST['presentadd']), trim($_POST['permanantadd']), intval($_POST['servicebookno']), $dateofexit,
-					trim($_POST['reasonforexit']), trim($_POST['idmark']), trim($_POST['photo']), trim($_POST['specimensign']), trim($_POST['remark'])
+			$query="INSERT INTO customer_register_form_c SET
+													    `customerid`=%i,
+														`si_no`=%i,
+														`name`='%s',
+														`recovery_type`=%i,
+														`particulars`='%s',
+														`date_of_loss`='%s',
+														`amount`=%i,
+														`whether_show_cause_issued`='%s',
+														`explanation_heard_in_presence_of`='%s',
+														`no_of_emis`=%i,
+														`first_month_year`='%s',
+														`last_month_year`='%s',
+														`date_of_complete_recovery`='%s',
+														`remark`='%s',
+														`created_by`=NOW(),
+														`updated_by`=NOW()";
+			$query=$sql->query($query, array($custid, intval($_POST['si_no']), trim($_POST['name']), intval($_POST['recovery_type']), 
+					trim($_POST['particulars']), trim($_POST['date_of_loss']), intval($_POST['amount']), trim($_POST['whether_show_cause_issued']), 
+					trim($_POST['explanation_heard_in_presence_of']), intval($_POST['no_of_emis']), trim($_POST['first_month_year']), 
+					trim($_POST['last_month_year']), $dateofcompleterecovery, trim($_POST['remark'])
 			));
 			if($db->query($query)){
 				$type['customerid']=$custid;
@@ -82,52 +59,56 @@
 
 	if(isset($_GET['custid']) && intval($_GET['custid'])){
 		$customerid=intval($_GET['custid']);
+		
+		$formlinq="SELECT emailid FROM customer_additional_info WHERE id=%i AND detailname='Shram Shuvidha LIN detail'";
+		$formlinq=$sql->query($formlinq, array($customerid));
+		$formlin=$db->queryUniqueValue($formlinq);
 	}
 ?>
 <link href="css/register-styles.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="js/customer-register-form-a-1.js"></script>
+<script type="text/javascript" src="js/customer-register-form-c.js"></script>
 <td valign="top" style="padding: 20px; width:100%">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
 		<div valign="top" class="table-heading">
 			<div class="pull-left"><a href="customer.php?custid=<?php echo $customerid; ?>"><img src="images/back.png"></a></div>
-			<div><?php echo ($customerid>0)?'Register Form A - Type B':''; ?></div>
+			<div><?php echo ($customerid>0)?'[PART B: FOR THE MINES ACT, 1952 (35 of 1952) ONLY]':''; ?></div>
 			<div class="clearall"><!-- --></div>
 		</div>
 		<div style="padding: 20px 0;">
-			<div style="border-bottom: 1px solid #cccccc;">
+			<!--<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
 					<a class="tab active_tab" id="general">General Details</a>
 					<a class="tab" id="additional">Additional Details</a>
 					<a class="tab" id="bills">Bills</a>
 					<a class="tab" id="registers">Registers</a>
 				</div>
-			</div>
+			</div>-->
 			<div style="padding:20px">
-				<form name="register_a_1" id="register_a_1" action="" method="post">
+				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">Sr No.</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Employee<br /> Code</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Surname</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Gender</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Father's/Spouse<br /> Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Date of Birth</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Nationality</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Education<br /> Level</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Date of<br /> Joining</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Designation</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:130px"><div class="listing_th_padding">SI Number in<br>Employee Register</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Name</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Token Number<br>Issued</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Date of First<br> Appointment with<br> present Owner</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div></td>
+							<td align="center" valign="top" class="list_table_th border_top border_bottom border_right">
+								<div class="listing_th_padding" style="padding: 0;">
+									<div class="border_bottom" style="padding:13px 0">Certificate of Vocational Training</div>
+									<div style="line-height:40px">
+										<div class="pull-left border_right" style="width:100px">Number</div>
+										<div class="pull-left" style="width:100px">Date</div>
+										<div class="clearall"><!-- --></div>
+									</div>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="srno" id="srno" value="">
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="empcode" id="empcode" value="" />
+									<input type="text" name="si_no" id="si_no" value="">
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
@@ -137,46 +118,27 @@
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="surname" id="surname" value="" />
+									<input type="text" name="recovery_type" id="recovery_type" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<select type="text" name="gender" id="gender" class="select_drop_down" style="width:100%">
-										<option value="0">Select</option>
-										<option value="1">Male</option>
-										<option value="2">Female</option>
-									</select>
+									<input type="text" name="particulars" id="particulars" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="secondname" id="secondname" value="" />
+									<input type="text" name="date_of_loss" id="date_of_loss" value="" readonly="readonly" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="dob" id="dob" value="" style="width:100%" />
+									<input type="text" name="amount" id="amount" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="nationality" id="nationality" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="education" id="education" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="doj" id="doj" value="" style="width:100%" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="designation" id="designation" value="" />
+									<input type="text" name="whether_show_cause_issued" id="whether_show_cause_issued" value="" style="width:100%" />
 								</div>
 							</td>
 						</tr>
@@ -184,140 +146,49 @@
 					</table>
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">Category<br /> Address<br /> *(HS|S|SS|US)</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Type of<br />Employment</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Mobile</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">UAN</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">PAN</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">ESIC IP</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">LWF</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">AADHAAR</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Bank A/C<br /> Number</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Bank</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Branch<br /> (IFSC)</div></td>
+							<td align="center" valign="top" class="list_table_th border_top border_bottom border_right" style="width:252px">
+								<div class="listing_th_padding" style="padding: 0;">
+									<div class="border_bottom" style="padding:13px 0">Nominee</div>
+									<div style="line-height:40px">
+										<div class="pull-left border_right" style="width:125px">Name</div>
+										<div class="pull-left" style="width:125px">Address</div>
+										<div class="clearall"><!-- --></div>
+									</div>
+								</div>
+							</td>
+							<td align="center" valign="top" class="list_table_th border_top border_bottom border_right">
+								<div class="listing_th_padding" style="padding: 0;">
+									<div class="border_bottom" style="padding:13px 0">Adult Person to be contracted in case of Emergency</div>
+									<div style="line-height:40px">
+										<div class="pull-left border_right" style="width:250px">Name and Relationship</div>
+										<div class="pull-left border_right" style="width:250px">Address</div>
+										<div class="pull-left" style="width:100px">Mobile</div>
+										<div class="clearall"><!-- --></div>
+									</div>
+								</div>
+							</td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Remarks</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">*Signature of Mines<br> Manager</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<div class="listing_td_padding">
-									<select name="cat_add" id="cat_add" class="select_drop_down" style="width:100%">
-										<option value="">Select</option>
-										<?php
-											foreach($REGISTER_FORM_A_1_CATEGORY_ADDRESS_ as $catkey => $catvalue){
-												echo '<option value="'.$catkey.'">'.$catvalue.'</option>';
-											}
-										?>
-									</select>
+									<input type="text" name="si_no" id="si_no" value="">
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="emptype" id="emptype" value="" />
+									<input type="text" name="name" id="name" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="mobile" id="mobile" value="" />
+									<input type="text" name="recovery_type" id="recovery_type" value="" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="uan" id="uan" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="pan" id="pan" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="esicip" id="esicip" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="lwf" id="lwf" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="aadharno" id="aadharno" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="bankacno" id="bankacno" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="bankname" id="bankname" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="ifsccode" id="ifsccode" value="" />
-								</div>
-							</td>
-						</tr>
-						<tr><td style="height:10px"><!-- --></td></tr>
-					</table>
-					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
-						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right"><div class="listing_th_padding">Present<br /> Address</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Permanent</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding" style="width:110px">Service Book No.</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Date of Exit</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Reason for Exit</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Mark of Identification</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Photo</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Specimen Signature/Thumb<br /> Impression</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
-						</tr>
-						<tr>
-							<td align="left" valign="top" class="border_bottom border_left border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="presentadd" id="presentadd" value="">
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="permanantadd" id="permanantadd" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="servicebookno" id="servicebookno" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="dateofexit" id="dateofexit" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="reasonforexit" id="reasonforexit" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="idmark" id="idmark" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="file" name="photo" id="photo" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="file" name="specimensign" id="specimensign" value="" />
-								</div>
-							</td>
-							<td align="left" valign="top" class="border_bottom border_right">
-								<div class="listing_td_padding">
-									<input type="text" name="remark" id="remark" value="" />
+									<input type="text" name="particulars" id="particulars" value="" />
 								</div>
 							</td>
 						</tr>
@@ -331,7 +202,7 @@
 				</form>
 				<?php 
 					$regYear=(isset($_POST['regyear']) && $_POST['regyear']>0)?$_POST['regyear']:date('Y');
-							
+						
 					$qry="SELECT * FROM customer_register_form_a_type_b WHERE customerid=%i AND YEAR(created_by)='%s'";
 					$qry=$sql->query($qry, array($customerid, $regYear));
 					$res=$db->query($qry);
@@ -359,47 +230,68 @@
 				<?php } ?>
 				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td valign="top" class="table-title" style="width:50px">Sr No.</td>
-							<td valign="top" class="table-title" style="width:100px">Employee Code</td>
-							<td valign="top" class="table-title" style="width:300px">Name</td>
-							<td valign="top" class="table-title" style="width:300px">Surname</td>
-							<td valign="top" class="table-title" style="width:200px">Father's/Spouse name</td>
-							<td valign="top" class="table-title" style="width:100px">Actions</td>
-						</tr>
+						<thead>
+							<tr>
+								<th valign="top" class="table-title border_left border_right">Actions</th>
+								<th valign="top" class="table-title border_right">SI Number</th>
+								<th valign="top" class="table-title border_right">Name</th>
+								<th valign="top" class="table-title border_right">Recovery Type</th>
+								<th valign="top" class="table-title border_right">Particulars</th>
+								<th valign="top" class="table-title border_right">Date of loss</th>
+								<th valign="top" class="table-title border_right">Amount</th>
+								<th valign="top" class="table-title border_right">Whether show cause issued</th>
+								<th valign="top" class="table-title border_right">Explanation heard in presence of</th>
+								<th valign="top" class="table-title border_right">Number of EMIS</th>
+								<th valign="top" class="table-title border_right">First month year</th>
+								<th valign="top" class="table-title border_right">Last month year</th>
+								<th valign="top" class="table-title border_right">Date of complete recovery</th>
+								<th valign="top" class="table-title border_right">Remark</th>
+							</tr>
+						</thead>
+						<tbody>
 						<?php
 							if($cnt>0){
+								$counter=1;
 								while($rw=$db->fetchNextObject($res)){
 									$id=intval($rw->id); 
 						?>
-						<tr>
-							<td valign="top" class="table-data" title="<?php echo intval($rw->srno); ?>"><?php echo intval($rw->srno); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->emp_code); ?>"><?php echo trim($rw->emp_code); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->firstname); ?>"><?php echo ellipses(trim($rw->firstname), 50); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim ($rw->lastname); ?>"><?php echo ellipses(trim($rw->lastname), 50); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($rw->secondname); ?>"><?php echo ellipses(trim($rw->secondname), 50); ?></td>
-							<td valign="middle" class="table-data">
-								<form name="registerformprint" id="registerformprint" action="register-form-a2-print.php" method="post">
-									<input type="hidden" name="fromprint" id="fromprint" value="0">
-									<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
-								</form>
-								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-2', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-									<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom()">Print</lable></div>
-									<div class="clearall">
-								</div>
-							</td>
-						</tr>
-						<?php } }else { ?>
-						<tr>
-							<td colspan="6">
-								<div id="norecord"></div>
-							</td>
-						</tr>
+							<tr>
+								<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
+									<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-c-print.php" method="post">
+										<input type="hidden" name="fromprint" id="fromprint" value="0">
+										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
+									</form>
+									<div>
+										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('c', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
+										<div class="clearall">
+									</div>
+								</td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->si_no); ?>"><?php echo intval($rw->si_no); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->recovery_type); ?>"><?php echo ellipses(intval($rw->recovery_type), 50); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->particulars); ?>"><?php echo trim($rw->particulars); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->date_of_loss)>0)?date("m/d/Y", strtotime(trim($rw->date_of_loss))):""; ?>"><?php echo (strlen($rw->date_of_loss)>0)?date("m/d/Y", strtotime(trim($rw->date_of_loss))):""; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->amount); ?>"><?php echo intval($rw->amount); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->whether_show_cause_issued); ?>"><?php echo trim($rw->whether_show_cause_issued); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->explanation_heard_in_presence_of); ?>"><?php echo trim($rw->explanation_heard_in_presence_of); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->no_of_emis); ?>"><?php echo intval($rw->no_of_emis); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->first_month_year); ?>"><?php echo trim($rw->first_month_year); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->last_month_year); ?>"><?php echo trim($rw->last_month_year); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->date_of_complete_recovery)>0)?date("m/d/Y", strtotime(trim($rw->date_of_complete_recovery))):""; ?>"><?php echo (strlen($rw->date_of_complete_recovery)>0)?date("m/d/Y", strtotime(trim($rw->date_of_complete_recovery))):""; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark); ?>"><?php echo trim($rw->remark); ?></td>
+							</tr>
+						<?php $counter++; } }else { ?>
+							<tr>
+								<td colspan="14">
+									<div id="norecord"></div>
+								</td>
+							</tr>
 						<script type="text/javascript" language="javascript">
 							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
 						</script>
 						<?php } ?>
+						</tbody>
 					</table>
 				</div>
 			</div>
