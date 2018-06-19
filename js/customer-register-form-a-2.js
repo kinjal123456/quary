@@ -1,197 +1,17 @@
 $(document).ready(function() {
-	$( "#dob, #doj, #dateofexit" ).datepicker();
+	$( "#date_of_first_appnt, #vocational_date" ).datepicker();
 	
-	$("#register_a_1").validate({
+	$("#registerform").validate({
         debug: false,onsubmit: true,onfocusout: false,onkeyup: false,
         rules: {
-        	srno: {
+        	si_no: {
                 required: true
-            }/*,
-            empcode: {
-                required: true
-            },
-            name: {
-                required: true
-            },
-            surname: {
-                required: true
-            },
-            gender: {
-                required: true
-            },
-            secondname: {
-                required: true
-            },
-            dob: {
-                required: true
-            },
-            nationality: {
-                required: true
-            },
-            education: {
-                required: true
-            },
-            doj: {
-                required: true
-            },
-            designation: {
-                required: true
-            },
-            cat_add: {
-                required: true
-            },
-            emptype: {
-                required: true
-            },
-            mobile: {
-                required: true
-            },
-            uan: {
-                required: true
-            },
-            pan: {
-                required: true
-            },
-            esicip: {
-                required: true
-            },
-            lwf: {
-                required: true
-            },
-            aadharno: {
-                required: true
-            },
-            bankacno: {
-                required: true
-            },
-            bankname: {
-                required: true
-            },
-            ifsccode: {
-                required: true
-            },
-            presentadd: {
-                required: true
-            },
-            permanantadd: {
-                required: true
-            },
-            servicebookno: {
-                required: true
-            },
-            dateofexit: {
-                required: true
-            },
-            reasonforexit: {
-                required: true
-            },
-            idmark: {
-                required: true
-            },
-            photo: {
-                required: true
-            },
-            specimensign: {
-                required: true
-            },
-            remark: {
-                required: true
-            }*/
+            }
         },
         messages: {
-        	srno: {
-            	required: "Please enter serial number."
-            }/*,
-            empcode: {
-            	required: "Please enter employee code."
-            },
-            name: {
-            	required: "Please enter name."
-            },
-            surname: {
-            	required: "Please enter surname."
-            },
-            dob: {
-            	required: "Please enter date of birth."
-            },
-            gender: {
-            	required: "Please select gender."
-            },
-            secondname: {
-            	required: "Please enter father's/spouse name."
-            },
-            nationality: {
-            	required: "Please enter nationality."
-            },
-            education: {
-            	required: "Please enter education."
-            },
-            doj: {
-            	required: "Please enter date of joining."
-            },
-            designation: {
-            	required: "Please enter designation."
-            },
-            cat_add: {
-            	required: "Please select category address."
-            },
-            emptype: {
-            	required: "Please enter type of employeement."
-            },
-            mobile: {
-            	required: "Please enter mobile."
-            },
-            uan: {
-            	required: "Please enter UAN."
-            },
-            pan: {
-            	required: "Please enter PAN."
-            },
-            esicip: {
-            	required: "Please enter ESIC IP."
-            },
-            lwf: {
-            	required: "Please enter LWF."
-            },
-            aadharno: {
-            	required: "Please enter aadhar."
-            },
-            bankacno: {
-            	required: "Please enter bank account number."
-            },
-            bankname: {
-            	required: "Please enter bank name."
-            },
-            ifsccode: {
-            	required: "Please enter branch ifsc code."
-            },
-            presentadd: {
-            	required: "Please enter present address."
-            },
-            permanantadd: {
-            	required: "Please enter permanent address."
-            },
-            servicebookno: {
-            	required: "Please enter service book number."
-            },
-            dateofexit: {
-            	required: "Please enter date of exit."
-            },
-            reasonforexit: {
-            	required: "Please enter reason for exit."
-            },
-            idmark: {
-            	required: "Please enter mark of identification."
-            },
-            photo: {
-            	required: "Please upload photo."
-            },
-            specimensign: {
-            	required: "Please upload specimen signature/thumb."
-            },
-            remark: {
-            	required: "Please enter remark."
-            }*/
+        	si_no: {
+            	required: "Please enter SI Number."
+            }
         },
         showErrors: validationError,
         submitHandler: validationSuccess
@@ -211,15 +31,15 @@ function validationError(errorMap, errorList){
 function validationSuccess(){
 	 showLoader();
 	 $("#submitbtn").attr("disabled","disabled");
-	 $('#register_a_1').ajaxSubmit({
-	  	success:loginformResponse,
+	 $('#registerform').ajaxSubmit({
+	  	success:formResponse,
 	  	dataType: "json"
 	 });
 }
 
 function formRequest(formData, jqForm, options) {}
 
-function loginformResponse(responseText, statusText) {
+function formResponse(responseText, statusText) {
     hideLoader();
     $("#submitbtn").removeAttr("disabled");
 	scrollwindowTop();
@@ -228,7 +48,7 @@ function loginformResponse(responseText, statusText) {
 		if(responseText.registerstaus == 'success') {
 			$("#submitbtn").attr("disabled","disabled");
 			$("#notify").notification({caption: "Information updated successfully.", type:"information", onhide:function(){
-				window.location="customer-register-form-a-1.php?custid="+responseText.customerid;
+				window.location="customer-register-form-a-2.php?custid="+responseText.customerid;
 			}});
 		}else {
 			$("#notify").notification({caption: "Unable to save information.", type:"warning", sticky:true});
