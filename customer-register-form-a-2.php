@@ -21,30 +21,33 @@
 	if(isset($_POST['submitbtn'])){
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
-		$dateofcompleterecovery=strlen(trim($_POST['date_of_complete_recovery'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_complete_recovery']))):"";
+		$date_of_first_appnt=strlen(trim($_POST['date_of_first_appnt'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_first_appnt']))):"";
+		$vocational_date=strlen(trim($_POST['vocational_date'])>0)?date("Y-m-d", strtotime(trim($_POST['vocational_date']))):"";
 		
 		if($custid>0){
 			$query="INSERT INTO customer_register_form_a_type_b SET
 													    `customerid`=%i,
 														`si_no`=%i,
 														`name`='%s',
-														`recovery_type`=%i,
-														`particulars`='%s',
-														`date_of_loss`='%s',
-														`amount`=%i,
-														`whether_show_cause_issued`='%s',
-														`explanation_heard_in_presence_of`='%s',
-														`no_of_emis`=%i,
-														`first_month_year`='%s',
-														`last_month_year`='%s',
-														`date_of_complete_recovery`='%s',
+														`token_number`='%s',
+														`date_of_first_appnt`='%s',
+														`cert_of_age`='%s',
+														`place_of_emp`='%s',
+														`vocational_number`='%s',
+														`vocational_date`='%s',
+														`nomi_name`='%s',
+														`nomi_add`='%s',
+														`emergency_name`='%s',
+														`emergency_add`='%s',
+														`emergency_mobile`=%i,
 														`remark`='%s',
+														`sign_of_mines`='%s',
 														`created_by`=NOW(),
 														`updated_by`=NOW()";
-			$query=$sql->query($query, array($custid, intval($_POST['si_no']), trim($_POST['name']), intval($_POST['recovery_type']), 
-					trim($_POST['particulars']), trim($_POST['date_of_loss']), intval($_POST['amount']), trim($_POST['whether_show_cause_issued']), 
-					trim($_POST['explanation_heard_in_presence_of']), intval($_POST['no_of_emis']), trim($_POST['first_month_year']), 
-					trim($_POST['last_month_year']), $dateofcompleterecovery, trim($_POST['remark'])
+			$query=$sql->query($query, array($custid, intval($_POST['si_no']), trim($_POST['name']), trim($_POST['token_number']), 
+					$date_of_first_appnt, trim($_POST['cert_of_age']), trim($_POST['place_of_emp']), trim($_POST['vocational_number']), 
+					$vocational_date, trim($_POST['nomi_name']), trim($_POST['nomi_add']), 
+					trim($_POST['emergency_name']), trim($_POST['emergency_add']), intval($_POST['emergency_mobile']), trim($_POST['remark']), trim($_POST['sign_of_mines'])
 			));
 			if($db->query($query)){
 				$type['customerid']=$custid;
@@ -269,61 +272,103 @@
 				<?php } ?>
 				<div style="padding:20px 0;width: 100%;max-height: 500px;overflow: auto;">
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<thead>
-							<tr>
-								<th valign="top" class="table-title border_left border_right">Actions</th>
-								<th valign="top" class="table-title border_right">SI Number</th>
-								<th valign="top" class="table-title border_right">Name</th>
-								<th valign="top" class="table-title border_right">Token Number</th>
-								<th valign="top" class="table-title border_right">Date of First<br> Appointment with<br> present Owner</th>
-								<th valign="top" class="table-title border_right">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</th>
-								<th valign="top" class="table-title border_right">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</th>
-								<th valign="top" class="table-title border_right">vocational_number</th>
-								<th valign="top" class="table-title border_right">vocational_date</th>
-								<th valign="top" class="table-title border_right">nomi_name</th>
-								<th valign="top" class="table-title border_right">nomi_add</th>
-								<th valign="top" class="table-title border_right">emergency_name</th>
-								<th valign="top" class="table-title border_right">emergency_add</th>
-								<th valign="top" class="table-title border_right">emergency_mobile</th>
-								<th valign="top" class="table-title border_right">remark</th>
-								<th valign="top" class="table-title border_right">sign_of_mines</th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php
-							if($cnt>0){
-								$counter=1;
-								while($rw=$db->fetchNextObject($res)){
-									$id=intval($rw->id); 
-						?>
-							<tr>
-								<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
-									<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-c-print.php" method="post">
-										<input type="hidden" name="fromprint" id="fromprint" value="0">
-										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
-									</form>
-									<div>
-										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('c', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
-										<div class="clearall">
-									</div>
-								</td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->si_no); ?>"><?php echo intval($rw->si_no); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->token_number); ?>"><?php echo trim($rw->token_number); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo date("m/d/Y", strtotime($rw->date_of_first_appnt)); ?>"><?php echo date("m/d/Y", strtotime($rw->date_of_first_appnt)); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->cert_of_age); ?>"><?php echo trim($rw->cert_of_age); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->place_of_emp); ?>"><?php echo trim($rw->place_of_emp); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->vocational_number); ?>"><?php echo trim($rw->vocational_number); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo date("m/d/Y", strtotime($rw->vocational_date)); ?>"><?php echo date("m/d/Y", strtotime($rw->vocational_date)); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nomi_name); ?>"><?php echo trim($rw->nomi_name); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nomi_add); ?>"><?php echo ellipses(trim($rw->nomi_add), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emergency_name); ?>"><?php echo trim($rw->emergency_name); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emergency_add); ?>"><?php echo trim($rw->emergency_add); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->emergency_mobile); ?>"><?php echo intval($rw->emergency_mobile); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark); ?>"><?php echo ellipses(trim($rw->remark), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->sign_of_mines); ?>"><?php echo trim($rw->sign_of_mines); ?></td>
-							</tr>
+						<tr>
+							<td valign="top" class="table-title border_left border_right">Actions</td>
+							<td valign="top" class="table-title border_right">SI Number</td>
+							<td valign="top" class="table-title border_right">Name</td>
+							<td valign="top" class="table-title border_right">Token Number</td>
+							<td valign="top" class="table-title border_right">Date of First<br> Appointment with<br> present Owner</td>
+							<td valign="top" class="table-title border_right">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</td>
+							<td valign="top" class="table-title border_right">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</td>
+							<td align="center" valign="top" class="border_right">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr style="line-height:35px">
+										<td align="center" colspan="2" class="table-title">Certificate of Vocational Training</td>
+									</tr>
+									<tr style="line-height:35px">
+										<td valign="top" class="table-title border_right">vocational_number</td>
+										<td valign="top" class="table-title border_right">vocational_date</td>
+									</tr>
+								</table>
+							</td>
+							<td align="middle" valign="top" class="border_right">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr style="line-height:35px">
+										<td align="center" colspan="2" class="table-title">Nominee</td>
+									</tr>
+									<tr style="line-height:35px">
+										<td valign="top" class="table-title border_right">Name</td>
+										<td valign="top" class="table-title border_right">Address</td>
+									</tr>
+								</table>
+							</td>
+							<td align="middle" valign="top" class="border_right">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr style="line-height:35px">
+										<td align="center" colspan="3" class="table-title">Adult Person to be contracted in case of Emergency</td>
+									</tr>
+									<tr style="line-height:35px">
+										<td valign="top" class="table-title border_right">Name</td>
+										<td valign="top" class="table-title border_right">Address</td>
+										<td valign="top" class="table-title border_right">Mobile</td>
+									</tr>
+								</table>
+							</td>
+							<td align="middle" valign="top" class="table-title border_right">remark</td>
+							<td align="middle" valign="top" class="table-title border_right">*Signature of Mines<br> Manager</td>
+						</tr>
+					<?php
+						if($cnt>0){
+							$counter=1;
+							while($rw=$db->fetchNextObject($res)){
+								$id=intval($rw->id); 
+					?>
+						<tr>
+							<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
+								<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-c-print.php" method="post">
+									<input type="hidden" name="fromprint" id="fromprint" value="0">
+									<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
+								</form>
+								<div>
+									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-2', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
+									<div class="clearall">
+								</div>
+							</td>
+							<td valign="top" class="table-data borderall" title="<?php echo intval($rw->si_no); ?>"><?php echo intval($rw->si_no); ?></td>
+							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
+							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->token_number); ?>"><?php echo trim($rw->token_number); ?></td>
+							<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->date_of_first_appnt)>0)?date("m/d/Y", strtotime($rw->date_of_first_appnt)):""; ?>"><?php echo (strlen($rw->date_of_first_appnt)>0)?date("m/d/Y", strtotime($rw->date_of_first_appnt)):""; ?></td>
+							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->cert_of_age); ?>"><?php echo trim($rw->cert_of_age); ?></td>
+							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->place_of_emp); ?>"><?php echo trim($rw->place_of_emp); ?></td>
+							<td valign="top" class="borderall">
+								<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+									<tr>
+										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->vocational_number); ?>" style="width:128px"><?php echo trim($rw->vocational_number); ?></td>
+										<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->vocational_date)>0)?date("m/d/Y", strtotime($rw->vocational_date)):""; ?>"><?php echo (strlen($rw->vocational_date)>0)?date("m/d/Y", strtotime($rw->vocational_date)):""; ?></td>
+									</tr>
+								</table>
+							</td>
+							<td valign="top" class="borderall">
+								<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+									<tr>
+										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nomi_name); ?>"><?php echo trim($rw->nomi_name); ?></td>
+										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nomi_add); ?>"><?php echo ellipses(trim($rw->nomi_add), 50); ?></td>
+									</tr>
+								</table>
+							</td>
+							<td valign="top" class="borderall">
+								<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+									<tr>
+										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emergency_name); ?>"><?php echo trim($rw->emergency_name); ?></td>
+										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emergency_add); ?>"><?php echo trim($rw->emergency_add); ?></td>
+										<td valign="top" class="table-data borderall" title="<?php echo intval($rw->emergency_mobile); ?>"><?php echo intval($rw->emergency_mobile); ?></td>
+									</tr>
+								</table>
+							</td>
+							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark); ?>"><?php echo ellipses(trim($rw->remark), 50); ?></td>
+							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->sign_of_mines); ?>"><?php echo trim($rw->sign_of_mines); ?></td>
+						</tr>
 						<?php $counter++; } }else { ?>
 							<tr>
 								<td colspan="14">
@@ -334,7 +379,6 @@
 							$("#norecord").notification({caption:"No Record found.", type: "warning", sticky:true});
 						</script>
 						<?php } ?>
-						</tbody>
 					</table>
 				</div>
 			</div>
