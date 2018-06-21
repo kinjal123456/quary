@@ -1,5 +1,5 @@
 <?php
-    $page_title = "Register Form A";
+    $page_title = "[PART B: FOR THE MINES ACT, 1952 (35 of 1952) ONLY]";
     session_start();
     require_once 'libs/data/db.connect.php';
     require_once 'style-print.php';
@@ -52,16 +52,16 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 <title>Quarry<?php if(isset($page_title)) echo " : ".$page_title; ?></title>
 <div style="padding:10px 0;">
 		<div align="center">
-			<div style="<?php echo $register_form_upper_hadding_lg; ?>">SCHEDULE</div>
+			<div style="<?php echo $register_form_upper_hadding_lg; ?>">[PART B: FOR THE MINES ACT, 1952 (35 of 1952) ONLY]</div>
 		</div>
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table.addlisting; ?>">
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Sr No.</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Employee<br /> Code</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Name</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Surname</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Gender</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">SI Number in<br>Employee Register</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Name</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Token Number<br>Issued</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Date of First<br> Appointment with<br> present Owner</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div></td>
 				</tr>
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
@@ -92,10 +92,47 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				</tr>
 				<tr><td style="height:10px"><!-- --></td></tr>
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Father's/Spouse<br /> Name</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Date of Birth</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Nationality</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Education<br /> Level</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div></td>
+					<td align="center" valign="top" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>">
+						<div style="<?php echo $listing_td_padding; ?>; padding:0">
+							<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+								<tr>
+									<td align="center" valign="middle" colspan="2" style="<?php echo $border_bottom?>;line-height:42px">Certificate of Vocational Training</td>
+								</tr>
+								<tr style="line-height:40px">
+									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Number</td>
+									<td align="center" valign="middle" style="width:100px">Date</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+					<td align="center" valign="top" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>">
+						<div style="<?php echo $listing_td_padding; ?>; padding:0">
+							<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+								<tr>
+									<td align="center" valign="middle" colspan="2" style="<?php echo $border_bottom?>;line-height:42px">Nominee</td>
+								</tr>
+								<tr style="line-height:40px">
+									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Name</td>
+									<td align="center" valign="middle" style="width:100px">Address</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+					<td align="center" valign="top" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>">
+						<div style="<?php echo $listing_td_padding; ?>; padding:0">
+							<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+								<tr>
+									<td align="center" valign="middle" colspan="3" style="<?php echo $border_bottom?>;line-height:42px">Adult Person to be contracted in case of Emergency</td>
+								</tr>
+								<tr style="line-height:40px">
+									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Name and Relationship</td>
+									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Address</td>
+									<td align="center" valign="middle" style="width:100px">Mobile</td>
+								</tr>
+							</table>
+						</div>
+					</td>
 					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Date of<br /> Joining</div></td>
 				</tr>
 				<tr>
