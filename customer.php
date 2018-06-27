@@ -117,7 +117,7 @@
 					if($explosiveid>0){
 						//UPDATE EXPLOSIVE DETAILS
 						$expinsert="UPDATE customer_licence_info SET customerid=%i, detail_type=%i, document_key='%s', licence_no='%s', name='%s', issue_date='%s', expiry_date='%s', updated_at=NOW() WHERE id=%i";
-						$expinsert=$sql->query($expinsert, array($custid, _EXPLOSIVE_LICENCE_TYPE_, trim($_POST['explosive_dockey']), trim($_POST['explosive_licenceno']), trim($_POST['explosive_occupiernm']), trim($_POST['explosive_issuedate']), trim($_POST['explosive_expirydate']), $explosiveid));
+						$expinsert=$sql->query($expinsert, array($custid, _EXPLOSIVE_LICENCE_TYPE_, trim($_POST['explosive_dockey']), trim($_POST['explosive_licenceno']), trim($_POST['explosive_occupiernm']), date("Y-m-d", strtotime(trim($_POST['explosive_issuedate']))), date("Y-m-d", strtotime(trim($_POST['explosive_expirydate']))), $explosiveid));
 						if($db->query($expinsert)){
 							$type['explosivestatus']='success';
 						}
@@ -146,7 +146,7 @@
 				for($s=0; $s<count($_POST['short_name']); $s++){
 					if(strlen(trim($_POST['short_name'][$s]))>0 && strlen(trim($_POST['short_doc_key'][$s]))>0 && strlen(trim($_POST['short_licenceno'][$s]))>0){
 						$shortinsert="INSERT INTO customer_licence_info SET customerid=%i, detail_type=%i, document_key='%s', licence_no='%s', name='%s', issue_date='%s', expiry_date='%s', created_at=NOW(), updated_at=NOW()";
-						$shortinsert=$sql->query($shortinsert, array($custid, _SHORTFIRE_LICENCE_TYPE_, trim($_POST['short_doc_key'][$s]), trim($_POST['short_licenceno'][$s]), trim($_POST['short_name'][$s]), trim($_POST['short_issuedate'][$s]), trim($_POST['short_expirydate'][$s])));
+						$shortinsert=$sql->query($shortinsert, array($custid, _SHORTFIRE_LICENCE_TYPE_, trim($_POST['short_doc_key'][$s]), trim($_POST['short_licenceno'][$s]), trim($_POST['short_name'][$s]), date("Y-m-d", strtotime(trim($_POST['short_issuedate'][$s]))), date("Y-m-d", strtotime(trim($_POST['short_expirydate'][$s])))));
 						if($db->query($shortinsert)){
 							$type['shortstatus']='success';
 						}

@@ -1,5 +1,13 @@
 $(document).ready(function() {
-	$("#explosive_issuedate, #explosive_expirydate, #short_issuedate, #short_expirydate").datepicker();
+	$("#explosive_issuedate, #explosive_expirydate").datepicker();
+	
+	$('body').on('focus', ".short_issuedate", function(){
+		$(this).datepicker();
+	});
+	
+	$('body').on('focus', ".short_expirydate", function(){
+		$(this).datepicker();
+	})
 	
 	$("#customerform").validate({
         debug: false,

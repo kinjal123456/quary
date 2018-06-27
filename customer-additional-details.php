@@ -213,12 +213,12 @@
 				</td>
 				<td align="left" valign="top" class="border_bottom border_right">
 					<div style="padding: 10px">
-						<?php echo (strlen(trim($shortfirerw->issue_date))>0)?trim($shortfirerw->issue_date):""; ?>
+						<?php echo (strlen(trim($shortfirerw->issue_date))>0)?date("m/d/Y", strtotime($shortfirerw->issue_date)):""; ?>
 					</div>
 				</td>
 				<td align="left" valign="top" class="border_bottom border_right">
 					<div style="padding: 10px">
-						<?php echo (strlen(trim($shortfirerw->expiry_date))>0)?trim($shortfirerw->expiry_date):""; ?>
+						<?php echo (strlen(trim($shortfirerw->expiry_date))>0)?date("m/d/Y", strtotime($shortfirerw->expiry_date)):""; ?>
 					</div>
 				</td>
 			</tr>
@@ -246,12 +246,12 @@
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-	                    <input type="text" name="short_issuedate[]" id="short_issuedate" class="short_issuedate" value="" />
+	                    <input type="text" name="short_issuedate[]" class="short_issuedate" value="" readonly="readonly" />
 	                </div>
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-	                    <input type="text" name="short_expirydate[]" id="short_expirydate" class="short_expirydate" value="" />
+	                    <input type="text" name="short_expirydate[]" class="short_expirydate" value="" readonly="readonly" />
 	                </div>
                 </td>
             </tr>
