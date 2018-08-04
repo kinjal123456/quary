@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('input, textarea').csform();
+	$('input').csform();
 	
 	$("#selectall").on("click", function(){
 		if($("#selectall").is(":checked")==true){
@@ -158,6 +158,23 @@ function deleteRegisterForm(formname, formid, customerid){
                     window.location.href="customer-register-form-"+formname+".php?custid="+customerid;
                 }});
             }else{
+                $("#notify").notification({caption:"Not able to delete the record.", type:"warning", sticky:false});
+            }
+        });
+    }
+}
+//Delete Notes
+function deletenotes(obj, noteid, customerid){
+    var answer = confirm('Do you really want to delete this record?.');
+    if(answer){
+        ajaxUpdate("customer.php", {action: 'noteDelete', noteid:noteid}, function(data){
+            hideLoader();
+            scrollwindowTop();
+            if(data.type=="success") {
+                $("#notify").notification({caption:"Note deleted successfully.", type:"information", sticky:false, onhide:function(){
+                    window.location.href="customer.php?custid="+customerid;
+                }});
+			}else{
                 $("#notify").notification({caption:"Not able to delete the record.", type:"warning", sticky:false});
             }
         });

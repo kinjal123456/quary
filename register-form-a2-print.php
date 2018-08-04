@@ -55,263 +55,161 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 			<div style="<?php echo $register_form_upper_hadding_lg; ?>">[PART B: FOR THE MINES ACT, 1952 (35 of 1952) ONLY]</div>
 		</div>
 		<div>
-			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table.addlisting; ?>">
+			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table; ?>">
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">SI Number in<br>Employee Register</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Name</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Token Number<br>Issued</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Date of First<br> Appointment with<br> present Owner</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
+						<div style="<?php echo $listing_th_padding; ?>">SI Number in<br>Employee Register</div>
+					</td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
+						<div style="<?php echo $listing_th_padding; ?>">Name</div>
+					</td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
+						<div style="<?php echo $listing_th_padding; ?>">Token Number<br>Issued</div>
+					</td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
+						<div style="<?php echo $listing_th_padding; ?>">Date of First<br> Appointment with<br> present Owner</div>
+					</td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>">
+						<div style="<?php echo $listing_th_padding; ?>">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div>
+					</td>
 				</tr>
 				<tr>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->srno); ?>
+							<?php echo intval($row->si_no); ?>
 						</div>
 					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->empcode); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
 							<?php echo trim($row->name); ?>
 						</div>
 					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->surname); ?>
+							<?php echo trim($row->token_number); ?>
 						</div>
 					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo (intval($row->gender)>0)?"Male":"Female"; ?>
+							<?php echo (strlen(trim($row->date_of_first_appnt))>0)?date("m/d/Y", strtotime($row->date_of_first_appnt)):""; ?>
+						</div>
+					</td>
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
+						<div style="<?php echo $listing_td_padding; ?>">
+							<?php echo trim($row->cert_of_age); ?>
 						</div>
 					</td>
 				</tr>
 				<tr><td style="height:10px"><!-- --></td></tr>
+			</table>
+			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table; ?>">
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div></td>
-					<td align="center" valign="top" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>">
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>">
+						<div style="<?php echo $listing_th_padding; ?>">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div>
+					</td>
+					<td align="center" valign="top" style="<?php echo $border_top.$border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>; padding:0">
 							<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 								<tr>
-									<td align="center" valign="middle" colspan="2" style="<?php echo $border_bottom?>;line-height:42px">Certificate of Vocational Training</td>
+									<td align="center" valign="middle" colspan="2" style="<?php echo $list_table_th.$border_bottom?>;line-height:42px">
+										<div style="<?php echo $listing_th_padding; ?>">Certificate of Vocational Training</div>
+									</td>
 								</tr>
 								<tr style="line-height:40px">
-									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Number</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">Number</td>
 									<td align="center" valign="middle" style="width:100px">Date</td>
 								</tr>
 							</table>
 						</div>
 					</td>
-					<td align="center" valign="top" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>">
+					<td align="center" valign="top" style="<?php echo $border_top.$border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>; padding:0">
 							<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 								<tr>
-									<td align="center" valign="middle" colspan="2" style="<?php echo $border_bottom?>;line-height:42px">Nominee</td>
+									<td align="center" valign="middle" colspan="2" style="<?php echo $list_table_th.$border_bottom?>;line-height:42px">
+										<div style="<?php echo $listing_th_padding; ?>">Nominee</div>
+									</td>
 								</tr>
 								<tr style="line-height:40px">
-									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Name</td>
-									<td align="center" valign="middle" style="width:100px">Address</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>width:100px">Name</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>width:100px">Address</td>
 								</tr>
 							</table>
 						</div>
 					</td>
-					<td align="center" valign="top" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>">
+				</tr>
+				<tr>
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
+						<div style="<?php echo $listing_td_padding; ?>">
+							<?php echo trim($row->place_of_emp); ?>
+						</div>
+					</td>
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
+						<div>
+							<table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:51px">
+								<tr>
+									<td valign="top" style="<?php echo $table_data.$border_right; ?>width:100px;" title="<?php echo trim($row->vocational_number); ?>" style="width:101px;border-top:none"><?php echo trim($row->vocational_number); ?></td>
+									<td valign="top" style="<?php echo $table_data; ?>width:100px;" title="<?php echo (strlen($row->vocational_date)>0)?date("m/d/Y", strtotime($row->vocational_date)):""; ?>" style="width:100px;border-top:none"><?php echo (strlen($row->vocational_date)>0)?date("m/d/Y", strtotime($row->vocational_date)):""; ?></td>
+								</tr>
+							</table>
+						</div>
+					</td>
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
+						<div>
+							<table border="0" cellpadding="0" cellspacing="0" style="width:100%;height:51px">
+								<tr>
+									<td valign="top" style="<?php echo $table_data.$border_right; ?>width:100px;" title="<?php echo trim($row->nomi_name); ?>" style="width:100px;border-top:none"><?php echo trim($row->nomi_name); ?></td>
+									<td valign="top" style="<?php echo $table_data; ?>width:100px;" title="<?php echo trim($row->nomi_add); ?>" style="width:100px;border-top:none;"><?php echo ellipses(trim($row->nomi_add), 50); ?></td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+				<tr><td style="height:10px"><!-- --></td></tr>
+			</table>
+			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table; ?>">
+				<tr>
+					<td align="center" valign="top" style="<?php echo $border_top.$border_bottom.$border_left; ?>">
 						<div style="<?php echo $listing_td_padding; ?>; padding:0">
 							<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 								<tr>
-									<td align="center" valign="middle" colspan="3" style="<?php echo $border_bottom?>;line-height:42px">Adult Person to be contracted in case of Emergency</td>
+									<td align="center" valign="middle" colspan="3" style="<?php echo $list_table_th.$border_bottom?>;line-height:42px">
+										<div style="<?php echo $listing_th_padding; ?>">Adult Person to be contracted in case of Emergency</div>
+									</td>
 								</tr>
 								<tr style="line-height:40px">
-									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Name and Relationship</td>
-									<td align="center" valign="middle" class="border_right" style="<?php echo $border_right; ?>;width:100px">Address</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">Name and Relationship</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">Address</td>
 									<td align="center" valign="middle" style="width:100px">Mobile</td>
 								</tr>
 							</table>
 						</div>
 					</td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Date of<br /> Joining</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">remark</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">*Signature of Mines<br> Manager</div></td>
 				</tr>
 				<tr>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->secondname); ?>
-						</div>
-					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo (strlen($row->dob)>0)?date("m/d/Y", strtotime($row->dob)):""; ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->nationality); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->education); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo date("m/d/Y", strtotime($row->doj)); ?>
-						</div>
-					</td>
-				</tr>
-				<tr><td style="height:10px"><!-- --></td></tr>
-				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Designation</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Category<br /> Address<br /> *(HS|S|SS|US)</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Type of<br />Employment</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Mobile</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">UAN</div></td>
-				</tr>
-				<tr>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->designation); ?>
+						<div>
+							<table border="0" cellpadding="0" cellspacing="0" style="width:100%;height:51px">
+								<tr>
+									<td align="center" valign="top" style="<?php echo $table_data.$border_right; ?>width:100px;" title="<?php echo trim($row->emergency_name); ?>" style="width:100px;border-top:none"><?php echo trim($row->emergency_name); ?></td>
+									<td align="center" valign="top" style="<?php echo $table_data.$border_right; ?>width:100px;" title="<?php echo trim($row->emergency_add); ?>" style="width:100px;border-top:none"><?php echo trim($row->emergency_add); ?></td>
+									<td align="center" valign="top" style="<?php echo $table_data; ?>width:100px;" title="<?php echo intval($row->emergency_mobile); ?>" style="width:100px;border-top:none"><?php echo intval($row->emergency_mobile); ?></td>
+								</tr>
+							</table>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->cat_add); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->emptype); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->mobile); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->uan); ?>
-						</div>
-					</td>
-				</tr>
-				<tr><td style="height:10px"><!-- --></td></tr>
-				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">PAN</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">ESIC IP</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">LWF</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">AADHAAR</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Bank A/C<br /> Number</div></td>
-				</tr>
-				<tr>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->pan); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->esicip); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->lwf); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->aadharno); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->bankacno); ?>
-						</div>
-					</td>
-				</tr>
-				<tr><td style="height:10px"><!-- --></td></tr>
-				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Bank</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Branch<br /> (IFSC)</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Present<br /> Address</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Permanent</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Service Book No.</div></td>
-				<tr>
-				<tr>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->bankname); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->ifsccode); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->presentadd); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->permanantadd); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->servicebookno); ?>
-						</div>
-					</td>
-				</tr>
-				<tr><td style="height:10px"><!-- --></td></tr>
-				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Date of Exit</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Reason for Exit</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Mark of Identification</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Photo</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Specimen Signature/Thumb<br /> Impression</div></td>
-				</tr>
-				<tr>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo strlen(trim($row->dateofexit)>0)?date("m/d/Y", strtotime(trim($row->dateofexit))):""; ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->reasonforexit); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->idmark); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->photo); ?>
-						</div>
-					</td>
-					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
-						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->specimensign); ?>
-						</div>
-					</td>
-				</tr>
-				<tr><td style="height:10px"><!-- --></td></tr>
-				<tr>
-					<td colspan="5" align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Remarks</div></td>
-				</tr>
-				<tr>
-					<td colspan="5" align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
 							<?php echo trim($row->remark); ?>
 						</div>
 					</td>
+					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
+						<div style="<?php echo $listing_td_padding; ?>">
+							<?php echo trim($row->sign_of_mines); ?>
+						</div>
+					</td> 
 				</tr>
 			</table>
 		</div>

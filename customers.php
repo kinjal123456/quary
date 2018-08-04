@@ -51,7 +51,18 @@
 	
 	$values=array();
 	
-	$query = "SELECT count(*) as totalrecords FROM customers ORDER BY created_at DESC";
+	$searchValue="";
+	$searchText="";
+	if(isset($_POST['searchcustomer']) && strlen($_POST['searchcustomer'])>0){
+		$searchValue=trim($_POST['searchcustomer']);
+		$searchText=" WHERE (LOWER(companyname) LIKE '%s%' OR LOWER(firstname) LIKE '%s%' OR LOWER(lastname) LIKE '%s%' OR email LIKE '%s')";
+		$values[]=$searchValue;
+		$values[]=$searchValue;
+		$values[]=$searchValue;
+		$values[]=$searchValue;
+	}
+	
+	$query = "SELECT count(*) as totalrecords FROM customers ".$searchText." ORDER BY created_at DESC";
     $count = intval($db->queryUniqueValue($query));
 	
 	$offset = (isset($_POST['offset']))?trim($_POST['offset']):0;
@@ -62,7 +73,7 @@
 	$values[] = $offset;
     $values[] = $perpage;
 	
-	$query = "SELECT id, firstname, lastname, email, phone FROM customers ORDER BY created_at DESC LIMIT %i, %i";
+	$query = "SELECT id, firstname, lastname, email, phone FROM customers ".$searchText." ORDER BY created_at DESC LIMIT %i, %i";
 	$query=$sql->query($query, $values);
 	$result=$db->query($query);
 	$limitcount=$db->numRows($result);
@@ -72,26 +83,38 @@
 <form name="customeruploadform" id="customeruploadform" method="post" action="customerupload.php">
 	<input type="hidden" name="uploadid" id="uploadid" value="">
 </form>
-<form name="filterform" id="filterform" action="" method="post">
-    <input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
-</form>
 <td valign="top" style="padding: 20px">
 	<div class="table-container">
 		<div id="notify"><!-- --></div>
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
-					<td align="right" colspan="6">
+					<td align="right" colspan="7">
 						<?php if($count>0){ ?>
 						<div class="pull-left">
 							<a href="#"><input type="button" name="deletebtn" id="deletebtn" value="Delete" class="add-button" onclick="deleteMultipleCustomers(this)"></a>
 						</div>
+						<form name="filterform" id="filterform" action="" method="post">
+						<div class="pull-left">
+							<div>
+								<div class="pull-left" style="padding:10px 0">
+									<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
+									<input type="text" name="searchcustomer" id="searchcustomer" value="<?php echo $searchValue; ?>">
+								</div>
+								<div class="pull-left">
+									<input type="submit" name="submitbtn" id="submitbtn" value="Search" class="add-button">
+								</div>
+								<div class="clearall"><!-- --></div>
+							</div>
+						</div>
+						</form>
 						<?php } ?>
 						<?php 
 							$zonequery = "SELECT count(*) as totalrecords FROM zones";
     						$zonecount = intval($db->queryUniqueValue($zonequery));
 							if($zonecount>0){
 						?>
+						<div class="pull-right"><a href="customeradd.php"><input type="button" name="addcustomer" id="addcustomer" value="Add Customer" class="add-button" style="margin-left:0"></a></div>
 						<div>
 							<script type="text/javascript" src="js/customers.js"></script>
 							<form action="" method="post" name="uploadcustomerform" id="uploadcustomerform">

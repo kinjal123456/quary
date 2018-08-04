@@ -1,12 +1,31 @@
 $(document).ready(function() {
 	$("#explosive_issuedate, #explosive_expirydate").datepicker();
 	
+	$('#explosive_issuedate, #explosive_expirydate').keydown(function (e) {
+		if (e.keyCode == 13) {
+			$('#customerform').submit();
+			return false;    //<---- Add this line
+		}
+	});
+	
 	$('body').on('focus', ".short_issuedate", function(){
 		$(this).datepicker();
+		$(this).keydown(function (e) {
+			if (e.keyCode == 13) {
+				$('#customerform').submit();
+				return false;    //<---- Add this line
+			}
+		});
 	});
 	
 	$('body').on('focus', ".short_expirydate", function(){
 		$(this).datepicker();
+		$(this).keydown(function (e) {
+			if (e.keyCode == 13) {
+				$('#customerform').submit();
+				return false;    //<---- Add this line
+			}
+		});
 	})
 	
 	$("#customerform").validate({
@@ -112,6 +131,9 @@ $(document).ready(function() {
             'billamt[]':{
             	checkbillamount: true,
 				checkvalidbillamount: true
+            },
+            'notes[]':{
+            	checknote: true
             }
         },
         messages: {
@@ -212,6 +234,9 @@ $(document).ready(function() {
             'billamt[]':{
             	checkbillamount: "Please enter bill amount.",
 				checkvalidbillamount: "Please enter valid bill amount."
+            },
+            'notes[]':{
+            	checknote: "Please enter note."
             }
         },
         showErrors: validationError,
@@ -234,6 +259,9 @@ $(document).ready(function() {
 			$('#billcontent').css('display', 'block');
 		}else if($(this).attr('id')=="registers"){
 			$('#regcontent').css('display', 'block');
+		}else if($(this).attr('id')=="notes"){
+			$('#noteid').val(1);
+			$('#notescontent').css('display', 'block');
 		}
 
 	});
@@ -256,6 +284,10 @@ $(document).ready(function() {
 	
 	$('.icon_add_bill').on("click", function(){
 		makebillClone();
+	});
+	
+	$('.icon_add_note').on("click", function(){
+		makenoteClone();
 	});
 	
 	$('.genemplisting').on('click', '.icon_delete', function(){
@@ -289,6 +321,13 @@ $(document).ready(function() {
 	$('.billslisting').on('click', '.icon_delete', function(){
 		if($('table#appendbillcontent tr.bills').length>1){
 			$('table#appendbillcontent tr.bills:last').remove();
+		}
+
+    });
+	
+	$('.noteslisting').on('click', '.icon_delete', function(){
+		if($('table#appendnotecontent tr.notes').length>1){
+			$('table#appendnotecontent tr.notes:last').remove();
 		}
 
     });
@@ -639,6 +678,20 @@ jQuery.validator.addMethod('checkvalidbillamount', function(value, element){
     if(validateflag==0){return true;} else{ return false;}
 });
 
+jQuery.validator.addMethod('checknote', function(value, element){
+    validateflag=1;
+    if($('.notes').length>0){
+        validateflag=0;
+        $('textarea.notes').each(function(index) {
+			if(index>0){
+				var value = $(this).val();
+				if(value==""){validateflag=1;}
+			}
+        });
+    }
+    if(validateflag==0){return true;} else{ return false;}
+});
+
 function makegenempClone(){
 	$('.templategenemp').show();
     var newentry = $('.templategenemp').clone(false).removeClass('templategenemp')[0].outerHTML;
@@ -695,6 +748,16 @@ function makebillClone(){
 	}
 }
 
+function makenoteClone(){
+	$('.templatenotes').show();
+	var newentry = $('.templatenotes').clone(false).removeClass('templatenotes')[0].outerHTML;
+	$('.templatenotes').hide();
+	lastoldelem = $('table#appendnotecontent tr.notes:last');
+	$(lastoldelem).after(newentry);
+
+	elem = $('table#appendnotecontent tr.notes:last');//getting element
+}
+
 function validationError(errorMap, errorList){
 	scrollwindowTop();
 	if(errorList.length==0) return;
@@ -742,13 +805,21 @@ function formResponse(responseText, statusText) {
 			}
 		}else if(responseText.billid == 'success'){
 			if(responseText.billstatus == 'success'){
-				$("#notify").notification({caption: "Customer's bills updated successfully.", type:"information", onhide:function(){
+				$("#notify").notification({caption: "Customer's bill(s) updated successfully.", type:"information", onhide:function(){
 					location.reload(true);
 				}});
 			}else if(responseText.billstatus == 'billexists'){
 				$("#notify").notification({caption: "Customer bill already exists for this user.", type:"warning", sticky:true});
 			}else {
 				$("#notify").notification({caption: "Unable to save customer bills information.", type:"warning", sticky:true});
+			}
+		}else if(responseText.noteid == 'success'){
+			if(responseText.notestatus == 'success'){
+				$("#notify").notification({caption: "Customer's note(s) updated successfully.", type:"information", onhide:function(){
+					location.reload(true);
+				}});	
+			}else {
+				$("#notify").notification({caption: "Unable to save customer notes information.", type:"warning", sticky:true});
 			}
 		}else {
 			$("#notify").notification({caption: "Unable to save information.", type:"warning", sticky:true});

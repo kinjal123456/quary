@@ -11,4 +11,5 @@ $register_table_td="width:100px";
 $listing_th_padding="padding: 8px 20px 9px 20px;color: #000;font-size: 13px;";
 $listing_td_padding="padding:5px;";
 $select_drop_down="height:30px; color:#686868; font-size:12px";
+$table_data="color: #525252;font-size: 13px;border-top: solid 1px #e6e6e6;font-family: Myriad Pro;padding: 15px 0 15px 28px;vertical-align: middle;";
 ?>

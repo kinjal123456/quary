@@ -1,12 +1,22 @@
-<?php 
+ <?php 
 	$explosiveqry="SELECT * FROM customer_licence_info WHERE customerid=%i AND detail_type=%i";
 	$explosiveqry=$sql->query($explosiveqry, array($customerid, _EXPLOSIVE_LICENCE_TYPE_));
 	$explosiveres=$db->query($explosiveqry);
 	$explosivecnt=$db->numRows($explosiveres);
 	$explosiverw=$db->fetchNextObject($explosiveres);
+	
+	$notifyExplosiveLicence="";
+	if($explosivecnt>0){
+		$notifyQ="SELECT DATEDIFF(expiry_date, CURDATE()) AS daysleft FROM customer_licence_info 
+				  WHERE customerid=%i AND detail_type=%i AND CURDATE() BETWEEN DATE_ADD(expiry_date, INTERVAL -2 MONTH) AND expiry_date";
+		$notifyQ=$sql->query($notifyQ, array($customerid, _EXPLOSIVE_LICENCE_TYPE_));
+		$notifyExplosiveLicence=$db->queryUniqueValue($notifyQ);
+	}
 ?>
 <div class="border_top border_bottom border_left border_right">
-	<div class="table_additional_data_heading">Explosive licence occupier details</div>
+	<div class="table_additional_data_heading pull-left">Explosive licence occupier details</div>
+	<div class="pull-right" style="padding:10px 20px 0 0;color:red"><?php echo (strlen($notifyExplosiveLicence)>0 && $notifyExplosiveLicence>=0)?$notifyExplosiveLicence." day(s) left":""; ?></div>
+	<div class="clearall"><!--  --></div>
 	<div class="border_top border_bottom border_left border_right" style="margin:20px">
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
@@ -31,7 +41,7 @@
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
 		                    <input type="text" name="explosive_occupiernm" id="explosive_occupiernm" class="explosive_occupiernm" value="<?php echo ($explosivecnt>0)?trim($explosiverw->name):""; ?>" />
-		                </div>
+		                </div> 
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
@@ -54,13 +64,13 @@
 			<table border="0" cellpadding="0" cellspacing="0" id="appendcapacitycontent" class="list_table capacitylisting">
 				<tr>
 					<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 40px;">&nbsp;</td>
-					<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Sr no.</div></td>
-					<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Explosive name</div></td>
-					<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Class</div></td>
-					<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Division</div></td>
-					<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Quantity at time</div></td>
-					<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Unit</div></td>
-					<td align="left" valign="top" class="list_table_th border_bottom"><div class="listing_th_padding">No. of times</div></td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Sr no.</div></td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Explosive name</div></td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Class</div></td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Division</div></td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Quantity at time</div></td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Unit</div></td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom"><div class="listing_th_padding">No. of times</div></td>
 				</tr>
 				<?php
 	            	$addcapqry="SELECT id, customerid, srno, explosive_name, class, division, qty_at_time, unit, no_of_time FROM customer_explosive_capacity
@@ -179,6 +189,7 @@
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Shortfire name</div></td>
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Issue date</div></td>
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Expirty date</div></td>
+				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Days left</div></td>
 			</tr>
 			<?php
 				$shortfireqry="SELECT * FROM customer_licence_info WHERE customerid=%i AND detail_type=%i";
@@ -187,6 +198,11 @@
 				$shortfirecnt=$db->numRows($shortfireres);
 				if($shortfirecnt>0){
 					while($shortfirerw=$db->fetchNextObject($shortfireres)){
+						$edate = date_create(date('Y-m-d', strtotime($shortfirerw->expiry_date)));
+						//date_add($edate, date_interval_create_from_date_string('-2 months'));
+						$customdate=date_create(date_format($edate, 'Y-m-d'));
+						$currentdate=date_create(date('Y-m-d'));
+						$diff=date_diff($customdate,$currentdate);
 			?>
 			<tr>
 				<td align="center" valign="middle" class="border_bottom border_left border_right">
@@ -221,6 +237,11 @@
 						<?php echo (strlen(trim($shortfirerw->expiry_date))>0)?date("m/d/Y", strtotime($shortfirerw->expiry_date)):""; ?>
 					</div>
 				</td>
+				<td align="left" valign="top" class="border_bottom border_right">
+					<div style="padding: 10px; <?php echo ($diff->format("%a")<=62)?'color:red':"N/A"; ?>">
+						<?php echo ($diff->format("%a")<=62)?$diff->format("%a days"):"N/A"; ?>
+					</div>
+				</td>
 			</tr>
 			<?php } } ?>
 			<tr class="short templateshort" style="display:none">
@@ -252,6 +273,11 @@
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
 	                    <input type="text" name="short_expirydate[]" class="short_expirydate" value="" readonly="readonly" />
+	                </div>
+                </td>
+                <td align="left" valign="top" class="border_bottom border_right">
+                    <div style="padding: 10px">
+	                    
 	                </div>
                 </td>
             </tr>

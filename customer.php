@@ -76,6 +76,21 @@
 		exit(0);
 	}
 	
+	//Delete Notes
+	if(isset($_POST['action']) && trim($_POST['action'])=="noteDelete"){
+		$type['type']="error";
+		$noteid=intval($_POST['noteid']);
+		if($noteid>0){
+			$query="DELETE FROM customer_notes WHERE id=%i";
+			$query=$sql->query($query, array($noteid));
+			if($db->query($query)){
+				$type['type']="success";
+			}
+		}
+		echo json_encode($type);
+		exit(0);
+	}
+	
 	if(isset($_POST['customerid'])){
 		$type['type']="error";
 		$custid=intval($_POST['customerid']);
@@ -189,6 +204,19 @@
 						}
 					}
 				}
+			}else if(isset($_POST['noteid']) && intval($_POST['noteid'])>0){//notes insertion
+				$type['noteid']="success";
+				
+				for($n=0; $n<count($_POST['notes']); $n++){
+					if(strlen($_POST['notes'][$n])>0){
+						$query="INSERT INTO customer_notes SET customerid=%i, notes='%s', created_at=NOW(), updated_at=NOW()";
+						$query=$sql->query($query, array($custid, trim($_POST['notes'][$n])));
+						if($db->query($query)){
+							$type['type']="success";
+							$type['notestatus']="success";
+						}
+					}
+				}
 			}
 		}
 		
@@ -221,6 +249,7 @@
 					<a class="tab" id="additional">Additional Details</a>
 					<a class="tab" id="bills">Bills</a>
 					<a class="tab" id="registers">Registers</a>
+					<a class="tab" id="notes">Notes</a>
 				</div>
 			</div>
 			<div style="padding:20px">
@@ -242,11 +271,16 @@
 						<div id="regcontent">
 							<?php include_once "customer-register-details.php"; ?>
 						</div>
+						<!-- Registers -->
+						<div id="notescontent">
+							<?php include_once "customer-notes-details.php"; ?>
+						</div>
 					</div>
 					<div style="padding-top:10px">
 						<input type="hidden" class="hiddencomponent" name="generalid" id="generalid" value="">
 						<input type="hidden" class="hiddencomponent" name="additionalid" id="additionalid" value="">
 						<input type="hidden" class="billid" name="billid" id="billid" value="">
+						<input type="hidden" class="noteid" name="noteid" id="noteid" value="">
 						<input type="hidden" name="customerid" id="customerid" value="<?php echo $customerid; ?>">
 						<input type="hidden" name="print" id="print" value="0">
 						<input type="submit" name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0">

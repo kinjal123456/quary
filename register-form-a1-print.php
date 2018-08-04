@@ -88,22 +88,22 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->empcode); ?>
+							<?php echo trim($row->emp_code); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->name); ?>
+							<?php echo trim($row->firstname); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->surname); ?>
+							<?php echo trim($row->lastname); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo (intval($row->gender)>0)?"Male":"Female"; ?>
+							<?php if(intval($row->gender)==1) echo "Men"; else if(intval($row->gender)==2) echo "Woman"; else echo ""; ?>
 						</div>
 					</td>
 				</tr>
@@ -158,12 +158,12 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->cat_add); ?>
+							<?php echo intval($row->category_address); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->emptype); ?>
+							<?php echo trim($row->emp_type); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
@@ -193,7 +193,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->esicip); ?>
+							<?php echo trim($row->esic_ip); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
@@ -203,12 +203,12 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->aadharno); ?>
+							<?php echo trim($row->aadhaar_no); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->bankacno); ?>
+							<?php echo intval($row->bank_ac_no); ?>
 						</div>
 					</td>
 				</tr>
@@ -223,27 +223,27 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->bankname); ?>
+							<?php echo trim($row->bank); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->ifsccode); ?>
+							<?php echo intval($row->branch_ifsc_code); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->presentadd); ?>
+							<?php echo trim($row->present_address); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->permanantadd); ?>
+							<?php echo trim($row->permenent_address); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->servicebookno); ?>
+							<?php echo intval($row->service_book_no); ?>
 						</div>
 					</td>
 				</tr>
@@ -258,27 +258,31 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo strlen(trim($row->dateofexit)>0)?date("m/d/Y", strtotime(trim($row->dateofexit))):""; ?>
+							<?php echo strlen(trim($row->date_of_exit)>0)?date("m/d/Y", strtotime(trim($row->date_of_exit))):""; ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->reasonforexit); ?>
+							<?php echo trim($row->reason_for_exit); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->idmark); ?>
+							<?php echo trim($row->id_mark); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->photo); ?>
+							<?php if(strlen(trim($row->photo))>0){ ?>
+								<img src="upload/<?php echo intval($row->customerid).'/'.$formid.'/image/'.trim($row->photo); ?>" style="width:50px;height:50px" >
+							<?php } ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo trim($row->specimensign); ?>
+							<?php if(strlen(trim($row->signature_thumb_image))>0){ ?>
+								<img src="upload/<?php echo intval($row->customerid).'/'.$formid.'/sign/'.trim($row->signature_thumb_image); ?>" style="width:50px;height:50px" >
+							<?php } ?>
 						</div>
 					</td>
 				</tr>

@@ -85,8 +85,18 @@
 	}
 	include_once "header.php";
 
+	$form_id=0;
 	if(isset($_GET['custid']) && intval($_GET['custid'])){
 		$customerid=intval($_GET['custid']);
+		
+		if(isset($_GET['id']) && intval($_GET['id'])){
+			$form_id=intval($_GET['id']);
+			
+			$formDetailQuery="SELECT * FROM customer_register_form_b WHERE id=%i";
+			$formDetailQuery=$sql->query($formDetailQuery, array($form_id));
+			$formDetailResult=$db->query($formDetailQuery);
+			$formDetailRow=$db->fetchNextObject($formDetailResult);
+		}
 		
 		$formlinq="SELECT emailid FROM customer_additional_info WHERE id=%i AND detailname='Shram Shuvidha LIN detail'";
 		$formlinq=$sql->query($formlinq, array($customerid));
@@ -104,14 +114,6 @@
 			<div class="clearall"><!-- --></div>
 		</div>
 		<div style="padding: 20px 0;">
-			<!--<div style="border-bottom: 1px solid #cccccc;">
-				<div class="tab_container">
-					<a class="tab active_tab" id="general">General Details</a>
-					<a class="tab" id="additional">Additional Details</a>
-					<a class="tab" id="bills">Bills</a>
-					<a class="tab" id="registers">Registers</a>
-				</div>
-			</div>-->
 			<div style="padding:20px">
 				<div>
 					<form name="registerform" id="registerform" action="" method="post">
@@ -310,57 +312,57 @@
 							<tr>
 								<td align="left" valign="top" class="border_bottom border_left border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="name" id="name" value="">
+										<input type="text" name="name" id="name" value="<?php echo ($form_id>0)?trim($formDetailRow->name):""; ?>">
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="rate_of_wage" id="rate_of_wage" value="" />
+										<input type="text" name="rate_of_wage" id="rate_of_wage" value="<?php echo ($form_id>0)?intval($formDetailRow->rate_of_wage):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="no_of_work_days" id="no_of_work_days" value="" />
+										<input type="text" name="no_of_work_days" id="no_of_work_days" value="<?php echo ($form_id>0)?intval($formDetailRow->no_of_work_days):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="overtime_hours" id="overtime_hours" value="" />
+										<input type="text" name="overtime_hours" id="overtime_hours" value="<?php echo ($form_id>0)?intval($formDetailRow->overtime_hours):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="basic" id="basic" value="" />
+										<input type="text" name="basic" id="basic" value="<?php echo ($form_id>0)?intval($formDetailRow->basic):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="special_basic" id="special_basic" value="" />
+										<input type="text" name="special_basic" id="special_basic" value="<?php echo ($form_id>0)?intval($formDetailRow->special_basic):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="da" id="da" value="" style="width:100%" />
+										<input type="text" name="da" id="da" value="<?php echo ($form_id>0)?intval($formDetailRow->da):""; ?>" style="width:100%" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="overtime_payments" id="overtime_payments" value="" />
+										<input type="text" name="overtime_payments" id="overtime_payments" value="<?php echo ($form_id>0)?intval($formDetailRow->overtime_payments):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="hra" id="hra" value="" />
+										<input type="text" name="hra" id="hra" value="<?php echo ($form_id>0)?intval($formDetailRow->hra):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="others" id="others" value="" style="width:100%" />
+										<input type="text" name="others" id="others" value="<?php echo ($form_id>0)?intval($formDetailRow->others):""; ?>" style="width:100%" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="total" id="total" value="" />
+										<input type="text" name="total" id="total" value="<?php echo ($form_id>0)?intval($formDetailRow->total):""; ?>" />
 									</div>
 								</td>
 							</tr>
@@ -383,57 +385,57 @@
 							<tr>
 								<td align="left" valign="top" class="border_bottom border_left border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="pf" id="pf" value="" />
+										<input type="text" name="pf" id="pf" value="<?php echo ($form_id>0)?intval($formDetailRow->pf):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="esic" id="esic" value="" />
+										<input type="text" name="esic" id="esic" value="<?php echo ($form_id>0)?trim($formDetailRow->esic):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="society" id="society" value="" />
+										<input type="text" name="society" id="society" value="<?php echo ($form_id>0)?trim($formDetailRow->society):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="income_tax" id="income_tax" value="" />
+										<input type="text" name="income_tax" id="income_tax" value="<?php echo ($form_id>0)?intval($formDetailRow->income_tax):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="insurance" id="insurance" value="" />
+										<input type="text" name="insurance" id="insurance" value="<?php echo ($form_id>0)?intval($formDetailRow->insurance):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="others_deduction" id="others_deduction" value="" />
+										<input type="text" name="others_deduction" id="others_deduction" value="<?php echo ($form_id>0)?intval($formDetailRow->total_deduction):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="recoveries" id="recoveries" value="" />
+										<input type="text" name="recoveries" id="recoveries" value="<?php echo ($form_id>0)?intval($formDetailRow->recoveries):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="total_deduction" id="total_deduction" value="" />
+										<input type="text" name="total_deduction" id="total_deduction" value="<?php echo ($form_id>0)?intval($formDetailRow->total_deduction):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="net_payment" id="net_payment" value="" />
+										<input type="text" name="net_payment" id="net_payment" value="<?php echo ($form_id>0)?intval($formDetailRow->net_payment):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="emp_share_pf_welfare" id="emp_share_pf_welfare" value="" />
+										<input type="text" name="emp_share_pf_welfare" id="emp_share_pf_welfare" value="<?php echo ($form_id>0)?intval($formDetailRow->emp_share_pf_welfare):""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="receipt_by_emp_bank_trans_id" id="receipt_by_emp_bank_trans_id" value="" />
+										<input type="text" name="receipt_by_emp_bank_trans_id" id="receipt_by_emp_bank_trans_id" value="<?php echo ($form_id>0)?intval($formDetailRow->receipt_by_emp_bank_trans_id):""; ?>" />
 									</div>
 								</td>
 							</tr>
@@ -447,12 +449,12 @@
 							<tr>
 								<td align="left" valign="top" class="border_bottom border_left border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="date_of_payment" id="date_of_payment" value="">
+										<input type="text" name="date_of_payment" id="date_of_payment" value="<?php echo ($form_id>0 && strlen($formDetailRow->date_of_payment)>0)?date("m/d/Y", strtotime($formDetailRow->date_of_payment)):""; ?>">
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="remark" id="remark" value="" />
+										<input type="text" name="remark" id="remark" value="<?php echo ($form_id>0)?trim($formDetailRow->remark):""; ?>" />
 									</div>
 								</td>
 							</tr>
@@ -532,13 +534,14 @@
 									$id=intval($rw->id); 
 						?>
 							<tr>
-								<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
+								<td valign="middle" class="table-data borderall" style="padding:5px 25px">
 									<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-b-print.php" method="post">
 										<input type="hidden" name="fromprint" id="fromprint" value="0">
 										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 									</form>
 									<div>
-										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('b', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+										<div class="pull-left action-icon"><a href="customer-register-form-b.php?custid=<?php echo $customerid; ?>&id=<?php echo $id; ?>"><img src="images/edit.png" /></a></div>
+										<div class="pull-left action-icon" style="padding-top:3px"><img src="images/delete.png" onclick="deleteRegisterForm('b', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
 										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
 										<div class="clearall">
 									</div>

@@ -274,9 +274,9 @@
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tr>
 							<td valign="top" class="table-title border_left border_right">Actions</td>
-							<td valign="top" class="table-title border_right">SI Number</td>
+							<td valign="top" class="table-title border_right">SI Number in<br>Employee Register</td>
 							<td valign="top" class="table-title border_right">Name</td>
-							<td valign="top" class="table-title border_right">Token Number</td>
+							<td valign="top" class="table-title border_right">Token Number<br>Issued</td>
 							<td valign="top" class="table-title border_right">Date of First<br> Appointment with<br> present Owner</td>
 							<td valign="top" class="table-title border_right">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</td>
 							<td valign="top" class="table-title border_right">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</td>
@@ -286,8 +286,8 @@
 										<td align="center" colspan="2" class="table-title">Certificate of Vocational Training</td>
 									</tr>
 									<tr style="line-height:35px">
-										<td valign="top" class="table-title border_right">vocational_number</td>
-										<td valign="top" class="table-title border_right">vocational_date</td>
+										<td valign="top" class="table-title border_bottom border_right">Number</td>
+										<td valign="top" class="table-title border_bottom">Date</td>
 									</tr>
 								</table>
 							</td>
@@ -297,8 +297,8 @@
 										<td align="center" colspan="2" class="table-title">Nominee</td>
 									</tr>
 									<tr style="line-height:35px">
-										<td valign="top" class="table-title border_right">Name</td>
-										<td valign="top" class="table-title border_right">Address</td>
+										<td valign="top" class="table-title border_bottom border_right">Name</td>
+										<td valign="top" class="table-title border_bottom">Address</td>
 									</tr>
 								</table>
 							</td>
@@ -308,9 +308,9 @@
 										<td align="center" colspan="3" class="table-title">Adult Person to be contracted in case of Emergency</td>
 									</tr>
 									<tr style="line-height:35px">
-										<td valign="top" class="table-title border_right">Name</td>
-										<td valign="top" class="table-title border_right">Address</td>
-										<td valign="top" class="table-title border_right">Mobile</td>
+										<td valign="top" class="table-title border_bottom border_right">Name and Relationship</td>
+										<td valign="top" class="table-title border_bottom border_right">Address</td>
+										<td valign="top" class="table-title border_bottom">Mobile</td>
 									</tr>
 								</table>
 							</td>
@@ -324,50 +324,50 @@
 								$id=intval($rw->id); 
 					?>
 						<tr>
-							<td valign="middle" class="table-data borderall" style="padding:5px 25px 0 25px">
-								<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-c-print.php" method="post">
+							<td valign="middle" class="table-data border_left border_right border_bottom" style="padding:5px 25px 0 25px">
+								<form name="registerformprint" id="registerformprint<?php echo $id; ?>" action="register-form-a2-print.php" method="post">
 									<input type="hidden" name="fromprint" id="fromprint" value="0">
 									<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 								</form>
 								<div>
 									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-2', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
-									<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
+									<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</label></div>
 									<div class="clearall">
 								</div>
 							</td>
-							<td valign="top" class="table-data borderall" title="<?php echo intval($rw->si_no); ?>"><?php echo intval($rw->si_no); ?></td>
-							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
-							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->token_number); ?>"><?php echo trim($rw->token_number); ?></td>
-							<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->date_of_first_appnt)>0)?date("m/d/Y", strtotime($rw->date_of_first_appnt)):""; ?>"><?php echo (strlen($rw->date_of_first_appnt)>0)?date("m/d/Y", strtotime($rw->date_of_first_appnt)):""; ?></td>
-							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->cert_of_age); ?>"><?php echo trim($rw->cert_of_age); ?></td>
-							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->place_of_emp); ?>"><?php echo trim($rw->place_of_emp); ?></td>
-							<td valign="top" class="borderall">
-								<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo intval($rw->si_no); ?>"><?php echo intval($rw->si_no); ?></td>
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo trim($rw->token_number); ?>"><?php echo trim($rw->token_number); ?></td>
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo (strlen($rw->date_of_first_appnt)>0)?date("m/d/Y", strtotime($rw->date_of_first_appnt)):""; ?>"><?php echo (strlen($rw->date_of_first_appnt)>0)?date("m/d/Y", strtotime($rw->date_of_first_appnt)):""; ?></td>
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo trim($rw->cert_of_age); ?>"><?php echo trim($rw->cert_of_age); ?></td>
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo trim($rw->place_of_emp); ?>"><?php echo trim($rw->place_of_emp); ?></td>
+							<td valign="top" class="border_bottom border_right">
+								<table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:51px">
 									<tr>
-										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->vocational_number); ?>" style="width:128px"><?php echo trim($rw->vocational_number); ?></td>
-										<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->vocational_date)>0)?date("m/d/Y", strtotime($rw->vocational_date)):""; ?>"><?php echo (strlen($rw->vocational_date)>0)?date("m/d/Y", strtotime($rw->vocational_date)):""; ?></td>
+										<td valign="top" class="table-data border_right" title="<?php echo trim($rw->vocational_number); ?>" style="width:101px;border-top:none"><?php echo trim($rw->vocational_number); ?></td>
+										<td valign="top" class="table-data" title="<?php echo (strlen($rw->vocational_date)>0)?date("m/d/Y", strtotime($rw->vocational_date)):""; ?>" style="width:100px;border-top:none"><?php echo (strlen($rw->vocational_date)>0)?date("m/d/Y", strtotime($rw->vocational_date)):""; ?></td>
 									</tr>
 								</table>
 							</td>
-							<td valign="top" class="borderall">
-								<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+							<td valign="middle" class="border_bottom border_right">
+								<table border="0" cellpadding="0" cellspacing="0" style="width:100%;height:51px">
 									<tr>
-										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nomi_name); ?>"><?php echo trim($rw->nomi_name); ?></td>
-										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->nomi_add); ?>"><?php echo ellipses(trim($rw->nomi_add), 50); ?></td>
+										<td valign="top" class="table-data border_right" title="<?php echo trim($rw->nomi_name); ?>" style="width:100px;border-top:none"><?php echo trim($rw->nomi_name); ?></td>
+										<td valign="top" class="table-data" title="<?php echo trim($rw->nomi_add); ?>" style="width:100px;border-top:none;"><?php echo ellipses(trim($rw->nomi_add), 50); ?></td>
 									</tr>
 								</table>
 							</td>
-							<td valign="top" class="borderall">
-								<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+							<td valign="middle" class="border_bottom border_right">
+								<table border="0" cellpadding="0" cellspacing="0" style="width:100%;height:51px">
 									<tr>
-										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emergency_name); ?>"><?php echo trim($rw->emergency_name); ?></td>
-										<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emergency_add); ?>"><?php echo trim($rw->emergency_add); ?></td>
-										<td valign="top" class="table-data borderall" title="<?php echo intval($rw->emergency_mobile); ?>"><?php echo intval($rw->emergency_mobile); ?></td>
+										<td valign="top" class="table-data border_right" title="<?php echo trim($rw->emergency_name); ?>" style="width:100px;border-top:none"><?php echo trim($rw->emergency_name); ?></td>
+										<td valign="top" class="table-data border_right" title="<?php echo trim($rw->emergency_add); ?>" style="width:100px;border-top:none"><?php echo trim($rw->emergency_add); ?></td>
+										<td valign="top" class="table-data" title="<?php echo intval($rw->emergency_mobile); ?>" style="width:100px;border-top:none"><?php echo intval($rw->emergency_mobile); ?></td>
 									</tr>
 								</table>
 							</td>
-							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark); ?>"><?php echo ellipses(trim($rw->remark), 50); ?></td>
-							<td valign="top" class="table-data borderall" title="<?php echo trim($rw->sign_of_mines); ?>"><?php echo trim($rw->sign_of_mines); ?></td>
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo trim($rw->remark); ?>"><?php echo ellipses(trim($rw->remark), 50); ?></td>
+							<td valign="top" class="table-data border_bottom border_right" title="<?php echo trim($rw->sign_of_mines); ?>"><?php echo trim($rw->sign_of_mines); ?></td>
 						</tr>
 						<?php $counter++; } }else { ?>
 							<tr>
