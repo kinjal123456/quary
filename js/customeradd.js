@@ -8,19 +8,13 @@ $(document).ready(function() {
             zoneid: {
                 required: true
             },
-			fname: {
-                required: true
-            },
-			lname: {
+			companyname: {
                 required: true
             },
 			custemail: {
                 required: true
             },
 			phone: {
-                required: true
-            },
-			licenceno: {
                 required: true
             }
         },
@@ -28,20 +22,14 @@ $(document).ready(function() {
             zoneid: {
                 required: "Please select zone."
             },
-			fname: {
-                required: "Please enter firstname."
-            },
-			lname: {
-                required: "Please enter lastname."
+			companyname: {
+                required: "Please enter Establishment name."
             },
 			custemail: {
                 required: "Please enter email."
             },
 			phone: {
                 required: "Please enter phone number."
-            },
-			licenceno: {
-                required: "Please enter licence number."
             }
         },
         showErrors: validationError,

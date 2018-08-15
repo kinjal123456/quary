@@ -106,8 +106,8 @@
 					$type['type']="success";
 					$type['genstatus']="custexists";
 				}else {
-					$query="UPDATE customers SET zoneid=%i, companyname='%s', firstname='%s', lastname='%s', phone=%i, email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
-					$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['firstnm']), trim($_POST['lastnm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), intval($_POST['custpincode']), trim($_POST['custstate']), $custid));
+					$query="UPDATE customers SET zoneid=%i, companyname='%s', phone=%i, email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
+					$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), intval($_POST['custpincode']), trim($_POST['custstate']), $custid));
 					if($db->query($query)){
 						$type['type']="success";
 						$type['genstatus']="success";
@@ -228,7 +228,7 @@
 	if(isset($_GET['custid']) && intval($_GET['custid'])>0){
 		$customerid=intval($_GET['custid']);
 		
-		$custquery="SELECT id, zoneid, companyname, firstname, lastname, email, password, phone, survey_no, address, pincode, state FROM customers WHERE id=%i";
+		$custquery="SELECT id, zoneid, companyname, email, password, phone, survey_no, address, pincode, state FROM customers WHERE id=%i";
 		$custquery=$sql->query($custquery, array($customerid));
 		$custresult=$db->query($custquery);
 		$custcount=$db->numRows($custresult);

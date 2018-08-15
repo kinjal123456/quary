@@ -33,7 +33,7 @@
 	$values[] = $offset;
     $values[] = $perpage;
 	
-	$query = "SELECT cb.id, cb.userid, cb.billname, cb.billno, cb.bill_amount, cb.payment_status, CONCAT(c.firstname, ' ', c.lastname) AS name FROM customers_bills cb 
+	$query = "SELECT cb.id, cb.userid, cb.billname, cb.billno, cb.bill_amount, cb.payment_status, companyname AS name FROM customers_bills cb 
 			  LEFT JOIN customers c ON cb.customerid=c.id
 			  WHERE YEAR(cb.created_at)='%s'
 			  ORDER BY cb.created_at DESC LIMIT %i, %i";

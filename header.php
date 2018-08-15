@@ -16,7 +16,7 @@
 	}
 	
 	if(isset($_GET['custid']) && intval($_GET['custid'])){
-		$custnameq="SELECT CONCAT(firstname, ' ', lastname) AS name FROM customers WHERE id=%i";
+		$custnameq="SELECT companyname AS name FROM customers WHERE id=%i";
 		$custnameq=$sql->query($custnameq, array(intval($_GET['custid'])));
 		$cust_name=$db->queryUniqueValue($custnameq);
 	}

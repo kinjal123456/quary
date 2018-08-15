@@ -55,7 +55,7 @@
 	$searchText="";
 	if(isset($_POST['searchcustomer']) && strlen($_POST['searchcustomer'])>0){
 		$searchValue=trim($_POST['searchcustomer']);
-		$searchText=" WHERE (LOWER(companyname) LIKE '%s%' OR LOWER(firstname) LIKE '%s%' OR LOWER(lastname) LIKE '%s%' OR email LIKE '%s')";
+		$searchText=" WHERE (LOWER(companyname) LIKE '%s%')";
 		$values[]=$searchValue;
 		$values[]=$searchValue;
 		$values[]=$searchValue;
@@ -73,7 +73,7 @@
 	$values[] = $offset;
     $values[] = $perpage;
 	
-	$query = "SELECT id, firstname, lastname, email, phone FROM customers ".$searchText." ORDER BY created_at DESC LIMIT %i, %i";
+	$query = "SELECT id, companyname, email, phone FROM customers ".$searchText." ORDER BY created_at DESC LIMIT %i, %i";
 	$query=$sql->query($query, $values);
 	$result=$db->query($query);
 	$limitcount=$db->numRows($result);
@@ -136,8 +136,7 @@
 				<tr>
 					<td valign="top" class="table-title" style="width:30px;padding-top:10px"><input type="checkbox" name="selectall" id="selectall"></td>
 					<td valign="top" class="table-title" style="width:50px">Sr no.</td>
-					<td valign="top" class="table-title">First Name</td>
-					<td valign="top" class="table-title">Last Name</td>
+					<td valign="top" class="table-title">Establishment Name</td>					
 					<td valign="top" class="table-title">Email</td>
 					<td valign="top" class="table-title">Phone Number</td>
 					<td valign="top" class="table-title" style="width:100px">Actions</td>
@@ -150,8 +149,7 @@
 						<tr>
 							<td valign="top" class="table-data"><input type="checkbox" name="selectcustomer" id="selectcustomer" class="selectcheckbox" value="<?php echo $id; ?>"></td>
 							<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($row->firstname); ?>"><?php echo ellipses(trim($row->firstname), 50); ?></td>
-							<td valign="top" class="table-data" title="<?php echo trim($row->lastname); ?>"><?php echo ellipses(trim($row->lastname), 20); ?></td>
+							<td valign="top" class="table-data" title="<?php echo trim($row->companyname); ?>"><?php echo ellipses(trim($row->companyname), 50); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($row->email); ?>"><?php echo ellipses(trim($row->email), 50); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($row->phone);?>"><?php echo trim($row->phone); ?></td>
 							<td valign="middle" class="table-data"> 

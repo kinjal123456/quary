@@ -12,8 +12,8 @@
 			if($custcount>0){//if email address repeats
 				$type['type']="custexists";
 			}else {
-				$query="INSERT INTO customers SET zoneid=%i, firstname='%s', lastname='%s', email='%s', phone='%s', licenceno='%s', created_at=now(), updated_at=now()";
-				$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['fname']), trim($_POST['lname']), trim($_POST['custemail']), trim($_POST['phone']), trim($_POST['licenceno'])));
+				$query="INSERT INTO customers SET zoneid=%i, companyname='%s', email='%s', phone='%s', licenceno='%s', created_at=now(), updated_at=now()";
+				$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companyname']), trim($_POST['custemail']), trim($_POST['phone']), trim($_POST['licenceno'])));
 				if($db->query($query)){
 					$type['type']="success";
 				}
@@ -28,7 +28,7 @@
 	if(isset($_GET['custid']) && intval($_GET['custid'])>0){
 		$customerid=intval($_GET['custid']);
 		
-		$custquery="SELECT id, zoneid, firstname, lastname, email, phone, licenceno FROM customers WHERE id=%i";
+		$custquery="SELECT id, zoneid, companyname, email, phone FROM customers WHERE id=%i";
 		$custquery=$sql->query($custquery, array($customerid));
 		$custresult=$db->query($custquery);
 		$custcount=$db->numRows($custresult);
@@ -67,15 +67,8 @@
 					<tr><td style="padding-top:10px"><!-- --></td></tr>
 					<tr>
 						<td valign="top" class="addField">
-							<div>First Name</div>
-							<div style="padding-top:5px"><input type="text" name="fname" id="fname" value="<?php echo ($customerid>0 && $custcount>0)?trim($custrow->firstname):""; ?>"></div>
-						</td>
-					</tr>
-					<tr><td style="padding-top:10px"><!-- --></td></tr>
-					<tr>
-						<td valign="top" class="addField">
-							<div>Last Name</div>
-							<div style="padding-top:5px"><input type="text" name="lname" id="lname" value="<?php echo ($customerid>0 && $custcount>0)?trim($custrow->lastname):""; ?>"></div>
+							<div>Establishment Name</div>
+							<div style="padding-top:5px"><input type="text" name="companyname" id="companyname" value="<?php echo ($customerid>0 && $custcount>0)?trim($custrow->firstname):""; ?>"></div>
 						</td>
 					</tr>
 					<tr><td style="padding-top:10px"><!-- --></td></tr>
@@ -90,13 +83,6 @@
 						<td valign="top" class="addField">
 							<div>Phone Number</div>
 							<div style="padding-top:5px"><input type="text" name="phone" id="phone" value="<?php echo ($customerid>0 && $custcount>0)?trim($custrow->phone):""; ?>"></div>
-						</td>
-					</tr>
-					<tr><td style="padding-top:10px"><!-- --></td></tr>
-					<tr>
-						<td valign="top" class="addField">
-							<div>Licence Number</div>
-							<div style="padding-top:5px"><input type="text" name="licenceno" id="licenceno" value="<?php echo ($customerid>0 && $custcount>0)?trim($custrow->licenceno):""; ?>"></div>
 						</td>
 					</tr>
 					<tr><td style="padding-top:10px"><!-- --></td></tr>

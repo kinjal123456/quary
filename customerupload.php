@@ -80,8 +80,7 @@
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
 			<td align="left" valign="top" class="table-title" style="width:40px">Sr no.</td>
-            <td align="left" valign="top" class="table-title" style="width:150px">First name</td>
-            <td align="left" valign="top" class="table-title" style="width:150px">Last name</td>
+            <td align="left" valign="top" class="table-title" style="width:150px">Establishment name</td>
             <td align="left" valign="top" class="table-title" style="width:200px">Email</td>
             <td align="left" valign="top" class="table-title" style="width:100px">Phone number</td>
             <td align="left" valign="top" class="table-title">Reason</td>
@@ -114,17 +113,11 @@
                 foreach($arraydata as $columnkey=>$columnvalue){
                     if($columnkey>0){ //skip the first row
                         if(array_filter($columnvalue)){
-                            //------------------------------------VALIDATION FOR REQUIRE FIRST NAME-------------------------------------//
-                            $fnamevalue=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_FIRSTNAME_]));
-                            $fnamecolname=$colString[$columnkey][_CUSTOMER_REQUIRED_FIRSTNAME_];
-                            if($fnamevalue==""){
-                                $error_list[]=_CUSTOMER_MESSAGE_REQUIRED_FIRSTNAME_." <span class='import_error_cellname'>[Cell ".$fnamecolname."]</span>";
-                            }
-                            //------------------------------------VALIDATION FOR REQUIRE LAST NAME-------------------------------------//
-                            $lnamevalue=trim(cleanstring($columnvalue[_CUSTOMER_REQUIRED_LASTNAME_]));
-                            $lnamecolname=$colString[$columnkey][_CUSTOMER_REQUIRED_LASTNAME_];
-                            if($lnamevalue==""){
-                                $error_list[]=_CUSTOMER_MESSAGE_REQUIRED_LASTNAME_." <span class='import_error_cellname'>[Cell ".$lnamecolname."]</span>";
+                            //------------------------------------VALIDATION FOR REQUIRE ESTABLISHMENT NAME-------------------------------------//
+                            $companynamevalue=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_ESTABLISHMENTNAME_]));
+                            $companynamecolname=$colString[$columnkey][_CUSTOMER_REQUIRED_ESTABLISHMENTNAME_];
+                            if($companynamevalue==""){
+                                $error_list[]=_CUSTOMER_MESSAGE_REQUIRED_ESTABLISHMENTNAME_." <span class='import_error_cellname'>[Cell ".$companynamecolname."]</span>";
                             }
                             //------------------------------------VALIDATION FOR REQUIRE EMAIL-------------------------------------//
                             $emailvalue=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_EMAIL_]));
@@ -150,12 +143,6 @@
                             		$error_list[]=_CUSTOMER_MESSAGE_INVALID_ZONE_." <span class='import_error_cellname'>[Cell ".$zonecolname."]</span>";
                             	}
                             }
-                            //------------------------------------VALIDATION FOR REQUIRE LICENCE-------------------------------------//
-                            $licencevalue=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_LICENCE_]));
-                            $licencecolname=$colString[$columnkey][_CUSTOMER_REQUIRED_LICENCE_];
-                            if($licencevalue==""){
-                            	$error_list[]=_CUSTOMER_MESSAGE_REQUIRED_LICENCE_." <span class='import_error_cellname'>[Cell ".$licencecolname."]</span>";
-                            }
 
                             //-------------if error - show the row data------------------//
                             if(!empty($error_list)){ //rows containing errors-print
@@ -173,8 +160,7 @@
         ?>
                                 <tr>
 									<td align="left" valign="top" class="table-data"><?php echo $counter; ?></td>
-                                    <td align="left" valign="top" class="table-data" title="<?php echo $fnamevalue; ?>"><?php echo ellipses($fnamevalue, 50); ?></td>
-                                    <td align="left" valign="top" class="table-data" title="<?php echo $lnamevalue; ?>"><?php echo ellipses($lnamevalue, 50); ?></td>
+                                    <td align="left" valign="top" class="table-data" title="<?php echo $companynamevalue; ?>"><?php echo ellipses($companynamevalue, 50); ?></td>
                                     <td align="left" valign="top" class="table-data" title="<?php echo $emailvalue; ?>"><?php echo ellipses($emailvalue, 50); ?></td>
                                     <td align="left" valign="top" class="table-data" title="<?php echo $phonevalue; ?>"><?php echo ellipses($phonevalue, 50); ?></td>
                                     <td align="left" valign="top" class="table-data">
@@ -229,30 +215,27 @@
 					foreach($arraydata as $columnkey=>$columnvalue){
 						if($columnkey>0){ //skip the first row (title)
 							if(array_filter($arraydata)){ //check for complete blank row,skip complete empty row
-								$fname=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_FIRSTNAME_]));
-								$lname=trim(cleanstring($columnvalue[_CUSTOMER_REQUIRED_LASTNAME_]));
+								$companyname=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_ESTABLISHMENTNAME_]));
 								$email=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_EMAIL_]));
 								$phone=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_PHONE_]));
 								$zoneval=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_ZONE_]));
 								$zoneId=getZoneId($zoneval);
-								$licenceno=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_LICENCE_]));
 								
 								$querycustomer="SELECT id as recordexist FROM `customers` WHERE email='%s'";
 								$querycustomer=$sql->query($querycustomer,array($email));
-								$rowcustomer=$db->query($querycustomer);
-								$recordexist=intval($rowcustomer->recordexist);
+								$recordexist=intval($db->queryUniqueValue($querycustomer));
 										
 								//-------------------insert new customers----------------------//
 								if($recordexist<=0){
-									$querycont="INSERT INTO `customers` SET `uploadid`=%i,`zoneid`=%i,`firstname`='%s',`lastname`='%s',`email`='%s',`phone`='%s',`licenceno`='%s',
+									$querycont="INSERT INTO `customers` SET `uploadid`=%i,`zoneid`=%i,`companyname`='%s',`email`='%s',`phone`='%s',
 												`created_at`=NOW(),`updated_at`=NOW()";
-									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$fname,$lname,$email,$phone,$licenceno));
+									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$companyname,$email,$phone));
 									$db->query($querycont);
 									$customerid=$db->lastInsertedId();
 								}else{
-									$querycont="UPDATE `customers` SET `uploadid`=%i,`zoneid`=%i,`firstname`='%s',`lastname`='%s',`email`='%s',`phone`='%s',`licenceno`='%s',
+									$querycont="UPDATE `customers` SET `uploadid`=%i,`zoneid`=%i,`companyname`='%s',`email`='%s',`phone`='%s',
 												`updated_at`=NOW() WHERE LOWER(email)='%s'";
-									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$fname, $lname,$email,$phone,$licenceno,$email));
+									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$companyname,$email,$phone,$email));
 									$db->query($querycont);
 								}
 							}

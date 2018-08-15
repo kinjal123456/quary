@@ -76,7 +76,7 @@
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<input type="text" name="billno[]" id="billno" class="billno" value="">
+				-
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
