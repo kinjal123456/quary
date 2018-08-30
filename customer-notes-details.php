@@ -4,6 +4,7 @@
 	$notesres=$db->query($notesqry);
 	$notescnt=$db->numRows($notesres);
 ?>
+
 <table border="0" cellpadding="0" cellspacing="0" id="appendnotecontent" class="noteslisting" style="width:100%">
 	<tr>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 80px;">&nbsp;</td>
@@ -48,8 +49,20 @@
 		<td id="notesrno" align="center" valign="middle" class="border_bottom border_left border_right">&nbsp;</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<textarea class="notes" name="notes[]" id="notes" style="width:100%"></textarea>
+				<textarea class="notes" name="notes[]" id="notes" style="width:100%" class="no-csform"></textarea>
 			</div>
+			<!--<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+			<script type="text/javascript" src="ckfinder/ckfinder.js"></script>-->
+			<script type="text/javascript">
+				CKEDITOR.replace( 'notes', {
+					filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
+					filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+					filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+					filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+					filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+					filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+				});
+			</script>
 		</td>
 	</tr>
 	<tr>

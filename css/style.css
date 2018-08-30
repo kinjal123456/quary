@@ -571,7 +571,7 @@ td.jqplot-table-legend{
 	cursor:pointer
 }
 .select_drop_down{
-	height:30px; color:#686868; font-size:12px
+	height:30px; color:#686868; font-size:12px;width:100% !important
 }
 .register_form_upper_hadding_lg{
 	font-weight:bold;

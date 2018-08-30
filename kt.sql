@@ -269,15 +269,28 @@ CREATE TABLE `customer_register_form_b` (
   `receipt_by_emp_bank_trans_id` int(11) DEFAULT NULL,
   `date_of_payment` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `remark` text COLLATE utf8_unicode_ci,
+  `min_highly_skilled` int(11) DEFAULT NULL,
+  `min_skilled` int(11) DEFAULT NULL,
+  `min_semi_skilled` int(11) DEFAULT NULL,
+  `min_un_skilled` int(11) DEFAULT NULL,
+  `da_highly_skilled` int(11) DEFAULT NULL,
+  `da_skilled` int(11) DEFAULT NULL,
+  `da_semi_skilled` int(11) DEFAULT NULL,
+  `da_un_skilled` int(11) DEFAULT NULL,
+  `over_highly_skilled` int(11) DEFAULT NULL,
+  `over_skilled` int(11) DEFAULT NULL,
+  `over_semi_skilled` int(11) DEFAULT NULL,
+  `over_un_skilled` int(11) DEFAULT NULL,
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_b` */
 
-insert  into `customer_register_form_b`(`id`,`customerid`,`name`,`rate_of_wage`,`no_of_work_days`,`overtime_hours`,`basic`,`special_basic`,`da`,`overtime_payments`,`hra`,`others`,`total`,`pf`,`esic`,`society`,`income_tax`,`insurance`,`others_deduction`,`recoveries`,`total_deduction`,`net_payment`,`emp_share_pf_welfare`,`receipt_by_emp_bank_trans_id`,`date_of_payment`,`remark`,`created_by`,`updated_by`) values 
-(1,2,'gdf',0,0,0,0,0,0,0,0,0,0,0,'','',0,0,0,0,0,0,0,0,'','','2018-06-16 12:46:45','2018-06-16 12:46:45');
+insert  into `customer_register_form_b`(`id`,`customerid`,`name`,`rate_of_wage`,`no_of_work_days`,`overtime_hours`,`basic`,`special_basic`,`da`,`overtime_payments`,`hra`,`others`,`total`,`pf`,`esic`,`society`,`income_tax`,`insurance`,`others_deduction`,`recoveries`,`total_deduction`,`net_payment`,`emp_share_pf_welfare`,`receipt_by_emp_bank_trans_id`,`date_of_payment`,`remark`,`min_highly_skilled`,`min_skilled`,`min_semi_skilled`,`min_un_skilled`,`da_highly_skilled`,`da_skilled`,`da_semi_skilled`,`da_un_skilled`,`over_highly_skilled`,`over_skilled`,`over_semi_skilled`,`over_un_skilled`,`created_by`,`updated_by`) values 
+(1,2,'gdf',0,0,0,0,0,0,0,0,0,0,0,'','',0,0,0,0,0,0,0,0,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2018-06-16 12:46:45','2018-06-16 12:46:45'),
+(3,1,'kinjal',21,435,456,45,645,5453,0,0,0,0,435,'','',0,0,0,0,0,0,0,0,'','',1,0,0,0,0,0,0,0,0,0,0,0,'2018-08-30 19:08:12','2018-08-30 19:57:49');
 
 /*Table structure for table `customer_register_form_c` */
 
@@ -376,7 +389,7 @@ CREATE TABLE `customers` (
   `companyname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `licenceno` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -392,11 +405,11 @@ CREATE TABLE `customers` (
 /*Data for the table `customers` */
 
 insert  into `customers`(`id`,`uploadid`,`zoneid`,`companyname`,`firstname`,`lastname`,`phone`,`licenceno`,`email`,`password`,`survey_no`,`address`,`pincode`,`state`,`created_at`,`updated_at`) values 
-(2,1,2,'','Mansi','thaker',65,'rtgre','m@gmail.com','kinjal','','Tithal road',396001,'Gujarat','2018-06-10 18:00:14','2018-06-11 17:33:14'),
-(24,9,1,NULL,'vrunda','d',543535,'LIC3','k3@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-06-16 11:10:41','2018-06-16 11:10:41'),
-(22,9,1,'dsfds','kinjal','thaker',435435,'LIC1','k1@gmail.com','kinjal','43534','7 shroff building, azad chowck',396001,'GUJARAT','2018-06-16 11:10:41','2018-06-16 11:12:36'),
-(23,9,2,NULL,'mansi','t',54353,'LIC2','k2@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-06-16 11:10:41','2018-06-16 11:10:41'),
-(26,0,1,NULL,'kinjal','thaker',435435,'df435435','m1@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-07-23 16:37:57','2018-07-23 16:37:57');
+(2,1,2,'','Mansi','thaker','65','rtgre','m@gmail.com','kinjal','','Tithal road',396001,'Gujarat','2018-06-10 18:00:14','2018-06-11 17:33:14'),
+(24,9,1,NULL,'vrunda','d','543535','LIC3','k3@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-06-16 11:10:41','2018-06-16 11:10:41'),
+(22,9,1,'dsfds','kinjal','thaker','435435','LIC1','k1@gmail.com','kinjal','43534','7 shroff building, azad chowck',396001,'GUJARAT','2018-06-16 11:10:41','2018-06-16 11:12:36'),
+(23,9,2,'kinjal','mansi','t','8866324756','LIC2','k2@gmail.com','test','123456','7 shroff building, azad chowck',396001,'GUJARAT','2018-06-16 11:10:41','2018-08-30 20:19:29'),
+(26,0,1,NULL,'kinjal','thaker','435435','df435435','m1@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-07-23 16:37:57','2018-07-23 16:37:57');
 
 /*Table structure for table `customers_bills` */
 

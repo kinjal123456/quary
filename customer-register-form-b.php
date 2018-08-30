@@ -18,12 +18,67 @@
 		exit(0);
 	}
 
-	if(isset($_POST['submitbtn'])){
+	if(isset($_POST['form_id'])){
+		$customer_form_id=intval($_POST['form_id']);
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
 		$dateofpayment=strlen(trim($_POST['date_of_payment'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_payment']))):"";
 		
-		if($custid>0){
+		if($customer_form_id>0){
+			$query="UPDATE customer_register_form_b SET
+													    `customerid`=%i,
+														`name`='%s',
+														`rate_of_wage`=%i,
+														`no_of_work_days`=%i,
+														`overtime_hours`=%i,
+														`basic`=%i,
+														`special_basic`=%i,
+														`da`=%i,
+														`overtime_payments`=%i,
+														`hra`=%i,
+														`others`=%i,
+														`total`=%i,
+														`pf`=%i,
+														`esic`='%s',
+														`society`='%s',
+														`income_tax`=%i,
+														`insurance`=%i,
+														`others_deduction`=%i,
+														`recoveries`=%i,
+														`total_deduction`=%i,
+														`net_payment`=%i,
+														`emp_share_pf_welfare`=%i,
+														`receipt_by_emp_bank_trans_id`=%i,
+														`date_of_payment`='%s',
+														`remark`='%s',
+														`min_highly_skilled`=%i,
+														`min_skilled`=%i,
+														`min_semi_skilled`=%i,
+														`min_un_skilled`=%i,
+														`da_highly_skilled`=%i,
+														`da_skilled`=%i,
+														`da_semi_skilled`=%i,
+														`da_un_skilled`=%i,
+														`over_highly_skilled`=%i,
+														`over_skilled`=%i,
+														`over_semi_skilled`=%i,
+														`over_un_skilled`=%i,
+														`updated_by`=NOW() WHERE id=%i";
+			$query=$sql->query($query, array($custid, trim($_POST['name']), trim($_POST['rate_of_wage']), trim($_POST['no_of_work_days']), 
+					trim($_POST['overtime_hours']), intval($_POST['basic']), trim($_POST['special_basic']), trim($_POST['da']), 
+					trim($_POST['overtime_payments']), trim($_POST['hra']), trim($_POST['others']), 
+					intval($_POST['total']), trim($_POST['pf']), trim($_POST['esic']), trim($_POST['society']), trim($_POST['income_tax']),
+					trim($_POST['insurance']), trim($_POST['others_deduction']), trim($_POST['recoveries']), intval($_POST['total_deduction']), trim($_POST['net_payment']),
+					intval($_POST['emp_share_pf_welfare']), trim($_POST['receipt_by_emp_bank_trans_id']), $dateofpayment, trim($_POST['remark']),
+					intval($_POST['min_highly_skilled']), intval($_POST['min_skilled']), intval($_POST['min_semi_skilled']), intval($_POST['min_un_skilled']), 
+					intval($_POST['da_highly_skilled']), intval($_POST['da_skilled']), intval($_POST['da_semi_skilled']), intval($_POST['da_un_skilled']), 
+					intval($_POST['over_highly_skilled']), intval($_POST['over_skilled']), intval($_POST['over_semi_skilled']), intval($_POST['over_un_skilled']), $customer_form_id
+			));
+			if($db->query($query)){
+				$type['customerid']=$custid;
+				$type["registerstaus"]="success";
+			}
+		}else {
 			$query="INSERT INTO customer_register_form_b SET
 													    `customerid`=%i,
 														`name`='%s',
@@ -152,36 +207,56 @@
 								<td align="center" class="border_top border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="min_highly_skilled" id="min_highly_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												$rate_key='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->min_highly_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="min_skilled" id="min_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												$rate_key='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->min_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="min_semi_skilled" id="min_semi_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												$rate_key='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->min_semi_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_left border_right register_table_td">
 									<div class="listing_th_padding">
 										<select name="min_un_skilled" id="min_un_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												$rate_key='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->min_un_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
@@ -193,36 +268,52 @@
 								<td align="center" class="border_top border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="da_highly_skilled" id="da_highly_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->da_highly_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="da_skilled" id="da_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->da_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="da_semi_skilled" id="da_semi_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->da_semi_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_left border_right register_table_td">
 									<div class="listing_th_padding">
 										<select name="da_un_skilled" id="da_un_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->da_un_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
@@ -234,36 +325,52 @@
 								<td align="center" class="border_top border_bottom border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="over_highly_skilled" id="over_highly_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->over_highly_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_bottom border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="over_skilled" id="over_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->over_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_bottom border_left register_table_td">
 									<div class="listing_th_padding">
 										<select name="over_semi_skilled" id="over_semi_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->over_semi_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
 								<td align="center" class="border_top border_bottom border_left border_right register_table_td">
 									<div class="listing_th_padding">
 										<select name="over_un_skilled" id="over_un_skilled" class="select_drop_down" style="width:100px;cursor:pointer">
-											<option value="0">Select</option>
-											<option value="1">Yes</option>
-											<option value="2">No</option>
+											<?php
+												$selectedvalue='';
+												$rate_values='';
+												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
+													$selectedvalue=($form_id>0 && $formDetailRow->over_un_skilled==$rate_values)?'selected="selected"':"";
+													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
+											} ?>
 										</select>
 									</div>
 								</td>
@@ -317,52 +424,52 @@
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="rate_of_wage" id="rate_of_wage" value="<?php echo ($form_id>0)?intval($formDetailRow->rate_of_wage):""; ?>" />
+										<input type="text" name="rate_of_wage" id="rate_of_wage" value="<?php echo ($form_id>0)?$formDetailRow->rate_of_wage:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="no_of_work_days" id="no_of_work_days" value="<?php echo ($form_id>0)?intval($formDetailRow->no_of_work_days):""; ?>" />
+										<input type="text" name="no_of_work_days" id="no_of_work_days" value="<?php echo ($form_id>0)?$formDetailRow->no_of_work_days:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="overtime_hours" id="overtime_hours" value="<?php echo ($form_id>0)?intval($formDetailRow->overtime_hours):""; ?>" />
+										<input type="text" name="overtime_hours" id="overtime_hours" value="<?php echo ($form_id>0)?$formDetailRow->overtime_hours:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="basic" id="basic" value="<?php echo ($form_id>0)?intval($formDetailRow->basic):""; ?>" />
+										<input type="text" name="basic" id="basic" value="<?php echo ($form_id>0)?$formDetailRow->basic:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="special_basic" id="special_basic" value="<?php echo ($form_id>0)?intval($formDetailRow->special_basic):""; ?>" />
+										<input type="text" name="special_basic" id="special_basic" value="<?php echo ($form_id>0)?$formDetailRow->special_basic:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="da" id="da" value="<?php echo ($form_id>0)?intval($formDetailRow->da):""; ?>" style="width:100%" />
+										<input type="text" name="da" id="da" value="<?php echo ($form_id>0)?$formDetailRow->da:""; ?>" style="width:100%" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="overtime_payments" id="overtime_payments" value="<?php echo ($form_id>0)?intval($formDetailRow->overtime_payments):""; ?>" />
+										<input type="text" name="overtime_payments" id="overtime_payments" value="<?php echo ($form_id>0)?$formDetailRow->overtime_payments:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="hra" id="hra" value="<?php echo ($form_id>0)?intval($formDetailRow->hra):""; ?>" />
+										<input type="text" name="hra" id="hra" value="<?php echo ($form_id>0)?$formDetailRow->hra:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="others" id="others" value="<?php echo ($form_id>0)?intval($formDetailRow->others):""; ?>" style="width:100%" />
+										<input type="text" name="others" id="others" value="<?php echo ($form_id>0)?$formDetailRow->others:""; ?>" style="width:100%" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="total" id="total" value="<?php echo ($form_id>0)?intval($formDetailRow->total):""; ?>" />
+										<input type="text" name="total" id="total" value="<?php echo ($form_id>0)?$formDetailRow->total:""; ?>" />
 									</div>
 								</td>
 							</tr>
@@ -385,7 +492,7 @@
 							<tr>
 								<td align="left" valign="top" class="border_bottom border_left border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="pf" id="pf" value="<?php echo ($form_id>0)?intval($formDetailRow->pf):""; ?>" />
+										<input type="text" name="pf" id="pf" value="<?php echo ($form_id>0)?$formDetailRow->pf:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
@@ -405,37 +512,37 @@
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="insurance" id="insurance" value="<?php echo ($form_id>0)?intval($formDetailRow->insurance):""; ?>" />
+										<input type="text" name="insurance" id="insurance" value="<?php echo ($form_id>0)?$formDetailRow->insurance:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="others_deduction" id="others_deduction" value="<?php echo ($form_id>0)?intval($formDetailRow->total_deduction):""; ?>" />
+										<input type="text" name="others_deduction" id="others_deduction" value="<?php echo ($form_id>0)?$formDetailRow->total_deduction:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="recoveries" id="recoveries" value="<?php echo ($form_id>0)?intval($formDetailRow->recoveries):""; ?>" />
+										<input type="text" name="recoveries" id="recoveries" value="<?php echo ($form_id>0)?$formDetailRow->recoveries:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="total_deduction" id="total_deduction" value="<?php echo ($form_id>0)?intval($formDetailRow->total_deduction):""; ?>" />
+										<input type="text" name="total_deduction" id="total_deduction" value="<?php echo ($form_id>0)?$formDetailRow->total_deduction:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="net_payment" id="net_payment" value="<?php echo ($form_id>0)?intval($formDetailRow->net_payment):""; ?>" />
+										<input type="text" name="net_payment" id="net_payment" value="<?php echo ($form_id>0)?$formDetailRow->net_payment:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="emp_share_pf_welfare" id="emp_share_pf_welfare" value="<?php echo ($form_id>0)?intval($formDetailRow->emp_share_pf_welfare):""; ?>" />
+										<input type="text" name="emp_share_pf_welfare" id="emp_share_pf_welfare" value="<?php echo ($form_id>0)?$formDetailRow->emp_share_pf_welfare:""; ?>" />
 									</div>
 								</td>
 								<td align="left" valign="top" class="border_bottom border_right">
 									<div class="listing_td_padding">
-										<input type="text" name="receipt_by_emp_bank_trans_id" id="receipt_by_emp_bank_trans_id" value="<?php echo ($form_id>0)?intval($formDetailRow->receipt_by_emp_bank_trans_id):""; ?>" />
+										<input type="text" name="receipt_by_emp_bank_trans_id" id="receipt_by_emp_bank_trans_id" value="<?php echo ($form_id>0)?$formDetailRow->receipt_by_emp_bank_trans_id:""; ?>" />
 									</div>
 								</td>
 							</tr>
@@ -461,6 +568,7 @@
 							<tr>
 								<td colspan="9">
 									<input type="hidden" name="custid" id="custid" value="<?php echo $customerid; ?>">
+									<input type="hidden" name="form_id" id="form_id" value="<?php echo $form_id; ?>">
 									<input name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0" type="submit">
 								</td>
 							</tr>
@@ -548,27 +656,27 @@
 								</td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->name); ?>"><?php echo trim($rw->name); ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->rate_of_wage); ?>"><?php echo trim($rw->rate_of_wage); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->no_of_work_days); ?>"><?php echo ellipses(intval($rw->no_of_work_days), 50); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->overtime_hours); ?>"><?php echo intval($rw->overtime_hours); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->basic); ?>"><?php echo intval($rw->basic); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->special_basic); ?>"><?php echo intval($rw->special_basic); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->da); ?>"><?php echo intval($rw->da); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->overtime_payments); ?>"><?php echo intval($rw->overtime_payments); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->hra); ?>"><?php echo intval($rw->hra); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->others); ?>"><?php echo intval($rw->others); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->total); ?>"><?php echo intval($rw->total); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->pf); ?>"><?php echo intval($rw->pf); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->esic); ?>"><?php echo trim($rw->esic); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->society); ?>"><?php echo trim($rw->society); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->income_tax); ?>"><?php echo intval($rw->income_tax); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->no_of_work_days; ?>"><?php echo $rw->no_of_work_days; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->overtime_hours; ?>"><?php echo $rw->overtime_hours; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->basic; ?>"><?php echo $rw->basic; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->special_basic; ?>"><?php echo $rw->special_basic; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->da; ?>"><?php echo $rw->da; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->overtime_payments; ?>"><?php echo $rw->overtime_payments; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->hra; ?>"><?php echo $rw->hra; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->others; ?>"><?php echo $rw->others; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->total; ?>"><?php echo $rw->total; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->pf; ?>"><?php echo $rw->pf; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->esic; ?>"><?php echo $rw->esic; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->society; ?>"><?php echo $rw->society; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->income_tax; ?>"><?php echo $rw->income_tax; ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->insurance); ?>"><?php echo trim($rw->insurance); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->others_deduction); ?>"><?php echo intval($rw->others_deduction); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->recoveries); ?>"><?php echo intval($rw->recoveries); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->total_deduction); ?>"><?php echo intval($rw->total_deduction); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->net_payment); ?>"><?php echo intval($rw->net_payment); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->others_deduction; ?>"><?php echo $rw->others_deduction; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->recoveries; ?>"><?php echo $rw->recoveries; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->total_deduction; ?>"><?php echo $rw->total_deduction; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->net_payment; ?>"><?php echo $rw->net_payment; ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->emp_share_pf_welfare); ?>"><?php echo trim($rw->emp_share_pf_welfare); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo intval($rw->receipt_by_emp_bank_trans_id); ?>"><?php echo intval($rw->receipt_by_emp_bank_trans_id); ?></td>
-								<td valign="top" class="table-data borderall" title="<?php echo date("m/d/Y", strtotime(trim($rw->date_of_payment))); ?>"><?php echo date("m/d/Y", strtotime(trim($rw->date_of_payment))); ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo $rw->receipt_by_emp_bank_trans_id; ?>"><?php echo $rw->receipt_by_emp_bank_trans_id; ?></td>
+								<td valign="top" class="table-data borderall" title="<?php echo (strlen($rw->date_of_payment)>0)?date("m/d/Y", strtotime(trim($rw->date_of_payment))):""; ?>"><?php echo (strlen($rw->date_of_payment)>0)?date("m/d/Y", strtotime(trim($rw->date_of_payment))):""; ?></td>
 								<td valign="top" class="table-data borderall" title="<?php echo trim($rw->remark); ?>"><?php echo ellipses(trim($rw->remark), 50); ?></td>
 							</tr>
 						<?php $counter++; } }else { ?>

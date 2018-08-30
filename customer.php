@@ -106,7 +106,7 @@
 					$type['type']="success";
 					$type['genstatus']="custexists";
 				}else {
-					$query="UPDATE customers SET zoneid=%i, companyname='%s', phone=%i, email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
+					$query="UPDATE customers SET zoneid=%i, companyname='%s', phone='%s', email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
 					$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), intval($_POST['custpincode']), trim($_POST['custstate']), $custid));
 					if($db->query($query)){
 						$type['type']="success";
