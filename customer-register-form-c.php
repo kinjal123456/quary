@@ -141,17 +141,17 @@
 				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">SI Number</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Recovery Type</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Particulars</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Date of Loss</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Amount</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Whether show <br />Cause Issued</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Explanation Heard <br /> in Presence of</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Number of EMIS</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">First Month Year</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Last Month Year</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">1. SI Number</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">2. Name</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">3. Recovery Type</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">4. Particulars</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">5. Date of Loss</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">6. Amount</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">7. Whether show <br />Cause Issued</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">8. Explanation Heard <br /> in Presence of</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">9. Number of EMIS</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">10. First Month Year</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">11. Last Month Year</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
@@ -214,8 +214,8 @@
 					</table>
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:200px"><div class="listing_th_padding">Date of Complete Recovery</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:200px"><div class="listing_th_padding">12. Date of Complete Recovery</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">13. Remarks</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
@@ -239,29 +239,65 @@
 					</table>
 				</form>
 				<?php 
-					$regYear=(isset($_POST['regyear']) && $_POST['regyear']>0)?$_POST['regyear']:date('Y');
+					$yearPart=''; $monthPart=''; $subPart=array(); $values=array();
+					$values[]=$customerid;
+					
+					if(isset($_POST['regyear']) && strlen($_POST['regyear'])>0){
+						$subPart[]="YEAR(created_by)='%s'";
+						$values[]=$_POST['regyear'];
+					}
+					
+					if(isset($_POST['regmonth']) && strlen($_POST['regmonth'])>0){
+						$subPart[]="MONTH(created_by)='%s'";
+						$values[]=$_POST['regmonth'];
+					}
+					
+					if(count($subPart)>0){
+						$qryPart=' AND '.implode(" AND ", $subPart);
+					}
 						
-					$qry="SELECT * FROM customer_register_form_c WHERE customerid=%i AND YEAR(created_by)='%s'";
-					$qry=$sql->query($qry, array($customerid, $regYear));
+					$qry="SELECT * FROM customer_register_form_c WHERE customerid=%i".$qryPart;
+					$qry=$sql->query($qry, $values);
 					$res=$db->query($qry);
 					$cnt=$db->numRows($res);
 					
-					if($cnt>0){
+					$monthq="SELECT MONTH(created_by) as month FROM customer_register_form_c WHERE customerid=%i GROUP BY MONTH(created_by) ORDER BY MONTH(created_by)";
+					$monthq=$sql->query($monthq, array($customerid));
+					$monthr=$db->query($monthq);
+					$monthc=$db->numRows($monthr);
+					
+					$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_c WHERE customerid=%i GROUP BY YEAR(created_by) ORDER BY created_by DESC";
+					$yearq=$sql->query($yearq, array($customerid));
+					$yearr=$db->query($yearq);
+					$yearc=$db->numRows($yearr);
+					
+					if($monthc>0 && $yearc>0){
 				?>
 					<div align="right" style="padding:10px">
 						<form name="filterregform" id="filterregform" action="" method="post">
-							<span>Select Year: </span>
-							<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
-								<option value="">Select</option>
-								<?php 
-									$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_c GROUP BY YEAR(created_by) ORDER BY created_by DESC";
-									$yearr=$db->query($yearq);
-									$yearc=$db->numRows($yearr);
-									while($yearrw=$db->fetchNextObject($yearr)){ ?>
-										<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
-									<?php }
-								?>
-							</select>
+							<div class="pull-right" style="padding-left:10px">
+								<div class="filtertitle">Select Month: </div>
+								<select name="regmonth" id="regmonth" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegMonths()">
+									<option value="">Select</option>
+									<?php 
+										while($monthrw=$db->fetchNextObject($monthr)){ ?>
+											<option value="<?php echo $monthrw->month; ?>" <?php echo ($_POST['regmonth']==$monthrw->month)?"selected='selected'":"" ;?> ><?php echo date("F", mktime(0,0,0,$monthrw->month,1,2011)); ?></option>
+										<?php }
+									?>
+								</select>
+							</div>
+							<div class="pull-right">
+								<div class="filtertitle">Select Year: </div>
+								<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
+									<option value="">Select</option>
+									<?php 
+										while($yearrw=$db->fetchNextObject($yearr)){ ?>
+											<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+										<?php }
+									?>
+								</select>
+							</div>
+							<div class="clearall"><!-- --></div>
 							<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
 						</form>
 					</div>

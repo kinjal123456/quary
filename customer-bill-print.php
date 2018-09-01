@@ -90,7 +90,7 @@ if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){?>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>;padding:10px 0; text-transform:capitalize"><?php echo number_to_word($row->bill_amount).(strlen($row->bill_amount)>0)?" Only":""; ?></td>
+				<td colspan="2" align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>;padding:10px 0; text-transform:capitalize"><?php echo number_to_word($row->bill_amount); ?><?php echo (strlen($row->bill_amount)>0)?" Only":""; ?></td>
 				<td align="right" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>;padding:10px 20px">
 					<div style="<?php echo $listing_td_padding; ?>"><?php echo "Rs. ".number_format($totalbill, 2); ?></div>
 				</td>

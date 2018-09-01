@@ -198,13 +198,16 @@ CREATE TABLE `customer_register_form_a_type_a` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_a_type_a` */
 
 insert  into `customer_register_form_a_type_a`(`id`,`customerid`,`srno`,`emp_code`,`firstname`,`lastname`,`gender`,`secondname`,`dob`,`nationality`,`education`,`doj`,`designation`,`category_address`,`emp_type`,`mobile`,`uan`,`pan`,`esic_ip`,`lwf`,`aadhaar_no`,`bank_ac_no`,`bank`,`branch_ifsc_code`,`present_address`,`permenent_address`,`service_book_no`,`date_of_exit`,`reason_for_exit`,`id_mark`,`photo`,`signature_thumb_image`,`remark`,`created_by`,`updated_by`) values 
 (1,3,1,'','','',0,'','','Indian','','','','0','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-06-15 11:47:19','2018-06-15 11:47:19'),
-(2,2,1,'','','',0,'','','Indian','','','','0','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-06-16 12:40:23','2018-06-16 12:40:23');
+(2,2,1,'','','',0,'','','Indian','','','','0','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-06-16 12:40:23','2018-06-16 12:40:23'),
+(3,23,1,'123','RK','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-08-31 19:41:25','2018-08-31 19:47:56'),
+(4,2,45,'','','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-09-01 13:19:24','2018-09-01 13:19:24'),
+(5,2,453,'','','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-09-01 13:19:30','2018-09-01 13:19:30');
 
 /*Table structure for table `customer_register_form_a_type_b` */
 
@@ -231,12 +234,13 @@ CREATE TABLE `customer_register_form_a_type_b` (
   `created_by` datetime NOT NULL,
   `updated_by` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='linked with register form A type A';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='linked with register form A type A';
 
 /*Data for the table `customer_register_form_a_type_b` */
 
 insert  into `customer_register_form_a_type_b`(`id`,`customerid`,`si_no`,`name`,`token_number`,`date_of_first_appnt`,`cert_of_age`,`place_of_emp`,`vocational_number`,`vocational_date`,`nomi_name`,`nomi_add`,`emergency_name`,`emergency_add`,`emergency_mobile`,`remark`,`sign_of_mines`,`created_by`,`updated_by`) values 
-(2,2,1,'kinjal chetankumar thaker','dsf','2018-06-21','dsf','sdf','dsfs','2018-06-28','kinjal','c','sdf','sdf',0,'sdf','sdf','2018-06-20 15:38:33','2018-06-20 15:38:33');
+(2,2,1,'kinjal chetankumar thaker','dsf','2018-06-21','dsf','sdf','dsfs','2018-06-28','kinjal','c','sdf','sdf',0,'sdf','sdf','2018-06-20 15:38:33','2018-06-20 15:38:33'),
+(3,23,1,'','','','','','','','','','','',0,'','','2018-08-31 19:56:42','2018-08-31 19:56:42');
 
 /*Table structure for table `customer_register_form_b` */
 
@@ -284,13 +288,14 @@ CREATE TABLE `customer_register_form_b` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_b` */
 
 insert  into `customer_register_form_b`(`id`,`customerid`,`name`,`rate_of_wage`,`no_of_work_days`,`overtime_hours`,`basic`,`special_basic`,`da`,`overtime_payments`,`hra`,`others`,`total`,`pf`,`esic`,`society`,`income_tax`,`insurance`,`others_deduction`,`recoveries`,`total_deduction`,`net_payment`,`emp_share_pf_welfare`,`receipt_by_emp_bank_trans_id`,`date_of_payment`,`remark`,`min_highly_skilled`,`min_skilled`,`min_semi_skilled`,`min_un_skilled`,`da_highly_skilled`,`da_skilled`,`da_semi_skilled`,`da_un_skilled`,`over_highly_skilled`,`over_skilled`,`over_semi_skilled`,`over_un_skilled`,`created_by`,`updated_by`) values 
 (1,2,'gdf',0,0,0,0,0,0,0,0,0,0,0,'','',0,0,0,0,0,0,0,0,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2018-06-16 12:46:45','2018-06-16 12:46:45'),
-(3,1,'kinjal',21,435,456,45,645,5453,0,0,0,0,435,'','',0,0,0,0,0,0,0,0,'','',1,0,0,0,0,0,0,0,0,0,0,0,'2018-08-30 19:08:12','2018-08-30 19:57:49');
+(3,1,'kinjal',21,435,456,45,645,5453,0,0,0,0,435,'','',0,0,0,0,0,0,0,0,'','',1,0,0,0,0,0,0,0,0,0,0,0,'2018-08-30 19:08:12','2018-08-30 19:57:49'),
+(4,2,'kinjal',0,0,0,0,0,0,0,0,0,0,0,'','',0,0,0,0,0,0,0,0,'','',0,0,0,0,0,0,0,0,0,0,0,0,'2018-09-01 11:01:24','2018-09-01 11:01:24');
 
 /*Table structure for table `customer_register_form_c` */
 
@@ -315,12 +320,13 @@ CREATE TABLE `customer_register_form_c` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_c` */
 
 insert  into `customer_register_form_c`(`id`,`customerid`,`si_no`,`name`,`recovery_type`,`particulars`,`date_of_loss`,`amount`,`whether_show_cause_issued`,`explanation_heard_in_presence_of`,`no_of_emis`,`first_month_year`,`last_month_year`,`date_of_complete_recovery`,`remark`,`created_by`,`updated_by`) values 
-(1,2,1,'gdfg',0,'','',0,'','',0,'','','','','2018-06-16 12:47:19','2018-06-16 12:47:19');
+(1,2,1,'gdfg',0,'','',0,'','',0,'','','','','2018-06-16 12:47:19','2018-06-16 12:47:19'),
+(2,2,1,'kinjal',0,'','',0,'','',0,'','','','','2018-09-01 16:55:53','2018-09-01 16:56:05');
 
 /*Table structure for table `customer_register_form_d` */
 
@@ -422,18 +428,25 @@ CREATE TABLE `customers_bills` (
   `billname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `billno` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `bill_amount` decimal(10,2) DEFAULT NULL,
+  `paid_by` tinyint(1) DEFAULT NULL COMMENT '1=cheque,2=cash',
+  `paid_on` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remarks` text COLLATE utf8mb4_unicode_ci,
   `payment_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1=paument due, 2=paid',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customers_bills` */
 
-insert  into `customers_bills`(`id`,`customerid`,`userid`,`billname`,`billno`,`bill_amount`,`payment_status`,`created_at`,`updated_at`) values 
-(5,22,1,'kinjal chetankumar thaker','m6xvr','45.00',1,'2017-06-16 11:13:18','2018-06-16 12:52:35'),
-(3,2,1,'Bill1','n8fa0','100.00',1,'2018-06-16 11:09:00','2018-06-16 11:13:33'),
-(6,22,2,'dgfdg','m56o6','45.00',1,'2017-06-16 11:13:18','2018-06-16 11:13:48');
+insert  into `customers_bills`(`id`,`customerid`,`userid`,`billname`,`billno`,`bill_amount`,`paid_by`,`paid_on`,`remarks`,`payment_status`,`created_at`,`updated_at`) values 
+(5,2,1,'Bill 1','JPD/LAB/001/18-19','100.00',NULL,NULL,NULL,0,'2018-08-31 12:55:12','2018-08-31 12:55:12'),
+(6,2,2,'Bill 1','BJB/EXP/001/18-19','50.00',NULL,NULL,NULL,0,'2018-08-31 12:55:12','2018-08-31 12:55:12'),
+(7,2,1,'Bill 2','JPD/LAB/002/18-19','45.00',NULL,NULL,NULL,0,'2018-08-31 15:22:44','2018-08-31 15:22:44'),
+(8,2,1,'bill 3','JPD/LAB/003/18-19','100.00',NULL,NULL,NULL,0,'2018-08-31 15:23:08','2018-08-31 15:23:08'),
+(9,2,2,'Bill 2','BJB/EXP/002/18-19','50.00',NULL,NULL,NULL,0,'2018-08-31 15:23:37','2018-08-31 15:23:37'),
+(10,23,1,'Bill 1','JPD/LAB/001/18-19','100.00',NULL,NULL,NULL,0,'2018-08-31 19:34:23','2018-08-31 19:34:23'),
+(11,23,1,'Bill 2','JPD/LAB/002/18-19','50.00',NULL,NULL,NULL,0,'2018-08-31 19:34:23','2018-08-31 19:34:23');
 
 /*Table structure for table `customerupload` */
 

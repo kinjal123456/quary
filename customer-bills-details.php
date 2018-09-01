@@ -12,6 +12,9 @@
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Bill number</div></td>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Bill name</div></td>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Bill amount</div></td>
+		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Paid By</div></td>
+		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Paid on</div></td>
+		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
 	</tr>
 	<?php
 		$counter=1;
@@ -54,6 +57,21 @@
 				<?php echo number_format($billsrw->bill_amount, 2); ?>
 			</div>
 		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<?php if($billsrw->paid_by==1) echo "Cheque"; else if($billsrw->paid_by==2) echo "Cash"; else echo ""; ?>
+			</div>
+		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<input type="text" name="paid_on" id="paid_on" class="paid_on" value="<?php echo trim($billsrw->paid_on); ?>" readonly="readonly" >
+			</div>
+		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<input type="text" name="remarks" id="remarks" value="<?php echo trim($billsrw->remarks); ?>" >
+			</div>
+		</td>
 	</tr>
 	<?php } } ?>
 	<tr class="bills template noofbills" style="height:40px;display:none">
@@ -89,14 +107,33 @@
 				<input type="text" name="billamt[]" id="billamt" class="billamt" value="">
 			</div>
 		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<select name="paid_by" id="paid_by" class="select_drop_down" style="width:100%">
+					<option value="">Select</option>
+					<option value="1" <?php echo (trim($billsrw->paid_by)==1)?'selected="selected"':''; ?>>Cheque</option>
+					<option value="2" <?php echo (trim($billsrw->paid_by)==2)?'selected="selected"':''; ?>>Cash</option>
+				</select>
+			</div>
+		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<input type="text" name="paid_on" id="paid_on" class="paid_on" value="<?php echo trim($billsrw->paid_on); ?>" readonly="readonly" >
+			</div>
+		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<input type="text" name="remarks" id="remarks" value="<?php echo trim($billsrw->remarks); ?>" >
+			</div>
+		</td>
 	</tr>
-	<?php if($billscnt<2){ ?>
+	<?php //if($billscnt<2){ ?>
 		<tr>
-			<td colspan="8" align="left" valign="top" class="border_right">
+			<td colspan="8" align="left" valign="top">
 				<div style="padding:10px;">
 					<div title="Add" class="icon_add icon_add_bill"></div>
 				</div>
 			</td>
 		</tr>
-	<?php } ?>
+	<?php //} ?>
 </table>

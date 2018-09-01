@@ -58,19 +58,19 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table; ?>">
 				<tr>
 					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
-						<div style="<?php echo $listing_th_padding; ?>">SI Number in<br>Employee Register</div>
+						<div style="<?php echo $listing_th_padding; ?>">1. SI Number in<br>Employee Register</div>
 					</td>
 					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
-						<div style="<?php echo $listing_th_padding; ?>">Name</div>
+						<div style="<?php echo $listing_th_padding; ?>">2. Name</div>
 					</td>
 					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
-						<div style="<?php echo $listing_th_padding; ?>">Token Number<br>Issued</div>
+						<div style="<?php echo $listing_th_padding; ?>">3. Token Number<br>Issued</div>
 					</td>
 					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left; ?>">
-						<div style="<?php echo $listing_th_padding; ?>">Date of First<br> Appointment with<br> present Owner</div>
+						<div style="<?php echo $listing_th_padding; ?>">4. Date of First<br> Appointment with<br> present Owner</div>
 					</td>
 					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_th_padding; ?>">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div>
+						<div style="<?php echo $listing_th_padding; ?>">5. Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div>
 					</td>
 				</tr>
 				<tr>
@@ -105,7 +105,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table; ?>">
 				<tr>
 					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>">
-						<div style="<?php echo $listing_th_padding; ?>">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div>
+						<div style="<?php echo $listing_th_padding; ?>">6. Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_top.$border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>; padding:0">
@@ -116,8 +116,8 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 									</td>
 								</tr>
 								<tr style="line-height:40px">
-									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">Number</td>
-									<td align="center" valign="middle" style="width:100px">Date</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">7. Number</td>
+									<td align="center" valign="middle" style="width:100px">8. Date</td>
 								</tr>
 							</table>
 						</div>
@@ -131,8 +131,8 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 									</td>
 								</tr>
 								<tr style="line-height:40px">
-									<td align="center" valign="middle" style="<?php echo $border_right; ?>width:100px">Name</td>
-									<td align="center" valign="middle" style="<?php echo $border_right; ?>width:100px">Address</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>width:100px">9. Name</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>width:100px">10. Address</td>
 								</tr>
 							</table>
 						</div>
@@ -178,15 +178,15 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 									</td>
 								</tr>
 								<tr style="line-height:40px">
-									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">Name and Relationship</td>
-									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">Address</td>
-									<td align="center" valign="middle" style="width:100px">Mobile</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">11. Name and Relationship</td>
+									<td align="center" valign="middle" style="<?php echo $border_right; ?>;width:100px">12. Address</td>
+									<td align="center" valign="middle" style="width:100px">13. Mobile</td>
 								</tr>
 							</table>
 						</div>
 					</td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">remark</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">*Signature of Mines<br> Manager</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">14. Remarks</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">15. *Signature of Mines<br> Manager</div></td>
 				</tr>
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">

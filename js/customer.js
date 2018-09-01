@@ -28,6 +28,16 @@ $(document).ready(function() {
 		});
 	})
 	
+	$('body').on('focus', ".paid_on", function(){
+		$(this).datepicker();
+		$(this).keydown(function (e) {
+			if (e.keyCode == 13) {
+				$('#customerform').submit();
+				return false;    //<---- Add this line
+			}
+		});
+	});
+	
 	$("#customerform").validate({
         debug: false,
         onsubmit: true,
@@ -735,7 +745,7 @@ function makeshortClone(){
 function makebillClone(){
 	var numofbills=$('table#appendbillcontent tr.noofbills').length-1;
 	
-	if(numofbills<2){
+	//if(numofbills<2){
 		$('.template').show();
 		var newentry = $('.template').clone(false).removeClass('template')[0].outerHTML;
 		$('.template').hide();
@@ -743,9 +753,9 @@ function makebillClone(){
 		$(lastoldelem).after(newentry);
 
 		elem = $('table#appendbillcontent tr.bills:last');//getting element
-	}else {
+	/*}else {
 		$(".icon_add_bill").hide();
-	}
+	}*/
 }
 
 function makenoteClone(){

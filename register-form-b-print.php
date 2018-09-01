@@ -79,11 +79,11 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" style="<?php echo $list_table.addlisting; ?>">
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Name</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Rate of<br> Wage</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Number of work<br> days</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Overtime<br /> hours</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Basic</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">1. Name</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">2. Rate of<br> Wage</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">3. Number of work<br> days</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">4. Overtime<br /> hours</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">5. Basic</div></td>
 				</tr>
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
@@ -114,11 +114,11 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				</tr>
 				<tr><td style="height:10px"><!-- --></td></tr>
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Special Basic</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">DA</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Overtime<br /> payments</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">HRA</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Others</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">6. Special Basic</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">7. DA</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">8. Overtime<br /> payments</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">9. HRA</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">10. Others</div></td>
 				</tr>
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
@@ -149,11 +149,11 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				</tr>
 				<tr><td style="height:10px"><!-- --></td></tr>
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Total</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">PF</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">ESIC</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Society</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Income Tax</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">11. Total</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">12. PF</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">13. ESIC</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">14. Society</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">15. Income Tax</div></td>
 				</tr>
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
@@ -184,11 +184,11 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				</tr>
 				<tr><td style="height:10px"><!-- --></td></tr>
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Insurance</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Others<br /> Deduction</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Recoveries</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Total<br /> Deduction</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">Net Payment</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">16. Insurance</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">17. Others<br /> Deduction</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">18. Recoveries</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">19. Total<br /> Deduction</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right.$register_table_td; ?>"><div style="<?php echo $listing_th_padding; ?>">20. Net Payment</div></td>
 				</tr>
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
@@ -219,10 +219,10 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 				</tr>
 				<tr><td style="height:10px"><!-- --></td></tr>
 				<tr>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Employee<br /> Share<br /> PF Welfare</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Receipt by<br /> Employee<br /> Bank<br /> Transaction<br /> Id</div></td>
-					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Date of Payment</div></td>
-					<td colspan="5" align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">Remarks</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">21. Employee<br /> Share<br /> PF Welfare</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">22. Receipt by<br /> Employee<br /> Bank<br /> Transaction<br /> Id</div></td>
+					<td align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">23. Date of Payment</div></td>
+					<td colspan="5" align="center" valign="middle" style="<?php echo $list_table_th.$border_top.$border_bottom.$border_left.$border_right; ?>"><div style="<?php echo $listing_th_padding; ?>">24. Remarks</div></td>
 				<tr>
 				<tr>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">

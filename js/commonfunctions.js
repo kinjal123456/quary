@@ -220,3 +220,7 @@ function filterYears(){
 function filterRegYears(){
 	$("#filterregform").submit();
 }
+//Filter reg by month
+function filterRegMonths(){
+	$("#filterregform").submit();
+}

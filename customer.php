@@ -190,10 +190,17 @@
 						$billquery = "SELECT count(*) as totalrecords FROM customers_bills WHERE customerid=%i AND userid=%i";
 						$billquery=$sql->query($billquery, array($custid, intval($_POST['user'][$b])));
 						$billcount = intval($db->queryUniqueValue($billquery));
-				
-						if($billcount==0){
+						$autobillno=$billcount;
+						if($billcount<=2){
+							if(intval($_POST['user'][$b])==1){//Jayeshbhai
+								$auto_bill_no='JPD/LAB/00'.($autobillno+1).'/'.date("y").'-'.date("y", strtotime("+1 year"));
+							}else if(intval($_POST['user'][$b])==2){//bhavnaben
+								$auto_bill_no='BJB/EXP/00'.($autobillno+1).'/'.date("y").'-'.date("y", strtotime("+1 year"));
+							}else {//Default value
+								$auto_bill_no="";
+							}
 							$query="INSERT INTO customers_bills SET customerid=%i, userid=%i, billno='%s', billname='%s', bill_amount='%s', created_at=NOW(), updated_at=NOW()";
-							$query=$sql->query($query, array($custid, intval($_POST['user'][$b]), genRandomString(5), trim($_POST['billname'][$b]), trim($_POST['billamt'][$b])));
+							$query=$sql->query($query, array($custid, intval($_POST['user'][$b]), $auto_bill_no, trim($_POST['billname'][$b]), trim($_POST['billamt'][$b])));
 							if($db->query($query)){
 								$type['type']="success";
 								$type['billstatus']="success";

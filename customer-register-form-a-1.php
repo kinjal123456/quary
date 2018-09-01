@@ -308,17 +308,17 @@
 				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">Sr No.</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Employee<br /> Code</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Surname</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Gender</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Father's/Spouse<br /> Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Date of Birth</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Nationality</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Education<br /> Level</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Date of<br /> Joining</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Designation</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">1. Sr No.</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">2. Employee<br /> Code</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">3. Name</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">4. Surname</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">5. Gender</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">6. Father's/Spouse<br /> Name</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">7. Date of Birth</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">8. Nationality</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">9. Education<br /> Level</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">10. Date of<br /> Joining</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">11. Designation</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
@@ -385,17 +385,17 @@
 					</table>
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">Category<br /> Address<br /> *(HS|S|SS|US)</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Type of<br />Employment</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Mobile</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">UAN</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">PAN</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">ESIC IP</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">LWF</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">AADHAAR</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Bank A/C<br /> Number</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Bank</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">Branch<br /> (IFSC)</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right register_table_td"><div class="listing_th_padding">12. Category<br /> Address<br /> *(HS|S|SS|US)</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">13. Type of<br />Employment</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">14. Mobile</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">15. UAN</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">16. PAN</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">17. ESIC IP</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">18. LWF</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">19. AADHAAR</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">20. Bank A/C<br /> Number</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">21. Bank</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td"><div class="listing_th_padding">22. Branch<br /> (IFSC)</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
@@ -466,15 +466,15 @@
 					</table>
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right"><div class="listing_th_padding">Present<br /> Address</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Permanent</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding" style="width:110px">Service Book No.</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Date of Exit</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Reason for Exit</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Mark of Identification</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Photo</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Specimen Signature/Thumb<br /> Impression</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Remarks</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right"><div class="listing_th_padding">23. Present<br /> Address</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">24. Permanent</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding" style="width:110px">25. Service Book No.</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">26. Date of Exit</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">27. Reason for Exit</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">28. Mark of Identification</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">29. Photo</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">30. Specimen Signature/Thumb<br /> Impression</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">31. Remarks</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
@@ -533,29 +533,64 @@
 					</table>
 				</form>
 				<?php 
-					$regYear=(isset($_POST['regyear']) && $_POST['regyear']>0)?$_POST['regyear']:date('Y');
+					$yearPart=''; $monthPart=''; $subPart=array(); $values=array();
+					$values[]=$customerid;
+					
+					if(isset($_POST['regyear']) && strlen($_POST['regyear'])>0){
+						$subPart[]="YEAR(created_by)='%s'";
+						$values[]=$_POST['regyear'];
+					}
+					
+					if(isset($_POST['regmonth']) && strlen($_POST['regmonth'])>0){
+						$subPart[]="MONTH(created_by)='%s'";
+						$values[]=$_POST['regmonth'];
+					}
+					
+					if(count($subPart)>0){
+						$qryPart=' AND '.implode(" AND ", $subPart);
+					}
 								
-					$qry="SELECT * FROM customer_register_form_a_type_a WHERE customerid=%i AND YEAR(created_by)='%s'";
-					$qry=$sql->query($qry, array($customerid, $regYear));
+					$qry="SELECT * FROM customer_register_form_a_type_a WHERE customerid=%i".$qryPart;
+					$qry=$sql->query($qry, $values);
 					$res=$db->query($qry);
 					$cnt=$db->numRows($res);
 					
-					if($cnt>0){
+					$monthq="SELECT MONTH(created_by) as month FROM customer_register_form_a_type_a WHERE customerid=%i GROUP BY MONTH(created_by) ORDER BY MONTH(created_by)";
+					$monthq=$sql->query($monthq, array($customerid));
+					$monthr=$db->query($monthq);
+					$monthc=$db->numRows($monthr);
+					
+					$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_a_type_a WHERE customerid=%i GROUP BY YEAR(created_by) ORDER BY created_by DESC";
+					$yearq=$sql->query($yearq, array($customerid));
+					$yearr=$db->query($yearq);
+					$yearc=$db->numRows($yearr);
 				?>
+				<?php if($monthc>0 || $yearc>0){ ?>
 					<div align="right" style="padding:10px">
 						<form name="filterregform" id="filterregform" action="" method="post">
-							<span>Select Year: </span>
-							<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
-								<option value="">Select</option>
-								<?php 
-									$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_a_type_a GROUP BY YEAR(created_by) ORDER BY created_by DESC";
-									$yearr=$db->query($yearq);
-									$yearc=$db->numRows($yearr);
-									while($yearrw=$db->fetchNextObject($yearr)){ ?>
-										<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
-									<?php }
-								?>
-							</select>
+							<div class="pull-right" style="padding-left:10px">
+								<div class="filtertitle">Select Month: </div>
+								<select name="regmonth" id="regmonth" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegMonths()">
+									<option value="">Select</option>
+									<?php 
+										while($monthrw=$db->fetchNextObject($monthr)){ ?>
+											<option value="<?php echo $monthrw->month; ?>" <?php echo ($_POST['regmonth']==$monthrw->month)?"selected='selected'":"" ;?> ><?php echo date("F", mktime(0,0,0,$monthrw->month,1,2011)); ?></option>
+										<?php }
+									?>
+								</select>
+							</div>
+							<div class="pull-right">
+								<div class="filtertitle">Select Year: </div>
+								<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
+									<option value="">Select</option>
+									<?php 
+										while($yearrw=$db->fetchNextObject($yearr)){ ?>
+											<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+										<?php }
+									?>
+								</select>
+							</div>
+							<div class="clearall"><!-- --></div>
 							<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
 						</form>
 					</div>

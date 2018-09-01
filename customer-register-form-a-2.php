@@ -129,12 +129,12 @@
 				<form name="registerform" id="registerform" action="" method="post">
 					<table border="0" cellpadding="0" cellspacing="0" class="list_table addlisting" style="width:100%">
 						<tr>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:130px"><div class="listing_th_padding">SI Number in<br>Employee Register</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Name</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Token Number<br>Issued</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Date of First<br> Appointment with<br> present Owner</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_left border_right" style="width:130px"><div class="listing_th_padding">1. SI Number in<br>Employee Register</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">2. Name</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">3. Token Number<br>Issued</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">4. Date of First<br> Appointment with<br> present Owner</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">5. Certificate of<br> age/fitness taken<br>(for 14 to 18 Years)</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">6. Place of<br> Employment<br> (Underground/Open<br> cast/Surface)</div></td>
 							<td align="center" valign="top" class="list_table_th border_top border_bottom border_right">
 								<div class="listing_th_padding" style="padding:0">
 									<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
@@ -142,8 +142,8 @@
 											<td align="center" valign="middle" colspan="2" class="border_bottom" style="line-height:42px">Certificate of Vocational Training</td>
 										</tr>
 										<tr style="line-height:40px">
-											<td align="center" valign="middle" class="border_right" style="width:100px">Number</td>
-											<td align="center" valign="middle" style="width:100px">Date</td>
+											<td align="center" valign="middle" class="border_right" style="width:100px">7. Number</td>
+											<td align="center" valign="middle" style="width:100px">8. Date</td>
 										</tr>
 									</table>
 								</div>
@@ -206,8 +206,8 @@
 											<td align="center" valign="middle" colspan="2" class="border_bottom" style="line-height:42px">Nominee</td>
 										</tr>
 										<tr style="line-height:40px">
-											<td align="center" valign="middle" class="border_right" style="width:100px">Name</td>
-											<td align="center" valign="middle" style="width:100px">Address</td>
+											<td align="center" valign="middle" class="border_right" style="width:100px">9. Name</td>
+											<td align="center" valign="middle" style="width:100px">10. Address</td>
 										</tr>
 									</table>
 								</div>
@@ -216,18 +216,18 @@
 								<div class="listing_th_padding" style="padding:0">
 									<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 										<tr>
-											<td align="center" valign="middle" colspan="3" class="border_bottom" style="line-height:42px">Adult Person to be contracted in case of Emergency</td>
+											<td align="center" valign="middle" colspan="3" class="border_bottom" style="line-height:42px">11. Adult Person to be contracted in case of Emergency</td>
 										</tr>
 										<tr style="line-height:40px">
 											<td align="center" valign="middle" class="border_right" style="width:100px">Name and Relationship</td>
-											<td align="center" valign="middle" class="border_right" style="width:100px">Address</td>
-											<td align="center" valign="middle" style="width:100px">Mobile</td>
+											<td align="center" valign="middle" class="border_right" style="width:100px">12. Address</td>
+											<td align="center" valign="middle" style="width:100px">13. Mobile</td>
 										</tr>
 									</table>
 								</div>
 							</td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td" style="width:200px"><div class="listing_th_padding">Remarks</div></td>
-							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td" style="width:200px"><div class="listing_th_padding">*Signature of Mines<br> Manager</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td" style="width:200px"><div class="listing_th_padding">14. Remarks</div></td>
+							<td align="center" valign="middle" class="list_table_th border_top border_bottom border_right register_table_td" style="width:200px"><div class="listing_th_padding">15. *Signature of Mines<br> Manager</div></td>
 						</tr>
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_right">
@@ -282,29 +282,65 @@
 					</table>
 				</form>
 				<?php 
-					$regYear=(isset($_POST['regyear']) && $_POST['regyear']>0)?$_POST['regyear']:date('Y');
+					$yearPart=''; $monthPart=''; $subPart=array(); $values=array();
+					$values[]=$customerid;
+					
+					if(isset($_POST['regyear']) && strlen($_POST['regyear'])>0){
+						$subPart[]="YEAR(created_by)='%s'";
+						$values[]=$_POST['regyear'];
+					}
+					
+					if(isset($_POST['regmonth']) && strlen($_POST['regmonth'])>0){
+						$subPart[]="MONTH(created_by)='%s'";
+						$values[]=$_POST['regmonth'];
+					}
+					
+					if(count($subPart)>0){
+						$qryPart=' AND '.implode(" AND ", $subPart);
+					}
 						
-					$qry="SELECT * FROM customer_register_form_a_type_b WHERE customerid=%i AND YEAR(created_by)='%s'";
-					$qry=$sql->query($qry, array($customerid, $regYear));
+					$qry="SELECT * FROM customer_register_form_a_type_b WHERE customerid=%i".$qryPart;
+					$qry=$sql->query($qry, $values);
 					$res=$db->query($qry);
 					$cnt=$db->numRows($res);
 					
-					if($cnt>0){
+					$monthq="SELECT MONTH(created_by) as month FROM customer_register_form_a_type_b WHERE customerid=%i GROUP BY MONTH(created_by) ORDER BY MONTH(created_by)";
+					$monthq=$sql->query($monthq, array($customerid));
+					$monthr=$db->query($monthq);
+					$monthc=$db->numRows($monthr);
+					
+					$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_a_type_b WHERE customerid=%i GROUP BY YEAR(created_by) ORDER BY created_by DESC";
+					$yearq=$sql->query($yearq, array($customerid));
+					$yearr=$db->query($yearq);
+					$yearc=$db->numRows($yearr);
+					
+					if($monthc>0 && $yearc>0){
 				?>
 					<div align="right" style="padding:10px">
 						<form name="filterregform" id="filterregform" action="" method="post">
-							<span>Select Year: </span>
-							<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
-								<option value="">Select</option>
-								<?php 
-									$yearq="SELECT YEAR(created_by) as year FROM customer_register_form_a_type_b GROUP BY YEAR(created_by) ORDER BY created_by DESC";
-									$yearr=$db->query($yearq);
-									$yearc=$db->numRows($yearr);
-									while($yearrw=$db->fetchNextObject($yearr)){ ?>
-										<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
-									<?php }
-								?>
-							</select>
+							<div class="pull-right" style="padding-left:10px">
+								<div class="filtertitle">Select Month: </div>
+								<select name="regmonth" id="regmonth" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegMonths()">
+									<option value="">Select</option>
+									<?php 
+										while($monthrw=$db->fetchNextObject($monthr)){ ?>
+											<option value="<?php echo $monthrw->month; ?>" <?php echo ($_POST['regmonth']==$monthrw->month)?"selected='selected'":"" ;?> ><?php echo date("F", mktime(0,0,0,$monthrw->month,1,2011)); ?></option>
+										<?php }
+									?>
+								</select>
+							</div>
+							<div class="pull-right">
+								<div class="filtertitle">Select Year: </div>
+								<select name="regyear" id="regyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterRegYears()">
+									<option value="">Select</option>
+									<?php 
+										while($yearrw=$db->fetchNextObject($yearr)){ ?>
+											<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['regyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+										<?php }
+									?>
+								</select>
+							</div>
+							<div class="clearall"><!-- --></div>
 							<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
 						</form>
 					</div>
