@@ -184,7 +184,21 @@
 			}else if(isset($_POST['billid']) && intval($_POST['billid'])>0){//bills insertion
 				$type['billid']="success";
 				
+				for($b1=0; $b1<count($_POST['temp_bill_id']); $b1++){
+					$paid_on1='';
+					if(intval($_POST['paid_by1'][$b1])>0 || strlen(trim($_POST['paid_on1'][$b1]))>0 || strlen(trim($_POST['remarks1'][$b1]))>0){
+						$paid_on1=(strlen(trim($_POST['paid_on1'][$b1]))>0)?date("m/d/Y", strtotime(trim($_POST['paid_on1'][$b1]))):'';
+						$query="UPDATE customers_bills SET paid_by=%i, paid_on='%s', remarks='%s', updated_at=NOW() WHERE id=%i";
+						$query=$sql->query($query, array(trim($_POST['paid_by1'][$b1]), $paid_on1, trim($_POST['remarks1'][$b1]), intval($_POST['temp_bill_id'][$b1])));
+						if($db->query($query)){
+							$type['type']="success";
+							$type['billstatus']="success";
+						}
+					}
+				}
+				
 				for($b=0; $b<count($_POST['user']); $b++){
+					$paid_on='';
 					if(intval($_POST['user'][$b])>0 && strlen(trim($_POST['billname'][$b]))>0 && strlen(trim($_POST['billamt'][$b]))>0){
 						
 						$billquery = "SELECT count(*) as totalrecords FROM customers_bills WHERE customerid=%i AND userid=%i";
@@ -199,8 +213,10 @@
 							}else {//Default value
 								$auto_bill_no="";
 							}
-							$query="INSERT INTO customers_bills SET customerid=%i, userid=%i, billno='%s', billname='%s', bill_amount='%s', created_at=NOW(), updated_at=NOW()";
-							$query=$sql->query($query, array($custid, intval($_POST['user'][$b]), $auto_bill_no, trim($_POST['billname'][$b]), trim($_POST['billamt'][$b])));
+							
+							$paid_on=(strlen(trim($_POST['paid_on'][$b]))>0)?date("m/d/Y", strtotime(trim($_POST['paid_on'][$b]))):'';
+							$query="INSERT INTO customers_bills SET customerid=%i, userid=%i, billno='%s', billname='%s', bill_amount='%s', paid_by=%i, paid_on='%s', remarks='%s', created_at=NOW(), updated_at=NOW()";
+							$query=$sql->query($query, array($custid, intval($_POST['user'][$b]), $auto_bill_no, trim($_POST['billname'][$b]), trim($_POST['billamt'][$b]), trim($_POST['paid_by'][$b]), $paid_on, trim($_POST['remarks'][$b])));
 							if($db->query($query)){
 								$type['type']="success";
 								$type['billstatus']="success";
@@ -213,11 +229,13 @@
 				}
 			}else if(isset($_POST['noteid']) && intval($_POST['noteid'])>0){//notes insertion
 				$type['noteid']="success";
+				$note_date='';
 				
 				for($n=0; $n<count($_POST['notes']); $n++){
+					$note_date=(strlen(trim($_POST['note_date'][$n]))>0)?date("m/d/Y", strtotime(trim($_POST['note_date'][$n]))):"";
 					if(strlen($_POST['notes'][$n])>0){
-						$query="INSERT INTO customer_notes SET customerid=%i, notes='%s', created_at=NOW(), updated_at=NOW()";
-						$query=$sql->query($query, array($custid, trim($_POST['notes'][$n])));
+						$query="INSERT INTO customer_notes SET customerid=%i, subject='%s', note_date='%s', notes='%s', created_at=NOW(), updated_at=NOW()";
+						$query=$sql->query($query, array($custid, trim($_POST['subject'][$n]), $note_date, trim($_POST['notes'][$n])));
 						if($db->query($query)){
 							$type['type']="success";
 							$type['notestatus']="success";

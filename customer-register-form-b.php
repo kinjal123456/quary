@@ -212,7 +212,7 @@
 												$rate_values='';
 												$rate_key='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->min_highly_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->min_highly_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -226,7 +226,7 @@
 												$rate_values='';
 												$rate_key='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->min_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->min_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -240,7 +240,7 @@
 												$rate_values='';
 												$rate_key='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->min_semi_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->min_semi_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -254,7 +254,7 @@
 												$rate_values='';
 												$rate_key='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->min_un_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->min_un_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -272,7 +272,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->da_highly_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->da_highly_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -285,7 +285,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->da_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->da_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -298,7 +298,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->da_semi_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->da_semi_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -311,7 +311,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->da_un_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->da_un_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -329,7 +329,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->over_highly_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->over_highly_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -342,7 +342,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->over_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->over_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -355,7 +355,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->over_semi_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->over_semi_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>
@@ -368,7 +368,7 @@
 												$selectedvalue='';
 												$rate_values='';
 												foreach($REGISTER_FORM_B_RATES_ as $rate_key => $rate_values){
-													$selectedvalue=($form_id>0 && $formDetailRow->over_un_skilled==$rate_values)?'selected="selected"':"";
+													$selectedvalue=($form_id>0 && $formDetailRow->over_un_skilled==$rate_key)?'selected="selected"':"";
 													echo '<option value="'.$rate_key.'" '.$selectedvalue.'>'.$rate_values.'</option>';
 											} ?>
 										</select>

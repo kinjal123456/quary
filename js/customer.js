@@ -38,6 +38,26 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('body').on('focus', ".paid_on1", function(){
+		$(this).datepicker();
+		$(this).keydown(function (e) {
+			if (e.keyCode == 13) {
+				$('#customerform').submit();
+				return false;    //<---- Add this line
+			}
+		});
+	});
+	
+	$('body').on('focus', ".note_date", function(){
+		$(this).datepicker();
+		$(this).keydown(function (e) {
+			if (e.keyCode == 13) {
+				$('#customerform').submit();
+				return false;    //<---- Add this line
+			}
+		});
+	});
+	
 	$("#customerform").validate({
         debug: false,
         onsubmit: true,
@@ -54,7 +74,8 @@ $(document).ready(function() {
 				required: true
 			},
 			'phoneno': {
-				required: true
+				required: true,
+				number: true
 			},
 			'custemail': {
 				required: true
@@ -157,7 +178,8 @@ $(document).ready(function() {
 				required: "Please enter lastname."
 			},
 			'phoneno': {
-				required: "Please enter phone number."
+				required: "Please enter phone number.",
+				number: "Please enter digits only."
 			},
 			'custemail': {
 				required: "Please enter email."

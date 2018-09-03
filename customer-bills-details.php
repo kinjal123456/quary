@@ -1,5 +1,5 @@
 <?php 
-	$billsqry="SELECT id, customerid, userid, billno, billname, bill_amount FROM customers_bills WHERE customerid=%i AND YEAR(created_at)=%i";
+	$billsqry="SELECT id, customerid, userid, billno, billname, bill_amount, paid_by, paid_on, remarks FROM customers_bills WHERE customerid=%i AND YEAR(created_at)=%i";
 	$billsqry=$sql->query($billsqry, array($customerid, date('Y')));
 	$billsres=$db->query($billsqry);
 	$billscnt=$db->numRows($billsres);
@@ -40,7 +40,7 @@
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
 				<?php echo $uservalue; ?>
-			</div>
+			</div8
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
@@ -59,17 +59,22 @@
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<?php if($billsrw->paid_by==1) echo "Cheque"; else if($billsrw->paid_by==2) echo "Cash"; else echo ""; ?>
+				<select name="paid_by1[]" id="paid_by1" class="select_drop_down" style="width:100%">
+					<option value="">Select</option>
+					<option value="1" <?php echo (intval($billsrw->paid_by)==1)?'selected="selected"':''; ?>>Cheque</option>
+					<option value="2" <?php echo (intval($billsrw->paid_by)==2)?'selected="selected"':''; ?>>Cash</option>
+				</select>
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<input type="text" name="paid_on" id="paid_on" class="paid_on" value="<?php echo trim($billsrw->paid_on); ?>" readonly="readonly" >
+				<input type="text" name="paid_on1[]" class="paid_on1" value="<?php echo (strlen($billsrw->paid_on)>0)?date("m/d/Y", strtotime($billsrw->paid_on)):''; ?>" readonly="readonly" >
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<input type="text" name="remarks" id="remarks" value="<?php echo trim($billsrw->remarks); ?>" >
+				<input type="hidden" name="temp_bill_id[]" id="temp_bill_id" value="<?php echo intval($billsrw->id); ?>">
+				<input type="text" name="remarks1[]" id="remarks1" value="<?php echo trim($billsrw->remarks); ?>" >
 			</div>
 		</td>
 	</tr>
@@ -109,21 +114,21 @@
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<select name="paid_by" id="paid_by" class="select_drop_down" style="width:100%">
-					<option value="">Select</option>
-					<option value="1" <?php echo (trim($billsrw->paid_by)==1)?'selected="selected"':''; ?>>Cheque</option>
-					<option value="2" <?php echo (trim($billsrw->paid_by)==2)?'selected="selected"':''; ?>>Cash</option>
+				<select name="paid_by[]" id="paid_by" class="select_drop_down" style="width:100%">
+					<option value="0">Select</option>
+					<option value="1">Cheque</option>
+					<option value="2">Cash</option>
 				</select>
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<input type="text" name="paid_on" id="paid_on" class="paid_on" value="<?php echo trim($billsrw->paid_on); ?>" readonly="readonly" >
+				<input type="text" name="paid_on[]" class="paid_on" value="" readonly="readonly">
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<input type="text" name="remarks" id="remarks" value="<?php echo trim($billsrw->remarks); ?>" >
+				<input type="text" name="remarks[]" id="remarks" value="" >
 			</div>
 		</td>
 	</tr>

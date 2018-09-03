@@ -33,7 +33,7 @@
 	$values[] = $offset;
     $values[] = $perpage;
 	
-	$query = "SELECT cb.id, cb.userid, cb.billname, cb.billno, cb.bill_amount, cb.payment_status, companyname AS name FROM customers_bills cb 
+	$query = "SELECT cb.id, cb.userid, cb.billname, cb.billno, cb.bill_amount, cb.paid_by, cb.paid_on, cb.remarks, cb.payment_status, companyname AS name FROM customers_bills cb 
 			  LEFT JOIN customers c ON cb.customerid=c.id
 			  WHERE YEAR(cb.created_at)='%s'
 			  ORDER BY cb.created_at DESC LIMIT %i, %i";
@@ -73,14 +73,18 @@
 					<td valign="top" class="table-title" style="width:100px">Bill Number</td>
 					<td valign="top" class="table-title">Bill Name</td>
 					<td valign="top" class="table-title" style="width:100px">Bill Amount</td>
+					<td valign="top" class="table-title" style="width:100px">Paid by</td>
+					<td valign="top" class="table-title" style="width:100px">Paid on</td>
 					<td valign="top" class="table-title" style="width:100px">Payment status</td>
 				</tr>
 				<?php
 					if($count>0){
 						$counter=1;
+						$paid_by="";
 						while($row=$db->fetchNextObject($result)){
 							$id=intval($row->id); 
 							$uservalue=(intval($row->userid)==1)?"Jayesh bhai":"Bhavna ben";
+							if($row->paid_by==1) $paid_by="Cheque"; else if($row->paid_by==2) $paid_by="Cash"; else $paid_by="";
 				?>
 						<tr>
 							<td valign="top" class="table-data">
@@ -92,7 +96,9 @@
 							<td valign="top" class="table-data" title="<?php echo trim($row->billno); ?>"><?php echo ellipses(trim($row->billno), 50); ?></td>
 							<td valign="top" class="table-data" title="<?php echo trim($row->billname); ?>"><?php echo ellipses(trim($row->billname), 50); ?></td>
 							<td valign="middle" class="table-data" title="<?php echo $row->bill_amount; ?>"><?php echo $row->bill_amount; ?></td>
-							<td valign="middle" class="table-data" title="<?php echo $row->bill_amount; ?>">
+							<td valign="middle" class="table-data" title="<?php echo $paid_by; ?>"><?php echo $paid_by; ?></td>
+							<td valign="middle" class="table-data" title="<?php echo $row->paid_on; ?>"><?php echo $row->paid_on; ?></td>
+							<td valign="middle" class="table-data">
 								<select name="paymentstatus" id="paymentstatus<?php echo $id; ?>" style="width:80px" onchange="updateBillPayment(this, <?php echo $id; ?>)">
 									<option value="0">Select</option>
 									<?php foreach($BILLS_PAYMENT_STATUS_ as $payment_key => $payment_value){ ?>

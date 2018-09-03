@@ -1,5 +1,5 @@
 <?php 
-	$notesqry="SELECT id, customerid, notes FROM customer_notes WHERE customerid=%i";
+	$notesqry="SELECT id, customerid, subject, note_date, notes FROM customer_notes WHERE customerid=%i";
 	$notesqry=$sql->query($notesqry, array($customerid));
 	$notesres=$db->query($notesqry);
 	$notescnt=$db->numRows($notesres);
@@ -9,6 +9,8 @@
 	<tr>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 80px;">&nbsp;</td>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width:100px"><div class="listing_th_padding">Sr no.</div></td>
+		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width:200px"><div class="listing_th_padding">Subject</div></td>
+		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width:200px"><div class="listing_th_padding">Date</div></td>
 		<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Notes</div></td>
 	</tr>
 	<?php
@@ -16,8 +18,6 @@
 		if($notescnt>0){
 			$addcapcount=1;
 			while($notesrw=$db->fetchNextObject($notesres)){
-				$uservalue=(intval($notesrw->userid)==1)?"Jayesh bhai":"Bhavna ben";
-				$customestyle=($notescnt==$counter)?'style="border-bottom: solid 1px #e6e6e6;"':'';
 	?>
 	<tr class="noofnotes">
 		<td align="center" valign="middle" class="border_bottom border_left border_right">
@@ -29,6 +29,16 @@
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
 				<?php echo $counter++; ?>
+			</div>
+		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<?php echo trim($notesrw->subject); ?>
+			</div>
+		</td>
+		<td align="left" valign="top" class="border_bottom border_right">
+			<div style="padding: 10px">
+				<?php echo (strlen($notesrw->note_date)>0)?date("m/d/Y", strtotime($notesrw->note_date)):''; ?>
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
@@ -47,12 +57,22 @@
 			</div>
 		</td>
 		<td id="notesrno" align="center" valign="middle" class="border_bottom border_left border_right">&nbsp;</td>
+		<td id="notesrno" align="center" valign="middle" class="border_bottom border_left border_right">
+			<div style="padding: 10px">
+				<input name="subject[]" id="subject" value="" />
+			</div>
+		</td>
+		<td id="notesrno" align="center" valign="middle" class="border_bottom border_left border_right">
+			<div style="padding: 10px">
+				<input name="note_date[]" class="note_date" value="" />
+			</div>
+		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
 				<textarea class="notes" name="notes[]" id="notes" style="width:100%" class="no-csform"></textarea>
 			</div>
 			<!--<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-			<script type="text/javascript" src="ckfinder/ckfinder.js"></script>-->
+			<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
 			<script type="text/javascript">
 				CKEDITOR.replace( 'notes', {
 					filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
@@ -62,7 +82,7 @@
 					filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
 					filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 				});
-			</script>
+			</script>-->
 		</td>
 	</tr>
 	<tr>
