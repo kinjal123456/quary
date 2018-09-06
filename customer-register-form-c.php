@@ -18,12 +18,40 @@
 		exit(0);
 	}
 
-	if(isset($_POST['submitbtn'])){
+	if(isset($_POST['form_id'])){
+		$customer_form_id=intval($_POST['form_id']);
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
+		$dateofloss=strlen(trim($_POST['date_of_loss'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_loss']))):"";
 		$dateofcompleterecovery=strlen(trim($_POST['date_of_complete_recovery'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_complete_recovery']))):"";
 		
-		if($custid>0){
+		if($customer_form_id>0){
+			$query="UPDATE customer_register_form_c SET
+													    `customerid`=%i,
+														`si_no`=%i,
+														`name`='%s',
+														`recovery_type`=%i,
+														`particulars`='%s',
+														`date_of_loss`='%s',
+														`amount`=%i,
+														`whether_show_cause_issued`='%s',
+														`explanation_heard_in_presence_of`='%s',
+														`no_of_emis`=%i,
+														`first_month_year`='%s',
+														`last_month_year`='%s',
+														`date_of_complete_recovery`='%s',
+														`remark`='%s',
+														`updated_by`=NOW() WHERE id=%i";
+			$query=$sql->query($query, array($custid, intval($_POST['si_no']), trim($_POST['name']), intval($_POST['recovery_type']), 
+					trim($_POST['particulars']), $dateofloss, intval($_POST['amount']), trim($_POST['whether_show_cause_issued']), 
+					trim($_POST['explanation_heard_in_presence_of']), intval($_POST['no_of_emis']), trim($_POST['first_month_year']), 
+					trim($_POST['last_month_year']), $dateofcompleterecovery, trim($_POST['remark']), $customer_form_id
+			));
+			if($db->query($query)){
+				$type['customerid']=$custid;
+				$type["registerstaus"]="success";
+			}
+		}else {
 			$query="INSERT INTO customer_register_form_c SET
 													    `customerid`=%i,
 														`si_no`=%i,
@@ -59,6 +87,15 @@
 
 	if(isset($_GET['custid']) && intval($_GET['custid'])){
 		$customerid=intval($_GET['custid']);
+		
+		if(isset($_GET['id']) && intval($_GET['id'])){
+			$form_id=intval($_GET['id']);
+			
+			$formDetailQuery="SELECT * FROM customer_register_form_c WHERE id=%i";
+			$formDetailQuery=$sql->query($formDetailQuery, array($form_id));
+			$formDetailResult=$db->query($formDetailQuery);
+			$formDetailRow=$db->fetchNextObject($formDetailResult);
+		}
 		
 		$formlinq="SELECT emailid FROM customer_additional_info WHERE id=%i AND detailname='Shram Shuvidha LIN detail'";
 		$formlinq=$sql->query($formlinq, array($customerid));
@@ -119,57 +156,57 @@
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="si_no" id="si_no" value="">
+									<input type="text" name="si_no" id="si_no" value="<?php echo ($form_id>0)?intval($formDetailRow->si_no):""; ?>">
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="name" id="name" value="" />
+									<input type="text" name="name" id="name" value="<?php echo ($form_id>0)?trim($formDetailRow->name):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="recovery_type" id="recovery_type" value="" />
+									<input type="text" name="recovery_type" id="recovery_type" value="<?php echo ($form_id>0)?intval($formDetailRow->recovery_type):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="particulars" id="particulars" value="" />
+									<input type="text" name="particulars" id="particulars" value="<?php echo ($form_id>0)?trim($formDetailRow->particulars):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="date_of_loss" id="date_of_loss" value="" readonly="readonly" />
+									<input type="text" name="date_of_loss" id="date_of_loss" value="<?php echo ($form_id>0 && strlen($formDetailRow->date_of_loss)>0)?date("m/d/Y", strtotime($formDetailRow->date_of_loss)):""; ?>" readonly="readonly" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="amount" id="amount" value="" />
+									<input type="text" name="amount" id="amount" value="<?php echo ($form_id>0)?intval($formDetailRow->amount):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="whether_show_cause_issued" id="whether_show_cause_issued" value="" style="width:100%" />
+									<input type="text" name="whether_show_cause_issued" id="whether_show_cause_issued" value="<?php echo ($form_id>0)?trim($formDetailRow->whether_show_cause_issued):""; ?>" style="width:100%" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="explanation_heard_in_presence_of" id="explanation_heard_in_presence_of" value="" />
+									<input type="text" name="explanation_heard_in_presence_of" id="explanation_heard_in_presence_of" value="<?php echo ($form_id>0)?trim($formDetailRow->explanation_heard_in_presence_of):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="no_of_emis" id="no_of_emis" value="" />
+									<input type="text" name="no_of_emis" id="no_of_emis" value="<?php echo ($form_id>0)?intval($formDetailRow->no_of_emis):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="first_month_year" id="first_month_year" value="" style="width:100%" />
+									<input type="text" name="first_month_year" id="first_month_year" value="<?php echo ($form_id>0)?trim($formDetailRow->first_month_year):""; ?>" style="width:100%" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="last_month_year" id="last_month_year" value="" />
+									<input type="text" name="last_month_year" id="last_month_year" value="<?php echo ($form_id>0)?trim($formDetailRow->last_month_year):""; ?>" />
 								</div>
 							</td>
 						</tr>
@@ -183,18 +220,19 @@
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="date_of_complete_recovery" id="date_of_complete_recovery" value="">
+									<input type="text" name="date_of_complete_recovery" id="date_of_complete_recovery" value="<?php echo ($form_id>0 && strlen($formDetailRow->date_of_complete_recovery)>0)?date("m/d/Y", strtotime($formDetailRow->date_of_complete_recovery)):""; ?>" readonly="readonly">
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="remark" id="remark" value="" />
+									<input type="text" name="remark" id="remark" value="<?php echo ($form_id>0)?trim($formDetailRow->remark):""; ?>" />
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="9">
 								<input type="hidden" name="custid" id="custid" value="<?php echo $customerid; ?>">
+								<input type="hidden" name="form_id" id="form_id" value="<?php echo $form_id; ?>">
 								<input name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0" type="submit">
 							</td>
 						</tr>
@@ -262,7 +300,8 @@
 										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 									</form>
 									<div>
-										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('c', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+										<div class="pull-left action-icon"><a href="customer-register-form-c.php?custid=<?php echo $customerid; ?>&id=<?php echo $id; ?>"><img src="images/edit.png" /></a></div>
+										<div class="pull-left action-icon" style="padding-top:3px"><img src="images/delete.png" onclick="deleteRegisterForm('c', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
 										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
 										<div class="clearall">
 									</div>

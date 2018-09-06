@@ -18,11 +18,33 @@
 		exit(0);
 	}
 
-	if(isset($_POST['submitbtn'])){
+	if(isset($_POST['form_id'])){
+		$customer_form_id=intval($_POST['form_id']);
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
 		
-		if($custid>0){//INSERT MAIN DATA
+		if($customer_form_id>0){
+			$query="UPDATE customer_register_form_d SET `customerid`=%i,`name`='%s',`relay_or_set_work`='%s',`summary_no_of_days`='%s',`signature_of_reg_keeper`='%s',
+														`remark_no_of_hours`='%s',`updated_by`=NOW() WHERE id=%i";
+			$query=$sql->query($query, array($custid, trim($_POST['name']), trim($_POST['relay_or_set_work']), trim($_POST['summary_no_of_days']), 
+					trim($_POST['signature_of_reg_keeper']), trim($_POST['remark_no_of_hours']), $customer_form_id));
+			if($db->query($query)){
+				if($customer_form_id>0){//UPDATE ATTENDENCE DATA
+					if(isset($_POST['days']) && count($_POST['days'])>0){
+						$dayno=1;
+						for($j=0; $j<=count($_POST['days']); $j++){
+							if(strlen($_POST['days'][$j])>0){
+								$upquery="UPDATE customer_register_form_d SET day_".$dayno."=%i,`updated_by`=NOW() WHERE id=%i";
+								$upquery=$sql->query($upquery, array($_POST['days'][$j], $customer_form_id));
+								$db->query($upquery);
+							}
+						$dayno++; }
+					}
+					$type['customerid']=$custid;
+					$type["registerstaus"]="success";
+				}
+			}
+		}else {//INSERT MAIN DATA
 			$query="INSERT INTO customer_register_form_d SET `customerid`=%i,`name`='%s',`relay_or_set_work`='%s',`summary_no_of_days`='%s',`signature_of_reg_keeper`='%s',
 														`remark_no_of_hours`='%s',`created_by`=NOW(),`updated_by`=NOW()";
 			$query=$sql->query($query, array($custid, trim($_POST['name']), trim($_POST['relay_or_set_work']), trim($_POST['summary_no_of_days']), 
@@ -53,6 +75,15 @@
 
 	if(isset($_GET['custid']) && intval($_GET['custid'])){
 		$customerid=intval($_GET['custid']);
+		
+		if(isset($_GET['id']) && intval($_GET['id'])){
+			$form_id=intval($_GET['id']);
+			
+			$formDetailQuery="SELECT * FROM customer_register_form_d WHERE id=%i";
+			$formDetailQuery=$sql->query($formDetailQuery, array($form_id));
+			$formDetailResult=$db->query($formDetailQuery);
+			$formDetailRow=$db->fetchNextObject($formDetailResult);
+		}
 		
 		$formlinq="SELECT emailid FROM customer_additional_info WHERE id=%i AND detailname='Shram Shuvidha LIN detail'";
 		$formlinq=$sql->query($formlinq, array($customerid));
@@ -117,27 +148,27 @@
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="name" id="name" value="">
+									<input type="text" name="name" id="name" value="<?php echo ($form_id>0)?trim($formDetailRow->name):""; ?>">
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="relay_or_set_work" id="relay_or_set_work" value="" />
+									<input type="text" name="relay_or_set_work" id="relay_or_set_work" value="<?php echo ($form_id>0)?trim($formDetailRow->relay_or_set_work):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="summary_no_of_days" id="summary_no_of_days" value="" />
+									<input type="text" name="summary_no_of_days" id="summary_no_of_days" value="<?php echo ($form_id>0)?intval($formDetailRow->summary_no_of_days):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="signature_of_reg_keeper" id="signature_of_reg_keeper" value="" />
+									<input type="text" name="signature_of_reg_keeper" id="signature_of_reg_keeper" value="<?php echo ($form_id>0)?trim($formDetailRow->signature_of_reg_keeper):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="remark_no_of_hours" id="remark_no_of_hours" value="" />
+									<input type="text" name="remark_no_of_hours" id="remark_no_of_hours" value="<?php echo ($form_id>0)?trim($formDetailRow->remark_no_of_hours):""; ?>" />
 								</div>
 							</td>
 						</tr>
@@ -153,9 +184,9 @@
 									<div class="listing_td_padding pull-left">
 										<select name="days[]" id="day_<?php echo $i; ?>">
 											<option value="">Select</option>
-											<?php foreach($REGISTER_FORM_D_ATTENDANCE_ as $attendancekey => $attendancevalue){ ?>
-												<option value="<?php echo $attendancekey; ?>"><?php echo $attendancevalue; ?></option>
-											<?php } ?>
+											<?php foreach($REGISTER_FORM_D_ATTENDANCE_ as $attendancekey => $attendancevalue){ $dynamicDay='day_'.$attendancekey; ?>
+												<option value="<?php echo $attendancekey; ?>" <?php echo ($form_id>0 && $formDetailRow->$dynamicDay==$attendancekey)?'selected="selected"':""; ?>><?php echo $attendancevalue; ?></option>
+											<?php unset($dynamicDay); } ?>
 										</select>
 									</div>
 								<?php } ?>
@@ -164,6 +195,7 @@
 						<tr>
 							<td colspan="9">
 								<input type="hidden" name="custid" id="custid" value="<?php echo $customerid; ?>">
+								<input type="hidden" name="form_id" id="form_id" value="<?php echo $form_id; ?>">
 								<input name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0" type="submit">
 							</td>
 						</tr>
@@ -223,7 +255,8 @@
 										<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 									</form>
 									<div>
-										<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('d', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+										<div class="pull-left action-icon"><a href="customer-register-form-d.php?custid=<?php echo $customerid; ?>&id=<?php echo $id; ?>"><img src="images/edit.png" /></a></div>
+										<div class="pull-left action-icon" style="padding-top:3px"><img src="images/delete.png" onclick="deleteRegisterForm('d', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
 										<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</lable></div>
 										<div class="clearall">
 									</div>

@@ -18,13 +18,42 @@
 		exit(0);
 	}
 
-	if(isset($_POST['submitbtn'])){
+	if(isset($_POST['form_id'])){
+		$customer_form_id=intval($_POST['form_id']);
 		$type["registerstaus"]="error";
 		$custid=intval($_POST['custid']);
 		$date_of_first_appnt=strlen(trim($_POST['date_of_first_appnt'])>0)?date("Y-m-d", strtotime(trim($_POST['date_of_first_appnt']))):"";
 		$vocational_date=strlen(trim($_POST['vocational_date'])>0)?date("Y-m-d", strtotime(trim($_POST['vocational_date']))):"";
 		
-		if($custid>0){
+		if($customer_form_id>0){
+			$query="UPDATE customer_register_form_a_type_b SET
+													    `customerid`=%i,
+														`si_no`=%i,
+														`name`='%s',
+														`token_number`='%s',
+														`date_of_first_appnt`='%s',
+														`cert_of_age`='%s',
+														`place_of_emp`='%s',
+														`vocational_number`='%s',
+														`vocational_date`='%s',
+														`nomi_name`='%s',
+														`nomi_add`='%s',
+														`emergency_name`='%s',
+														`emergency_add`='%s',
+														`emergency_mobile`=%i,
+														`remark`='%s',
+														`sign_of_mines`='%s',
+														`updated_by`=NOW() WHERE id=%i";
+			$query=$sql->query($query, array($custid, intval($_POST['si_no']), trim($_POST['name']), trim($_POST['token_number']), 
+					$date_of_first_appnt, trim($_POST['cert_of_age']), trim($_POST['place_of_emp']), trim($_POST['vocational_number']), 
+					$vocational_date, trim($_POST['nomi_name']), trim($_POST['nomi_add']), 
+					trim($_POST['emergency_name']), trim($_POST['emergency_add']), intval($_POST['emergency_mobile']), trim($_POST['remark']), trim($_POST['sign_of_mines']), $customer_form_id
+			));
+			if($db->query($query)){
+				$type['customerid']=$custid;
+				$type["registerstaus"]="success";
+			}
+		}else {
 			$query="INSERT INTO customer_register_form_a_type_b SET
 													    `customerid`=%i,
 														`si_no`=%i,
@@ -62,6 +91,15 @@
 
 	if(isset($_GET['custid']) && intval($_GET['custid'])){
 		$customerid=intval($_GET['custid']);
+		
+		if(isset($_GET['id']) && intval($_GET['id'])){
+			$form_id=intval($_GET['id']);
+			
+			$formDetailQuery="SELECT * FROM customer_register_form_a_type_b WHERE id=%i";
+			$formDetailQuery=$sql->query($formDetailQuery, array($form_id));
+			$formDetailResult=$db->query($formDetailQuery);
+			$formDetailRow=$db->fetchNextObject($formDetailResult);
+		}
 		
 		$formlinq="SELECT emailid FROM customer_additional_info WHERE id=%i AND detailname='Shram Shuvidha LIN detail'";
 		$formlinq=$sql->query($formlinq, array($customerid));
@@ -114,32 +152,32 @@
 						<tr>
 							<td align="left" valign="top" class="border_bottom border_left border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="si_no" id="si_no" value="">
+									<input type="text" name="si_no" id="si_no" value="<?php echo ($form_id>0)?intval($formDetailRow->si_no):""; ?>">
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="name" id="name" value="" />
+									<input type="text" name="name" id="name" value="<?php echo ($form_id>0)?trim($formDetailRow->name):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="token_number" id="token_number" value="" />
+									<input type="text" name="token_number" id="token_number" value="<?php echo ($form_id>0)?trim($formDetailRow->token_number):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="date_of_first_appnt" id="date_of_first_appnt" value="" readonly="readonly" />
+									<input type="text" name="date_of_first_appnt" id="date_of_first_appnt" value="<?php echo ($form_id>0 && strlen($formDetailRow->date_of_first_appnt)>0)?date("m/d/Y", strtotime($formDetailRow->date_of_first_appnt)):""; ?>" readonly="readonly" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="cert_of_age" id="cert_of_age" value="" />
+									<input type="text" name="cert_of_age" id="cert_of_age" value="<?php echo ($form_id>0)?trim($formDetailRow->cert_of_age):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="place_of_emp" id="place_of_emp" value="" />
+									<input type="text" name="place_of_emp" id="place_of_emp" value="<?php echo ($form_id>0)?trim($formDetailRow->place_of_emp):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
@@ -147,10 +185,10 @@
 									<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 										<tr style="line-height:40px">
 											<td align="center" valign="middle" class="border_right" style="width:100px;padding:5px">
-												<input type="text" name="vocational_number" id="vocational_number" value="" style="width:100%" />
+												<input type="text" name="vocational_number" id="vocational_number" value="<?php echo ($form_id>0)?trim(vocational_number):""; ?>" style="width:100%" />
 											</td>
 											<td align="center" valign="middle" style="width:100px;padding:5px">
-												<input type="text" name="vocational_date" id="vocational_date" value="" style="width:100%" />
+												<input type="text" name="vocational_date" id="vocational_date" value="<?php echo ($form_id>0 && strlen($formDetailRow->vocational_date)>0)?date("m/d/Y", strtotime($formDetailRow->vocational_date)):""; ?>" style="width:100%" />
 											</td>
 										</tr>
 									</table>
@@ -197,10 +235,10 @@
 									<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 										<tr style="line-height:40px">
 											<td align="center" valign="middle" class="border_right" style="width:100px;padding:5px">
-												<input type="text" name="nomi_name" id="nomi_name" value="" style="width:100%" />
+												<input type="text" name="nomi_name" id="nomi_name" value="<?php echo ($form_id>0)?trim($formDetailRow->nomi_name):""; ?>" style="width:100%" />
 											</td>
 											<td align="center" valign="middle" style="width:100px;padding:5px">
-												<input type="text" name="nomi_add" id="nomi_add" value="" style="width:100%" />
+												<input type="text" name="nomi_add" id="nomi_add" value="<?php echo ($form_id>0)?trim($formDetailRow->nomi_add):""; ?>" style="width:100%" />
 											</td>
 										</tr>
 									</table>
@@ -211,13 +249,13 @@
 									<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 										<tr style="line-height:40px">
 											<td align="center" valign="middle" class="border_right" style="width:100px;padding:5px">
-												<input type="text" name="emergency_name" id="emergency_name" value="" style="width:100%" />
+												<input type="text" name="emergency_name" id="emergency_name" value="<?php echo ($form_id>0)?trim($formDetailRow->emergency_name):""; ?>" style="width:100%" />
 											</td>
 											<td align="center" valign="middle" class="border_right" style="width:100px;padding:5px">
-												<input type="text" name="emergency_add" id="emergency_add" value="" style="width:100%" />
+												<input type="text" name="emergency_add" id="emergency_add" value="<?php echo ($form_id>0)?trim($formDetailRow->emergency_add):""; ?>" style="width:100%" />
 											</td>
 											<td align="center" valign="middle" style="width:100px;padding:5px">
-												<input type="text" name="emergency_mobile" id="emergency_mobile" value="" style="width:100%" />
+												<input type="text" name="emergency_mobile" id="emergency_mobile" value="<?php echo ($form_id>0)?intval($formDetailRow->emergency_mobile):""; ?>" style="width:100%" />
 											</td>
 										</tr>
 									</table>
@@ -225,18 +263,19 @@
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="remark" id="remark" value="" />
+									<input type="text" name="remark" id="remark" value="<?php echo ($form_id>0)?trim($formDetailRow->remark):""; ?>" />
 								</div>
 							</td>
 							<td align="left" valign="top" class="border_bottom border_right">
 								<div class="listing_td_padding">
-									<input type="text" name="sign_of_mines" id="sign_of_mines" value="" />
+									<input type="text" name="sign_of_mines" id="sign_of_mines" value="<?php echo ($form_id>0)?trim($formDetailRow->sign_of_mines):""; ?>" />
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="9">
 								<input type="hidden" name="custid" id="custid" value="<?php echo $customerid; ?>">
+								<input type="hidden" name="form_id" id="form_id" value="<?php echo $form_id; ?>">
 								<input name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0" type="submit">
 							</td>
 						</tr>
@@ -330,7 +369,8 @@
 									<input type="hidden" name="formid" id="formid" value="<?php echo $id; ?>">
 								</form>
 								<div>
-									<div class="pull-left action-icon"><img src="images/delete-icon.png" onclick="deleteRegisterForm('a-2', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
+									<div class="pull-left action-icon"><a href="customer-register-form-a-2.php?custid=<?php echo $customerid; ?>&id=<?php echo $id; ?>"><img src="images/edit.png" /></a></div>
+									<div class="pull-left action-icon" style="padding-top:3px"><img src="images/delete.png" onclick="deleteRegisterForm('a-2', <?php echo $id; ?>, <?php echo intval($rw->customerid); ?>)" title="Delete"></div>
 									<div class="pull-left action-icon"><label title="Print" style="cursor:pointer" onclick="printRegisterfrom(<?php echo $id; ?>)">Print</label></div>
 									<div class="clearall">
 								</div>

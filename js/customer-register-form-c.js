@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#date_of_loss").datepicker();
+	$("#date_of_loss, #date_of_complete_recovery").datepicker();
 	
 	$("#registerform").validate({
         debug: false,onsubmit: true,onfocusout: false,onkeyup: false,

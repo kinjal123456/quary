@@ -40,7 +40,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 		$count=$db->numRows($result);
 		$row=$db->fetchNextObject($result);
 		
-		$custnameq="SELECT CONCAT(firstname, ' ', lastname) AS name FROM customers WHERE id=%i";
+		$custnameq="SELECT companyname AS name FROM customers WHERE id=%i";
 		$custnameq=$sql->query($custnameq, array(intval($row->customerid)));
 		$cust_name=$db->queryUniqueValue($custnameq);
 		
@@ -158,7 +158,7 @@ if(isset($_POST['fromprint']) && $_POST['fromprint'] == 1){
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 						<div style="<?php echo $listing_td_padding; ?>">
-							<?php echo intval($row->category_address); ?>
+							<?php echo trim($row->category_address); ?>
 						</div>
 					</td>
 					<td align="center" valign="top" style="<?php echo $border_bottom.$border_right; ?>">

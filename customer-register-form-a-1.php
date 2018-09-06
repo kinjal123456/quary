@@ -41,7 +41,7 @@
 													  `education`='%s',
 													  `doj`='%s',
 													  `designation`='%s',
-													  `category_address`=%i,
+													  `category_address`='%s',
 													  `emp_type`='%s',
 													  `mobile`=%i,
 													  `uan`='%s',
@@ -63,7 +63,7 @@
 			$query=$sql->query($query, array($custid, intval($_POST['srno']), trim($_POST['empcode']), trim($_POST['name']), 
 					trim($_POST['surname']), intval($_POST['gender']), trim($_POST['secondname']), $dateofbirth, 
 					trim($_POST['nationality']), trim($_POST['education']), $dateofjoin, trim($_POST['designation']), 
-					intval($_POST['cat_add']), trim($_POST['emptype']), intval($_POST['mobile']), trim($_POST['uan']), trim($_POST['pan']),
+					trim($_POST['cat_add']), trim($_POST['emptype']), intval($_POST['mobile']), trim($_POST['uan']), trim($_POST['pan']),
 					trim($_POST['esicip']), trim($_POST['lwf']), trim($_POST['aadharno']), intval($_POST['bankacno']), trim($_POST['bankname']),
 					intval($_POST['ifsccode']), trim($_POST['presentadd']), trim($_POST['permanantadd']), intval($_POST['servicebookno']), $dateofexit,
 					trim($_POST['reasonforexit']), trim($_POST['idmark']), trim($_POST['remark']), $customer_form_id
@@ -145,7 +145,7 @@
 													  `education`='%s',
 													  `doj`='%s',
 													  `designation`='%s',
-													  `category_address`=%i,
+													  `category_address`='%s',
 													  `emp_type`='%s',
 													  `mobile`=%i,
 													  `uan`='%s',
@@ -168,7 +168,7 @@
 			$query=$sql->query($query, array($custid, intval($_POST['srno']), trim($_POST['empcode']), trim($_POST['name']), 
 					trim($_POST['surname']), intval($_POST['gender']), trim($_POST['secondname']), $dateofbirth, 
 					trim($_POST['nationality']), trim($_POST['education']), $dateofjoin, trim($_POST['designation']), 
-					intval($_POST['cat_add']), trim($_POST['emptype']), intval($_POST['mobile']), trim($_POST['uan']), trim($_POST['pan']),
+					trim($_POST['cat_add']), trim($_POST['emptype']), intval($_POST['mobile']), trim($_POST['uan']), trim($_POST['pan']),
 					trim($_POST['esicip']), trim($_POST['lwf']), trim($_POST['aadharno']), intval($_POST['bankacno']), trim($_POST['bankname']),
 					intval($_POST['ifsccode']), trim($_POST['presentadd']), trim($_POST['permanantadd']), intval($_POST['servicebookno']), $dateofexit,
 					trim($_POST['reasonforexit']), trim($_POST['idmark']), trim($_POST['remark'])
@@ -404,8 +404,8 @@
 										<option value="">Select</option>
 										<?php
 											foreach($REGISTER_FORM_A_1_CATEGORY_ADDRESS_ as $catkey => $catvalue){
-												$cat_selected=($form_id>0 && ($catkey==intval($formDetailRow->category_address)))?'selected="selected"':"";
-												echo '<option value="'.$catkey.'" '.$cat_selected.' >'.$catvalue.'</option>';
+												$cat_selected=($form_id>0 && ($catvalue==trim($formDetailRow->category_address)))?'selected="selected"':"";
+												echo '<option value="'.$catvalue.'" '.$cat_selected.' >'.$catvalue.'</option>';
 											}
 										?>
 									</select>
