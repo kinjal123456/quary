@@ -8,6 +8,11 @@ $(document).ready(function(){
 			$('.selectcheckbox').removeAttr("checked").csform.update();
 		}
 	});
+	
+	$("#popup").draggable({
+		"handle": ".popup_dragger",
+		containment: 'parent'
+	});
 });
 
 function manage(offset){

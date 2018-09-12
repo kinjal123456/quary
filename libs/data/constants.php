@@ -44,4 +44,10 @@
 	
 	/****************************************REGISTER FORM B RATES VALUES*****************************************************************************/
 	$REGISTER_FORM_B_RATES_ = array("Select", "Yes", "No");
+		
+	/****************************************CAPACITY EXPLOSIVE NAME VALUES*****************************************************************************/
+	$CAPACITY_EXPLOSIVE_NAMES_ = array("Nitrate mixture", "Safely fuse", "Detoriating fuse", "Detoriators");
+	
+	/****************************************CAPACITY UNIT VALUES*****************************************************************************/
+	$CAPACITY_UNIT_ = array("Kgs", "Mtrs", "Nos");
 ?>

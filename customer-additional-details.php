@@ -45,13 +45,13 @@
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-		                    <input type="text" name="explosive_issuedate" id="explosive_issuedate" class="explosive_issuedate" value="<?php echo ($explosivecnt>0 && strlen(trim($explosiverw->issue_date))>0)?date("m/d/Y", strtotime(trim($explosiverw->issue_date))):""; ?>" readonly="readonly" />
+		                    <input type="text" name="explosive_issuedate" id="explosive_issuedate" class="explosive_issuedate" value="<?php echo ($explosivecnt>0 && strlen(trim($explosiverw->issue_date))>0)?date("d/m/Y", strtotime(trim($explosiverw->issue_date))):""; ?>" />
 		                </div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom">
 	                    <div style="padding: 10px">
 							<input type="hidden" name="explosiveid" id="explosiveid" value="<?php echo ($explosivecnt>0)?intval($explosiverw->id):0; ?>" />
-		                    <input type="text" name="explosive_expirydate" id="explosive_expirydate" class="explosive_expirydate" value="<?php echo ($explosivecnt>0 && trim($explosiverw->expiry_date)>0)?date("m/d/Y", strtotime(trim($explosiverw->expiry_date))):""; ?>" readonly="readonly" />
+		                    <input type="text" name="explosive_expirydate" id="explosive_expirydate" class="explosive_expirydate" value="<?php echo ($explosivecnt>0 && trim($explosiverw->expiry_date)>0)?date("d/m/Y", strtotime(trim($explosiverw->expiry_date))):""; ?>" />
 		                </div>
 	                </td>
 	            </tr>
@@ -63,7 +63,7 @@
 		<div>
 			<table border="0" cellpadding="0" cellspacing="0" id="appendcapacitycontent" class="list_table capacitylisting">
 				<tr>
-					<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 40px;">&nbsp;</td>
+					<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 80px;">&nbsp;</td>
 					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Sr no.</div></td>
 					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Explosive name</div></td>
 					<td align="left" valign="top" class="list_table_th border_top border_bottom border_right"><div class="listing_th_padding">Class</div></td>
@@ -84,9 +84,9 @@
 	            ?>
 	            <tr>
 	                <td align="center" valign="middle" class="border_bottom border_left border_right">
-	                	<div>
-	                		<!--<div title="Edit" class="pull-left icon_edit"></div>-->
-	                		<div title="Delete" class="icon_delete" onclick="deleteCapacity(this, <?php echo intval($addcaprw->id); ?>, <?php echo intval($addcaprw->customerid); ?>)"></div>
+	                	<div style="padding-left:15px">
+	                		<div title="Edit" class="pull-left icon_edit" onclick="ajaxPopup('popup/edit-capacity.php?id=<?php echo intval($addcaprw->id); ?>');"></div>
+	                		<div title="Delete" class="icon_delete" onclick="deleteCapacity(this, <?php echo intval($addcaprw->id); ?>, <?php echo intval($addcaprw->customerid); ?>)" style="margin-left:10px"></div>
 	                		<div style="clear:all"><!--  --></div>
 	                	</div>
 	                </td>
@@ -140,7 +140,12 @@
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-							<input type="text" name="capacity_explosivenm[]" id="capacity_explosivenm" class="capacity_explosivenm" value="">
+							<select name="capacity_explosivenm[]" id="capacity_explosivenm" class="capacity_explosivenm select_drop_down">
+								<option value="">Select</option>
+								<?php foreach($CAPACITY_EXPLOSIVE_NAMES_ as $exp_name){ ?>
+									<option value="<?php echo $exp_name; ?>"><?php echo $exp_name; ?></option>
+								<?php } ?>
+							</select>
 	                	</div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
@@ -160,7 +165,12 @@
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-		                    <input type="text" name="capacity_unit[]" id="capacity_unit" class="capacity_unit" value="" />
+							<select name="capacity_unit[]" id="capacity_unit" class="capacity_unit select_drop_down">
+								<option value="">Select</option>
+								<?php foreach($CAPACITY_UNIT_ as $unit_name){ ?>
+									<option value="<?php echo $unit_name; ?>"><?php echo $unit_name; ?></option>
+								<?php } ?>
+							</select>
 		                </div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom">

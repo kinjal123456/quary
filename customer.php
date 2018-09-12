@@ -117,7 +117,7 @@
 				//UPDATE CUSTOMERS EMPLOYEES
 				for($e=0; $e<count($_POST['empname']); $e++){
 					if(strlen(trim($_POST['empname'][$e]))>0 && strlen(trim($_POST['empdesignation'][$e]))>0 && strlen(trim($_POST['empmob'][$e]))>0){
-						$empinsert="INSERT INTO customer_employees SET customerid=%i, name='%s', designation='%s', mobile_no=%i, created_at=NOW(), updated_at=NOW()";
+						$empinsert="INSERT INTO customer_employees SET customerid=%i, name='%s', designation='%s', mobile_no='%s', created_at=NOW(), updated_at=NOW()";
 						$empinsert=$sql->query($empinsert, array($custid, trim($_POST['empname'][$e]), trim($_POST['empdesignation'][$e]), trim($_POST['empmob'][$e])));
 						if($db->query($empinsert)){
 							$type['custempstatus']="success";

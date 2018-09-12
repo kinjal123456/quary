@@ -1,63 +1,4 @@
 $(document).ready(function() {
-	$("#explosive_issuedate, #explosive_expirydate").datepicker();
-	
-	$('#explosive_issuedate, #explosive_expirydate').keydown(function (e) {
-		if (e.keyCode == 13) {
-			$('#customerform').submit();
-			return false;    //<---- Add this line
-		}
-	});
-	
-	$('body').on('focus', ".short_issuedate", function(){
-		$(this).datepicker();
-		$(this).keydown(function (e) {
-			if (e.keyCode == 13) {
-				$('#customerform').submit();
-				return false;    //<---- Add this line
-			}
-		});
-	});
-	
-	$('body').on('focus', ".short_expirydate", function(){
-		$(this).datepicker();
-		$(this).keydown(function (e) {
-			if (e.keyCode == 13) {
-				$('#customerform').submit();
-				return false;    //<---- Add this line
-			}
-		});
-	})
-	
-	$('body').on('focus', ".paid_on", function(){
-		$(this).datepicker();
-		$(this).keydown(function (e) {
-			if (e.keyCode == 13) {
-				$('#customerform').submit();
-				return false;    //<---- Add this line
-			}
-		});
-	});
-	
-	$('body').on('focus', ".paid_on1", function(){
-		$(this).datepicker();
-		$(this).keydown(function (e) {
-			if (e.keyCode == 13) {
-				$('#customerform').submit();
-				return false;    //<---- Add this line
-			}
-		});
-	});
-	
-	$('body').on('focus', ".note_date", function(){
-		$(this).datepicker();
-		$(this).keydown(function (e) {
-			if (e.keyCode == 13) {
-				$('#customerform').submit();
-				return false;    //<---- Add this line
-			}
-		});
-	});
-	
 	$("#customerform").validate({
         debug: false,
         onsubmit: true,
@@ -228,7 +169,7 @@ $(document).ready(function() {
             	checkcapacityqty: "Please enter capacity quantity in number."
             },
 			'capacity_unit[]':{
-            	checkcapacityunit: "Please enter capacity unit in number."
+            	checkcapacityunit: "Please select capacity unit."
             },
 			'capacity_notimes[]':{
             	checkcapacitynotimes: "Please enter capacity number of times in number."
@@ -445,15 +386,14 @@ jQuery.validator.addMethod('checkvalidcapacitysrno', function(value, element){
 
 //Capacity explosive name
 jQuery.validator.addMethod('checkcapacityexpnm', function(value, element){
-    validateflag=1;
-	
-	if($('.capacity_explosivenm').length>0){
+	validateflag=1;
+    if($('select.capacity_explosivenm option:selected').length>0){
         validateflag=0;
-        $('input.capacity_explosivenm').each(function(index) {
-			if(index>0){
-				var value = $(this).val();
-				if(value==""){validateflag=1;}
-			}
+        $('select.capacity_explosivenm option:selected').each(function(index) {
+        	if(index>0){
+		        var value = $(this).val();
+		        if(value==""){validateflag=1;}
+        	}
         });
     }
     if(validateflag==0){return true;} else{ return false;}
@@ -507,14 +447,14 @@ jQuery.validator.addMethod('checkcapacityqty', function(value, element){
 
 //Capacity unit
 jQuery.validator.addMethod('checkcapacityunit', function(value, element){
-    validateflag=1;
-    if($('.capacity_unit').length>0){
+	validateflag=1;
+    if($('select.capacity_unit option:selected').length>0){
         validateflag=0;
-        $('input.capacity_unit').each(function(index) {
-			if(index>0){
-				var value = $(this).val();
-				if(value=="" || !isNaN(parseInt(value))==false){ validateflag=1; }
-			}
+        $('select.capacity_unit option:selected').each(function(index) {
+        	if(index>0){
+		        var value = $(this).val();
+		        if(value==""){validateflag=1;}
+        	}
         });
     }
     if(validateflag==0){return true;} else{ return false;}

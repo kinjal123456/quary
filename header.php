@@ -30,6 +30,7 @@
     <title>Quarry</title>
 	<link href="css/common.css" type="text/css" rel="stylesheet" />
     <link href="css/style.css" type="text/css" rel="stylesheet" />
+	<link href="css/popup.css" type="text/css" rel="stylesheet" />
 	<link href="css/notification.css" type="text/css" rel="stylesheet" />
 	<link href="css/csform.css" type="text/css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css"/>
@@ -46,8 +47,8 @@
 	<script type="text/javascript" src="js/commonfunctions.js"></script>
 </head>
 <body>
-	<!--<div id="popupmodel"></div>
-	<div id="popup"></div>-->
+	<div id="popupmodel"></div>
+	<div id="popup"></div>
 	<div class="container">
 		<div class="header-background">
 			<div class="pull-left header-logo">
