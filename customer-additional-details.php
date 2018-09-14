@@ -45,13 +45,13 @@
 	                </td>
 	                <td align="left" valign="top" class="border_bottom border_right">
 	                    <div style="padding: 10px">
-		                    <input type="text" name="explosive_issuedate" id="explosive_issuedate" class="explosive_issuedate" value="<?php echo ($explosivecnt>0 && strlen(trim($explosiverw->issue_date))>0)?date("d/m/Y", strtotime(trim($explosiverw->issue_date))):""; ?>" />
+		                    <input type="text" name="explosive_issuedate" id="explosive_issuedate" class="explosive_issuedate" value="<?php echo ($explosivecnt>0 && strlen(trim($explosiverw->issue_date))>0)?trim($explosiverw->issue_date):""; ?>" />
 		                </div>
 	                </td>
 	                <td align="left" valign="top" class="border_bottom">
 	                    <div style="padding: 10px">
 							<input type="hidden" name="explosiveid" id="explosiveid" value="<?php echo ($explosivecnt>0)?intval($explosiverw->id):0; ?>" />
-		                    <input type="text" name="explosive_expirydate" id="explosive_expirydate" class="explosive_expirydate" value="<?php echo ($explosivecnt>0 && trim($explosiverw->expiry_date)>0)?date("d/m/Y", strtotime(trim($explosiverw->expiry_date))):""; ?>" />
+		                    <input type="text" name="explosive_expirydate" id="explosive_expirydate" class="explosive_expirydate" value="<?php echo ($explosivecnt>0 && trim($explosiverw->expiry_date)>0)?trim($explosiverw->expiry_date):""; ?>" />
 		                </div>
 	                </td>
 	            </tr>
@@ -193,7 +193,7 @@
 	<div class="border_top border_bottom border_left border_right" style="margin:20px">
 		<table border="0" cellpadding="0" cellspacing="0" id="appendshortcontent" class="list_table shortlisting">
 			<tr>
-				<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 40px;">&nbsp;</td>
+				<td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 80px;">&nbsp;</td>
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Document key</div></td>
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Licence number</div></td>
 				<td align="left" valign="top" class="list_table_th border_bottom border_right"><div class="listing_th_padding">Shortfire name</div></td>
@@ -208,7 +208,7 @@
 				$shortfirecnt=$db->numRows($shortfireres);
 				if($shortfirecnt>0){
 					while($shortfirerw=$db->fetchNextObject($shortfireres)){
-						$edate = date_create(date('Y-m-d', strtotime($shortfirerw->expiry_date)));
+						$edate = date_create(date('Y-m-d', st rtotime($shortfirerw->expiry_date)));
 						//date_add($edate, date_interval_create_from_date_string('-2 months'));
 						$customdate=date_create(date_format($edate, 'Y-m-d'));
 						$currentdate=date_create(date('Y-m-d'));
@@ -216,9 +216,9 @@
 			?>
 			<tr>
 				<td align="center" valign="middle" class="border_bottom border_left border_right">
-					<div>
-						<!--<div title="Edit" class="pull-left icon_edit"></div>-->
-						<div title="Delete" class="icon_delete" onclick="deleteShortfire(this, <?php echo intval($shortfirerw->id); ?>, <?php echo intval($shortfirerw->customerid); ?>)"></div>
+					<div style="padding-left:15px">
+						<div title="Edit" class="pull-left icon_edit" onclick="ajaxPopup('popup/edit-shortfire.php?id=<?php echo intval($shortfirerw->id); ?>');"></div>
+						<div title="Delete" class="icon_delete" onclick="deleteShortfire(this, <?php echo intval($shortfirerw->id); ?>, <?php echo intval($shortfirerw->customerid); ?>)" style="margin-left:10px"></div>
 						<div style="clear:all"><!--  --></div>
 					</div>
 				</td>
@@ -239,12 +239,12 @@
 				</td>
 				<td align="left" valign="top" class="border_bottom border_right">
 					<div style="padding: 10px">
-						<?php echo (strlen(trim($shortfirerw->issue_date))>0)?date("m/d/Y", strtotime($shortfirerw->issue_date)):""; ?>
+						<?php echo (strlen(trim($shortfirerw->issue_date))>0)?trim($shortfirerw->issue_date):""; ?>
 					</div>
 				</td>
 				<td align="left" valign="top" class="border_bottom border_right">
 					<div style="padding: 10px">
-						<?php echo (strlen(trim($shortfirerw->expiry_date))>0)?date("m/d/Y", strtotime($shortfirerw->expiry_date)):""; ?>
+						<?php echo (strlen(trim($shortfirerw->expiry_date))>0)?trim($shortfirerw->expiry_date):""; ?>
 					</div>
 				</td>
 				<td align="left" valign="top" class="border_bottom border_right">
@@ -277,12 +277,12 @@
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-	                    <input type="text" name="short_issuedate[]" class="short_issuedate" value="" readonly="readonly" />
+	                    <input type="text" name="short_issuedate[]" class="short_issuedate" value="" />
 	                </div>
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-	                    <input type="text" name="short_expirydate[]" class="short_expirydate" value="" readonly="readonly" />
+	                    <input type="text" name="short_expirydate[]" class="short_expirydate" value="" />
 	                </div>
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
@@ -305,7 +305,7 @@
 	<div>
 		<table border="0" cellpadding="0" cellspacing="0" id="appendaddcontent" class="list_table addlisting">
 			<tr>
-                <td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 20px;">&nbsp;</td>
+                <td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 40px;">&nbsp;</td>
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Detail name</div></td>
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Id</div></td>
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Password</div></td>
@@ -320,8 +320,8 @@
             ?>
             <tr>
                 <td align="center" valign="middle" class="border_bottom border_left border_right">
-                	<div>
-                		<!--<div title="Edit" class="pull-left icon_edit"></div>-->
+                	<div style="padding-left:15px">
+                		<div title="Edit" class="pull-left icon_edit" onclick="ajaxPopup('popup/edit-additional.php?id=<?php echo intval($addrw->id); ?>');" style="padding-top:10px"></div>
                 		<div title="Delete" class="icon_delete" onclick="deleteDetails(this, <?php echo intval($addrw->id); ?>, <?php echo intval($addrw->customerid); ?>)"></div>
                 		<div style="clear:all"><!--  --></div>
                 	</div>
