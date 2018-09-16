@@ -42,6 +42,7 @@ CREATE TABLE `customer_additional_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customerid` int(11) DEFAULT NULL,
   `detailname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `add_licence_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `emailid` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `startdate` datetime DEFAULT NULL,
@@ -49,11 +50,11 @@ CREATE TABLE `customer_additional_info` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customer_additional_info` */
 
-insert  into `customer_additional_info`(`id`,`customerid`,`detailname`,`emailid`,`password`,`startdate`,`enddate`,`created_at`,`updated_at`) values (1,2,'Employee RNA detail','kinjalthaker51@gmail.com','gdfgdf',NULL,NULL,'2018-06-11 17:33:42','2018-06-11 17:33:42'),(2,2,'Shram Shuvidha LIN detail','kinjalthaker51@gmail.com','dfg',NULL,NULL,'2018-06-11 17:33:42','2018-06-11 17:33:42'),(3,3,'Employee RNA detail','kinjalthaker51@gmail.com','kinjal',NULL,NULL,'2018-06-12 11:57:37','2018-06-12 11:57:37'),(4,3,'Shram Shuvidha LIN detail','mansi@gmail.com','mansi',NULL,NULL,'2018-06-12 11:57:37','2018-06-12 11:57:37');
+insert  into `customer_additional_info`(`id`,`customerid`,`detailname`,`add_licence_no`,`emailid`,`password`,`startdate`,`enddate`,`created_at`,`updated_at`) values (1,2,'Employee RNA detail',NULL,'kinjalthaker51@gmail.com','gdfgdf',NULL,NULL,'2018-06-11 17:33:42','2018-06-11 17:33:42'),(2,2,'Shram Shuvidha LIN detail',NULL,'kinjalthaker51@gmail.com','dfg',NULL,NULL,'2018-06-11 17:33:42','2018-06-11 17:33:42'),(3,3,'Employee RNA detail',NULL,'kinjalthaker51@gmail.com','kinjal',NULL,NULL,'2018-06-12 11:57:37','2018-06-12 11:57:37'),(4,3,'Shram Shuvidha LIN detail',NULL,'mansi@gmail.com','mansi',NULL,NULL,'2018-06-12 11:57:37','2018-06-12 11:57:37'),(5,29,'Employee RNA detail','123df','kinjal@gmail.com','kinjal',NULL,NULL,'2018-09-16 14:15:01','2018-09-16 14:56:39'),(6,29,'Shram Shuvidha LIN detail','456','kintesh@gmail.com','kintesh',NULL,NULL,'2018-09-16 14:15:01','2018-09-16 14:15:01'),(7,29,'ggdfg','5345','dfd@gmail.com','dfdf',NULL,NULL,'2018-09-16 14:59:02','2018-09-16 14:59:25');
 
 /*Table structure for table `customer_employees` */
 
@@ -113,11 +114,11 @@ CREATE TABLE `customer_licence_info` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_licence_info` */
 
-insert  into `customer_licence_info`(`id`,`customerid`,`detail_type`,`document_key`,`licence_no`,`name`,`issue_date`,`expiry_date`,`created_at`,`updated_at`) values (1,2,'1','gdfg','dg','dfd','2018-06-11','2018-09-07','2018-06-11 17:33:42','2018-07-09 13:20:16'),(2,3,'1','sf','sdf','sdf','2018-06-19','2018-09-07','2018-06-12 11:57:37','2018-06-12 11:57:37'),(3,2,'2','dsf','sdf','dsf','2018-06-11','2018-09-11','2018-06-21 10:59:26','2018-06-21 10:59:26'),(4,2,'2','dfg','dfg','dfg','2018-07-10','2018-09-09','2018-07-09 13:11:38','2018-07-09 13:11:38');
+insert  into `customer_licence_info`(`id`,`customerid`,`detail_type`,`document_key`,`licence_no`,`name`,`issue_date`,`expiry_date`,`created_at`,`updated_at`) values (1,2,'1','gdfg','dg','dfd','2018-06-11','2018-09-07','2018-06-11 17:33:42','2018-07-09 13:20:16'),(2,3,'1','sf','sdf','sdf','2018-06-19','2018-09-07','2018-06-12 11:57:37','2018-06-12 11:57:37'),(3,2,'2','dsf','sdf','dsf','2018-06-11','2018-09-11','2018-06-21 10:59:26','2018-06-21 10:59:26'),(4,2,'2','dfg','dfg','dfg','2018-07-10','2018-09-09','2018-07-09 13:11:38','2018-07-09 13:11:38'),(7,29,'1','3','53454','test','15/09/2018','06/10/2018','2018-09-16 14:15:01','2018-09-16 17:35:37');
 
 /*Table structure for table `customer_notes` */
 
@@ -132,11 +133,11 @@ CREATE TABLE `customer_notes` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_notes` */
 
-insert  into `customer_notes`(`id`,`customerid`,`subject`,`note_date`,`notes`,`created_at`,`updated_at`) values (4,2,NULL,NULL,'dfg','2018-08-04 13:07:21','2018-08-04 13:07:21'),(3,2,NULL,NULL,'dfg','2018-08-04 13:07:21','2018-08-04 13:07:21'),(5,2,NULL,NULL,'dfg','2018-08-04 13:07:21','2018-08-04 13:07:21'),(6,23,'testing','09/30/2018','tedfdf','2018-09-03 14:55:49','2018-09-03 14:55:49'),(7,23,'gdf','09/12/2018','gdfgdf','2018-09-03 14:57:07','2018-09-03 14:57:07'),(8,23,'dhfgh','09/21/2018','fghgf','2018-09-03 14:57:07','2018-09-03 14:57:07');
+insert  into `customer_notes`(`id`,`customerid`,`subject`,`note_date`,`notes`,`created_at`,`updated_at`) values (4,2,NULL,NULL,'dfg','2018-08-04 13:07:21','2018-08-04 13:07:21'),(3,2,NULL,NULL,'dfg','2018-08-04 13:07:21','2018-08-04 13:07:21'),(5,2,NULL,NULL,'dfg','2018-08-04 13:07:21','2018-08-04 13:07:21'),(6,23,'testing','09/30/2018','tedfdf','2018-09-03 14:55:49','2018-09-03 14:55:49'),(7,23,'gdf','09/12/2018','gdfgdf','2018-09-03 14:57:07','2018-09-03 14:57:07'),(8,23,'dhfgh','09/21/2018','fghgf','2018-09-03 14:57:07','2018-09-03 14:57:07'),(9,29,'kin','06/10/2018','dffd','2018-09-16 17:03:04','2018-09-16 22:59:26'),(10,29,'dfdf','06/10/2018 df','dfdf','2018-09-16 17:30:30','2018-09-16 17:30:30');
 
 /*Table structure for table `customer_register_form_a_type_a` */
 
@@ -179,11 +180,11 @@ CREATE TABLE `customer_register_form_a_type_a` (
   `created_by` datetime DEFAULT NULL,
   `updated_by` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer_register_form_a_type_a` */
 
-insert  into `customer_register_form_a_type_a`(`id`,`customerid`,`srno`,`emp_code`,`firstname`,`lastname`,`gender`,`secondname`,`dob`,`nationality`,`education`,`doj`,`designation`,`category_address`,`emp_type`,`mobile`,`uan`,`pan`,`esic_ip`,`lwf`,`aadhaar_no`,`bank_ac_no`,`bank`,`branch_ifsc_code`,`present_address`,`permenent_address`,`service_book_no`,`date_of_exit`,`reason_for_exit`,`id_mark`,`photo`,`signature_thumb_image`,`remark`,`created_by`,`updated_by`) values (1,3,1,'','','',0,'','','Indian','','','','0','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-06-15 11:47:19','2018-06-15 11:47:19'),(2,2,1,'','','',0,'','','Indian','','','','0','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-06-16 12:40:23','2018-06-16 12:40:23'),(3,23,1,'123','RK','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-08-31 19:41:25','2018-08-31 19:47:56'),(4,2,45,'','','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-09-01 13:19:24','2018-09-01 13:19:24'),(5,2,453,'','','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-09-01 13:19:30','2018-09-01 13:19:30');
+insert  into `customer_register_form_a_type_a`(`id`,`customerid`,`srno`,`emp_code`,`firstname`,`lastname`,`gender`,`secondname`,`dob`,`nationality`,`education`,`doj`,`designation`,`category_address`,`emp_type`,`mobile`,`uan`,`pan`,`esic_ip`,`lwf`,`aadhaar_no`,`bank_ac_no`,`bank`,`branch_ifsc_code`,`present_address`,`permenent_address`,`service_book_no`,`date_of_exit`,`reason_for_exit`,`id_mark`,`photo`,`signature_thumb_image`,`remark`,`created_by`,`updated_by`) values (1,3,1,'','','',0,'','','Indian','','','','0','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-06-15 11:47:19','2018-06-15 11:47:19'),(2,2,1,'','','',0,'','','Indian','','','','0','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-06-16 12:40:23','2018-06-16 12:40:23'),(3,23,1,'123','RK','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-08-31 19:41:25','2018-08-31 19:47:56'),(4,2,45,'','','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-09-01 13:19:24','2018-09-01 13:19:24'),(5,2,453,'','','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-09-01 13:19:30','2018-09-01 13:19:30'),(6,29,1,'','','',0,'','','Indian','','','','','',0,'','','','','',0,'',0,'','',0,'','','',NULL,NULL,'','2018-09-16 17:07:17','2018-09-16 17:07:17');
 
 /*Table structure for table `customer_register_form_a_type_b` */
 
@@ -366,16 +367,18 @@ CREATE TABLE `customers` (
   `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `survey_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` text COLLATE utf8mb4_unicode_ci,
+  `address2` text COLLATE utf8mb4_unicode_ci,
+  `address3` text COLLATE utf8mb4_unicode_ci,
   `pincode` int(11) DEFAULT NULL,
   `state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customers` */
 
-insert  into `customers`(`id`,`uploadid`,`zoneid`,`companyname`,`firstname`,`lastname`,`phone`,`licenceno`,`email`,`password`,`survey_no`,`address`,`pincode`,`state`,`created_at`,`updated_at`) values (2,1,2,'','Mansi','thaker','65','rtgre','m@gmail.com','kinjal','','Tithal road',396001,'Gujarat','2018-06-10 18:00:14','2018-06-11 17:33:14'),(24,9,1,NULL,'vrunda','d','543535','LIC3','k3@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-06-16 11:10:41','2018-06-16 11:10:41'),(22,9,1,'dsfds','kinjal','thaker','435435','LIC1','k1@gmail.com','kinjal','43534','7 shroff building, azad chowck',396001,'GUJARAT','2018-06-16 11:10:41','2018-06-16 11:12:36'),(23,9,2,'kinjal','mansi','t','87687686','LIC2','k2@gmail.com','test','123456','',396001,'GUJARAT','2018-06-16 11:10:41','2018-09-03 14:58:50'),(26,0,1,'RK','kinjal','thaker','76576576','df435435','m1@gmail.com','RK6','','',0,'','2018-07-23 16:37:57','2018-09-03 15:00:25'),(27,0,2,'Company 1','','','765765757657','','faltu@gmail.com','faltu','','',0,'','2018-09-03 14:57:58','2018-09-03 14:58:11'),(28,10,1,'kk','','','57657',NULL,'t@gmail.com',NULL,NULL,NULL,NULL,NULL,'2018-09-03 15:02:40','2018-09-03 15:02:40');
+insert  into `customers`(`id`,`uploadid`,`zoneid`,`companyname`,`firstname`,`lastname`,`phone`,`licenceno`,`email`,`password`,`survey_no`,`address`,`address2`,`address3`,`pincode`,`state`,`created_at`,`updated_at`) values (2,1,2,'dfdf','Mansi','thaker','65','rtgre','m@gmail.com','kinjal','','Tithal road',NULL,NULL,396001,'Gujarat','2018-06-10 18:00:14','2018-09-16 12:14:47'),(24,9,1,'156','vrunda','d','543535','LIC3','k3@gmail.com','rgrrdg','','destnation','without','journey',0,'','2018-06-16 11:10:41','2018-09-16 13:20:39'),(22,9,1,'kinjal','kinjal','thaker','435435','LIC1','k1@gmail.com','kinjal','43534','destnation','without','journey',396001,'GUJARAT','2018-06-16 11:10:41','2018-09-16 13:29:39'),(23,9,2,'kinjal','mansi','t','87687686','LIC2','k2@gmail.com','test','123456','on way to...','','',396001,'GUJARAT','2018-06-16 11:10:41','2018-09-16 13:30:22'),(26,0,1,'RK','kinjal','thaker','76576576','df435435','m1@gmail.com','RK6','','',NULL,NULL,0,'','2018-07-23 16:37:57','2018-09-03 15:00:25'),(27,0,2,'Company 1','','','765765757657','','faltu@gmail.com','faltu','','',NULL,NULL,0,'','2018-09-03 14:57:58','2018-09-03 14:58:11'),(28,12,1,'kk','','','57657',NULL,'t@gmail.com','kk','435','add1','add2','add3',396001,'Gujarat','2018-09-03 15:02:40','2018-09-16 13:51:51'),(29,12,1,'love','','','8866324756',NULL,'love@gmail.com','love','7868','add_1','add_2','add_3',396001,'Gujarat','2018-09-16 13:51:51','2018-09-16 17:06:44');
 
 /*Table structure for table `customers_bills` */
 
@@ -395,11 +398,11 @@ CREATE TABLE `customers_bills` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customers_bills` */
 
-insert  into `customers_bills`(`id`,`customerid`,`userid`,`billname`,`billno`,`bill_amount`,`paid_by`,`paid_on`,`remarks`,`payment_status`,`created_at`,`updated_at`) values (5,2,1,'Bill 1','JPD/LAB/001/18-19','100.00',NULL,NULL,NULL,0,'2018-08-31 12:55:12','2018-08-31 12:55:12'),(6,2,2,'Bill 1','BJB/EXP/001/18-19','50.00',NULL,NULL,NULL,0,'2018-08-31 12:55:12','2018-08-31 12:55:12'),(7,2,1,'Bill 2','JPD/LAB/002/18-19','45.00',NULL,NULL,NULL,0,'2018-08-31 15:22:44','2018-08-31 15:22:44'),(8,2,1,'bill 3','JPD/LAB/003/18-19','100.00',NULL,NULL,NULL,0,'2018-08-31 15:23:08','2018-08-31 15:23:08'),(9,2,2,'Bill 2','BJB/EXP/002/18-19','50.00',NULL,NULL,NULL,0,'2018-08-31 15:23:37','2018-08-31 15:23:37'),(10,23,1,'Bill 1','JPD/LAB/001/18-19','100.00',1,'09/18/2018','1',0,'2018-08-31 19:34:23','2018-09-02 23:47:20'),(11,23,1,'Bill 2','JPD/LAB/002/18-19','50.00',1,'09/25/2018','2',0,'2018-08-31 19:34:23','2018-09-02 23:47:20'),(13,23,1,'Bill 2','JPD/LAB/003/18-19','100.00',1,'09/13/2018','3',0,'2018-09-02 15:05:10','2018-09-02 23:47:20'),(14,23,2,'Bill 4','BJB/EXP/001/18-19','50.00',2,'09/02/2018','testing',0,'2018-09-02 15:10:00','2018-09-02 23:47:20'),(15,23,2,'Bill 5','BJB/EXP/002/18-19','100.00',1,'09/30/2018','dfd',0,'2018-09-02 23:47:03','2018-09-02 23:47:20');
+insert  into `customers_bills`(`id`,`customerid`,`userid`,`billname`,`billno`,`bill_amount`,`paid_by`,`paid_on`,`remarks`,`payment_status`,`created_at`,`updated_at`) values (2,24,1,'bill1','JPD/LAB/001/18-19','100.00',0,'','',0,'2018-09-16 12:29:48','2018-09-16 13:26:30'),(3,22,1,'bill2','JPD/LAB/001/18-19','50.00',0,'','',0,'2018-09-16 12:29:48','2018-09-16 12:29:48');
 
 /*Table structure for table `customerupload` */
 
@@ -411,11 +414,11 @@ CREATE TABLE `customerupload` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `customerupload` */
 
-insert  into `customerupload`(`id`,`filename`,`created_at`,`updated_at`) values (1,'0_15880500_1528633809.xlsx','2018-06-10 18:00:09','2018-06-10 18:00:09'),(9,'0_47214900_1529127636.xlsx','2018-06-16 11:10:36','2018-06-16 11:10:36'),(10,'0_69624800_1535967154.xlsx','2018-09-03 15:02:34','2018-09-03 15:02:34');
+insert  into `customerupload`(`id`,`filename`,`created_at`,`updated_at`) values (1,'0_15880500_1528633809.xlsx','2018-06-10 18:00:09','2018-06-10 18:00:09'),(9,'0_47214900_1529127636.xlsx','2018-06-16 11:10:36','2018-06-16 11:10:36'),(10,'0_69624800_1535967154.xlsx','2018-09-03 15:02:34','2018-09-03 15:02:34'),(11,'0_33934000_1537085790.xlsx','2018-09-16 13:46:30','2018-09-16 13:46:30'),(12,'0_21122000_1537086106.xlsx','2018-09-16 13:51:46','2018-09-16 13:51:46');
 
 /*Table structure for table `zones` */
 

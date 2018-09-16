@@ -135,15 +135,15 @@ function deleteDetails(obj, detailid, customerid){
     }
 }
 //Delete Bills
-function deleteBills(obj, billid, customerid){
+function deleteBills(obj, billid){
     var answer = confirm('Do you really want to delete this record?.');
     if(answer){
-        ajaxUpdate("customer.php", {action: 'billDelete', billid:billid}, function(data){
+        ajaxUpdate("customer-bills-details.php", {action: 'billDelete', billid:billid}, function(data){
             hideLoader();
             scrollwindowTop();
             if(data.type=="success") {
                 $("#notify").notification({caption:"Bill deleted successfully.", type:"information", sticky:false, onhide:function(){
-                    window.location.href="customer.php?custid="+customerid;
+                    window.location.href="customer-bills-details.php";
                 }});
 			}else{
                 $("#notify").notification({caption:"Not able to delete the record.", type:"warning", sticky:false});

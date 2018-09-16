@@ -4,6 +4,11 @@
 	$popup_title='Edit Capacity';
 	
 	if(isset($_POST['capacityid'])){
+		$_SESSION['tab1']=0;
+		$_SESSION['tab2']=1;
+		$_SESSION['tab3']=0;
+		$_SESSION['tab4']=0;
+		
 		$type['type']="error";
 		$capid=intval($_POST['capacityid']);
 		if($capid>0){

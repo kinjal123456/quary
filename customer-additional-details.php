@@ -208,7 +208,7 @@
 				$shortfirecnt=$db->numRows($shortfireres);
 				if($shortfirecnt>0){
 					while($shortfirerw=$db->fetchNextObject($shortfireres)){
-						$edate = date_create(date('Y-m-d', st rtotime($shortfirerw->expiry_date)));
+						$edate = date_create(date('Y-m-d', strtotime($shortfirerw->expiry_date)));
 						//date_add($edate, date_interval_create_from_date_string('-2 months'));
 						$customdate=date_create(date_format($edate, 'Y-m-d'));
 						$currentdate=date_create(date('Y-m-d'));
@@ -307,11 +307,12 @@
 			<tr>
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_left border_right" style="width: 40px;">&nbsp;</td>
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Detail name</div></td>
+				<td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Licence number</div></td>
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Id</div></td>
                 <td align="left" valign="top" class="list_table_th border_top border_bottom border_right" style="width: 100px;"><div class="listing_th_padding">Password</div></td>
             </tr>
             <?php
-            	$addqry="SELECT id, customerid, detailname, emailid, password FROM customer_additional_info WHERE customerid=%i";
+            	$addqry="SELECT id, customerid, detailname, add_licence_no, emailid, password FROM customer_additional_info WHERE customerid=%i";
             	$addqry=$sql->query($addqry, array($customerid));
             	$addres=$db->query($addqry);
             	$addcnt=$db->numRows($addres);
@@ -321,7 +322,7 @@
             <tr>
                 <td align="center" valign="middle" class="border_bottom border_left border_right">
                 	<div style="padding-left:15px">
-                		<div title="Edit" class="pull-left icon_edit" onclick="ajaxPopup('popup/edit-additional.php?id=<?php echo intval($addrw->id); ?>');" style="padding-top:10px"></div>
+                		<div title="Edit" class="pull-left icon_edit" onclick="ajaxPopup('popup/edit-additional.php?id=<?php echo intval($addrw->id); ?>');"></div>
                 		<div title="Delete" class="icon_delete" onclick="deleteDetails(this, <?php echo intval($addrw->id); ?>, <?php echo intval($addrw->customerid); ?>)"></div>
                 		<div style="clear:all"><!--  --></div>
                 	</div>
@@ -329,6 +330,11 @@
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
                     	<?php echo trim($addrw->detailname); ?>
+	                </div>
+                </td>
+				<td align="left" valign="top" class="border_bottom border_right">
+                    <div style="padding: 10px">
+                    	<?php echo trim($addrw->add_licence_no); ?>
 	                </div>
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
@@ -348,9 +354,14 @@
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
                     	Employee RNA detail
-                        <input type="hidden" name="detailname[]" value="Employee RNA detail">
+                        <input type="hidden" name="detailname[]" class="detailname" value="Employee RNA detail">
 			        </div>
 		        </td>
+				<td align="left" valign="top" class="border_bottom border_right">
+		        	<div style="padding: 10px">
+                    	<input type="text" name="add_licence_no[]" id="add_licence_no" class="add_licence_no" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
+	                </div>
+                </td>
 		        <td align="left" valign="top" class="border_bottom border_right">
 		        	<div style="padding: 10px">
                     	<input type="text" name="emailid[]" class="emailid" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
@@ -358,7 +369,7 @@
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-                    	<input type="password" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
+                    	<input type="text" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
 	                </div>
                 </td>
             </tr>
@@ -370,6 +381,11 @@
                     	<input type="hidden" name="detailname[]" value="Shram Shuvidha LIN detail">
 			        </div>
 		        </td>
+				<td align="left" valign="top" class="border_bottom border_right">
+		        	<div style="padding: 10px">
+                    	<input type="text" name="add_licence_no[]" id="add_licence_no" class="add_licence_no" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
+	                </div>
+                </td>
 		        <td align="left" valign="top" class="border_bottom border_right">
 		        	<div style="padding: 10px">
                     	<input type="text" name="emailid[]" class="emailid" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
@@ -393,6 +409,11 @@
                     	<input type="text" name="detailname[]" class="detailname" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
 	                </div>
                 </td>
+				<td align="left" valign="top" class="border_bottom border_right">
+                    <div style="padding: 10px">
+                    	<input type="text" name="add_licence_no[]" class="add_licence_no" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
+	                </div>
+                </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
                     	<input type="text" name="emailid[]" class="emailid" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
@@ -412,4 +433,4 @@
 				</td>
 			</tr>
 	</table>
-</div>
+	</div>

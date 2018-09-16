@@ -1,5 +1,6 @@
 <?php 
 	include 'libs/data/db.connect.php';
+	session_start();
 	
 	//Delete Employee
 	if(isset($_POST['action']) && trim($_POST['action'])=="custEmpDelete"){
@@ -61,21 +62,6 @@
 		exit(0);
 	}
 	
-	//Delete Bills
-	if(isset($_POST['action']) && trim($_POST['action'])=="billDelete"){
-		$type['type']="error";
-		$billid=intval($_POST['billid']);
-		if($billid>0){
-			$query="DELETE FROM customers_bills WHERE id=%i";
-			$query=$sql->query($query, array($billid));
-			if($db->query($query)){
-				$type['type']="success";
-			}
-		}
-		echo json_encode($type);
-		exit(0);
-	}
-	
 	//Delete Notes
 	if(isset($_POST['action']) && trim($_POST['action'])=="noteDelete"){
 		$type['type']="error";
@@ -93,10 +79,17 @@
 	
 	if(isset($_POST['customerid'])){
 		$type['type']="error";
+		
+		$_SESSION['tab1']=0;
+		$_SESSION['tab2']=0;
+		$_SESSION['tab3']=0;
+		$_SESSION['tab4']=0;
+		
 		$custid=intval($_POST['customerid']);
 		if($custid>0){
 			if(isset($_POST['generalid']) && intval($_POST['generalid'])>0){//general updation
 				$type["generalid"]="success";
+				$_SESSION['tab1']=1;
 				
 				$custquery = "SELECT count(*) as totalrecords FROM customers WHERE email='%s' AND id<>%i";
 				$custquery=$sql->query($custquery, array(trim($_POST['custemail']), $custid));
@@ -106,8 +99,8 @@
 					$type['type']="success";
 					$type['genstatus']="custexists";
 				}else {
-					$query="UPDATE customers SET zoneid=%i, companyname='%s', phone='%s', email='%s', password='%s', survey_no='%s', address='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
-					$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), intval($_POST['custpincode']), trim($_POST['custstate']), $custid));
+					$query="UPDATE customers SET zoneid=%i, companyname='%s', phone='%s', email='%s', password='%s', survey_no='%s', address='%s', address2='%s', address3='%s', pincode=%i, state='%s', updated_at=NOW() WHERE id=%i";
+					$query=$sql->query($query, array(intval($_POST['zoneid']), trim($_POST['companynm']), trim($_POST['phoneno']), trim($_POST['custemail']), utf8_encode(trim($_POST['custpwd'])), trim($_POST['surveyno']), trim($_POST['custadd']), trim($_POST['custadd2']), trim($_POST['custadd3']), $_POST['custpincode'], trim($_POST['custstate']), $custid));
 					if($db->query($query)){
 						$type['type']="success";
 						$type['genstatus']="success";
@@ -126,6 +119,7 @@
 				}
 			}else if(isset($_POST['additionalid']) && intval($_POST['additionalid'])>0){//additional information
 				$type['additionalid']="success";
+				$_SESSION['tab2']=1;
 				
 				if(isset($_POST['explosiveid'])){
 					$explosiveid=intval($_POST['explosiveid']);
@@ -171,8 +165,8 @@
 				//UPDATE ADDITIONAL LAST FIELDS DETAILS
 				for($i=0; $i<count($_POST['detailname']); $i++){
 					if(strlen(trim($_POST['detailname'][$i]))>0 && strlen(trim($_POST['emailid'][$i]))>0 && strlen(trim($_POST['addpassword'][$i]))>0){
-						$query="INSERT INTO customer_additional_info SET customerid=%i, detailname='%s', emailid='%s', password='%s', created_at=NOW(), updated_at=NOW()";
-						$query=$sql->query($query, array($custid, trim($_POST['detailname'][$i]), trim($_POST['emailid'][$i]), utf8_encode(trim($_POST['addpassword'][$i]))));
+						$query="INSERT INTO customer_additional_info SET customerid=%i, detailname='%s', add_licence_no='%s', emailid='%s', password='%s', created_at=NOW(), updated_at=NOW()";
+						$query=$sql->query($query, array($custid, trim($_POST['detailname'][$i]), trim($_POST['add_licence_no'][$i]), trim($_POST['emailid'][$i]), utf8_encode(trim($_POST['addpassword'][$i]))));
 						if($db->query($query)){
 							$type['addstatus']="success";
 						}
@@ -180,62 +174,15 @@
 				}
 				
 				$type['type']="success";
-
-			}else if(isset($_POST['billid']) && intval($_POST['billid'])>0){//bills insertion
-				$type['billid']="success";
 				
-				for($b1=0; $b1<count($_POST['temp_bill_id']); $b1++){
-					$paid_on1='';
-					if(intval($_POST['paid_by1'][$b1])>0 || strlen(trim($_POST['paid_on1'][$b1]))>0 || strlen(trim($_POST['remarks1'][$b1]))>0){
-						$paid_on1=(strlen(trim($_POST['paid_on1'][$b1]))>0)?date("m/d/Y", strtotime(trim($_POST['paid_on1'][$b1]))):'';
-						$query="UPDATE customers_bills SET paid_by=%i, paid_on='%s', remarks='%s', updated_at=NOW() WHERE id=%i";
-						$query=$sql->query($query, array(trim($_POST['paid_by1'][$b1]), $paid_on1, trim($_POST['remarks1'][$b1]), intval($_POST['temp_bill_id'][$b1])));
-						if($db->query($query)){
-							$type['type']="success";
-							$type['billstatus']="success";
-						}
-					}
-				}
-				
-				for($b=0; $b<count($_POST['user']); $b++){
-					$paid_on='';
-					if(intval($_POST['user'][$b])>0 && strlen(trim($_POST['billname'][$b]))>0 && strlen(trim($_POST['billamt'][$b]))>0){
-						
-						$billquery = "SELECT count(*) as totalrecords FROM customers_bills WHERE customerid=%i AND userid=%i";
-						$billquery=$sql->query($billquery, array($custid, intval($_POST['user'][$b])));
-						$billcount = intval($db->queryUniqueValue($billquery));
-						$autobillno=$billcount;
-						if($billcount<=2){
-							if(intval($_POST['user'][$b])==1){//Jayeshbhai
-								$auto_bill_no='JPD/LAB/00'.($autobillno+1).'/'.date("y").'-'.date("y", strtotime("+1 year"));
-							}else if(intval($_POST['user'][$b])==2){//bhavnaben
-								$auto_bill_no='BJB/EXP/00'.($autobillno+1).'/'.date("y").'-'.date("y", strtotime("+1 year"));
-							}else {//Default value
-								$auto_bill_no="";
-							}
-							
-							$paid_on=(strlen(trim($_POST['paid_on'][$b]))>0)?date("m/d/Y", strtotime(trim($_POST['paid_on'][$b]))):'';
-							$query="INSERT INTO customers_bills SET customerid=%i, userid=%i, billno='%s', billname='%s', bill_amount='%s', paid_by=%i, paid_on='%s', remarks='%s', created_at=NOW(), updated_at=NOW()";
-							$query=$sql->query($query, array($custid, intval($_POST['user'][$b]), $auto_bill_no, trim($_POST['billname'][$b]), trim($_POST['billamt'][$b]), trim($_POST['paid_by'][$b]), $paid_on, trim($_POST['remarks'][$b])));
-							if($db->query($query)){
-								$type['type']="success";
-								$type['billstatus']="success";
-							}
-						}else {
-							$type['type']="success";
-							$type['billstatus']="billexists";
-						}
-					}
-				}
 			}else if(isset($_POST['noteid']) && intval($_POST['noteid'])>0){//notes insertion
 				$type['noteid']="success";
-				$note_date='';
+				$_SESSION['tab4']=1;
 				
 				for($n=0; $n<count($_POST['notes']); $n++){
-					$note_date=(strlen(trim($_POST['note_date'][$n]))>0)?date("m/d/Y", strtotime(trim($_POST['note_date'][$n]))):"";
 					if(strlen($_POST['notes'][$n])>0){
 						$query="INSERT INTO customer_notes SET customerid=%i, subject='%s', note_date='%s', notes='%s', created_at=NOW(), updated_at=NOW()";
-						$query=$sql->query($query, array($custid, trim($_POST['subject'][$n]), $note_date, trim($_POST['notes'][$n])));
+						$query=$sql->query($query, array($custid, trim($_POST['subject'][$n]), trim($_POST['note_date'][$n]), trim($_POST['notes'][$n])));
 						if($db->query($query)){
 							$type['type']="success";
 							$type['notestatus']="success";
@@ -253,7 +200,7 @@
 	if(isset($_GET['custid']) && intval($_GET['custid'])>0){
 		$customerid=intval($_GET['custid']);
 		
-		$custquery="SELECT id, zoneid, companyname, email, password, phone, survey_no, address, pincode, state FROM customers WHERE id=%i";
+		$custquery="SELECT id, zoneid, companyname, email, password, phone, survey_no, address, address2, address3, pincode, state FROM customers WHERE id=%i";
 		$custquery=$sql->query($custquery, array($customerid));
 		$custresult=$db->query($custquery);
 		$custcount=$db->numRows($custresult);
@@ -270,34 +217,29 @@
 		<div style="padding: 20px 0;">
 			<div style="border-bottom: 1px solid #cccccc;">
 				<div class="tab_container">
-					<a class="tab active_tab" id="general">General Details</a>
-					<a class="tab" id="additional">Additional Details</a>
-					<a class="tab" id="bills">Bills</a>
-					<a class="tab" id="registers">Registers</a>
-					<a class="tab" id="notes">Notes</a>
+					<a class="tab <?php echo (isset($_SESSION['tab1']) && intval($_SESSION['tab1'])==1)?'active_tab':''; ?>" id="general">General Details</a>
+					<a class="tab <?php echo (isset($_SESSION['tab2']) && intval($_SESSION['tab2'])==1)?'active_tab':''; ?>" id="additional">Additional Details</a>
+					<a class="tab <?php echo (isset($_SESSION['tab3']) && intval($_SESSION['tab3'])==1)?'active_tab':''; ?>" id="registers">Registers</a>
+					<a class="tab <?php echo (isset($_SESSION['tab4']) && intval($_SESSION['tab4'])==1)?'active_tab':''; ?>" id="notes">Notes</a>
 				</div>
 			</div>
 			<div style="padding:20px">
 				<form name="customerform" id="customerform" action="" method="post">
 					<div class="tab_content_container">
 						<!-- Genereal Details -->
-						<div id="gencontent" style="display:block">
+						<div id="gencontent" style="display:<?php echo (isset($_SESSION['tab1']) && intval($_SESSION['tab1'])==1)?'block':'none'; ?>">
 							<?php include_once "customer-general-details.php"; ?>
 						</div>
 						<!-- Additional Details -->
-						<div id="addcontent">
+						<div id="addcontent" style="display:<?php echo (isset($_SESSION['tab2']) && intval($_SESSION['tab2'])==1)?'block':'none'; ?>">
 							<?php include_once "customer-additional-details.php"; ?>
 						</div>
-						<!-- Bills -->
-						<div id="billcontent">
-							<?php include_once "customer-bills-details.php"; ?>
-						</div>
 						<!-- Registers -->
-						<div id="regcontent">
+						<div id="regcontent" style="display:<?php echo (isset($_SESSION['tab3']) && intval($_SESSION['tab3'])==1)?'block':'none'; ?>">
 							<?php include_once "customer-register-details.php"; ?>
 						</div>
 						<!-- Registers -->
-						<div id="notescontent">
+						<div id="notescontent" style="display:<?php echo (isset($_SESSION['tab4']) && intval($_SESSION['tab4'])==1)?'block':'none'; ?>">
 							<?php include_once "customer-notes-details.php"; ?>
 						</div>
 					</div>

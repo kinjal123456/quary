@@ -86,10 +86,26 @@
 			</td>
 			<td style="width:10px"><!--  --></td>
 			<td style="padding-right:10px">
-				<div class="addField" style="padding-right:10px">Address: </div>
+				<div class="addField" style="padding-right:10px">Address 1: </div>
 			</td>
 			<td>
 				<div class="customer-table-data"><input type="text" name="custadd" id="custadd" style="width: 100%; border: 0; padding:0" value="<?php echo trim($custrow->address); ?>" ></div>
+			</td>
+		</tr>
+		<tr><td style="height:10px"><!--  --></td></tr>
+		<tr>
+			<td style="padding-right:10px">
+				<div class="addField" style="padding-right:10px">Address 2: </div>
+			</td>
+			<td>
+				<div class="customer-table-data"><input type="text" name="custadd2" id="custadd2" style="width: 100%; border: 0; padding:0" value="<?php echo trim($custrow->address2); ?>" ></div>
+			</td>
+			<td style="width:10px"><!--  --></td>
+			<td style="padding-right:10px">
+				<div class="addField" style="padding-right:10px">Address 3: </div>
+			</td>
+			<td>
+				<div class="customer-table-data"><input type="text" name="custadd3" id="custadd3" style="width: 100%; border: 0; padding:0" value="<?php echo trim($custrow->address3); ?>" ></div>
 			</td>
 		</tr>
 		<tr><td style="height:10px"><!--  --></td></tr>
@@ -115,8 +131,8 @@
 		?>
 		<tr>
 			<td align="center" valign="middle" class="border_bottom border_left border_right">
-				<div>
-					<!--<div title="Edit" class="pull-left icon_edit"></div>-->
+				<div style="padding-left:15px">
+					<div title="Edit" class="pull-left icon_edit" onclick="ajaxPopup('popup/edit-employee.php?id=<?php echo intval($genemprw->id); ?>');"></div>
 					<div title="Delete" class="icon_delete" onclick="deleteCustomerEmployee(this, <?php echo $id; ?>, <?php echo intval($genemprw->customerid); ?>)"></div>
 					<div style="clear:all"><!--  --></div>
 				</div>

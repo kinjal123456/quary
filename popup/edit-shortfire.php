@@ -4,6 +4,11 @@
 	$popup_title='Edit Short fire permit details';
 	
 	if(isset($_POST['shortfireid'])){
+		$_SESSION['tab1']=0;
+		$_SESSION['tab2']=2;
+		$_SESSION['tab3']=0;
+		$_SESSION['tab4']=0;
+		
 		$type['type']="error";
 		$shortid=intval($_POST['shortfireid']);
 		if($shortid>0){

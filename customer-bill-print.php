@@ -33,7 +33,7 @@ if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){?>
 	if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){
 		$billid=intval($_POST['bill_id']);
 		
-		$query="SELECT CONCAT(c.firstname, ' ', c.lastname) AS name, c.pincode, c.state, c.address, cb.billname, cb.bill_amount, cb.billno, cb.created_at FROM customers_bills cb 
+		$query="SELECT companyname, c.pincode, c.state, c.address, c.address2, c.address3, cb.billname, cb.bill_amount, cb.billno, cb.created_at FROM customers_bills cb 
 				LEFT JOIN customers c ON cb.customerid=c.id 
 				WHERE cb.id=%i";
 		$query=$sql->query($query, array($billid));
@@ -54,11 +54,13 @@ if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){?>
 		<div>
 			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline;padding-bottom:5px">Bill No: <?php echo trim($row->billno); ?></div>
 			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline;padding-bottom:15px">Dated: <?php echo date("dS F, Y", strtotime(trim($row->created_at))); ?>.</div>
-			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->name); ?></div>
-			<?php if(strlen($row->address)>0){ ?>
+			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->companyname); ?></div>
+			<?php if(strlen($row->address)>0 || strlen($row->address2)>0 || strlen($row->address3)>0){ ?>
 				<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->address); ?></div>
+				<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->address2); ?></div>
+				<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo trim($row->address3); ?></div>
 			<?php } ?>
-			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo $row->pincode.", ".trim($row->state); ?></div>
+			<div style="font-weight:bold;text-transform:capitalize;text-decoration:underline"><?php echo $row->pincode; ?><?php echo (strlen($row->state)>0)?','.trim($row->state):''; ?></div>
 		</div>
 		<div style="height:20px"><!-- --></div>
 	</div>
@@ -72,7 +74,7 @@ if(isset($_POST['bill_id']) && intval($_POST['bill_id'])>0){?>
 			<?php 
 				$counter=1; 
 				$totalbill+=number_format($row->bill_amount, 2); ?>
-			<tr>
+			<tr style="height:200px">
 				<td align="center" valign="top" style="<?php echo $border_bottom.$border_left.$border_right; ?>">
 					<div style="<?php echo $listing_td_padding; ?>">
 						<?php echo $counter,"."; ?>

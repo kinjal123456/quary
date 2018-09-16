@@ -21,7 +21,8 @@
 	?>
 	<tr class="noofnotes">
 		<td align="center" valign="middle" class="border_bottom border_left border_right">
-			<div>
+			<div style="padding-left:15px">
+				<div title="Edit" class="pull-left icon_edit" onclick="ajaxPopup('popup/edit-note.php?id=<?php echo intval($notesrw->id); ?>');"></div>
 				<div title="Delete" class="icon_delete pull-left" onclick="deletenotes(this, <?php echo intval($notesrw->id); ?>, <?php echo intval($notesrw->customerid); ?>)" style="margin-left:10px"></div>
 				<div class="clearall">
 			</div>
@@ -38,7 +39,7 @@
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<?php echo (strlen($notesrw->note_date)>0)?date("m/d/Y", strtotime($notesrw->note_date)):''; ?>
+				<?php echo trim($notesrw->note_date); ?>
 			</div>
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">

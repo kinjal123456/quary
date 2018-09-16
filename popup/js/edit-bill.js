@@ -1,40 +1,58 @@
 $(document).ready(function() {
-	$("#additionalform").validate({
+	$("#billform").validate({
         debug: false,
         onsubmit: true,
         onfocusout: false,
         onkeyup: false,
         rules: {
-            detailname: {
+            cust: {
                 required: true
             },
-			add_licence_no: {
+			user: {
                 required: true
             },
-			emailid: {
+			billname: {
                 required: true
             },
-			addpassword: {
-                required: true
+			billamt: {
+                required: true/*,
+				checkvalidbillamount: true*/
             }
         },
         messages: {
-            detailname: {
-                required: "Please enter detail name."
+            cust: {
+                required: "Please select customer."
             },
-			add_licence_no: {
-                required: "Please enter licence number."
+			user: {
+                required: "Please select user."
             },
-			emailid: {
-                required: "Please enter email id."
+			billname: {
+                required: "Please enter bill name."
             },
-			addpassword: {
-                required: "Please enter password."
+			billamt: {
+                required: "Please enter bill amount."/*,
+				checkvalidbillamount: "Please enter valid bill amount."*/
             }
         },
         showErrors: validationError,
         submitHandler: validationSuccess
     });
+});
+
+jQuery.validator.addMethod('checkvalidbillamount', function(value, element){
+	validateflag=1;
+	var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+	   
+    if($('.billamt').length>0){
+        validateflag=0;
+        $('input.billamt').each(function(index) {
+			if(index>0){
+				var value = $(this).val();
+				if(numberRegex.test(value)==false){validateflag=1;}
+			}
+        });
+    }
+    if(validateflag==0){return true;} else{ return false;}
 });
 
 function validationError(errorMap, errorList){
@@ -49,7 +67,7 @@ function validationError(errorMap, errorList){
 function validationSuccess(){
 	 showLoader();
 	 $("#submitbtn").attr("disabled","disabled");
-	 $('#additionalform').ajaxSubmit({
+	 $('#billform').ajaxSubmit({
 	  	success:formResponse,
 	  	dataType: "json"
 	 });
@@ -64,8 +82,8 @@ function formResponse(responseText, statusText) {
 	if(statusText == 'success') {
 		if(responseText.type == 'success') {
 			$("#submitbtn").attr("disabled","disabled");
-			$("#notifypopup").notification({caption: "Additional details updated successfully.", type:"information", onhide:function(){
-				window.location="customer.php?custid="+$('#customerid').val();
+			$("#notifypopup").notification({caption: "Bills details updated successfully.", type:"information", onhide:function(){
+				window.location="customer-bills-details.php";
 			}});
 		}else {
 			$("#notifypopup").notification({caption: "Unable to save information.", type:"warning", sticky:true});

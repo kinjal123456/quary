@@ -1,35 +1,29 @@
 $(document).ready(function() {
-	$("#additionalform").validate({
+	$("#noteform").validate({
         debug: false,
         onsubmit: true,
         onfocusout: false,
         onkeyup: false,
         rules: {
-            detailname: {
+            subject: {
                 required: true
             },
-			add_licence_no: {
+			note_date: {
                 required: true
             },
-			emailid: {
-                required: true
-            },
-			addpassword: {
+			notes: {
                 required: true
             }
         },
         messages: {
-            detailname: {
-                required: "Please enter detail name."
+            subject: {
+                required: "Please enter subject."
             },
-			add_licence_no: {
-                required: "Please enter licence number."
+			note_date: {
+                required: "Please enter date."
             },
-			emailid: {
-                required: "Please enter email id."
-            },
-			addpassword: {
-                required: "Please enter password."
+			notes: {
+                required: "Please enter note."
             }
         },
         showErrors: validationError,
@@ -49,7 +43,7 @@ function validationError(errorMap, errorList){
 function validationSuccess(){
 	 showLoader();
 	 $("#submitbtn").attr("disabled","disabled");
-	 $('#additionalform').ajaxSubmit({
+	 $('#noteform').ajaxSubmit({
 	  	success:formResponse,
 	  	dataType: "json"
 	 });
@@ -64,7 +58,7 @@ function formResponse(responseText, statusText) {
 	if(statusText == 'success') {
 		if(responseText.type == 'success') {
 			$("#submitbtn").attr("disabled","disabled");
-			$("#notifypopup").notification({caption: "Additional details updated successfully.", type:"information", onhide:function(){
+			$("#notifypopup").notification({caption: "Note updated successfully.", type:"information", onhide:function(){
 				window.location="customer.php?custid="+$('#customerid').val();
 			}});
 		}else {

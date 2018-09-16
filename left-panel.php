@@ -21,6 +21,15 @@
 			</tr>
 			<tr>
 				<td valign="top">
+					<a href="customer-bills-details.php">
+						<div class="<?php echo ($filename=='customer-bills-details.php')?'left-menu-item-selected':'left-menu-item'; ?>">
+							<div class="padding-left30">Add Bill</div>
+						</div>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">
 					<a href="bills.php">
 						<div class="<?php echo ($filename=='bills.php')?'left-menu-item-selected':'left-menu-item'; ?>">
 							<div class="padding-left30">Bills</div>

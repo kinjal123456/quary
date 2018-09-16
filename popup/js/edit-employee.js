@@ -1,35 +1,29 @@
 $(document).ready(function() {
-	$("#additionalform").validate({
+	$("#employeeform").validate({
         debug: false,
         onsubmit: true,
         onfocusout: false,
         onkeyup: false,
         rules: {
-            detailname: {
+            empname: {
                 required: true
             },
-			add_licence_no: {
+			empdesignation: {
                 required: true
             },
-			emailid: {
-                required: true
-            },
-			addpassword: {
+			empmob: {
                 required: true
             }
         },
         messages: {
-            detailname: {
-                required: "Please enter detail name."
+            empname: {
+                required: "Please enter name."
             },
-			add_licence_no: {
-                required: "Please enter licence number."
+			empdesignation: {
+                required: "Please enter designation."
             },
-			emailid: {
-                required: "Please enter email id."
-            },
-			addpassword: {
-                required: "Please enter password."
+			empmob: {
+                required: "Please enter mobile."
             }
         },
         showErrors: validationError,
@@ -49,7 +43,7 @@ function validationError(errorMap, errorList){
 function validationSuccess(){
 	 showLoader();
 	 $("#submitbtn").attr("disabled","disabled");
-	 $('#additionalform').ajaxSubmit({
+	 $('#employeeform').ajaxSubmit({
 	  	success:formResponse,
 	  	dataType: "json"
 	 });
@@ -64,7 +58,7 @@ function formResponse(responseText, statusText) {
 	if(statusText == 'success') {
 		if(responseText.type == 'success') {
 			$("#submitbtn").attr("disabled","disabled");
-			$("#notifypopup").notification({caption: "Additional details updated successfully.", type:"information", onhide:function(){
+			$("#notifypopup").notification({caption: "Employee details updated successfully.", type:"information", onhide:function(){
 				window.location="customer.php?custid="+$('#customerid').val();
 			}});
 		}else {

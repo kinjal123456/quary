@@ -12,8 +12,15 @@
 	/****************************************CUSTOMERS CONSTANTS**********************************************************************************/
     define("_CUSTOMER_REQUIRED_ESTABLISHMENTNAME_", "0");
     define("_CUSTOMER_REQUIRED_EMAIL_", "1");
-    define("_CUSTOMER_REQUIRED_PHONE_", "2");
-	define("_CUSTOMER_REQUIRED_ZONE_", "3");
+    define("_CUSTOMER_REQUIRED_PASSWORD_", "2");
+	define("_CUSTOMER_REQUIRED_PHONE_", "3");
+	define("_CUSTOMER_REQUIRED_ZONE_", "4");
+	define("_CUSTOMER_REQUIRED_SURVEY_", "5");
+	define("_CUSTOMER_REQUIRED_PINCODE_", "6");
+	define("_CUSTOMER_REQUIRED_STATE_", "7");
+	define("_CUSTOMER_REQUIRED_ADD1_", "8");
+	define("_CUSTOMER_REQUIRED_ADD2_", "9");
+	define("_CUSTOMER_REQUIRED_ADD3_", "10");
 	
 	define("_CUSTOMER_MESSAGE_REQUIRED_ESTABLISHMENTNAME_", "&bull; The establishment name must not be empty.");
     define("_CUSTOMER_MESSAGE_REQUIRED_EMAIL_", "&bull; The email must not be empty.");

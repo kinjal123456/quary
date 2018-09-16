@@ -219,6 +219,14 @@
 								$email=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_EMAIL_]));
 								$phone=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_PHONE_]));
 								$zoneval=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_ZONE_]));
+								$passwordval=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_PASSWORD_]));
+								$surveyval=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_SURVEY_]));
+								$pincodeval=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_PINCODE_]));
+								$stateval=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_STATE_]));
+								$add1val=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_ADD1_]));
+								$add2val=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_ADD2_]));
+								$add3val=replaceMultiWhiteSpace(trim($columnvalue[_CUSTOMER_REQUIRED_ADD3_]));
+								
 								$zoneId=getZoneId($zoneval);
 								
 								$querycustomer="SELECT id as recordexist FROM `customers` WHERE email='%s'";
@@ -228,14 +236,16 @@
 								//-------------------insert new customers----------------------//
 								if($recordexist<=0){
 									$querycont="INSERT INTO `customers` SET `uploadid`=%i,`zoneid`=%i,`companyname`='%s',`email`='%s',`phone`='%s',
+												password='%s', survey_no='%s', pincode=%i, state='%s', address='%s', address2='%s', address3='%s',
 												`created_at`=NOW(),`updated_at`=NOW()";
-									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$companyname,$email,$phone));
+									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$companyname,$email,$phone,$passwordval,$surveyval,$pincodeval,$stateval,$add1val,$add2val,$add3val));
 									$db->query($querycont);
 									$customerid=$db->lastInsertedId();
 								}else{
 									$querycont="UPDATE `customers` SET `uploadid`=%i,`zoneid`=%i,`companyname`='%s',`email`='%s',`phone`='%s',
+												password='%s', survey_no='%s', pincode=%i, state='%s', address='%s', address2='%s', address3='%s',
 												`updated_at`=NOW() WHERE LOWER(email)='%s'";
-									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$companyname,$email,$phone,$email));
+									$querycont=$sql->query($querycont,array($uploadid,$zoneId,$companyname,$email,$phone,$passwordval,$surveyval,$pincodeval,$stateval,$add1val,$add2val,$add3val,$email));
 									$db->query($querycont);
 								}
 							}
