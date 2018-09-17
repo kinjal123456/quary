@@ -70,20 +70,10 @@
 		</td>
 		<td align="left" valign="top" class="border_bottom border_right">
 			<div style="padding: 10px">
-				<textarea class="notes" name="notes[]" id="notes" style="width:100%" class="no-csform"></textarea>
+				<textarea class="cust_note" name="cust_note[]" id="cust_note" style="width:100%" class="no-csform"></textarea>
 			</div>
 			<!--<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-			<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
-			<script type="text/javascript">
-				CKEDITOR.replace( 'notes', {
-					filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
-					filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
-					filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
-					filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-					filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-					filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-				});
-			</script>-->
+			<script type="text/javascript" src="ckfinder/ckfinder.js"></script>-->
 		</td>
 	</tr>
 	<tr>

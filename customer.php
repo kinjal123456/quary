@@ -179,10 +179,10 @@
 				$type['noteid']="success";
 				$_SESSION['tab4']=1;
 				
-				for($n=0; $n<count($_POST['notes']); $n++){
-					if(strlen($_POST['notes'][$n])>0){
+				for($n=0; $n<count($_POST['cust_note']); $n++){
+					if(strlen($_POST['cust_note'][$n])>0){
 						$query="INSERT INTO customer_notes SET customerid=%i, subject='%s', note_date='%s', notes='%s', created_at=NOW(), updated_at=NOW()";
-						$query=$sql->query($query, array($custid, trim($_POST['subject'][$n]), trim($_POST['note_date'][$n]), trim($_POST['notes'][$n])));
+						$query=$sql->query($query, array($custid, trim($_POST['subject'][$n]), trim($_POST['note_date'][$n]), trim($_POST['cust_note'][$n])));
 						if($db->query($query)){
 							$type['type']="success";
 							$type['notestatus']="success";
