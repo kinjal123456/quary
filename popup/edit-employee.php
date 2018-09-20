@@ -4,7 +4,7 @@
 	$popup_title='Edit Employee details';
 	
 	if(isset($_POST['empid'])){
-		$_SESSION['tab1']=1
+		$_SESSION['tab1']=1;
 		$_SESSION['tab2']=0;
 		$_SESSION['tab3']=0;
 		$_SESSION['tab4']=0;
