@@ -89,7 +89,7 @@
 									<td valign="top" class="table-title">Customers</td>
 								</tr>
 								<?php 
-									$qry="SELECT CONCAT(firstname, ' ', lastname) AS customername FROM customers WHERE zoneid=%i";
+									$qry="SELECT companyname AS customername FROM customers WHERE zoneid=%i";
 									$qry=$sql->query($qry, array($zoneid));
 									$res=$db->query($qry);
 									$cnt=$db->numRows($res);

@@ -354,7 +354,7 @@
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
                     	Employee RNA detail
-                        <input type="hidden" name="detailname[]" class="detailname" value="Employee RNA detail">
+                        <input type="hidden" name="detailname[]" value="Employee RNA detail">
 			        </div>
 		        </td>
 				<td align="left" valign="top" class="border_bottom border_right">
@@ -393,7 +393,7 @@
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-                    	<input type="password" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
+                    	<input type="text" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
 	                </div>
                 </td>
             </tr>
@@ -421,7 +421,7 @@
                 </td>
                 <td align="left" valign="top" class="border_bottom border_right">
                     <div style="padding: 10px">
-                    	<input type="password" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
+                    	<input type="text" name="addpassword[]" class="addpassword" style="cursor: pointer; width: 100%; border: 0; padding:0" value="" />
 	                </div>
                 </td>
             </tr>

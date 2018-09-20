@@ -271,7 +271,7 @@ $(document).ready(function() {
 
     });
 	
-	$('#generalid').val(1);
+	//$('#generalid').val(1);
 });
 
 //Employee name
@@ -535,7 +535,7 @@ jQuery.validator.addMethod('checkdetailids', function(value, element){
     if($('.emailid').length>0){
         validateflag=0;
         $('input.emailid').each(function(index) {
-			if(index!=2){
+			if(index>0 && index!=2){
 				var value = $(this).val();
 				if(value==""){validateflag=1;}
 			}
@@ -549,7 +549,7 @@ jQuery.validator.addMethod('checkdetailpwd', function(value, element){
     if($('.addpassword').length>0){
         validateflag=0;
         $('input.addpassword').each(function(index) {
-			if(index!=2){
+			if(index>0 && index!=2){
 				var value = $(this).val();
 				if(value==""){validateflag=1;}
 			}

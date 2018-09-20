@@ -244,10 +244,10 @@
 						</div>
 					</div>
 					<div style="padding-top:10px">
-						<input type="hidden" class="hiddencomponent" name="generalid" id="generalid" value="">
-						<input type="hidden" class="hiddencomponent" name="additionalid" id="additionalid" value="">
-						<input type="hidden" class="billid" name="billid" id="billid" value="">
-						<input type="hidden" class="noteid" name="noteid" id="noteid" value="">
+						<input type="text" class="hiddencomponent" name="generalid" id="generalid" value="<?php echo (isset($_SESSION['tab1']) && intval($_SESSION['tab1'])==1)?1:''; ?>">
+						<input type="text" class="hiddencomponent" name="additionalid" id="additionalid" value="<?php echo (isset($_SESSION['tab2']) && intval($_SESSION['tab2'])==1)?1:''; ?>">
+						<input type="text" class="billid" name="billid" id="billid" value="<?php echo (isset($_SESSION['tab3']) && intval($_SESSION['tab3'])==1)?1:''; ?>">
+						<input type="text" class="noteid" name="noteid" id="noteid" value="<?php echo (isset($_SESSION['tab4']) && intval($_SESSION['tab4'])==1)?1:''; ?>">
 						<input type="hidden" name="customerid" id="customerid" value="<?php echo $customerid; ?>">
 						<input type="hidden" name="print" id="print" value="0">
 						<input type="submit" name="submitbtn" id="submitbtn" value="Save" class="add-button" style="margin-left:0">
