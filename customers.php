@@ -57,12 +57,10 @@
 		$searchValue=trim($_POST['searchcustomer']);
 		$searchText=" WHERE (LOWER(companyname) LIKE '%s%')";
 		$values[]=$searchValue;
-		$values[]=$searchValue;
-		$values[]=$searchValue;
-		$values[]=$searchValue;
 	}
 	
 	$query = "SELECT count(*) as totalrecords FROM customers ".$searchText." ORDER BY created_at DESC";
+	$query=$sql->query($query, $values);
     $count = intval($db->queryUniqueValue($query));
 	
 	$offset = (isset($_POST['offset']))?trim($_POST['offset']):0;
@@ -90,7 +88,7 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td align="right" colspan="7">
-						<?php if($count>0){ ?>
+						<?php if($count>0 || strlen($searchValue)==0){ ?>
 						<div class="pull-left">
 							<a href="#"><input type="button" name="deletebtn" id="deletebtn" value="Delete" class="add-button" onclick="deleteMultipleCustomers(this)"></a>
 						</div>
