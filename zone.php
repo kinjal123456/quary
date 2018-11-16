@@ -87,9 +87,10 @@
 								<tr>
 									<td valign="top" class="table-title" style="width:50px">Sr no.</td>
 									<td valign="top" class="table-title">Customers</td>
+									<td valign="top" class="table-title" style="width:50px">Action</td>
 								</tr>
 								<?php 
-									$qry="SELECT companyname AS customername FROM customers WHERE zoneid=%i";
+									$qry="SELECT id, companyname AS customername FROM customers WHERE zoneid=%i";
 									$qry=$sql->query($qry, array($zoneid));
 									$res=$db->query($qry);
 									$cnt=$db->numRows($res);
@@ -100,6 +101,7 @@
 									<tr>
 										<td valign="top" class="table-data" title="<?php echo $counter; ?>"><?php echo $counter; ?></td>
 										<td valign="top" class="table-data" title="<?php echo trim($rw->customername); ?>"><?php echo ellipses(trim($rw->customername), 50); ?></td>
+										<td valign="top" class="table-data"><div class="pull-left action-icon"><a href="customer.php?custid=<?php echo intval($rw->id); ?>" title="View"><img src="images/view-icon.png"></a></div></td>
 									</tr>
 								<?php $counter++; } }else { ?>
 									<tr>

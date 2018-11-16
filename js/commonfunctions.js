@@ -221,6 +221,10 @@ function updateBillPayment(obj, billid){
 function filterYears(){
 	$("#filterform").submit();
 }
+//Filter bill by payment status
+function filterPaymentStatus(){
+	$("#filterform").submit();
+}
 //Filter reg by year
 function filterRegYears(){
 	$("#filterregform").submit();

@@ -3,6 +3,7 @@
 	include 'libs/data/db.paging.php';
 	
 	$values=array();
+	$subpart='';
 	
 	if(isset($_POST['action']) && trim($_POST['action'])=="billPaymentUpdate"){
 		$type['type']="error";
@@ -20,8 +21,12 @@
 	}
 	
 	$values[]=(isset($_POST['billyear']) && $_POST['billyear']>0)?$_POST['billyear']:date('Y');
+	if(isset($_POST['payment_status']) && $_POST['payment_status']>0){
+		$subpart=" AND payment_status=%i";
+		$values[]=$_POST['payment_status'];
+	}
 	
-	$qry = "SELECT count(*) as totalrecords FROM customers_bills WHERE YEAR(created_at)='%s' ORDER BY created_at DESC";
+	$qry = "SELECT count(*) as totalrecords FROM customers_bills WHERE YEAR(created_at)='%s' ".$subpart." ORDER BY created_at DESC";
 	$qry=$sql->query($qry, $values);
     $count = intval($db->queryUniqueValue($qry));
 	
@@ -35,7 +40,7 @@
 	
 	$query = "SELECT cb.id, cb.userid, cb.billname, cb.billno, cb.bill_amount, cb.paid_by, cb.paid_on, cb.remarks, cb.payment_status, companyname AS name FROM customers_bills cb 
 			  LEFT JOIN customers c ON cb.customerid=c.id
-			  WHERE YEAR(cb.created_at)='%s'
+			  WHERE YEAR(cb.created_at)='%s' ".$subpart."
 			  ORDER BY cb.created_at DESC LIMIT %i, %i";
 	$query = $sql->query($query, $values);
 	$result=$db->query($query);
@@ -47,18 +52,29 @@
 	<div class="table-container">
 		<div align="right" style="padding:10px">
 			<form name="filterform" id="filterform" action="" method="post">
-				<span>Select Year: </span>
-				<select name="billyear" id="billyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterYears()">
-					<option value="">Select</option>
-					<?php 
-						$yearq="SELECT YEAR(created_at) as year FROM customers_bills GROUP BY YEAR(created_at) ORDER BY created_at DESC";
-						$yearr=$db->query($yearq);
-						$yearc=$db->numRows($yearr);
-						while($yearrw=$db->fetchNextObject($yearr)){ ?>
-							<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['billyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
-						<?php }
-					?>
-				</select>
+				<div>
+					<span>Select Year: </span>
+					<select name="billyear" id="billyear" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterYears()">
+						<option value="">Select</option>
+						<?php 
+							$yearq="SELECT YEAR(created_at) as year FROM customers_bills GROUP BY YEAR(created_at) ORDER BY created_at DESC";
+							$yearr=$db->query($yearq);
+							$yearc=$db->numRows($yearr);
+							while($yearrw=$db->fetchNextObject($yearr)){ ?>
+								<option value="<?php echo $yearrw->year; ?>" <?php echo ($_POST['billyear']==$yearrw->year)?"selected='selected'":"" ;?> ><?php echo $yearrw->year; ?></option>
+							<?php }
+						?>
+					</select>
+				</div>
+				<div>
+					<span>Select payment status: </span>
+					<select name="payment_status" id="payment_status" class="select_drop_down" style="width:100px;cursor:pointer" onchange="filterPaymentStatus()">
+						<option value="0">Select</option>
+						<?php foreach($BILLS_PAYMENT_STATUS_ as $payment_k => $payment_val){ ?>
+							<option value="<?php echo $payment_k; ?>" <?php echo (isset($_POST['payment_status']) && intval($_POST['payment_status'])==$payment_k)?'selected="selected"':""; ?>><?php echo $payment_val; ?></option>
+						<?php } ?>
+					</select>
+				</div>
 				<input type="hidden" name="offset" id="offset" value="<?php echo $offset; ?>"/>
 			</form>
 		</div>
@@ -109,7 +125,7 @@
 						</tr>
 				<?php $counter++; } }else { ?>
 						<tr>
-							<td colspan="7">
+							<td colspan="10">
 								<div id="norecord"></div>
 							</td>
 						</tr>
